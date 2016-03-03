@@ -1,3 +1,7 @@
+/*
+	THEME MAIN BLUE COLOR: #2A6497
+*/
+
 body {
   padding-top: 70px;
   padding-bottom: 30px;
@@ -46,6 +50,7 @@ body {
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
+  text-align: center;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
@@ -61,7 +66,7 @@ body {
 .calendar-month {
     padding: 40px 25px;
     width: 100%;
-    background: #1abc9c;
+    background: #2A6497;
 }
 
 .calendar-month ul.calendar-header {
@@ -117,7 +122,7 @@ body {
 
 .calendar-days li .calendar-day-active {
     padding: 5px;
-    background: #1abc9c;
+    background: #2A6497;
     color: white !important
 }
 
