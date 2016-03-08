@@ -126,7 +126,6 @@ body {
     color: white !important
 }
 
-
 /* Add media queries for smaller screens 
 @media screen and (max-width:720px) {
     .weekdays li, .days li {width: 13.1%;}
