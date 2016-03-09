@@ -47,3 +47,8 @@
 .container .jumbotron {
 	border-radius: 0;
 }
+
+/* WELL */
+.well {
+	border-radius: 0;
+}
