@@ -44,7 +44,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">Add users</a></li>
-					<li><a href="#">Remove users</a></li>
+					<li class="active"><a href="#">Remove users</a></li>
 					<li><a href="#">Manage groups</a></li>
 				</ul>
 			</div>
@@ -91,44 +91,65 @@
 					<!-- Main jumbotron for a primary marketing message or call to action -->
 					<div class="jumbotron">
 						<h1>EduPoll</h1>
-						<p>Register multiple users simultaneously by importing a file with the specified format.</p>
-					</div>
-
-					<div class="page-header">
-						<h1>Import file</h1>
-					</div>
-
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Select the file with the users'
-								information</h3>
-						</div>
-						<div class="panel-body">
-							<form class="form-importfile">
-								<input type="file">
-								<br/><button type="button" class="btn btn-primary">Submit</button>
-							</form>
-						</div>
+						<p>Use this page to remove users from the system.</p>
 					</div>
 					
-					<br/><br/><h3>The specified file must match the following format:</h3>
+					<h2>User list:</h2>
 
-					<div class="well">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Maecenas sed diam eget risus varius blandit sit amet non magna.
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-							commodo cursus magna, vel scelerisque nisl consectetur et. Cras
-							mattis consectetur purus sit amet fermentum. Duis mollis, est non
-							commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem
-							nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Maecenas sed diam eget risus varius blandit sit amet non magna.
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-							commodo cursus magna, vel scelerisque nisl consectetur et. Cras
-							mattis consectetur purus sit amet fermentum. Duis mollis, est non
-							commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem
-							nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
-					</div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Pedro Mota</td>
+								<td>pmota@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>António Moreira</td>
+								<td>amoreira@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>João Neves</td>
+								<td>jneves@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Rita Esteves</td>
+								<td>resteves@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Maria Costa</td>
+								<td>mcosta@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>Ricardo Carvalho</td>
+								<td>rcarvalho@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td>Mário Gomes</td>
+								<td>mgomes@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+						</tbody>
+					</table>
 
 				</div>
 			</div>
