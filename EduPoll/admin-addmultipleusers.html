@@ -12,11 +12,10 @@
 <title>EduPoll</title>
 
 <!-- Bootstrap core CSS -->
-<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap theme -->
-<link href="css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="css/global.css" rel="stylesheet">
 <link href="css/theme.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -43,7 +42,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="admin.html">Home</a></li>
+					<li><a href="admin.htmls">Home</a></li>
 					<li><a href="admin-addusers.html">Add users</a></li>
 					<li><a href="admin-removeusers.html">Remove users</a></li>
 					<li><a href="admin-groups.html">Manage groups</a></li>
@@ -90,34 +89,46 @@
 				<div class="container theme-showcase" role="main">
 
 					<!-- Main jumbotron for a primary marketing message or call to action -->
-					<div class="first-element jumbotron">
+					<div class="jumbotron">
 						<h1>EduPoll</h1>
-						<p>Use this page to register an individual user.</p>
+						<p>Register multiple users simultaneously by importing a file with the specified format.</p>
 					</div>
 
-					<form class="form-signin">
-						<h2 class="form-signin-heading">Enter the new user's information below</h2>
-						
-						<label for="inputName" class="sr-only">Full name</label>
-						<input type="text" id="inputName" class="form-control" placeholder="Full name" required autofocus>
-						<br/>
-						
-						<label for="inputEmail" class="sr-only">Email</label>
-						<input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
-						<br/>
-						
-						<label for="inputPassword" class="sr-only">Password</label>
-						<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-						<br/>
-						
-						<div class="checkbox">
-							<label class="radio-inline"><input type="radio" name="optradio" required>Teacher</label>
-							<label class="radio-inline"><input type="radio" name="optradio" required>Student</label>
+					<div class="page-header">
+						<h1>Import file</h1>
+					</div>
+
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Select the file with the users'
+								information</h3>
 						</div>
-						<br/>
-						
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Register Student</button>
-					</form>
+						<div class="panel-body">
+							<form class="form-importfile">
+								<input type="file">
+								<br/><button type="button" class="btn btn-primary">Submit</button>
+							</form>
+						</div>
+					</div>
+					
+					<br/><br/><h3>The specified file must match the following format:</h3>
+
+					<div class="well">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Maecenas sed diam eget risus varius blandit sit amet non magna.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+							commodo cursus magna, vel scelerisque nisl consectetur et. Cras
+							mattis consectetur purus sit amet fermentum. Duis mollis, est non
+							commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem
+							nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Maecenas sed diam eget risus varius blandit sit amet non magna.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+							commodo cursus magna, vel scelerisque nisl consectetur et. Cras
+							mattis consectetur purus sit amet fermentum. Duis mollis, est non
+							commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem
+							nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
+					</div>
 
 				</div>
 			</div>

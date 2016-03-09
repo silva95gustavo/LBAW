@@ -12,11 +12,10 @@
 <title>EduPoll</title>
 
 <!-- Bootstrap core CSS -->
-<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap theme -->
-<link href="css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="css/global.css" rel="stylesheet">
 <link href="css/theme.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -44,8 +43,8 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="admin.html">Home</a></li>
-					<li><a href="admin-addusers.html">Add users</a></li>
-					<li><a href="admin-removeusers.html">Remove users</a></li>
+					<li><a href="admin-remove-users.html">Add users</a></li>
+					<li class="active"><a href="admin-removeusers.html">Remove users</a></li>
 					<li><a href="admin-groups.html">Manage groups</a></li>
 				</ul>
 			</div>
@@ -90,34 +89,67 @@
 				<div class="container theme-showcase" role="main">
 
 					<!-- Main jumbotron for a primary marketing message or call to action -->
-					<div class="first-element jumbotron">
+					<div class="jumbotron">
 						<h1>EduPoll</h1>
-						<p>Use this page to register an individual user.</p>
+						<p>Use this page to remove users from the system.</p>
 					</div>
+					
+					<h2>User list:</h2>
 
-					<form class="form-signin">
-						<h2 class="form-signin-heading">Enter the new user's information below</h2>
-						
-						<label for="inputName" class="sr-only">Full name</label>
-						<input type="text" id="inputName" class="form-control" placeholder="Full name" required autofocus>
-						<br/>
-						
-						<label for="inputEmail" class="sr-only">Email</label>
-						<input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
-						<br/>
-						
-						<label for="inputPassword" class="sr-only">Password</label>
-						<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-						<br/>
-						
-						<div class="checkbox">
-							<label class="radio-inline"><input type="radio" name="optradio" required>Teacher</label>
-							<label class="radio-inline"><input type="radio" name="optradio" required>Student</label>
-						</div>
-						<br/>
-						
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Register Student</button>
-					</form>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Pedro Mota</td>
+								<td>pmota@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>António Moreira</td>
+								<td>amoreira@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>João Neves</td>
+								<td>jneves@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Rita Esteves</td>
+								<td>resteves@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Maria Costa</td>
+								<td>mcosta@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>Ricardo Carvalho</td>
+								<td>rcarvalho@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td>Mário Gomes</td>
+								<td>mgomes@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+						</tbody>
+					</table>
 
 				</div>
 			</div>
