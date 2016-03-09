@@ -1,0 +1,49 @@
+.first-element {
+	border-radius: 6px 6px 0 0 !important;
+}
+.last-element {
+	border-radius: 0 0 6px 6px !important;
+}
+
+/* BUTTON */
+.btn,
+.btn:hover,
+.btn:active,
+.btn:focus,
+.btn:active:focus,
+.btn:visited,
+.btn:active {
+	background: none;
+	background-color: grey;
+    border: 0;
+    border-radius: 0;
+}
+.btn:hover {
+	background-color: #AAAAAA;
+}
+
+.btn-primary {
+	background-color: #766940;
+}
+.btn-primary:hover {
+	background-color: #9A884D;
+}
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:active:focus {
+	background-color: #665D3D;
+}
+
+/* PANEL */
+.panel {
+	border-radius: 0;
+}
+.panel > .panel-heading {
+	border-radius: 0;
+	background-image: none;
+}
+
+/* JUMBOTRON */
+.container .jumbotron {
+	border-radius: 0;
+}
