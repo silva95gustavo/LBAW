@@ -13,25 +13,9 @@
 .btn:active:focus,
 .btn:visited,
 .btn:active {
-	background: none;
-	background-color: grey;
+	background-image: none;
     border: 0;
     border-radius: 0;
-}
-.btn:hover {
-	background-color: #AAAAAA;
-}
-
-.btn-primary {
-	background-color: #766940;
-}
-.btn-primary:hover {
-	background-color: #9A884D;
-}
-.btn-primary:active,
-.btn-primary:focus,
-.btn-primary:active:focus {
-	background-color: #665D3D;
 }
 
 /* PANEL */
