@@ -1,9 +1,22 @@
 body {
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background: url('../img/signin_background/1.jpg') no-repeat center center fixed;
+
+	background: url('../img/signin_background/1.jpg') no-repeat center fixed;
 	background-size: cover;
 }
+
+
+.vertical-center {
+	min-height: 100vh;
+	
+	display: flex; 
+
+	align-items : center;
+  
+	width: 100%;
+  
+	justify-content : center;
+}
+
 
 form.form-signin {
 	background: #f2f2f2;
@@ -28,8 +41,6 @@ form.form-signin {
 .form-signin .form-control {
 	position: relative;
 	height: auto;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 10px;
 	font-size: 16px;
