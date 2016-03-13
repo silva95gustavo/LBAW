@@ -44,7 +44,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="main.html">Previous Exams</a></li>
-					<li><a href="#">Create Exam</a></li>
+					<li class="active"><a href="#">Create Exam</a></li>
 					<li><a href="#">My Exams</a></li>
 					<li><a href="#">Logout</a></li>
 				</ul>
@@ -91,66 +91,38 @@
 
 					<!-- Main jumbotron for a primary marketing message or call to action -->
 					<div class="first-element jumbotron">
-						<h1>EduPoll</h1>
-						<p>Check out your upcoming exams below, or use the navbar
-							above to access other pages and useful info.</p>
+						<h1>Create Exam</h1>
+						<p>Use this page to create an exam, and edit it afterwards.</p>
 					</div>
 
-					<div class="panel panel-danger">
-						<div class="panel-heading">
-							<h3 class="panel-title">Ongoing exams</h3>
+					<form class="form-register-ind-user" method="get" action="test.html">
+						<h2 class="form-signin-heading">Enter the new exam's information below</h2>
+						
+						<label for="inputName" class="sr-only">Exam name</label>
+						<input type="text" name="examName" id="inputName" class="form-control" placeholder="Exam name" required autofocus>
+						<br/>
+						
+						<label for="inputDescription" class="sr-only">Exam description</label>
+						<textarea id="inputDescription" name="examDescription" class="form-control" placeholder="Exam description" rows="10" required></textarea>
+						<br/>
+						
+						<div class="checkbox">
+							<label class="radio-inline"><input type="radio" name="examType" checked="checked" >Closed Exam</label>
+							<label class="radio-inline"><input type="radio" name="examType">Open Exam</label>
 						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="#" class="list-group-item">
-									<h4 class="list-group-item-heading">LBAW - Teste 1</h4> <datetime
-										class="list-group-item-text">22-01-2015 12:00-14:00</datetime>
-									<p class="list-group-item-text">This exam starts in less
-										than 10 minutes!</p>
-								</a>
-							</div>
+						<br/>
+
+						<div class="alert alert-warning" role="alert">
+							<strong>Warning!</strong> Closed exams can only be seen by users you later invite to them.
 						</div>
-					</div>
-					<div class="panel panel-warning">
-						<div class="panel-heading">
-							<h3 class="panel-title">Close exams</h3>
-						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="#" class="list-group-item">
-									<h4 class="list-group-item-heading">IART - Teste 1</h4> <datetime
-										class="list-group-item-text">25-01-2015 12:00-14:00</datetime>
-								</a> <a href="#" class="list-group-item">
-									<h4 class="list-group-item-heading">COMP - Avaliação
-										Individual 1</h4> <datetime class="list-group-item-text">27-01-2015
-									12:00-14:00</datetime>
-								</a> <a href="#" class="list-group-item">
-									<h4 class="list-group-item-heading">SDIS - Prova 2</h4> <datetime
-										class="list-group-item-text">29-01-2015 12:00-14:00</datetime>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="last-element panel panel-info">
-						<div class="panel-heading">
-							<h3 class="panel-title">Future exams</h3>
-						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="#" class="list-group-item">
-									<h4 class="list-group-item-heading">LBAW - Teste 2</h4> <datetime
-										class="list-group-item-text">05-02-2015 12:00-14:00</datetime>
-								</a> <a href="#" class="list-group-item">
-									<h4 class="list-group-item-heading">COMP - Avaliação
-										Individual 2</h4> <datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</a> <a href="#" class="list-group-item">
-									<h4 class="list-group-item-heading">SDIS - Prova 3</h4> <datetime
-										class="list-group-item-text">23-02-2015 12:00-14:00</datetime>
-								</a>
-							</div>
-						</div>
-					</div>
+
+						<!--  <div class="alert alert-warning" role="alert">
+							<strong>Warning!</strong> Open exams can be seen and taken by anyone with the exam link. It might be hard to control who has access to this exam.
+						</div> -->
+
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Create Exam</button>
+					</form>
+					
 				</div>
 			</div>
 		</div>
