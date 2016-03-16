@@ -90,41 +90,64 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="container theme-showcase" role="main">
-				<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 					<!-- Main jumbotron for a primary marketing message or call to action -->
 					<div class="first-element jumbotron">
 						<h1>Edit Exam</h1>
 						<p>Use this page to edit the exam.</p>
 					</div>
-					
+					<!-- Trigger the modal with a button -->
+
+					<!-- Modal -->
+					<div id="myModal" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title"><strong>Create/Edit Question</strong></h4>
+								</div>
+								<div class="modal-body">
+									<p><strong>Category: </strong> Category A</p>
+									<label><strong>Question:</strong></label>
+									<input type="text" class="form-control">
+									<form>
+										<div class="radio">
+											<label><input type="radio" name="optradio1">Option 1</label>
+										</div>
+										<input type="text" class="form-control">
+										
+										<div class="radio">
+											<label><input type="radio" name="optradio1">Option 2</label>
+										</div>
+										<input type="text" class="form-control">
+										
+										<div class="radio">
+											<label><input type="radio" name="optradio1">Option 3</label>
+										</div>
+										<input type="text" class="form-control">
+										
+										<div class="radio">
+											<label><input type="radio" name="optradio1">Option 4</label>
+										</div>
+										<input type="text" class="form-control">
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
 					<div class="panel panel-default text-center">
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-md-4">
-									<button type="button" class="btn btn-info">Add New Category</button>
+									<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add New Category</button>
 								</div>
 								<div class="col-md-4">
 									<button type="button" class="btn btn-success">Save Changes</button>
