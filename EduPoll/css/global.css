@@ -18,6 +18,17 @@
     border-radius: 0;
 }
 
+/* JUMBOTRON */
+div.jumbotron {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+div.jumbotron h2 {
+	vertical-align: middle;
+	text-align: center;
+}
+
 /* PANEL */
 .panel {
 	border-radius: 0;
