@@ -5,6 +5,14 @@
 	border-radius: 0 0 6px 6px !important;
 }
 
+div.main {
+	min-width: 700px;
+}
+
+div.main div.container {
+	min-width: 700px;
+}
+
 /* BUTTON */
 .btn,
 .btn:hover,
