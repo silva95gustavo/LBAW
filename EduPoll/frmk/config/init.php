@@ -4,10 +4,10 @@
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
-  $BASE_DIR = '/opt/lbaw/lbaw15xx/public_html/frmk/'; //FIXME
-  $BASE_URL = '/~lbaw15xx/frmk/'; //FIXME
+  $BASE_DIR = '/opt/lbaw/lbaw1565/public_html/frmk/';
+  $BASE_URL = '/~lbaw1565/frmk/';
 
-  $conn = new PDO('pgsql:host=dbm;dbname=lbaw15xx', 'lbaw15xx', '_password_'); //FIXME
+  $conn = new PDO('pgsql:host=dbm;dbname=lbaw1565', 'lbaw1565', 'BN80V7U5');
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
