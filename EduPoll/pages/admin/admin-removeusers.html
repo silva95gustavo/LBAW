@@ -32,12 +32,19 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
 				<a class="navbar-brand" href="admin.html">EduPoll</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="admin-addusers.html">Add users</a></li>
-					<li><a href="admin-removeusers.html">Remove users</a></li>
+					<li><a href="admin-remove-users.html">Add users</a></li>
+					<li class="active"><a href="admin-removeusers.html">Remove users</a></li>
 					<li><a href="admin-groups.html">Manage groups</a></li>
 					<li><a href="index.html">Logout</a></li>
 				</ul>
@@ -83,38 +90,77 @@
 				<div class="container theme-showcase" role="main">
 
 					<ol class="breadcrumb">
-						<li class="active">Home</li>
+						<li><a href="admin.html">Home</a></li>
+						<li class="active">Remove Users</li>
 					</ol>
 
-					<a href="admin-addusers.html"><button type="button" class="btn btn-lg btn-primary">Add users</button></a>
-					<a href="admin-removeusers.html"><button type="button" class="btn btn-lg btn-primary">Remove users</button></a>
-					<a href="admin-groups.html"><button type="button" class="btn btn-lg btn-primary">Manage groups</button></a>
+					<form class="form-change-password">
+						<h2 class="form-signin-heading">Remove user</h2>
+						
+						<label for="inputUserToRemove" class="sr-only">Full name</label>
+						<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email" required autofocus>
+						<br/>
+						
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Remove User</button>
+					</form>
+					<br/><br/>
+					
+					<h2>User list:</h2>
 
-					<div class="page-header">
-						<h1>Statistics</h1>
-					</div>
-
-					<div class="row">
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Number of registered users</td>
-									<td>8012</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Number of exams this week</td>
-									<td>10</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Exams created during the last week</td>
-									<td>2</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Pedro Mota</td>
+								<td>pmota@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>António Moreira</td>
+								<td>amoreira@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>João Neves</td>
+								<td>jneves@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Rita Esteves</td>
+								<td>resteves@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Maria Costa</td>
+								<td>mcosta@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>Ricardo Carvalho</td>
+								<td>rcarvalho@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td>Mário Gomes</td>
+								<td>mgomes@up.pt</td>
+								<td><a href="#">Remove</a></td>
+							</tr>
+						</tbody>
+					</table>
 
 				</div>
 			</div>
@@ -139,7 +185,7 @@
 							|| document
 									.write('<script src="js/vendor/jquery.min.js"><\/script>')
 				</script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/docs.min.js"></script>
+	<script src="javascript/bootstrap.min.js"></script>
+	<script src="javascript/docs.min.js"></script>
 </body>
 </html>

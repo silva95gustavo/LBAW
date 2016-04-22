@@ -39,14 +39,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="admin.html">EduPoll</a>
+				<a class="navbar-brand" href="main.html">EduPoll</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="admin-addusers.html">Add users</a></li>
-					<li><a href="admin-removeusers.html">Remove users</a></li>
-					<li><a href="admin-groups.html">Manage groups</a></li>
-					<li><a href="index.html">Logout</a></li>
+					<li><a href="exams-taken.html">Previous Exams</a></li>
+					<li class="active"><a href="create-exam.html">Create Exam</a></li>
+					<li><a href="my-exams.html">My Exams</a></li>
+					<li><a href="index..html">Logout</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -73,16 +73,15 @@
 					</ul>
 
 					<ul class="calendar-days">
-						<li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8
-						</li><li>9</li><li><span class="calendar-day-active">10</span></li><li>11
-						</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18
-						</li><li>19</li><li>20</li><li>21</li><li>22</li><li>23</li><li>24</li><li>25
-						</li><li>26</li><li>27</li><li>28</li><li>29</li><li>30</li><li>31</li>
+						<li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>
+						<span class="calendar-day-active">10</span></li><li>11</li><li>12</li><li>13</li><li>14</li><li>15
+						</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li><li>21</li><li>22</li><li>23</li><li>
+						24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li><li>30</li><li>31</li>
 					</ul>
 				</div>
 				
           	</br></br><ul class="nav nav-sidebar" text-align="right">
-            	<li><a href="edit-profile.html">Administrator</a></li>
+            	<li><a href="edit-profile.html">André Sousa Lago</a></li>
           	</ul>
           
 			</div>
@@ -90,31 +89,38 @@
 				<div class="container theme-showcase" role="main">
 
 					<ol class="breadcrumb">
-						<li><a href="admin.html">Home</a></li>
-						<li><a href="add-users.html">Add Users</a></li>
-						<li class="active">Add Individual User</li>
+						<li><a href="main.html">Home</a></li>
+						<li class="active">Create Exam</li>
 					</ol>
 
-					<form class="form-register-ind-user">
-						<h2 class="form-signin-heading">Enter the new user's information below</h2>
+					<form class="form-register-ind-user" method="get" action="test.html">
+						<h2 class="form-signin-heading">Enter the new exam's information below</h2>
 						
-						<label for="inputName" class="sr-only">Full name</label>
-						<input type="text" id="inputName" class="form-control" placeholder="Full name" required autofocus>
+						<label for="inputName" class="sr-only">Exam name</label>
+						<input type="text" name="examName" id="inputName" class="form-control" placeholder="Exam name" required autofocus>
 						<br/>
 						
-						<label for="inputEmail" class="sr-only">Email</label>
-						<input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
+						<label for="inputDescription" class="sr-only">Exam description</label>
+						<textarea id="inputDescription" name="examDescription" class="form-control" placeholder="Exam description" rows="10" required></textarea>
 						<br/>
 						
 						<div class="checkbox">
-							<label class="radio-inline"><input type="radio" name="optradio" required>Teacher</label>
-							<label class="radio-inline"><input type="radio" name="optradio" checked="checked" required>Student</label>
+							<label class="radio-inline"><input type="radio" name="examType" checked="checked" >Closed Exam</label>
+							<label class="radio-inline"><input type="radio" name="examType">Open Exam</label>
 						</div>
 						<br/>
-						
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Register Student</button>
-					</form>
 
+						<div class="alert alert-warning" role="alert">
+							<strong>Warning!</strong> Closed exams can only be seen by users you later invite to them.
+						</div>
+
+						<!--  <div class="alert alert-warning" role="alert">
+							<strong>Warning!</strong> Open exams can be seen and taken by anyone with the exam link. It might be hard to control who has access to this exam.
+						</div> -->
+
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Create Exam</button>
+					</form>
+					
 				</div>
 			</div>
 		</div>
@@ -138,7 +144,7 @@
 							|| document
 									.write('<script src="js/vendor/jquery.min.js"><\/script>')
 				</script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/docs.min.js"></script>
+	<script src="javascript/bootstrap.min.js"></script>
+	<script src="javascript/docs.min.js"></script>
 </body>
 </html>

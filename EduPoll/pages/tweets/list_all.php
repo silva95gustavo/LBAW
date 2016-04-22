@@ -2,7 +2,7 @@
   include_once('../../config/init.php');
   include_once($BASE_DIR .'database/tweets.php');
 
-  $tweets = getAllTweets();  
+  /*$tweets = getAllTweets();  
   
   foreach ($tweets as $key => $tweet) {
     unset($photo);
@@ -17,5 +17,5 @@
   $smarty->assign('last_tweet_id', $tweets[0]['id']);  
   
   $smarty->assign('tweets', $tweets);
-  $smarty->display('tweets/list.tpl');
+  $smarty->display('tweets/list.tpl');*/
 ?>

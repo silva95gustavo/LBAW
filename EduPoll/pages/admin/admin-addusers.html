@@ -43,8 +43,8 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="admin-remove-users.html">Add users</a></li>
-					<li class="active"><a href="admin-removeusers.html">Remove users</a></li>
+					<li class="active"><a href="admin-addusers.html">Add users</a></li>
+					<li><a href="admin-removeusers.html">Remove users</a></li>
 					<li><a href="admin-groups.html">Manage groups</a></li>
 					<li><a href="index.html">Logout</a></li>
 				</ul>
@@ -91,76 +91,20 @@
 
 					<ol class="breadcrumb">
 						<li><a href="admin.html">Home</a></li>
-						<li class="active">Remove Users</li>
+						<li class="active">Add Users</li>
 					</ol>
 
-					<form class="form-change-password">
-						<h2 class="form-signin-heading">Remove user</h2>
-						
-						<label for="inputUserToRemove" class="sr-only">Full name</label>
-						<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email" required autofocus>
-						<br/>
-						
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Remove User</button>
-					</form>
 					<br/><br/>
-					
-					<h2>User list:</h2>
-
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Email</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Pedro Mota</td>
-								<td>pmota@up.pt</td>
-								<td><a href="#">Remove</a></td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>António Moreira</td>
-								<td>amoreira@up.pt</td>
-								<td><a href="#">Remove</a></td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>João Neves</td>
-								<td>jneves@up.pt</td>
-								<td><a href="#">Remove</a></td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>Rita Esteves</td>
-								<td>resteves@up.pt</td>
-								<td><a href="#">Remove</a></td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>Maria Costa</td>
-								<td>mcosta@up.pt</td>
-								<td><a href="#">Remove</a></td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>Ricardo Carvalho</td>
-								<td>rcarvalho@up.pt</td>
-								<td><a href="#">Remove</a></td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>Mário Gomes</td>
-								<td>mgomes@up.pt</td>
-								<td><a href="#">Remove</a></td>
-							</tr>
-						</tbody>
-					</table>
+					<a href="admin-addindividualuser.html"><button type="button" class="btn btn-lg btn-primary">
+						Add individual users
+					</button></a>
+					<h4>Create a single user and add it to the system
+						(automatically notifies the user)</h4>
+					<br/><br/><br/><br/>
+					<a href="admin-addmultipleusers.html"><button type="button" class="btn btn-lg btn-primary">
+						Add multiple users
+					</button></a>
+					<h4>Import a file containing a list of users, along with their types and groups, therefore adding all of them to the system.</h4>
 
 				</div>
 			</div>
@@ -185,7 +129,7 @@
 							|| document
 									.write('<script src="js/vendor/jquery.min.js"><\/script>')
 				</script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/docs.min.js"></script>
+	<script src="javascript/bootstrap.min.js"></script>
+	<script src="javascript/docs.min.js"></script>
 </body>
 </html>
