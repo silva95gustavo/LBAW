@@ -1,36 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Fritter</title>
-    <meta charset='utf-8'>
-    <link rel="stylesheet" href="{$BASE_URL}css/style.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{$BASE_URL}javascript/main.js"></script>
-  </head>
-  <body>
-    <header>
-      <h1><a href="{$BASE_URL}">Fritter</a></h1>
-      {if $USERNAME}
-        {include file='common/menu_logged_in.tpl'}
-      {else}
-        {include file='common/menu_logged_out.tpl'}
-      {/if}
-    </header>
-    {if $USERNAME}
-    <div id="tweet_form">
-      <form action="{$BASE_URL}actions/tweets/tweet.php" method="post">
-        <textarea name="tweet" placeholder="Say something"></textarea>
-        <input type="submit">
-      </form>
-    </div>
-    {/if}
-    <div id="error_messages">
-    {foreach $ERROR_MESSAGES as $error}
-      <div class="error">{$error}<a class="close" href="#">X</a></div>
-    {/foreach}
-    </div>
-    <div id="success_messages">
-    {foreach $SUCCESS_MESSAGES as $success}
-      <div class="success">{$success}<a class="close" href="#">X</a></div>
-    {/foreach}
-    </div>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="img/favicon.png">
+
+<title>EduPoll</title>
+
+<!-- Bootstrap core CSS -->
+<link href="{$BASE_URL}css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap theme -->
+<link href="{$BASE_URL}css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{$BASE_URL}css/global.css" rel="stylesheet">
+<link href="{$BASE_URL}css/theme.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body role="document">

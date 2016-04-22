@@ -5,14 +5,14 @@
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
   $BASE_DIR = '/opt/lbaw/lbaw1565/public_html/';
-  //$BASE_DIR = '/usr/users2/mieic2013/up20130xxxx/public_html/LBAW/';
-  $BASE_URL = '/';
+  //$BASE_DIR = '/usr/users2/mieic2013/up201304143/public_html/LBAW/';
+  $BASE_URL = '/~lbaw1565/';
 
   $conn = new PDO('pgsql:host=dbm;dbname=lbaw1565', 'lbaw1565', 'BN80V7U5');
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $conn->exec('SET SCHEMA \'frmk\''); //FIXME?
+  $conn->exec('SET SCHEMA \'public\'');
 
   include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
   
