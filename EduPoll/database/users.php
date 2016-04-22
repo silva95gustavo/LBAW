@@ -6,12 +6,12 @@
     $stmt->execute(array($username, $realname, sha1($password)));
   }
 
-  function isLoginCorrect($username, $password) {
+  function isLoginCorrect($email, $password) {
     global $conn;
     $stmt = $conn->prepare("SELECT * 
-                            FROM users 
-                            WHERE username = ? AND password = ?");
-    $stmt->execute(array($username, sha1($password)));
+                            FROM RegisteredUser 
+                            WHERE email = ? AND password = ?");
+    $stmt->execute(array($email, sha1($password)));
     return $stmt->fetch() == true;
   }
 ?>
