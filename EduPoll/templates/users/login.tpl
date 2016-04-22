@@ -19,6 +19,9 @@
 <link href="{$BASE_URL}css/global.css" rel="stylesheet">
 <link href="{$BASE_URL}css/signin.css" rel="stylesheet">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="{$BASE_URL}javascript/main.js"></script>
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -27,8 +30,18 @@
 </head>
 
 <body role="document">
-
-<div class="container">
+	<div class="container">
+	
+	<div id="error_messages">
+    {foreach $ERROR_MESSAGES as $error}
+      <div class="alert alert-danger">{$error}<a class="close" href="#">X</a></div>
+    {/foreach}
+    </div>
+    <div id="success_messages">
+    {foreach $SUCCESS_MESSAGES as $success}
+      <div class="alert alert-success">{$success}<a class="close" href="#">X</a></div>
+    {/foreach}
+    </div>
 
 	<div class="col-md-4 col-md-offset-4">
 		<form class="form-signin" action="{$BASE_URL}actions/users/login.php">
@@ -48,6 +61,6 @@
 		</form>
 	</div>
 
-</div>
+	</div>
 
 {include file='common/footer.tpl'}
