@@ -1,3 +1,10 @@
+.error {
+  background-color: #FFAAAA;
+  padding: 10px;
+  color: #333;
+  font-weight: bold;
+}
+
 .first-element {
 	border-radius: 6px 6px 0 0 !important;
 }
