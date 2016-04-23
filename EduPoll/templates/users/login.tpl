@@ -2,31 +2,34 @@
 <link href="{$BASE_URL}css/signin.css" rel="stylesheet">
 	<div class="container">
 	
-	<div id="error_messages">
+	<div id="result_messages">
     {foreach $ERROR_MESSAGES as $error}
-      <div class="alert alert-danger alert-dismissable">{$error}
-      <button type="button" class="close" data-dismiss="alert">&times;</a>
-      {$success}
+      <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {$error}
       </div>
     {/foreach}
-    </div>
-    <div id="success_messages">
     {foreach $SUCCESS_MESSAGES as $success}
-      <div class="alert alert-success alert-dismissable">{$success}
-      <button type="button" class="close" data-dismiss="alert">&times;</a>
+      <div class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
       {$success}
       </div>
     {/foreach}
+    {if !empty($SUCCESS_MESSAGES)}
+    	<script type="text/JavaScript">
+      		setTimeout("location.href = '{$BASE_URL}main.html';",1000);
+ 		</script>
+    {/if}
     </div>
 
 	<div class="col-md-4 col-md-offset-4">
-		<form class="form-signin" action="{$BASE_URL}actions/users/login.php">
+		<form class="form-signin" action="{$BASE_URL}actions/users/login.php" method="post">
 			<h2 class="form-signin-heading">EduPoll</h2>
 			<label for="inputEmail" class="sr-only">Email address</label> <input
-				   type="email" id="inputEmail" class="form-control"
+				   type="email" id="inputEmail" name="email" class="form-control"
 				   placeholder="Email address" required autofocus> 
 				<label for="inputPassword" class="sr-only">Password</label> 
-			<input type="password" id="inputPassword" class="form-control"
+			<input type="password" id="inputPassword" name="password" class="form-control"
 				   placeholder="Password" required>
 				<div class="checkbox">
 					<label> 
