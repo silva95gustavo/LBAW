@@ -10,8 +10,13 @@
     global $conn;
     $stmt = $conn->prepare("SELECT * 
                             FROM RegisteredUser 
-                            WHERE email = ? AND passwordHash = ?");
-    $stmt->execute(array($email, password_hash($password)));
-    return $stmt->fetch() == true;
+                            WHERE email = ?");
+    $stmt->execute(array($email));
+    $result = $stmt->fetch();
+    if (!$result)
+    	return false;
+    if (password_verify($password, $result['passwordhash']))
+    	return $result;
+    else return false;
   }
 ?>
