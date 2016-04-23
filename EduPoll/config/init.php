@@ -15,6 +15,7 @@
   $conn->exec('SET SCHEMA \'public\'');
 
   include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
+  include_once($BASE_DIR . 'lib/phpPasswordHashingLib/passwordLib.php');
   
   $smarty = new Smarty;
   $smarty->template_dir = $BASE_DIR . 'templates/';
