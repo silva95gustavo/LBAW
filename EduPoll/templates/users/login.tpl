@@ -17,7 +17,7 @@
     {/foreach}
     {if !empty($SUCCESS_MESSAGES)}
     	<script type="text/JavaScript">
-      		setTimeout("location.href = '{$BASE_URL}main.html';",1000);
+      		setTimeout("location.href = '{$BASE_URL}pages/users/main.html';",1000);
  		</script>
     {/if}
     </div>
