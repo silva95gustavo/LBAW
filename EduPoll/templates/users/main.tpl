@@ -16,7 +16,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/exam-welcome.php" class="list-group-item">
+								<a href="{$BASE_URL}pages/exams/exam_welcome.php" class="list-group-item">
 									<h4 class="list-group-item-heading">LBAW - Teste 1</h4> <datetime
 										class="list-group-item-text">22-01-2015 12:00-14:00</datetime>
 									<p class="list-group-item-text">This exam starts in less
@@ -31,14 +31,14 @@
 						</div>
 						<div class="panel-body">
 							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/exam-welcome.php" class="list-group-item">
+								<a href="{$BASE_URL}pages/exams/exam_welcome.php" class="list-group-item">
 									<h4 class="list-group-item-heading">IART - Teste 1</h4> <datetime
 										class="list-group-item-text">25-01-2015 12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.php" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam_welcome.php" class="list-group-item">
 									<h4 class="list-group-item-heading">COMP - Avaliação
 										Individual 1</h4> <datetime class="list-group-item-text">27-01-2015
 									12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.php" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam_welcome.php" class="list-group-item">
 									<h4 class="list-group-item-heading">SDIS - Prova 2</h4> <datetime
 										class="list-group-item-text">29-01-2015 12:00-14:00</datetime>
 								</a>
@@ -51,14 +51,14 @@
 						</div>
 						<div class="panel-body">
 							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/exam-welcome.php" class="list-group-item">
+								<a href="{$BASE_URL}pages/exams/exam_welcome.php" class="list-group-item">
 									<h4 class="list-group-item-heading">LBAW - Teste 2</h4> <datetime
 										class="list-group-item-text">05-02-2015 12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.php" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam_welcome.php" class="list-group-item">
 									<h4 class="list-group-item-heading">COMP - Avaliação
 										Individual 2</h4> <datetime class="list-group-item-text">15-02-2015
 									12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.php" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam_welcome.php" class="list-group-item">
 									<h4 class="list-group-item-heading">SDIS - Prova 3</h4> <datetime
 										class="list-group-item-text">23-02-2015 12:00-14:00</datetime>
 								</a>
