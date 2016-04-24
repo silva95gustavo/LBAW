@@ -20,7 +20,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="results.html"><h4 class="list-group-item-heading">COMP -
+									<a href="results.php"><h4 class="list-group-item-heading">COMP -
 											Avaliação Individual 2</h4></a>
 									<datetime class="list-group-item-text">15-02-2015
 									12:00-14:00</datetime>
@@ -34,7 +34,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="results.html"><h4 class="list-group-item-heading">TCOM -
+									<a href="results.php"><h4 class="list-group-item-heading">TCOM -
 											Avaliação 2</h4></a>
 									<datetime class="list-group-item-text">15-02-2015
 									12:00-14:00</datetime>
@@ -48,7 +48,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="results.html"><h4 class="list-group-item-heading">IART -
+									<a href="results.php"><h4 class="list-group-item-heading">IART -
 											Teste 1</h4></a>
 									<datetime class="list-group-item-text">15-02-2015
 									12:00-14:00</datetime>
@@ -62,7 +62,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="results.html"><h4 class="list-group-item-heading">PPIN -
+									<a href="results.php"><h4 class="list-group-item-heading">PPIN -
 											Inquérito de projeto</h4></a>
 									<datetime class="list-group-item-text">15-02-2015
 									12:00-14:00</datetime>
@@ -76,7 +76,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="results.html"><h4 class="list-group-item-heading">LBAW -
+									<a href="results.php"><h4 class="list-group-item-heading">LBAW -
 											Avaliação A2</h4></a>
 									<datetime class="list-group-item-text">15-02-2015
 									12:00-14:00</datetime>
