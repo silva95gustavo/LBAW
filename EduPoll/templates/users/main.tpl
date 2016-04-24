@@ -15,10 +15,10 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="exams-taken.html">Previous Exams</a></li>
-					<li><a href="create-exam.html">Create Exam</a></li>
-					<li><a href="my-exams.html">My Exams</a></li>
-					<li><a href="index.html">Logout</a></li>
+					<li><a href="{$BASE_URL}pages/exams/exams-taken.html">Previous Exams</a></li>
+					<li><a href="{$BASE_URL}pages/exams/create-exam.html">Create Exam</a></li>
+					<li><a href="{$BASE_URL}pages/exams/my-exams.html">My Exams</a></li>
+					<li><a href="{$BASE_URL}actions/users/logout.php">Logout</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -53,7 +53,7 @@
 				</div>
 				
           	</br></br><ul class="nav nav-sidebar" text-align="right">
-            	<li><a href="edit-profile.html">André Sousa Lago</a></li>
+            	<li><a href="edit-profile.html">{$name}</a></li>
           	</ul>
           
 			</div>
@@ -70,7 +70,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="list-group">
-								<a href="exam-welcome.html" class="list-group-item">
+								<a href="{$BASE_URL}pages/exams/exam-welcome.html" class="list-group-item">
 									<h4 class="list-group-item-heading">LBAW - Teste 1</h4> <datetime
 										class="list-group-item-text">22-01-2015 12:00-14:00</datetime>
 									<p class="list-group-item-text">This exam starts in less
@@ -85,14 +85,14 @@
 						</div>
 						<div class="panel-body">
 							<div class="list-group">
-								<a href="exam-welcome.html" class="list-group-item">
+								<a href="{$BASE_URL}pages/exams/exam-welcome.html" class="list-group-item">
 									<h4 class="list-group-item-heading">IART - Teste 1</h4> <datetime
 										class="list-group-item-text">25-01-2015 12:00-14:00</datetime>
-								</a> <a href="exam-welcome.html" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.html" class="list-group-item">
 									<h4 class="list-group-item-heading">COMP - Avaliação
 										Individual 1</h4> <datetime class="list-group-item-text">27-01-2015
 									12:00-14:00</datetime>
-								</a> <a href="exam-welcome.html" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.html" class="list-group-item">
 									<h4 class="list-group-item-heading">SDIS - Prova 2</h4> <datetime
 										class="list-group-item-text">29-01-2015 12:00-14:00</datetime>
 								</a>
@@ -105,14 +105,14 @@
 						</div>
 						<div class="panel-body">
 							<div class="list-group">
-								<a href="exam-welcome.html" class="list-group-item">
+								<a href="{$BASE_URL}pages/exams/exam-welcome.html" class="list-group-item">
 									<h4 class="list-group-item-heading">LBAW - Teste 2</h4> <datetime
 										class="list-group-item-text">05-02-2015 12:00-14:00</datetime>
-								</a> <a href="exam-welcome.html" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.html" class="list-group-item">
 									<h4 class="list-group-item-heading">COMP - Avaliação
 										Individual 2</h4> <datetime class="list-group-item-text">15-02-2015
 									12:00-14:00</datetime>
-								</a> <a href="exam-welcome.html" class="list-group-item">
+								</a> <a href="{$BASE_URL}pages/exams/exam-welcome.html" class="list-group-item">
 									<h4 class="list-group-item-heading">SDIS - Prova 3</h4> <datetime
 										class="list-group-item-text">23-02-2015 12:00-14:00</datetime>
 								</a>

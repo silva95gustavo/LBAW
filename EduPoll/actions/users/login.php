@@ -15,6 +15,8 @@
   if ($result = isLoginCorrect($email, $password)) {
   	$_SESSION['userID'] = $result['id'];
     $_SESSION['email'] = $email;
+    $_SESSION['name'] = $result['name'];
+    $_SESSION['gender'] = $result['gender'];
     $_SESSION['success_messages'][] = 'Login successful';  
   } else {
     $_SESSION['error_messages'][] = 'Login failed';  
