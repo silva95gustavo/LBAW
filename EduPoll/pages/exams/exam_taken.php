@@ -60,8 +60,8 @@
 				<div class="calendar-mini">
 					<div class="calendar-month">
 						<ul class="calendar-header">
-							<li class="calendar-prev-month">❮</li>
-							<li class="calendar-next-month">❯</li>
+							<li class="calendar-prev-month">â�®</li>
+							<li class="calendar-next-month">â�¯</li>
 							<li style="text-align: center">August<br> <span
 								style="font-size: 18px">2016</span>
 							</li>
@@ -81,7 +81,7 @@
 				</div>
 				
           	</br></br><ul class="nav nav-sidebar" text-align="right">
-            	<li><a href="edit-profile.html">André Sousa Lago</a></li>
+            	<li><a href="edit-profile.html">AndrÃ© Sousa Lago</a></li>
           	</ul>
           
 			</div>
