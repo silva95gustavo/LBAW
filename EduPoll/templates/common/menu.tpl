@@ -14,14 +14,14 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 				{if isAdmin()}
-					<li><a href="{$BASE_URL}pages/admin/admin-addusers.html">Add users</a></li>
-					<li><a href="{$BASE_URL}pages/admin/admin-removeusers.html">Remove users</a></li>
-					<li><a href="{$BASE_URL}pages/admin/admin-groups.html">Manage groups</a></li>
+					<li><a href="{$BASE_URL}pages/admin/admin-addusers.php">Add users</a></li>
+					<li><a href="{$BASE_URL}pages/admin/admin-removeusers.php">Remove users</a></li>
+					<li><a href="{$BASE_URL}pages/admin/admin-groups.php">Manage groups</a></li>
 					<li><a href="{$BASE_URL}actions/users/logout.php">Logout</a></li>
 				{elseif isAcademic()}
-					<li><a href="{$BASE_URL}pages/exams/exams-taken.html">Previous Exams</a></li>
-					<li><a href="{$BASE_URL}pages/exams/create-exam.html">Create Exam</a></li>
-					<li><a href="{$BASE_URL}pages/exams/my-exams.html">My Exams</a></li>
+					<li><a href="{$BASE_URL}pages/exams/exams-taken.php">Previous Exams</a></li>
+					<li><a href="{$BASE_URL}pages/exams/create-exam.php">Create Exam</a></li>
+					<li><a href="{$BASE_URL}pages/exams/my-exams.php">My Exams</a></li>
 					<li><a href="{$BASE_URL}actions/users/logout.php">Logout</a></li>
 				{/if}
 				</ul>
