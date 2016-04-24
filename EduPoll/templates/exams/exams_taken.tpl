@@ -8,11 +8,7 @@
 				<div class="container theme-showcase" role="main">
 
 					<ol class="breadcrumb">
-					{if isAdmin() }
-						<li><a href="{$BASE_URL}pages/admin/main.php">Home</a></li>
-					{elseif isAcademic() }
 						<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
-					{/if}
 						<li class="active">Previous Exams</li>
 					</ol>
 
