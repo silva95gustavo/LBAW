@@ -8,5 +8,5 @@ if (! isAdmin ()) {
 }
 
 $smarty->assign ( 'name', $_SESSION ['name'] );
-$smarty->display ( 'admin/add_users.tpl' );
+$smarty->display ( 'admin/groups.tpl' );
 ?>

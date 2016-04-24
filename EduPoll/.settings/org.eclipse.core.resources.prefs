@@ -1,7 +1,12 @@
 eclipse.preferences.version=1
 encoding//pages/admin/add_users.php=UTF-8
 encoding//pages/exams/results.php=UTF-8
+encoding//templates/admin/add_individual_user.tpl=UTF-8
+encoding//templates/admin/add_multiple_users.tpl=UTF-8
 encoding//templates/admin/add_users.tpl=UTF-8
+encoding//templates/admin/groups.tpl=UTF-8
+encoding//templates/admin/main.tpl=UTF-8
+encoding//templates/admin/remove_users.tpl=UTF-8
 encoding//templates/common/sidebar.tpl=UTF-8
 encoding//templates/users/edit_profile.tpl=UTF-8
 encoding//templates/users/main.tpl=UTF-8

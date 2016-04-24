@@ -24,7 +24,7 @@
 		</div>
 		
   	</br></br><ul class="nav nav-sidebar" text-align="right">
-    	<li><a href="edit_profile.php">{$name}</a></li>
+    	<li><a href="{$BASE_URL}pages/users/edit_profile.php">{$name}</a></li>
   	</ul>
   
 	</div>

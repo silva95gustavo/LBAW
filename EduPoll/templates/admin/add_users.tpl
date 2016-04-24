@@ -8,18 +8,18 @@
 				<div class="container theme-showcase" role="main">
 
 					<ol class="breadcrumb">
-						<li><a href="admin.html">Home</a></li>
+						<li><a href="main.html">Home</a></li>
 						<li class="active">Add Users</li>
 					</ol>
 
 					<br/><br/>
-					<a href="admin-addindividualuser.html"><button type="button" class="btn btn-lg btn-primary">
+					<a href="add_individual_user.php"><button type="button" class="btn btn-lg btn-primary">
 						Add individual users
 					</button></a>
 					<h4>Create a single user and add it to the system
 						(automatically notifies the user)</h4>
 					<br/><br/><br/><br/>
-					<a href="admin-addmultipleusers.html"><button type="button" class="btn btn-lg btn-primary">
+					<a href="add_multiple_users.php"><button type="button" class="btn btn-lg btn-primary">
 						Add multiple users
 					</button></a>
 					<h4>Import a file containing a list of users, along with their types and groups, therefore adding all of them to the system.</h4>

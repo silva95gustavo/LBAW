@@ -9,7 +9,11 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
+				{if isAdmin()}
+				<a class="navbar-brand" href="{$BASE_URL}pages/admin/main.php">EduPoll</a>
+				{elseif isAcademic()}
 				<a class="navbar-brand" href="{$BASE_URL}pages/users/main.php">EduPoll</a>
+				{/if}
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
