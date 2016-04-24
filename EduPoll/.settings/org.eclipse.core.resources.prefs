@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
-encoding//pages/exams/results.html=UTF-8
-encoding//pages/users/edit-profile.html=UTF-8
+encoding//pages/exams/results.php=UTF-8
+encoding//pages/users/edit-profile.php=UTF-8
+encoding//templates/users/edit-profile.tpl=UTF-8
 encoding//templates/users/main.tpl=UTF-8
