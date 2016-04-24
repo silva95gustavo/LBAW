@@ -19,4 +19,11 @@
     	return $result;
     else return false;
   }
+  
+  function getUserInfo($userID) {
+  	global $conn;
+  	$stmt = $conn->prepare("SELECT * FROM RegisteredUser WHERE id = ?");
+  	$stmt->execute(array($userID));
+  	return $stmt->fetch();
+  }
 ?>
