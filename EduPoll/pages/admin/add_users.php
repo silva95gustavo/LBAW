@@ -8,5 +8,5 @@ if (! isLoggedIn ()) {
 }
 
 $smarty->assign ( 'name', $_SESSION ['name'] );
-$smarty->display ( 'users/edit-profile.tpl' );
+$smarty->display ( 'admin/add_users.tpl' );
 ?>
