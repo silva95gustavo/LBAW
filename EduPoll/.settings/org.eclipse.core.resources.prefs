@@ -14,6 +14,7 @@ encoding//templates/exams/exams_taken.tpl=UTF-8
 encoding//templates/exams/my_exams.tpl=UTF-8
 encoding//templates/exams/results.tpl=UTF-8
 encoding//templates/exams/results_unavailable.tpl=UTF-8
+encoding//templates/exams/statistics.tpl=UTF-8
 encoding//templates/exams/take.tpl=UTF-8
 encoding//templates/exams/welcome.tpl=UTF-8
 encoding//templates/users/edit_profile.tpl=UTF-8
