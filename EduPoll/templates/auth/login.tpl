@@ -23,7 +23,7 @@
     </div>
 
 	<div class="col-md-4 col-md-offset-4">
-		<form class="form-signin" action="{$BASE_URL}actions/users/login.php" method="post">
+		<form class="form-signin" action="{$BASE_URL}actions/auth/login.php" method="post">
 			<h2 class="form-signin-heading">EduPoll</h2>
 			<label for="inputEmail" class="sr-only">Email address</label> <input
 				   type="email" id="inputEmail" name="email" class="form-control"

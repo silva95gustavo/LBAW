@@ -7,5 +7,5 @@
   	die();
   }
   
-  $smarty->display('users/login.tpl');
+  $smarty->display('auth/login.tpl');
 ?>
