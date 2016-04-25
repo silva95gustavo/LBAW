@@ -3,5 +3,5 @@
   include_once($BASE_DIR .'database/users.php');
   include_once('../common/utils.php');
   
-  $smarty->display('users/register.tpl');
+  $smarty->display('auth/register.tpl');
 ?>
