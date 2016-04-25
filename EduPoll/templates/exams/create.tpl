@@ -6,13 +6,15 @@
 			{include file='common/sidebar.tpl'}
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="container theme-showcase" role="main">
-
+				
+					{include file='common/result_messages.tpl'}
+					
 					<ol class="breadcrumb">
 						<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
 						<li class="active">Create Exam</li>
 					</ol>
 
-					<form class="form-register-ind-user" method="get" action="test.html">
+					<form class="form-register-ind-user" method="post" action="{$BASE_URL}actions/exams/create.php">
 						<h2 class="form-signin-heading">Enter the new exam's information below</h2>
 						
 						<label for="inputName" class="sr-only">Exam name</label>
@@ -24,8 +26,7 @@
 						<br/>
 						
 						<div class="checkbox">
-							<label class="radio-inline"><input type="radio" name="examType" checked="checked" >Closed Exam</label>
-							<label class="radio-inline"><input type="radio" name="examType">Open Exam</label>
+							<label class="checkbox"><input type="checkbox" name="examType" checked="checked" >Closed exam?</label>
 						</div>
 						<br/>
 
