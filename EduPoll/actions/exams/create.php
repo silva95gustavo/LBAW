@@ -15,32 +15,32 @@
   	exit;
   }
   
-  if (!isset($_POST['name']) || !isset($_POST['description']) || !isset($_POST['examType'])) {
+  if (!isset($_POST['examName']) || !isset($_POST['examDescription'])) {
   	$_SESSION['error_messages'][] = 'Missing fields.';
   	header("Location: " . $_SERVER['HTTP_REFERER']);
   	exit;
   }
   
-  if (strlen($_POST['name'] == 0)) {
+  if (strlen($_POST['examName']) == 0) {
   	$_SESSION['error_messages'][] = 'Exam name cannot be empty.';
   	header("Location: " . $_SERVER['HTTP_REFERER']);
   	exit;
   }
   
-  if (strlen($_POST['name']) > 100) {
+  if (strlen($_POST['examName']) > 100) {
   	$_SESSION['error_messages'][] = 'Exam name too big.';
   	header("Location: " . $_SERVER['HTTP_REFERER']);
   	exit;
   }
   
-  if (strlen($_POST['description']) > 10000) {
+  if (strlen($_POST['examDescription']) > 10000) {
   	$_SESSION['error_messages'][] = 'Description too big.';
   	header("Location: " . $_SERVER['HTTP_REFERER']);
   	exit;
   }
   
   try {
-  	createExam($userInfo['id'], trim($_POST['name']), $_POST['description'], !$_POST['examType']);
+  	createExam($userInfo['id'], trim($_POST['examName']), $_POST['examDescription'], isset($_POST['examType']) ? 0 : 1);
   } catch (PDOException $e) {
   	$_SESSION['error_messages'][] = 'Error creating exam: ' . $e->getMessage();
   	$_SESSION['form_values'] = $_POST;

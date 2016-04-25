@@ -5,7 +5,7 @@ function createExam($ownerID, $name, $description, $open) {
     $stmt = $conn->prepare("INSERT INTO exam
     		(name, description, ownerID, openToPublic)
             VALUES (?, ?, ?, ?)");
-    $stmt->execute(array($name, $description, $ownerID, $open));
+    return $stmt->execute(array($name, $description, $ownerID, $open));
 }
 
 ?>
