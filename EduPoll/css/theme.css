@@ -125,3 +125,16 @@ body {
     background: #2A6497;
     color: white !important
 }
+
+label[for="inputMaxTries"] {
+	margin-right: 1em;
+}
+
+#inputMaxTries {
+	display: inline;
+	width: 5em;
+}
+
+.examTypeWarning {
+	display: none;
+}
