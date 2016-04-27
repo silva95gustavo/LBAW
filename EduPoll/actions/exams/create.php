@@ -15,7 +15,7 @@
   	exit;
   }
   
-  if (!isset($_POST['examName']) || !isset($_POST['examDescription'])) {
+  if (!isset($_POST['examName']) || !isset($_POST['examDescription']) || !isset($_POST['examMaxTries'])) {
   	$_SESSION['error_messages'][] = 'Missing fields.';
   	header("Location: " . $_SERVER['HTTP_REFERER']);
   	exit;
@@ -39,8 +39,14 @@
   	exit;
   }
   
+  if (!ctype_digit($_POST['examMaxTries']) || (int)$_POST['examMaxTries'] < 0) {
+  	$_SESSION['error_messages'][] = 'Invalid value for the maximum amount of tries, it must be a positive integer.';
+  	header("Location: " . $_SERVER['HTTP_REFERER']);
+  	exit;
+  }
+  
   try {
-  	createExam($userInfo['id'], trim($_POST['examName']), $_POST['examDescription'], isset($_POST['examType']) ? 0 : 1);
+  	createExam($userInfo['id'], trim($_POST['examName']), $_POST['examDescription'], isset($_POST['examType']) ? 0 : 1, $_POST['examMaxTries']);
   } catch (PDOException $e) {
   	$_SESSION['error_messages'][] = 'Error creating exam: ' . $e->getMessage();
   	$_SESSION['form_values'] = $_POST;
