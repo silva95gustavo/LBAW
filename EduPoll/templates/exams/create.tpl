@@ -14,23 +14,27 @@
 						<li class="active">Create Exam</li>
 					</ol>
 
-					<form class="form-register-ind-user" method="post" action="{$BASE_URL}actions/exams/create.php">
+					<form class="form-create-exam" method="post" action="{$BASE_URL}actions/exams/create.php">
 						<h2 class="form-signin-heading">Enter the new exam's information below</h2>
 						
-						<label for="inputName" class="sr-only">Exam name</label>
-						<input type="text" name="examName" id="inputName" class="form-control" placeholder="Exam name" required autofocus>
+						<label for="inputExam" class="sr-only">Exam name</label>
+						<input type="text" name="examName" id="inputExam" class="form-control" placeholder="Exam name" required autofocus>
 						<br/>
 						
 						<label for="inputDescription" class="sr-only">Exam description</label>
 						<textarea id="inputDescription" name="examDescription" class="form-control" placeholder="Exam description" rows="10" required></textarea>
 						<br/>
 						
-						<div class="checkbox">
-							<label class="checkbox"><input type="checkbox" name="examType" checked="checked" >Closed exam?</label>
+						<label for="inputMaxTries">Maximum number of tries</label>
+						<input type="number" name="examMaxTries" id="inputMaxTries" class="form-control" min="0" required value="1">
+						<br/>
+						
+						<div class="checkbox examType">
+							<label class="checkbox"><input type="checkbox" class="examType" name="examType">Closed exam?</label>
 						</div>
 						<br/>
 
-						<div class="alert alert-warning" role="alert">
+						<div class="alert alert-warning examTypeWarning" role="alert">
 							<strong>Warning!</strong> Closed exams can only be seen by users you later invite to them.
 						</div>
 
@@ -52,5 +56,5 @@
 
 	</div>
 	<!-- /container -->
-
+	<script src="{$BASE_URL}javascript/exams/create.js"></script>
 {include file='common/footer.tpl'}
