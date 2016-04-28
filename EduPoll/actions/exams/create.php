@@ -46,7 +46,7 @@
   }
   
   try {
-  	createExam($userInfo['id'], trim($_POST['examName']), $_POST['examDescription'], isset($_POST['examType']) ? 0 : 1, $_POST['examMaxTries']);
+  	createExam($userInfo['id'], trim($_POST['examName']), $_POST['examDescription'], (isset($_POST['examType']) && !isStudent()) ? 0 : 1, $_POST['examMaxTries']);
   } catch (PDOException $e) {
   	$_SESSION['error_messages'][] = 'Error creating exam: ' . $e->getMessage();
   	$_SESSION['form_values'] = $_POST;
