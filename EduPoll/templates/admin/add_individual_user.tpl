@@ -15,34 +15,35 @@
 						<li class="active">Add Individual User</li>
 					</ol>
 
-					<form class="form-register-ind-user">
+					<form class="form-register-ind-user" method="post" action="{$BASE_URL}actions/users/register.php">
 						<h2 class="form-signin-heading">Enter the new user's information below</h2>
 						
 						<label for="inputName" class="sr-only">Full name</label>
-						<input type="text" id="inputName" class="form-control" placeholder="Full name" required autofocus>
+						<input type="text" name="userName" id="inputName" class="form-control" placeholder="Full name" required autofocus>
 						<br/>
 						
 						<label for="inputEmail" class="sr-only">Email</label>
-						<input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
+						<input type="email" name="userEmail" id="inputEmail" class="form-control" placeholder="Email" required>
 						<br/>
 						
 						<div class="checkbox">
-							<label class="radio-inline"><input type="radio" name="optradio" required>Teacher</label>
-							<label class="radio-inline"><input type="radio" name="optradio" checked="checked" required>Student</label>
+							{html_radios name='genderType' options=$genderValues selected=$genderType }
 						</div>
+
 						<br/>
-						
+
+						<div class="checkbox">
+							{html_radios name='userType' options=$userValues selected=$userType }
+						</div>
+
+						<br/>
+
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Register Student</button>
 					</form>
 
 				</div>
 			</div>
 		</div>
-
-
-
-
-
 
 	</div>
 	<!-- /container -->
