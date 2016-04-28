@@ -29,10 +29,10 @@
 						<input type="number" name="examMaxTries" id="inputMaxTries" class="form-control" min="0" required value="1">
 						<br/>
 						
+						{if !isStudent()}
 						<div class="checkbox examType">
 							<label class="checkbox"><input type="checkbox" class="examType" name="examType">Closed exam?</label>
 						</div>
-						<br/>
 
 						<div class="alert alert-warning examTypeWarning" role="alert">
 							<strong>Warning!</strong> Closed exams can only be seen by users you later invite to them.
@@ -41,7 +41,9 @@
 						<!--  <div class="alert alert-warning" role="alert">
 							<strong>Warning!</strong> Open exams can be seen and taken by anyone with the exam link. It might be hard to control who has access to this exam.
 						</div> -->
-
+						{/if}
+						<br/>
+						
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Create Exam</button>
 					</form>
 					
