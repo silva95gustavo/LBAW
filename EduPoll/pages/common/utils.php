@@ -16,11 +16,11 @@ function isAcademic() {
 }
 function isStudent() {
 	global $userInfo;
-	return isLoggedIn () && $userInfo['type'] == 1;
+	return isLoggedIn () && $userInfo['type'] == 2;
 }
 function isTeacher() {
 	global $userInfo;
-	return isLoggedIn () && $userInfo['type'] == 2;
+	return isLoggedIn () && $userInfo['type'] == 1;
 }
 
 function sendEmail($email, $message) {
@@ -29,7 +29,7 @@ function sendEmail($email, $message) {
   $headers   = array();
   $headers[] = "MIME-Version: 1.0";
   $headers[] = "Content-type: text/plain; charset=iso-8859-1";
-  $headers[] = "From: Sender Name <edupoll@fe.up.pt>";
+  $headers[] = "From: Edupoll <edupoll@fe.up.pt>";
   $headers[] = "Reply-To: Edupoll <edupoll@fe.up.pt>";
   $headers[] = "Subject: Edupoll Signup";
   $headers[] = "X-Mailer: PHP/".phpversion();

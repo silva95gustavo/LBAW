@@ -38,7 +38,7 @@
 
 						<br/>
 
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Register Student</button>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Register User</button>
 					</form>
 
 				</div>
