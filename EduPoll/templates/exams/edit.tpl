@@ -62,6 +62,13 @@
 						</div>
 					</div>
 
+					<div class="jumbotron">
+						<div class="row">
+							<h2>{$exam.name}</h2>
+							<p>{$exam.description}</p>
+						</div>
+					</div>
+
 					<div class="panel panel-default text-center">
 						<div class="panel-heading">
 							<div class="row">
@@ -77,7 +84,6 @@
 							</div>
 						</div>
 					</div>
-					
 
 					<div class="panel panel-info">
 						<div class="panel-heading">
