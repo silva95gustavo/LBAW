@@ -10,6 +10,7 @@ encoding//templates/admin/main.tpl=UTF-8
 encoding//templates/admin/remove_users.tpl=UTF-8
 encoding//templates/common/sidebar.tpl=UTF-8
 encoding//templates/exams/create.tpl=UTF-8
+encoding//templates/exams/edit.tpl=UTF-8
 encoding//templates/exams/exams_taken.tpl=UTF-8
 encoding//templates/exams/my_exams.tpl=UTF-8
 encoding//templates/exams/results.tpl=UTF-8

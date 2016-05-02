@@ -25,7 +25,7 @@
 								</div>
 
 								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Owner <a href="edit-exam.html">(edit exam)</a></p>
+									<br/><p class="list-group-item-text">Owner <a href="edit.php">(edit exam)</a></p>
 								</div>
 							</div>
 						</div>
@@ -39,7 +39,7 @@
 								</div>
 
 								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Manager <a href="edit-exam.html">(edit exam)</a></p>
+									<br/><p class="list-group-item-text">Manager <a href="edit.php">(edit exam)</a></p>
 								</div>
 							</div>
 						</div>
@@ -53,7 +53,7 @@
 								</div>
 
 								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Owner <a href="edit-exam.html">(edit exam)</a></p>
+									<br/><p class="list-group-item-text">Owner <a href="edit.php">(edit exam)</a></p>
 								</div>
 							</div>
 						</div>
@@ -67,7 +67,7 @@
 								</div>
 
 								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Manager <a href="edit-exam.html">(edit exam)</a></p>
+									<br/><p class="list-group-item-text">Manager <a href="edit.php">(edit exam)</a></p>
 								</div>
 							</div>
 						</div>
@@ -81,7 +81,7 @@
 								</div>
 
 								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Manager <a href="edit-exam.html">(edit exam)</a></p>
+									<br/><p class="list-group-item-text">Manager <a href="edit.php">(edit exam)</a></p>
 								</div>
 							</div>
 						</div>
