@@ -25,6 +25,13 @@
 						<textarea id="inputDescription" name="examDescription" class="form-control" placeholder="Exam description" rows="10" required></textarea>
 						<br/>
 						
+						<div id="datetimepicker" class="input-append date">
+      						<input type="text"></input>
+      						<span class="add-on">
+        						<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      						</span>
+    					</div>
+
 						<label for="inputMaxTries">Maximum number of tries</label>
 						<input type="number" name="examMaxTries" id="inputMaxTries" class="form-control" min="0" required value="1">
 						<br/>
@@ -55,8 +62,13 @@
 
 
 
-
 	</div>
 	<!-- /container -->
 	<script src="{$BASE_URL}javascript/exams/create.js"></script>
+	<script type="text/javascript">
+      $('#datetimepicker').datetimepicker({
+        format: 'dd/MM/yyyy hh:mm:ss',
+        language: 'pt-BR'
+      });
+    </script>
 {include file='common/footer.tpl'}
