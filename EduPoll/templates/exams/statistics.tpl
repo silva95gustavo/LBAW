@@ -180,6 +180,6 @@
 		</div>
 	</div>
 
-	<script src="./frameworks/Chart.js"></script>
-	<script src="./javascript/exam-statistics.js"></script>
+	<script src="{$BASE_URL}frameworks/Chart.js"></script>
+	<script src="{$BASE_URL}javascript/exam-statistics.js"></script>
 {include file='common/footer.tpl'}
