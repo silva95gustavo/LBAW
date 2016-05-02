@@ -8,7 +8,7 @@ function isOwner($exam) {
 }
 
 if (! isLoggedIn ()) {
-	header ( 'Location: ' . $BASE_URL . 'pages/users/login.php' );
+	header ( 'Location: ' . $BASE_URL . 'pages/auth/login.php' );
 	die ();
 } else if (isAdmin()) {
   	header('Location: ' . $BASE_URL . 'pages/admin/main.php');
