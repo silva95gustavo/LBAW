@@ -18,6 +18,9 @@
 <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 
 
+<!-- Font awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 <!-- Custom styles for this template -->
 <link href="{$BASE_URL}css/global.css" rel="stylesheet">
 <link href="{$BASE_URL}css/theme.css" rel="stylesheet">
