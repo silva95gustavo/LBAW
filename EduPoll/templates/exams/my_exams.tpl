@@ -15,76 +15,22 @@
 					</ol>
 
 					<div class="list-group">
+					
+						{foreach $exams as $exam }
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="exam-statistics.html"><h4 class="list-group-item-heading">COMP -
-											Avaliação Individual 2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
+									<a href="statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<datetime class="list-group-item-text">{$exam.startendtime}</datetime>
 								</div>
 
 								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Owner <a href="edit.php">(edit exam)</a></p>
+									<br/><p class="list-group-item-text">{if isOwner($exam)}Owner{else}Manager{/if} <a href="edit.php?id={$exam.id}">(edit exam)</a></p>
 								</div>
 							</div>
 						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="exam-statistics.html"><h4 class="list-group-item-heading">TCOM -
-											Avaliação 2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Manager <a href="edit.php">(edit exam)</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="exam-statistics.html"><h4 class="list-group-item-heading">IART -
-											Teste 1</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Owner <a href="edit.php">(edit exam)</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="exam-statistics.html"><h4 class="list-group-item-heading">PPIN -
-											Inquérito de projeto</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Manager <a href="edit.php">(edit exam)</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="exam-statistics.html"><h4 class="list-group-item-heading">LBAW -
-											Avaliação A2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Manager <a href="edit.php">(edit exam)</a></p>
-								</div>
-							</div>
-						</div>
+						{/foreach}
+						
 					</div>
 				</div>
 			</div>
