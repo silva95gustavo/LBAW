@@ -67,10 +67,10 @@
 						<div class="jumbotron">
 							<div class="row">
 								<span>
-									<h2 class="inline-editable exam-name">{$exam.name}</h2>
+									<h2 class="inline-editable exam-name">{$exam.name|escape:'html'}</h2>
 									<a href="" class="inline-edit-button exam-name"><img src="{$BASE_URL}images/edit_field.png" alt="Edit" /></a>
 								</span>
-								<p>{$exam.description}</p>
+								<p>{$exam.description|escape:'html'}</p>
 							</div>
 						</div>
 	
