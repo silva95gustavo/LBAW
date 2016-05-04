@@ -1,5 +1,3 @@
-BASE_URL = '...';
-
 $(document).ready(function() {
 	$(".inline-edit-button.exam-name").click(function() {
 		editTextField($(this).parent().find(".inline-editable"), "name", function(inputElement) {
