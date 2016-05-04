@@ -26,6 +26,18 @@ div.main div.container {
     border-radius: 0;
 }
 
+/* EDITABLES */
+.inline-editable {
+	display: inline;
+	padding: auto;
+}
+
+.inline-edit-button, .inline-edit-button img {
+	display: inline;
+	height: 2em;
+	width: 2em;
+}
+
 /* JUMBOTRON */
 div.jumbotron {
 	padding-top: 10px;
