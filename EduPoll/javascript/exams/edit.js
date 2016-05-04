@@ -4,7 +4,7 @@ function updateField(field, name, inputElement, inputSelector) {
 	}
 	data[inputElement.attr('name')] = inputElement.val();
 	$.ajax({
-		url : "../../api/exams/edit_name.php",
+		url : BASE_URL + "api/exams/edit_name.php",
 		type: "POST",
 		data : data,
 		success: function(data, textStatus, jqXHR)

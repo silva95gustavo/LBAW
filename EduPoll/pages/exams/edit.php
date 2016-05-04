@@ -11,7 +11,10 @@ if (! isLoggedIn ()) {
   	die();
  }
 
-$exam = getExam($_GET['id']);
+$examID = $_GET['id'];
+$exam = getExam($examID);
+if ($exam)
+	$exam['id'] = $examID;
 
 $smarty->assign ( 'exam', $exam);
 $smarty->assign ( 'name', $_SESSION ['name'] );
