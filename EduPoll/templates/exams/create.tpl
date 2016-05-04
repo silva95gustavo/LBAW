@@ -64,6 +64,8 @@
 
 	</div>
 	<!-- /container -->
+
+{include file='common/footer.tpl'}
 	<script type="text/javascript" src="https://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="{$BASE_URL}javascript/exams/create.js"></script>
 	<script type="text/javascript">
@@ -72,4 +74,3 @@
         language: 'pt-BR'
       });
     </script>
-{include file='common/footer.tpl'}
