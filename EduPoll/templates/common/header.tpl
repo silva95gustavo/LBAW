@@ -23,7 +23,6 @@
 <link href="{$BASE_URL}css/global.css" rel="stylesheet">
 <link href="{$BASE_URL}css/theme.css" rel="stylesheet">
 
-<script src="{$BASE_URL}javascript/main.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
