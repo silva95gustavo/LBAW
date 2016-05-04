@@ -26,4 +26,31 @@
   	$stmt->execute(array($userID));
   	return $stmt->fetch();
   }
+  
+  function getUsers($start, $perPage) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM RegisteredUser LIMIT ? OFFSET ?");
+    $stmt->execute(array($perPage, $start));
+    return $stmt->fetchAll();
+  }
+  
+  function getNumberOfUsers() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM RegisteredUser");
+    $stmt->execute();
+    return $stmt->fetch()['total'];
+  }
+  
+  function deleteUser($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM RegisteredUser WHERE id = ?");
+    $stmt->execute(array($id));
+  }
+  
+  function searchUserFTS($data) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT name FROM RegisteredUser WHERE to_tsvector('english', name) @@ to_tsquery('english', ?)");
+    $stmt->execute(array($data));
+    return $stmt->fetchAll();
+  }
 ?>

@@ -56,7 +56,7 @@
               . "\r\nGood Luck with your exams!";
   sendEmail($email, $message);
 
-  $_SESSION['success_messages'][] = 'User was registered successfully';  
+  $_SESSION['success_messages'][] = 'User was registered successfully';
   header("Location: " . $_SERVER['HTTP_REFERER']);
 
 ?>
