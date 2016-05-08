@@ -35,8 +35,6 @@ div.main div.container {
 	position: absolute;
 	right: 10px;
 	top: 5px;
-	width: 2em;
-	height: 2em;
 	font-size: 2em;
 	cursor: pointer;
 }
