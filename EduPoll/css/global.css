@@ -26,6 +26,29 @@ div.main div.container {
     border-radius: 0;
 }
 
+/* EDITABLES */
+.inline-editable {
+	position: relative;
+}
+.inline-editable-button {
+	display: none !important;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	font-size: 2em;
+	cursor: pointer;
+}
+.inline-editable-button * {
+	width: 100%;
+	height: 100%;
+}
+.inline-editable-button:hover {
+	color: grey;
+}
+.inline-editable-text:hover + .inline-editable-button, .inline-editable-button:hover {
+	display: block !important;
+}
+
 /* JUMBOTRON */
 div.jumbotron {
 	padding-top: 10px;

@@ -10,7 +10,7 @@ function createExam($ownerID, $name, $description, $open, $maxTries) {
 
 function getExam($examID) {
 	global $conn;
-	$stmt = $conn->prepare("SELECT name, description, starttime, endtime, opentopublic, maxtries, maxscore
+	$stmt = $conn->prepare("SELECT name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
    		FROM exam
    		WHERE id = ?");
 	$stmt->execute(array($examID));
@@ -25,4 +25,18 @@ function getOwnedAndManagedExams($userID) {
 	$stmt->execute(array($userID, $userID));
 	return $stmt->fetchAll();
 }
+
+function editExamName($examID, $newName) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE name FROM exam WHERE id = ?");
+	$stmt->execute(array($newName));
+	return $stmt->fetchAll();
+}
+
+function deleteExam($examID) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM exam WHERE id = ?");
+	return $stmt->execute(array($examID));
+}
+
 ?>

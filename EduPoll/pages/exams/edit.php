@@ -9,11 +9,16 @@ if (! isLoggedIn ()) {
 } else if (isAdmin()) {
   	header('Location: ' . $BASE_URL . 'pages/admin/main.php');
   	die();
- }
+}
 
-$exam = getExam($_GET['id']);
-
-$smarty->assign ( 'exam', $exam);
-$smarty->assign ( 'name', $_SESSION ['name'] );
+$examID = $_GET['id'];
+$exam = getExam($examID);
+if ($exam)
+{
+	$exam['id'] = $examID;
+	$smarty->assign ( 'exam', $exam);
+	$smarty->assign ( 'isOwner', $exam['ownerid'] === $userInfo['id']);
+}
+$smarty->assign ( 'name', $userInfo['name'] );
 $smarty->display ( 'exams/edit.tpl' );
 ?>
