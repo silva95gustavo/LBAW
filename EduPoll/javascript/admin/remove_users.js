@@ -1,33 +1,28 @@
 
 var userId = null;
 
-$('a').click(function(e){
-    
-    userId = $(this.id).selector;
-    $('#yes').click(function () {
-        if (this.id == 'yes') {
-            
-            $.ajax({
-                type: 'POST',
-                url: "../../actions/users/delete.php",
-                data: { id: userId },
-                statusCode: {
-                    200: function () {
-                        $('tr#'+userId).remove();
-                    },
+$('#confirmationModal').on('show.bs.modal', function (e) {
+    var data = $(e.relatedTarget).data();
+    console.log(data);
+    $('#yes').data('id', data.id);
+})
 
-                    400: function () {
-                        location.reload();
-                    }
-                }
-
-            });
-            
+$('#yes').click(function (e) {
+    userId = $(this).data('id');
+    console.log('check', $(this).data('id'), userId, $(this).data());
+    $.ajax({
+        type: 'POST',
+        url: "../../actions/users/delete.php",
+        data: { id: userId },
+        success: function () {
+            $('tr#' + userId).remove();
+            $('#confirmationModal').modal('hide');
+        },
+        error: function () {
+            location.reload();
         }
-    })
-
-});
-
+    });
+})
 
 function searchForUserMatch() {
     var data = $('#inputUserToRemove').val();
