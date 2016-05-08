@@ -66,26 +66,36 @@
 
 						<div class="jumbotron">
 							<div class="row">
-								<span>
-									<h2 class="inline-editable exam-name">{$exam.name}</h2>
-									<a href="" class="inline-edit-button exam-name"><img src="{$BASE_URL}images/edit_field.png" alt="Edit" /></a>
-								</span>
-								<p>{$exam.description}</p>
+								<div class="inline-editable exam-name">
+									<h2 class="inline-editable-text exam-name">{$exam.name|escape:'html'}</h2>
+									<i class="inline-editable-button exam-name fa fa-pencil" aria-hidden="false"></i>
+								</div>
+								<div class="inline-editable exam-description">
+									<h3 class="inline-editable-text exam-description">{$exam.description|escape:'html'}</h2>
+									<i class="inline-editable-button exam-description fa fa-pencil" aria-hidden="false"></i>
+								</div>
 							</div>
 						</div>
 	
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-info">Add New Category</button>
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-success">Save Changes</button>
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-danger">Cancel Changes</button>
 									</div>	
+									{if $isOwner}
+									<div class="col-sm-3">
+										<form class="delete-exam" action="{$BASE_URL}actions/exams/delete.php" method="post">
+											<input type="hidden" name="id" value="{$exam.id}">
+											<button type="submit" class="btn btn-danger">Delete exam</button>
+									</div>
+									{/if}
 								</div>
 							</div>
 						</div>

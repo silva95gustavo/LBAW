@@ -35,12 +35,8 @@ function sendEmail($email, $message) {
   $headers[] = "X-Mailer: PHP/".phpversion();
 
   mail($email, "Edupoll Signup", $message, implode("\r\n", $headers));
-
 }
 
 if (isLoggedIn())
 	$userInfo = getUserInfo($_SESSION['userID']);
-
-
-
 ?>

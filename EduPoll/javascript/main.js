@@ -1,11 +1,28 @@
-BASE_URL = '...';
-
 $(document).ready(function() {
-	$(".inline-edit-button.exam-name").click(function() {
-		editTextField($(this).parent().find(".inline-editable"), "name", function(inputElement) {
-			return inputElement.val().length > 0;
-		});
+	$(".inline-editable-button.exam-name").click(function() {
+		editTextField(
+				$(this).parent().find(".inline-editable-text"),
+				"name",
+				function(inputElement) {
+					return inputElement.val().length > 0;
+				},
+				examNameEditCallback
+				);
 		return false;
+	});
+	$(".inline-editable-button.exam-description").click(function() {
+		editTextareaField(
+				$(this).parent().find(".inline-editable-text"),
+				"name",
+				function(inputElement) {
+					return inputElement.val().length > 0;
+				},
+				examDescriptionEditCallback
+				);
+		return false;
+	});
+	$("form.delete-exam").submit(function() {
+		return confirm("Are you sure you want to delete this exam? This action cannot be undone.");
 	});
 });
 
@@ -18,7 +35,7 @@ function validateField(field, condition) {
 		field.removeClass('valid').addClass('error');
 }
 
-function editField(field, name, inputHTML, inputSelector, condition, submitCondition) {
+function editField(field, name, inputHTML, inputSelector, condition, submitCondition, submitCallback) {
 	var inputElement = $(inputHTML);
 	inputElement.val(br2nl(decodeEntities(field.html())));
 	field.next().hide();
@@ -39,28 +56,28 @@ function editField(field, name, inputHTML, inputSelector, condition, submitCondi
 		{
 			var valid = inputElement.hasClass('valid');
 			if (valid)
-				updateField(field, name, inputElement, inputSelector);
+				submitCallback(field, name, inputElement, inputSelector);
 			return false;
 		}
 	});
 }
 
-function editTextField(field, name, condition) {
+function editTextField(field, name, condition, submitCallback) {
 	var inputHTML = '<input class="edit ' + name + '" name="' + name + '" type="text" />';
 	var inputSelector = "input.edit." + name;
 	var submitCondition = function(event) {
 		return event.keyCode == 13;
 	}
-	return editField(field, name, inputHTML, inputSelector, condition, submitCondition);
+	return editField(field, name, inputHTML, inputSelector, condition, submitCondition, submitCallback);
 }
 
-function editTextareaField(field, name, condition) {
+function editTextareaField(field, name, condition, submitCallback) {
 	var inputHTML = '<textarea class="edit ' + name + '" name="' + name + '" /></textarea>';
 	var inputSelector = "textarea.edit." + name;
 	var submitCondition = function(event) {
 		return event.keyCode == 13 && !event.shiftKey;
 	}
-	return editField(field, name, inputHTML, inputSelector, condition, submitCondition);
+	return editField(field, name, inputHTML, inputSelector, condition, submitCondition, submitCallback);
 }
 
 function editFieldFinish(field, html, inputElement, inputSelector) {
