@@ -1,29 +1,4 @@
 $(document).ready(function() {
-	$(".inline-editable-button.exam-name").click(function() {
-		editTextField(
-				$(this).parent().find(".inline-editable-text"),
-				"name",
-				function(inputElement) {
-					return inputElement.val().length > 0;
-				},
-				examNameEditCallback
-				);
-		return false;
-	});
-	$(".inline-editable-button.exam-description").click(function() {
-		editTextareaField(
-				$(this).parent().find(".inline-editable-text"),
-				"name",
-				function(inputElement) {
-					return inputElement.val().length > 0;
-				},
-				examDescriptionEditCallback
-				);
-		return false;
-	});
-	$("form.delete-exam").submit(function() {
-		return confirm("Are you sure you want to delete this exam? This action cannot be undone.");
-	});
 });
 
 function validateField(field, condition) {

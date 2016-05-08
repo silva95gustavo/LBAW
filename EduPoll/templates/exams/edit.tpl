@@ -62,6 +62,21 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModal" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to delete this exam?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes" class="btn btn-success">Yes</button>
+									<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div class="exam" id="exam{$exam.id}">
 
 						<div class="jumbotron">
@@ -91,9 +106,7 @@
 									</div>	
 									{if $isOwner}
 									<div class="col-sm-3">
-										<form class="delete-exam" action="{$BASE_URL}actions/exams/delete.php" method="post">
-											<input type="hidden" name="id" value="{$exam.id}">
-											<button type="submit" class="btn btn-danger">Delete exam</button>
+										<button type="submit" class="btn btn-danger" data-id="{$exam.id}" data-toggle="modal" data-target="#confirmationModal">Delete exam</button>
 									</div>
 									{/if}
 								</div>
