@@ -13,7 +13,10 @@
 						<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
 						<li class="active">My Exams</li>
 					</ol>
-
+					
+					{if (sizeof($exams) === 0)}
+						<p>You do not own or manage any exam. <a href="{$BASE_URL}pages/exams/create.php">Create one now.</a></p>
+					{else}
 					<div class="list-group">
 					
 						{foreach $exams as $exam }
@@ -30,8 +33,8 @@
 							</div>
 						</div>
 						{/foreach}
-						
 					</div>
+					{/if}
 				</div>
 			</div>
 		</div>
