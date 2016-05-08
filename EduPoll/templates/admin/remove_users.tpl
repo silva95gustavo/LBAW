@@ -42,7 +42,7 @@
 							<td>{$user.id}</td>
 							<td>{$user.name}</td>
 							<td>{$user.email}</td>
-							<td><a id="{$user.id}" href="#" data-toggle="modal" data-target="#myModal">Remove</a></td>
+							<td><a data-id="{$user.id}" href="#" data-toggle="modal" data-target="#confirmationModal">Remove</a></td>
 						</tr>
 						{/foreach}
 					</tbody>
@@ -51,7 +51,7 @@
 				{for $i=1 to $numberOfPages}
 				<a href="remove_users.php?page={$i}">{$i}</a> {/for}
 
-				<div id="myModal" class="modal fade" role="dialog">
+				<div id="confirmationModal" class="modal fade" role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header text-center">
@@ -59,7 +59,7 @@
 								<h4 class="modal-title">Are you sure to delete this user?</h4>
 							</div>
 							<div class="modal-body text-center">
-								<button type="button" id="yes" class="btn btn-success" data-dismiss="modal">Yes</button>
+								<button type="button" id="yes" class="btn btn-success">Yes</button>
 								<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
 							</div>
 						</div>
