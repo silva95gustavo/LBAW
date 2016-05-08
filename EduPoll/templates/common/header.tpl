@@ -23,6 +23,9 @@
 <link href="{$BASE_URL}css/global.css" rel="stylesheet">
 <link href="{$BASE_URL}css/theme.css" rel="stylesheet">
 
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
 <script>BASE_URL = '../../';</script>
 
 
