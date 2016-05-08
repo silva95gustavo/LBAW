@@ -21,6 +21,9 @@ $(document).ready(function() {
 				);
 		return false;
 	});
+	$("form.delete-exam").submit(function() {
+		return confirm("Are you sure you want to delete this exam? This action cannot be undone.");
+	});
 });
 
 function validateField(field, condition) {

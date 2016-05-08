@@ -33,8 +33,8 @@ div.main div.container {
 .inline-editable-button {
 	display: none !important;
 	position: absolute;
-	right: 10px;
-	top: 5px;
+	right: 0px;
+	top: 0px;
 	font-size: 2em;
 	cursor: pointer;
 }
