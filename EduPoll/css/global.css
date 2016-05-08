@@ -37,10 +37,15 @@ div.main div.container {
 	top: 5px;
 	width: 2em;
 	height: 2em;
+	font-size: 2em;
+	cursor: pointer;
 }
-.inline-editable-button img {
+.inline-editable-button * {
 	width: 100%;
 	height: 100%;
+}
+.inline-editable-button:hover {
+	color: grey;
 }
 .inline-editable-text:hover + .inline-editable-button, .inline-editable-button:hover {
 	display: block !important;
