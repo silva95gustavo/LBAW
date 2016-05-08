@@ -80,15 +80,22 @@
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-info">Add New Category</button>
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-success">Save Changes</button>
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-danger">Cancel Changes</button>
 									</div>	
+									{if $isOwner}
+									<div class="col-sm-3">
+										<form class="delete-exam" action="{$BASE_URL}actions/exams/delete.php" method="post">
+											<input type="hidden" name="id" value="{$exam.id}">
+											<button type="submit" class="btn btn-danger">Delete exam</button>
+									</div>
+									{/if}
 								</div>
 							</div>
 						</div>

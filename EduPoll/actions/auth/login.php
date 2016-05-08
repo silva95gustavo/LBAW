@@ -17,9 +17,11 @@
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $result['name'];
     $_SESSION['gender'] = $result['gender'];
-    $_SESSION['success_messages'][] = 'Login successful';  
+    //$_SESSION['success_messages'][] = 'Login successful';  
   } else {
     $_SESSION['error_messages'][] = 'Login failed';  
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
   }
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  header('Location: ' . $BASE_URL . 'pages/users/main.php');
 ?>
