@@ -66,11 +66,14 @@
 
 						<div class="jumbotron">
 							<div class="row">
-								<span>
-									<h2 class="inline-editable exam-name">{$exam.name|escape:'html'}</h2>
-									<a href="" class="inline-edit-button exam-name"><img src="{$BASE_URL}images/edit_field.png" alt="Edit" /></a>
-								</span>
-								<p>{$exam.description|escape:'html'}</p>
+								<div class="inline-editable exam-name">
+									<h2 class="inline-editable-text exam-name">{$exam.name|escape:'html'}</h2>
+									<a href="" class="inline-editable-button exam-name"><img src="{$BASE_URL}images/edit_field.png" alt="Edit exam name" /></a>
+								</div>
+								<div class="inline-editable exam-description">
+									<h3 class="inline-editable-text exam-description">{$exam.description|escape:'html'}</h2>
+									<a href="" class="inline-editable-button exam-description"><img src="{$BASE_URL}images/edit_field.png" alt="Edit exam description" /></a>
+								</div>
 							</div>
 						</div>
 	

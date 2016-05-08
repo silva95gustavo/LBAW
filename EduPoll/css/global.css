@@ -28,14 +28,22 @@ div.main div.container {
 
 /* EDITABLES */
 .inline-editable {
-	display: inline;
-	padding: auto;
+	position: relative;
 }
-
-.inline-edit-button, .inline-edit-button img {
-	display: inline;
-	height: 2em;
+.inline-editable-button {
+	display: none !important;
+	position: absolute;
+	right: 10px;
+	top: 5px;
 	width: 2em;
+	height: 2em;
+}
+.inline-editable-button img {
+	width: 100%;
+	height: 100%;
+}
+.inline-editable-text:hover + .inline-editable-button, .inline-editable-button:hover {
+	display: block !important;
 }
 
 /* JUMBOTRON */
