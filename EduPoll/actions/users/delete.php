@@ -5,11 +5,12 @@
   
 
   $userToDelete = isset($_POST['id']) ? (int)$_POST['id'] : exit;
-  
+  $result = null;
   try {
-    deleteUser($userToDelete);
+    $result = deleteUser($userToDelete);
   } catch (PDOException $e) {
-    $_SESSION['error_messages'][] = 'Error on user deletion.';
+    //$_SESSION['error_messages'][] = 'Error on user deletion.';
+    $_SESSION['error_messages'][] = $result;
     $_SESSION['form_values'] = $_POST;
     http_response_code(400);
     exit;
