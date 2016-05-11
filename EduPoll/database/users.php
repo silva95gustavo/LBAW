@@ -64,7 +64,7 @@
   
   function searchUserFTS($data) {
     global $conn;
-    $stmt = $conn->prepare("SELECT id, name, email, type FROM RegisteredUser WHERE email = ? OR to_tsvector('english', name) @@ to_tsquery('english', ?)");
+    $stmt = $conn->prepare("SELECT id, name, email, type FROM RegisteredUser WHERE email = ? OR to_tsvector('english', name) @@ plainto_tsquery('english', ?)");
     $stmt->execute(array($data, $data));
     return $stmt->fetchAll();
   }
