@@ -5,6 +5,7 @@ include_once ('../../database/exams.php');
 
 $data['name'] = $_POST['name'];
 header('Content-Type: application/json');
-echo json_encode($data);
+$reply = editExamName($_POST['id'], $_POST['name']);
+echo json_encode($reply);
 
 ?>
