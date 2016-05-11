@@ -29,7 +29,7 @@ $(document).ready(
 						});
 					})
 					$("#inputUserToRemove").autocomplete({
-						source : BASE_URL + "api/admin/search_user_by_name.php",
+						source : BASE_URL + "api/admin/search_user_autocomplete.php",
 						minLength : 3,
 						select : function(event, ui) {
 							console.log(ui.item ? "Selected: " + ui.item.value
