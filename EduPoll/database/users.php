@@ -74,7 +74,7 @@
     $stmt = $conn->prepare("UPDATE RegisteredUser
                               SET passwordhash = ?
                                 WHERE id = ?");
-    $stmt->execute(array(password_hash($newPassword), $userID));
+    return $stmt->execute(array(password_hash($newPassword), $userID));
   }
   
   function updateUserEmail($userID, $newEmail) {
