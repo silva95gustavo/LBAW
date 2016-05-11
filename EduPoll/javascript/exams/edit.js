@@ -58,8 +58,8 @@ function examNameEditCallback(field, name, inputElement, inputSelector) {
 		data : data,
 		success: function(data, textStatus, jqXHR)
 		{
-			console.log(jqXHR.responseText);
-			var obj = JSON.parse(jqXHR.responseText);
+			//console.log(jqXHR.responseText);
+			var obj = JSON.parse(jqXHR.responseText)[0];
 			editFieldFinish(field, nl2br(htmlspecialchars(obj[name])), inputElement, inputSelector);
 		},
 		error: function (jqXHR, textStatus, errorThrown)

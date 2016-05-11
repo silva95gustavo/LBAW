@@ -28,8 +28,8 @@ function getOwnedAndManagedExams($userID) {
 
 function editExamName($examID, $newName) {
 	global $conn;
-	$stmt = $conn->prepare("UPDATE name FROM exam WHERE id = ?");
-	$stmt->execute(array($newName));
+	$stmt = $conn->prepare("UPDATE exam SET name = ? WHERE id = ? RETURNING name");
+	$stmt->execute(array($newName, $examID));
 	return $stmt->fetchAll();
 }
 
