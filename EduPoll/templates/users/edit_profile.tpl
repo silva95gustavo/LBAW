@@ -14,7 +14,7 @@
 						<li class="active">Edit Profile</li>
 					</ol>
 
-					<form class="form-change-password">
+					<form class="form-change-password" method="post" action="{$BASE_URL}actions/users/edit.php">
 						<h2 class="form-signin-heading">Change password</h2>
 						
 						<label for="inputOldPassword" class="sr-only">Full name</label>
@@ -34,7 +34,7 @@
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Update Password</button>
 					</form>
 
-					<form class="form-change-email">
+					<form class="form-change-email" method="post" action="{$BASE_URL}actions/users/edit.php">
 						<h2 class="form-signin-heading">Change email</h2>
 						
 						<label for="inputNewEmail" class="sr-only">New email</label>
@@ -58,4 +58,5 @@
 	</div>
 	<!-- /container -->
 	
+<!--<script src="{$BASE_URL}javascript/user/edit_profile.js"></script>-->
 {include file='common/footer.tpl'}
