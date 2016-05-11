@@ -18,15 +18,15 @@
 						<h2 class="form-signin-heading">Change password</h2>
 						
 						<label for="inputOldPassword" class="sr-only">Full name</label>
-						<input type="password" id="inputOldPassword" class="form-control" placeholder="Current Password" required autofocus>
+						<input type="password" name="inputOldPassword" id="inputOldPassword" class="form-control" placeholder="Current Password" required autofocus>
 						<br/>
 						
 						<label for="inputNewPassword" class="sr-only">Email</label>
-						<input type="password" id="inputNewPassword" class="form-control" placeholder="New Password" required>
+						<input type="password" name="inputNewPassword" id="inputNewPassword" class="form-control" placeholder="New Password" required>
 						<br/>
 						
 						<label for="inputConfirmPassword" class="sr-only">Email</label>
-						<input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm New Password" required>
+						<input type="password" name="inputConfirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm New Password" required>
 						<br/>
 						
 						<br/>
@@ -38,7 +38,7 @@
 						<h2 class="form-signin-heading">Change email</h2>
 						
 						<label for="inputNewEmail" class="sr-only">New email</label>
-						<input type="email" id="inputNewEmail" class="form-control" placeholder="New Email" required>
+						<input type="email" name="inputNewEmail" id="inputNewEmail" class="form-control" placeholder="New Email" required>
 						<br/>
 						
 						<br/>
