@@ -26,6 +26,16 @@ function getOwnedAndManagedExams($userID) {
 	return $stmt->fetchAll();
 }
 
+function isExamManager($userID, $examID) {
+	global $conn;
+	$stmt = $conn->prepare("(SELECT managerid FROM managesexam WHERE manager = ? AND examid = ?");
+	$stmt->execute(array($userID, $examID));
+	if(count($stmt->fetchAll()) > 0)
+		return true;
+	else
+		return false;
+}
+
 function editExamName($examID, $newName) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET name = ? WHERE id = ? RETURNING name");
