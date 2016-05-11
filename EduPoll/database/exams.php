@@ -26,10 +26,27 @@ function getOwnedAndManagedExams($userID) {
 	return $stmt->fetchAll();
 }
 
+function isExamManager($userID, $examID) {
+	global $conn;
+	$stmt = $conn->prepare("(SELECT managerid FROM managesexam WHERE manager = ? AND examid = ?");
+	$stmt->execute(array($userID, $examID));
+	if(count($stmt->fetchAll()) > 0)
+		return true;
+	else
+		return false;
+}
+
 function editExamName($examID, $newName) {
 	global $conn;
-	$stmt = $conn->prepare("UPDATE name FROM exam WHERE id = ?");
-	$stmt->execute(array($newName));
+	$stmt = $conn->prepare("UPDATE exam SET name = ? WHERE id = ? RETURNING name");
+	$stmt->execute(array($newName, $examID));
+	return $stmt->fetchAll();
+}
+
+function editExamDescription($examID, $newDescription) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE exam SET description = ? WHERE id = ? RETURNING description");
+	$stmt->execute(array($newDescription, $examID));
 	return $stmt->fetchAll();
 }
 

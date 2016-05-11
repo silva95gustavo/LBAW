@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 if (! isLoggedIn ()) {
 	http_response_code(401);
 	echo 'You are not logged in.';
-	exit ();
+	exit;
 }
 
 $exam = getExam($_POST['id']);
@@ -20,7 +20,7 @@ if (!$exam) {
 if ($exam ['ownerid'] !== $userInfo ['id']) {
 	if (!isExamManager($userInfo['id'], $_POST['id'])) {
 		http_response_code(401);
-		echo 'Only the owner/manager of an exam may edit it\'s name.';
+		echo 'Only the owner/manager of an exam may edit it\'s description.';
 		exit;
 	}
 }
@@ -28,10 +28,10 @@ if ($exam ['ownerid'] !== $userInfo ['id']) {
 $reply;
 
 try {
-	$reply = editExamName($_POST['id'], $_POST['name']);
+	$reply = editExamDescription($_POST['id'], $_POST['description']);
 } catch (PDOException $e) {
 	http_response_code(400);
-	echo 'Error editing exam name: ' . $e->getMessage();
+	echo 'Error editing exam description: ' . $e->getMessage();
 	exit;
 }
 

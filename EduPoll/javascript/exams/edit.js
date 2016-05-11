@@ -13,7 +13,7 @@ $(document).ready(function() {
 	$(".inline-editable-button.exam-description").click(function() {
 		editTextareaField(
 				$(this).parent().find(".inline-editable-text"),
-				"name",
+				"description",
 				function(inputElement) {
 					return inputElement.val().length > 0;
 				},
@@ -59,12 +59,13 @@ function examNameEditCallback(field, name, inputElement, inputSelector) {
 		success: function(data, textStatus, jqXHR)
 		{
 			console.log(jqXHR.responseText);
-			var obj = JSON.parse(jqXHR.responseText);
+			var obj = JSON.parse(jqXHR.responseText)[0];
 			editFieldFinish(field, nl2br(htmlspecialchars(obj[name])), inputElement, inputSelector);
 		},
 		error: function (jqXHR, textStatus, errorThrown)
 		{
 			console.error("Error: " + jqXHR.responseText);
+			inputElement.css('background-color', 'red');
 		}
 	});
 };
@@ -82,10 +83,11 @@ function examDescriptionEditCallback(field, name, inputElement, inputSelector) {
 		{
 			console.log(jqXHR.responseText);
 			var obj = JSON.parse(jqXHR.responseText);
-			editFieldFinish(field, nl2br(htmlspecialchars(obj[name])), inputElement, inputSelector);
+			editFieldFinish(field, nl2br(htmlspecialchars(obj[0].description)), inputElement, inputSelector);
 		},
 		error: function (jqXHR, textStatus, errorThrown)
 		{
+			inputElement.css('background-color', 'red');
 			console.error("Error: " + jqXHR.responseText);
 		}
 	});
