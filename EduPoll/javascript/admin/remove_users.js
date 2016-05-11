@@ -15,6 +15,7 @@ $('#yes').click(function (e) {
         url: "../../actions/users/delete.php",
         data: { id: userId },
         success: function () {
+        	$('tr#' + userId).hide('slow', function(){ $('tr#' + userId).remove(); });
             $('tr#' + userId).remove();
             $('#confirmationModal').modal('hide');
         },
