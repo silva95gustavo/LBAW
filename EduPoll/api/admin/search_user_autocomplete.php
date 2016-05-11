@@ -1,7 +1,7 @@
 <?
 require_once ('../../config/init.php');
-include_once ('../../pages/common/utils.php');
-include_once ('../../database/users.php');
+require_once ('../../pages/common/utils.php');
+require_once ('../../database/users.php');
 
 header('Content-Type: application/json');
 
@@ -13,6 +13,13 @@ if (! isAdmin ()) {
 
 try {
 	$users = searchUserFTS($_GET['term']);
+	for ($i = 0; $i < sizeof($users); $i++) {
+		$id = $users[$i]['id'];
+		$name = $users[$i]['name'];
+		unset($users[$i]);
+		$users[$i]['value'] = $id;
+		$users[$i]['label'] = $name;
+	}
 	http_response_code(200);
 	echo json_encode($users);
 } catch (PDOException $e) {
