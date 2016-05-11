@@ -13,11 +13,11 @@
 					<li class="active">Remove Users</li>
 				</ol>
 
-				<form class="form-change-password">
+				<form class="form-remove-user">
 					<h2 class="form-signin-heading">Remove user</h2>
 
 					<label for="inputUserToRemove" class="sr-only">Full name</label>
-					<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email" onkeyup="searchForUserMatch()"
+					<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email" onkeyup=""
 						required autofocus>
 					<br/>
 
@@ -74,5 +74,7 @@
 
 
 <!-- /container -->
-<script src="{$BASE_URL}javascript/admin/remove_users.js"></script>
+
 {include file='common/footer.tpl'}
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+<script src="{$BASE_URL}javascript/admin/remove_users.js"></script>
