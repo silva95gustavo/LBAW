@@ -45,6 +45,7 @@
     global $conn;
     $stmt = $conn->prepare("DELETE FROM RegisteredUser WHERE id = ?");
     $stmt->execute(array($id));
+    return $stmt->fetchAll();
   }
   
   function searchUserFTS($data) {
