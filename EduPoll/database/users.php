@@ -76,4 +76,12 @@
                                 WHERE id = ?");
     $stmt->execute(array(password_hash($newPassword), $userID));
   }
+  
+  function updateUserEmail($userID, $newEmail) {
+  	global $conn;
+    $stmt = $conn->prepare("UPDATE registereduser
+                              SET email = ?
+                                WHERE id = ?");
+    return $stmt->execute(array($newEmail, $userID));
+  }
 ?>
