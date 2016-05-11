@@ -74,5 +74,5 @@
 
 
 <!-- /container -->
-{include file='common/footer.tpl'}
 <script src="{$BASE_URL}javascript/admin/remove_users.js"></script>
+{include file='common/footer.tpl'}
