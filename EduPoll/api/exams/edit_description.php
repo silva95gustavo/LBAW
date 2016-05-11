@@ -4,7 +4,7 @@ include_once ('../../pages/common/utils.php');
 include_once ('../../database/exams.php');
 
 header('Content-Type: application/json');
-$reply = editExamName($_POST['id'], $_POST['name']);
+$reply = editExamDescription($_POST['id'], $_POST['description']);
 echo json_encode($reply);
 
 ?>

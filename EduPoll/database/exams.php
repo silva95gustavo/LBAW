@@ -33,6 +33,13 @@ function editExamName($examID, $newName) {
 	return $stmt->fetchAll();
 }
 
+function editExamDescription($examID, $newDescription) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE exam SET description = ? WHERE id = ? RETURNING description");
+	$stmt->execute(array($newDescription, $examID));
+	return $stmt->fetchAll();
+}
+
 function deleteExam($examID) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM exam WHERE id = ?");
