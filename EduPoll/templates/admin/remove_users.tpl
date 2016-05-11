@@ -17,7 +17,7 @@
 					<h2 class="form-signin-heading">Remove user</h2>
 
 					<label for="inputUserToRemove" class="sr-only">Full name</label>
-					<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email" onkeyup=""
+					<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email"
 						required autofocus>
 					<br/>
 

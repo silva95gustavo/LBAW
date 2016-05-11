@@ -17,7 +17,7 @@ try {
 		$id = $users[$i]['id'];
 		$name = $users[$i]['name'];
 		unset($users[$i]);
-		$users[$i]['value'] = $id;
+		$users[$i]['id'] = $id;
 		$users[$i]['label'] = $name;
 	}
 	http_response_code(200);
