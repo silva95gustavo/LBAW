@@ -20,8 +20,6 @@
 					<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email"
 						required autofocus>
 					<br/>
-
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Remove User</button>
 				</form>
 				<br/><br/>
 
