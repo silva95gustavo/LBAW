@@ -65,6 +65,7 @@ function examNameEditCallback(field, name, inputElement, inputSelector) {
 		error: function (jqXHR, textStatus, errorThrown)
 		{
 			console.error("Error: " + jqXHR.responseText);
+			inputElement.css('background-color', 'red');
 		}
 	});
 };
@@ -86,6 +87,7 @@ function examDescriptionEditCallback(field, name, inputElement, inputSelector) {
 		},
 		error: function (jqXHR, textStatus, errorThrown)
 		{
+			inputElement.css('background-color', 'red');
 			console.error("Error: " + jqXHR.responseText);
 		}
 	});
