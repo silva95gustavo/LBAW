@@ -23,40 +23,48 @@ function editPasssword() {
 
   if(isPasswordCorrect($userID, $oldPassword)) {
     if($newPassword == $newPasswordVerify) {
-
-      try {
-        updateUserPassword($userID, $newPassword);
-      } catch (PDOException $e) {
-        $_SESSION['error_messages'][] = "Error changing the password.";
-        $_SESSION['form_values'] = $_POST;
-        header("Location: " . $_SERVER['HTTP_REFERER']);
-        exit;
-      }
-      $_SESSION['success_messages'][] = 'Password changedSuccessfully';
-      header("Location: " . $_SERVER['HTTP_REFERER']);
-
-    }
-    else
-    {
-     $_SESSION['error_messages'][] = "Passwords introduced don't check.";
-     $_SESSION['form_values'] = $_POST;
-     header("Location: " . $_SERVER['HTTP_REFERER']);
-     exit;
-   }
- }
+      	try {
+        	updateUserPassword($userID, $newPassword);
+      	} catch (PDOException $e) {
+        	$_SESSION['error_messages'][] = "Error changing the password.";
+        	$_SESSION['form_values'] = $_POST;
+        	header("Location: " . $_SERVER['HTTP_REFERER']);
+        	exit;
+      	}
+      	$_SESSION['success_messages'][] = 'Password changed successfully';
+    } else {
+    	$_SESSION['error_messages'][] = "Passwords introduced don't match.";
+     	$_SESSION['form_values'] = $_POST;
+  	}
+  } else {
+ 	$_SESSION['error_messages'][] = "Password inserted is incorrect.";
+    $_SESSION['form_values'] = $_POST;
+  }
+  
+  header ( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+  die ();
 }
 
 function editEmail() {
-	if (updateUserEmail($_SESSION['userID'], $_POST['inputNewEmail']) != 1) {
+	try {
+		updateUserEmail($_SESSION['userID'], $_POST['inputNewEmail']);
+	} catch (PDOException $e) {
 		$_SESSION['error_messages'][] = "Unable to edit user password.";
-	} else {
-		$_SESSION['success_messages'][] = "Email changed successfully.";
+        $_SESSION['form_values'] = $_POST;
+		header ( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+		die ();
 	}
+	
+	$_SESSION['success_messages'][] = "Email changed successfully.";
+    $_SESSION['form_values'] = $_POST;
 	
 	header ( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 	die ();
 
 }
 
+$_SESSION['error_messages'][] = "No values were edited. Missing parameters.";
+$_SESSION['form_values'] = $_POST;
+header ( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 
 ?>
