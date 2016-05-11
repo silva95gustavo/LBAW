@@ -21,11 +21,13 @@
 					<li><a href="{$BASE_URL}pages/admin/add_users.php">Add users</a></li>
 					<li><a href="{$BASE_URL}pages/admin/remove_users.php">Remove users</a></li>
 					<li><a href="{$BASE_URL}pages/admin/groups.php">Manage groups</a></li>
+					<li><a href="{$BASE_URL}pages/users/edit_profile.php">Edit profile</a></li>
 					<li><a href="{$BASE_URL}actions/auth/logout.php">Logout</a></li>
 				{elseif isAcademic()}
 					<li><a href="{$BASE_URL}pages/exams/exams_taken.php">Previous Exams</a></li>
 					<li><a href="{$BASE_URL}pages/exams/create.php">Create Exam</a></li>
 					<li><a href="{$BASE_URL}pages/exams/my_exams.php">My Exams</a></li>
+					<li><a href="{$BASE_URL}pages/users/edit_profile.php">Edit profile</a></li>
 					<li><a href="{$BASE_URL}actions/auth/logout.php">Logout</a></li>
 				{/if}
 				</ul>
