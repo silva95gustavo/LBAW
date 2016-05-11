@@ -38,7 +38,7 @@
 						<h2 class="form-signin-heading">Change email</h2>
 						
 						<label for="inputNewEmail" class="sr-only">New email</label>
-						<input type="email" id="inputNewEmail" class="form-control" placeholder="New Email" required>
+						<input type="email" name="inputNewEmail" id="inputNewEmail" class="form-control" placeholder="New Email" required>
 						<br/>
 						
 						<br/>
