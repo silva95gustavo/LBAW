@@ -1,14 +1,7 @@
 $(document).ready(function() {
-	$(".inline-editable-button.exam-name").click(function() {
-		editTextField(
-				$(this).parent().find(".inline-editable-text"),
-				"name",
-				function(inputElement) {
-					return inputElement.val().length > 0;
-				},
-				examNameEditCallback
-				);
-		return false;
+	$(".inline-editable.exam-name").editable(BASE_URL + 'api/exams/edit_name.php', {
+		name : 'name',
+		submitdata : { 'id' : $(".inline-editable.exam-name").data("id")}
 	});
 	$(".inline-editable-button.exam-description").click(function() {
 		editTextareaField(
