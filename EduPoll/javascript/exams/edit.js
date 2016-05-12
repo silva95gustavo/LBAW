@@ -1,87 +1,49 @@
 $(document).ready(function() {
 	$(".inline-editable.exam-name").editable(BASE_URL + 'api/exams/edit_name.php', {
 		name : 'name',
+		tooltip   : 'Click to edit...',
 		submitdata : { 'id' : $(".inline-editable.exam-name").data("id")}
 	});
-	$(".inline-editable-button.exam-description").click(function() {
-		editTextareaField(
-				$(this).parent().find(".inline-editable-text"),
-				"description",
-				function(inputElement) {
-					return inputElement.val().length > 0;
-				},
-				examDescriptionEditCallback
-				);
-		return false;
+	$(".inline-editable.exam-description").editable(BASE_URL + 'api/exams/edit_description.php', {
+		type : 'textarea',
+		name : 'description',
+		tooltip   : 'Click to edit...',
+		submit : 'OK',
+		cancel : 'Cancel',
+		submitdata : { 'id' : $(".inline-editable.exam-description").data("id")},
+		callback: function(value,settings) {
+			var retval = nl2br(value);
+			$(this).html(retval);
+		},
+		data: function(value,settings) {
+			value = value.replace(/\r/gi, "");
+			value = value.replace(/\n/gi, "");
+			var retval = value.replace(/<br>/gi, "\n");
+			return retval;
+		}
 	});
-	
+
 	$('#confirmationModal').on('show.bs.modal', function (e) {
-	    var data = $(e.relatedTarget).data();
-	    console.log(data);
-	    $('#yes').data('id', data.id);
+		var data = $(e.relatedTarget).data();
+		console.log(data);
+		$('#yes').data('id', data.id);
 	})
 
 	$('#yes').click(function (e) {
-	    userId = $(this).data('id');
-	    console.log('check', $(this).data('id'), userId, $(this).data());
-	    $.ajax({
-	        type: 'POST',
-	        url: "../../actions/exams/delete.php",
-	        data: { id: userId },
-	        success: function () {
-	            $('tr#' + userId).remove();
-	            $('#confirmationModal').modal('hide');
-	            window.location.replace(BASE_URL + 'pages/exams/my_exams.php');
-	        },
-	        error: function () {
-	            location.reload();
-	        }
-	    });
+		userId = $(this).data('id');
+		console.log('check', $(this).data('id'), userId, $(this).data());
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/delete.php",
+			data: { id: userId },
+			success: function () {
+				$('tr#' + userId).remove();
+				$('#confirmationModal').modal('hide');
+				window.location.replace(BASE_URL + 'pages/exams/my_exams.php');
+			},
+			error: function () {
+				location.reload();
+			}
+		});
 	})
 });
-
-function examNameEditCallback(field, name, inputElement, inputSelector) {
-	var data = {
-			'id' : field.closest('.exam').attr('id').substr("exam".length, 99999)
-	}
-	data[inputElement.attr('name')] = inputElement.val();
-	$.ajax({
-		url : BASE_URL + "api/exams/edit_name.php",
-		type: "POST",
-		data : data,
-		success: function(data, textStatus, jqXHR)
-		{
-			console.log(jqXHR.responseText);
-			var obj = JSON.parse(jqXHR.responseText)[0];
-			editFieldFinish(field, nl2br(htmlspecialchars(obj[name])), inputElement, inputSelector);
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			console.error("Error: " + jqXHR.responseText);
-			inputElement.css('background-color', 'red');
-		}
-	});
-};
-
-function examDescriptionEditCallback(field, name, inputElement, inputSelector) {
-	var data = {
-			'id' : field.closest('.exam').attr('id').substr("exam".length, 99999)
-	}
-	data[inputElement.attr('name')] = inputElement.val();
-	$.ajax({
-		url : BASE_URL + "api/exams/edit_description.php",
-		type: "POST",
-		data : data,
-		success: function(data, textStatus, jqXHR)
-		{
-			console.log(jqXHR.responseText);
-			var obj = JSON.parse(jqXHR.responseText);
-			editFieldFinish(field, nl2br(htmlspecialchars(obj[0].description)), inputElement, inputSelector);
-		},
-		error: function (jqXHR, textStatus, errorThrown)
-		{
-			inputElement.css('background-color', 'red');
-			console.error("Error: " + jqXHR.responseText);
-		}
-	});
-};
