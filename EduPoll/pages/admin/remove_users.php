@@ -1,6 +1,7 @@
 <?
 require_once ('../../config/init.php');
 include_once ('../common/utils.php');
+include_once ('../common/sidebar.php');
 
 if (! isAdmin ()) {
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
@@ -14,6 +15,8 @@ $start = ($page - 1) * $perPage;
 $users = getUsers($start, $perPage);
 $numberOfUsers = getNumberOfUsers();
 $numberOfPages = ceil($numberOfUsers / $perPage);
+
+prepareDate($smarty);
 
 $smarty->assign ( 'users', $users );
 $smarty->assign ( 'numberOfPages', $numberOfPages );
