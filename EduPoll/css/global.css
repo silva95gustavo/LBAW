@@ -28,7 +28,17 @@ div.main div.container {
 
 /* EDITABLES */
 .inline-editable {
+	display: inline-block;
+	padding: 0 0.5em;
+}
+.inline-editable:hover {
+	display: inline-block;
 	position: relative;
+	outline: 2px dashed #CCC;
+	width: auto;
+}
+.exam-name-container {
+	text-align: center;
 }
 .inline-editable-button {
 	display: none !important;
@@ -77,8 +87,4 @@ div.jumbotron h2 {
 /* WELL */
 .well {
 	border-radius: 0;
-}
-
-.exam-name {
-	text-align: center;
 }
