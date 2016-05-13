@@ -1,12 +1,9 @@
 <?
 require_once ('../../config/init.php');
 include_once ('../common/utils.php');
-<<<<<<< HEAD
 include_once ('../common/sidebar.php');
-=======
 include_once ('../../database/users.php');
 include_once ('../../database/exams.php');
->>>>>>> Pedro
 
 if (! isAdmin ()) {
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
