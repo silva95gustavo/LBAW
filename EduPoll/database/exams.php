@@ -60,4 +60,11 @@ function deleteExam($examID) {
 	return $stmt->execute(array($examID));
 }
 
+function getNumberOfExams(){
+	global $conn;
+	$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM exam");
+	$stmt->execute();
+	return $stmt->fetch()['total'];
+}
+
 ?>
