@@ -54,6 +54,20 @@
     $stmt->execute();
     return $stmt->fetch()['total'];
   }
+
+  function getNumberOfStudents(){
+    global $conn;
+    $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM RegisteredUser WHERE type = 2");
+    $stmt->execute();
+    return $stmt->fetch()['total'];
+  }
+
+    function getNumberOfTeachers(){
+    global $conn;
+    $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM RegisteredUser WHERE type = 1");
+    $stmt->execute();
+    return $stmt->fetch()['total'];
+  }
   
   function deleteUser($id) {
     global $conn;
