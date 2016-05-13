@@ -10,8 +10,8 @@
 					{include file='common/result_messages.tpl'}
 
 					<ol class="breadcrumb">
-						<li><a href="admin.html">Home</a></li>
-						<li><a href="add-users.html">Add Users</a></li>
+						<li><a href="main.php">Home</a></li>
+						<li><a href="add_users.php">Add Users</a></li>
 						<li class="active">Add Multiple Users</li>
 					</ol>
 

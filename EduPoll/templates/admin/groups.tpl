@@ -10,7 +10,7 @@
 					{include file='common/result_messages.tpl'}
 
 					<ol class="breadcrumb">
-						<li><a href="admin.html">Home</a></li>
+						<li><a href="main.php">Home</a></li>
 						<li class="active">Manage Groups</li>
 					</ol>
 					
