@@ -4,8 +4,12 @@ function createExam($ownerID, $name, $description, $open, $maxTries) {
 	global $conn;
     $stmt = $conn->prepare("INSERT INTO exam
     		(name, description, ownerID, openToPublic, maxTries)
-            VALUES (?, ?, ?, ?, ?)");
-    return $stmt->execute(array($name, $description, $ownerID, $open, $maxTries));
+            VALUES (?, ?, ?, ?, ?) RETURNING id");
+    if($stmt->execute(array($name, $description, $ownerID, $open, $maxTries)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+    }
+    else return -1;
 }
 
 function getExam($examID) {
@@ -24,6 +28,16 @@ function getOwnedAndManagedExams($userID) {
 		ORDER BY startTime DESC)");
 	$stmt->execute(array($userID, $userID));
 	return $stmt->fetchAll();
+}
+
+function isExamManager($userID, $examID) {
+	global $conn;
+	$stmt = $conn->prepare("(SELECT managerid FROM managesexam WHERE manager = ? AND examid = ?");
+	$stmt->execute(array($userID, $examID));
+	if(count($stmt->fetchAll()) > 0)
+		return true;
+	else
+		return false;
 }
 
 function editExamName($examID, $newName) {
