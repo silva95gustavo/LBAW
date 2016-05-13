@@ -46,7 +46,7 @@
   }
   
   try {
-  	createExam($userInfo['id'], trim($_POST['examName']), $_POST['examDescription'], (isset($_POST['examType']) && !isStudent()) ? 0 : 1, $_POST['examMaxTries']);
+  	$examID = createExam($userInfo['id'], trim($_POST['examName']), $_POST['examDescription'], (isset($_POST['examType']) && !isStudent()) ? 0 : 1, $_POST['examMaxTries']);
   } catch (PDOException $e) {
   	$_SESSION['error_messages'][] = 'Error creating exam: ' . $e->getMessage();
   	$_SESSION['form_values'] = $_POST;
@@ -54,5 +54,5 @@
   	exit;
   }
   $_SESSION['success_messages'][] = 'Exam successfully created.';
-  header("Location: " . $_SERVER['HTTP_REFERER']);
+  header("Location: " . $BASE_URL . "pages/exams/edit.php?id=" . $examID);
   ?>
