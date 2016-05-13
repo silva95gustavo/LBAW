@@ -26,18 +26,23 @@
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td>Number of registered users</td>
-									<td>8012</td>
+									<td>Number of registered Users</td>
+									<td>{$numberOfUsers}</td>
 								</tr>
 								<tr>
 									<td>2</td>
-									<td>Number of exams this week</td>
-									<td>10</td>
+									<td>Number of registered Students</td>
+									<td>{$numberOfStudents}</td>
 								</tr>
 								<tr>
 									<td>3</td>
-									<td>Exams created during the last week</td>
-									<td>2</td>
+									<td>Number of registered Teachers</td>
+									<td>{$numberOfTeachers}</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>Number of exams</td>
+									<td>{$numberOfExams}</td>
 								</tr>
 							</tbody>
 						</table>
