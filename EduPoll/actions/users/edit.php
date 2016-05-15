@@ -46,17 +46,24 @@ function editPasssword() {
 }
 
 function editEmail() {
+  if($_POST['inputNewEmail'] != $_POST['inputConfirmNewEmail']) {
+    $_SESSION['error_messages'][] = "Introduced Emails don't match.";
+    $_SESSION['form_values'] = $_POST;
+    header ( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+    die ();
+  }
+
 	try {
 		updateUserEmail($_SESSION['userID'], $_POST['inputNewEmail']);
 	} catch (PDOException $e) {
 		$_SESSION['error_messages'][] = "Unable to edit user password.";
-        $_SESSION['form_values'] = $_POST;
+    $_SESSION['form_values'] = $_POST;
 		header ( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		die ();
 	}
 	
 	$_SESSION['success_messages'][] = "Email changed successfully.";
-    $_SESSION['form_values'] = $_POST;
+  $_SESSION['form_values'] = $_POST;
 	
 	header ( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 	die ();

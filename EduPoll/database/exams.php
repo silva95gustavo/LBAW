@@ -1,11 +1,22 @@
 <?php 
 
-function createExam($ownerID, $name, $description, $open, $maxTries) {
+function createExam($ownerID, $name, $description, $startTime, $endTime, $open, $maxTries) {
 	global $conn;
-    $stmt = $conn->prepare("INSERT INTO exam
+	if($startTime != null) {
+		$stmt = $conn->prepare("INSERT INTO exam
+    		(name, description, ownerID, startTime, endTime, openToPublic, maxTries)
+            VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id");
+		if($stmt->execute(array($name, $description, $ownerID, $startTime, $endTime, $open, $maxTries)))
+	    {
+	    	return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+	    }
+	    else return -1;
+	}
+	
+	$stmt = $conn->prepare("INSERT INTO exam
     		(name, description, ownerID, openToPublic, maxTries)
             VALUES (?, ?, ?, ?, ?) RETURNING id");
-    if($stmt->execute(array($name, $description, $ownerID, $open, $maxTries)))
+	if($stmt->execute(array($name, $description, $ownerID, $open, $maxTries)))
     {
     	return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
     }

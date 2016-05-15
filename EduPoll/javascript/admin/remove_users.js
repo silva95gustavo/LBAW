@@ -5,7 +5,7 @@ $(document).ready(
 			$('#confirmationModal').on('show.bs.modal', function(e) {
 				var data = $(e.relatedTarget).data() || $('#inputUserToRemove').data();
 				$('#yes').data('id', data.id);
-			})
+			});
 
 			$('#yes').click(function(e) {
 				userId = $(this).data('id');
