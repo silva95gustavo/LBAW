@@ -4,8 +4,12 @@ function createExam($ownerID, $name, $description, $open, $maxTries) {
 	global $conn;
     $stmt = $conn->prepare("INSERT INTO exam
     		(name, description, ownerID, openToPublic, maxTries)
-            VALUES (?, ?, ?, ?, ?)");
-    return $stmt->execute(array($name, $description, $ownerID, $open, $maxTries));
+            VALUES (?, ?, ?, ?, ?) RETURNING id");
+    if($stmt->execute(array($name, $description, $ownerID, $open, $maxTries)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+    }
+    else return -1;
 }
 
 function getExam($examID) {
@@ -54,6 +58,13 @@ function deleteExam($examID) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM exam WHERE id = ?");
 	return $stmt->execute(array($examID));
+}
+
+function getNumberOfExams(){
+	global $conn;
+	$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM exam");
+	$stmt->execute();
+	return $stmt->fetch()['total'];
 }
 
 ?>

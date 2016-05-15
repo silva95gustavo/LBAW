@@ -81,13 +81,11 @@
 
 						<div class="jumbotron">
 							<div class="row">
-								<div class="inline-editable exam-name">
-									<h2 class="inline-editable-text exam-name">{$exam.name|escape:'html'}</h2>
-									<i class="inline-editable-button exam-name fa fa-pencil" aria-hidden="false"></i>
+								<div class="exam-name-container">
+									<h2 class="inline-editable exam-name" name="name" data-id="{$exam.id}">{$exam.name|escape:'html'}</h2>
 								</div>
-								<div class="inline-editable exam-description">
-									<h3 class="inline-editable-text exam-description">{$exam.description|escape:'html'}</h2>
-									<i class="inline-editable-button exam-description fa fa-pencil" aria-hidden="false"></i>
+								<div class="exam-description-container">
+									<h3 class="inline-editable exam-description" name="description" data-id="{$exam.id}">{$exam.description|escape:'html'|nl2br}</h2>
 								</div>
 							</div>
 						</div>
