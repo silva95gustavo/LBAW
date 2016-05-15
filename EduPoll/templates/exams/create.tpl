@@ -25,13 +25,6 @@
 						<textarea id="inputDescription" name="examDescription" class="form-control" placeholder="Exam description" rows="10" required></textarea>
 						<br/>
 						
-						<div id="datetimepicker" class="input-append date">
-      						<input type="text"></input>
-      						<span class="add-on">
-        						<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      						</span>
-    					</div>
-
 						<label for="inputMaxTries">Maximum number of tries</label>
 						<input type="number" name="examMaxTries" id="inputMaxTries" class="form-control" min="0" required value="1">
 						<br/>
@@ -66,11 +59,5 @@
 	<!-- /container -->
 
 {include file='common/footer.tpl'}
-	<script src="https://tarruda.github.io/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- <script src="https://tarruda.github.io/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script> -->
 	<script src="{$BASE_URL}javascript/exams/create.js"></script>
-	<script type="text/javascript">
-      $('#datetimepicker').datetimepicker({
-        format: 'dd/MM/yyyy hh:mm:ss',
-        language: 'pt-BR'
-      });
-    </script>
