@@ -13,24 +13,18 @@
 
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-
-<!-- Font awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
 <!-- Custom styles for this template -->
+<link href="{$BASE_URL}css/bootstrap/bootstrap-switch.min.css" rel="stylesheet">
+<link href="{$BASE_URL}css/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="{$BASE_URL}css/global.css" rel="stylesheet">
 <link href="{$BASE_URL}css/theme.css" rel="stylesheet">
 
-<!-- JQuery -->
-<script type="text/javascript" src="../../frameworks/jquery-2.2.1.min.js"></script>
-<script type="text/javascript" src="../../frameworks/moment.js"></script>
-<script type="text/javascript" src="../../frameworks/transition.js"></script>
-<script type="text/javascript" src="../../frameworks/collapse.js"></script>
-<script type="text/javascript" src="../../frameworks/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../frameworks/bootstrap-datetimepicker.min.js"></script>
+
 <!-- include your less or built css files  -->
 <!-- 
   bootstrap-datetimepicker-build.less will pull in "../bootstrap/variables.less" and "bootstrap-datetimepicker.less";
