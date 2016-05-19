@@ -17,56 +17,76 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">Ongoing exams</h3>
 						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">LBAW - Teste 1</h4> <datetime
-										class="list-group-item-text">22-01-2015 12:00-14:00</datetime>
-									<p class="list-group-item-text">This exam starts in less
-										than 10 minutes!</p>
-								</a>
+						{if (sizeof($Ongoingexams) === 0)}
+						<p>You do not have any Ongoing exams.</p>
+						{else}
+						<div class="list-group">
+							{foreach $Ongoingexams as $Ongoing }
+							<div class="list-group-item">
+								<div class="row">
+									<div class="col-md-10">
+										<a href="statistics.php"><h4 class="list-group-item-heading">{$Ongoing.name}</h4></a>
+										<datetime class="list-group-item-text">{$Ongoing.starttime} - {$Ongoing.endtime}</datetime>
+									</div>
+
+									<div class="col-md-2">
+										<br/><p class="list-group-item-text">cenas</p>
+									</div>
+								</div>
 							</div>
+							{/foreach}
 						</div>
+						{/if}
 					</div>
 					<div class="panel panel-warning">
 						<div class="panel-heading">
 							<h3 class="panel-title">Upcoming exams</h3>
 						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">IART - Teste 1</h4> <datetime
-										class="list-group-item-text">25-01-2015 12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">COMP - Avaliação
-										Individual 1</h4> <datetime class="list-group-item-text">27-01-2015
-									12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">SDIS - Prova 2</h4> <datetime
-										class="list-group-item-text">29-01-2015 12:00-14:00</datetime>
-								</a>
+						{if (sizeof($Upcomingexams) === 0)}
+						<p>You do not have any Upcoming exams.</p>
+						{else}
+						<div class="list-group">
+							{foreach $Upcomingexams as $Upcoming }
+							<div class="list-group-item">
+								<div class="row">
+									<div class="col-md-10">
+										<a href="statistics.php"><h4 class="list-group-item-heading">{$Upcoming.name}</h4></a>
+										<datetime class="list-group-item-text">{$Upcoming.starttime} - {$Upcoming.endtime}</datetime>
+									</div>
+
+									<div class="col-md-2">
+										<br/><p class="list-group-item-text">cenas</p>
+									</div>
+								</div>
 							</div>
+							{/foreach}
 						</div>
+						{/if}
 					</div>
 					<div class="last-element panel panel-info">
 						<div class="panel-heading">
 							<h3 class="panel-title">Future exams</h3>
 						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">LBAW - Teste 2</h4> <datetime
-										class="list-group-item-text">05-02-2015 12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">COMP - Avaliação
-										Individual 2</h4> <datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">SDIS - Prova 3</h4> <datetime
-										class="list-group-item-text">23-02-2015 12:00-14:00</datetime>
-								</a>
+						{if (sizeof($Futureexams) === 0)}
+						<p>You do not have any Future exams.</p>
+						{else}
+						<div class="list-group">
+							{foreach $Futureexams as $Future }
+							<div class="list-group-item">
+								<div class="row">
+									<div class="col-md-10">
+										<a href="statistics.php"><h4 class="list-group-item-heading">{$Future.name}</h4></a>
+										<datetime class="list-group-item-text">{$Future.starttime} - {$Future.endtime}</datetime>
+									</div>
+
+									<div class="col-md-2">
+										<br/><p class="list-group-item-text">cenas</p>
+									</div>
+								</div>
 							</div>
+							{/foreach}
 						</div>
+						{/if}
 					</div>
 				</div>
 			</div>
