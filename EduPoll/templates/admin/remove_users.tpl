@@ -14,6 +14,7 @@
 				</ol>
 
 				<form class="form-remove-user">
+					<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 					<h2 class="form-signin-heading">Remove user</h2>
 
 					<label for="inputUserToRemove" class="sr-only">Full name</label>

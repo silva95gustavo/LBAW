@@ -15,6 +15,7 @@
 				</ol>
 
 				<form class="form-create-exam" method="post" action="{$BASE_URL}actions/exams/create.php">
+					<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 					<h2 class="form-signin-heading">Enter the new exam's information below</h2>
 
 					<label for="inputExam" class="sr-only">Exam name</label>
