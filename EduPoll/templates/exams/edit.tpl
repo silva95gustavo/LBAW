@@ -89,6 +89,13 @@
 								</div>
 							</div>
 						</div>
+						
+  						<div id="demo" class="collapse">
+  							Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+  							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  						</div>
+						<a href="#demo" class="btn btn-info show-managers" data-toggle="collapse">Show/hide managers</a>
 	
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
