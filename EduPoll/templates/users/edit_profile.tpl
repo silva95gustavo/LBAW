@@ -15,6 +15,7 @@
 					</ol>
 
 					<form class="form-change-password" method="post" action="{$BASE_URL}actions/users/edit.php">
+						<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 						<h2 class="form-signin-heading">Change password</h2>
 						
 						<div class="row">
@@ -47,6 +48,7 @@
 					<br/>
 
 					<form class="form-change-email" method="post" action="{$BASE_URL}actions/users/edit.php">
+						<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 						<h2 class="form-signin-heading">Change email</h2>
 						
 						<div class="row">
