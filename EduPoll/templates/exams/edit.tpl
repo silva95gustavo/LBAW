@@ -32,6 +32,7 @@
 									<label><strong>Question:</strong></label>
 									<input type="text" class="form-control">
 									<form>
+										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 										<div class="radio">
 											<label><input type="radio" name="optradio1">Option 1</label>
 										</div>
@@ -137,6 +138,7 @@
 									<div class="panel-body">
 										<p><strong>Question: </strong>First question. Select the correct option:</p>
 										<form>
+											<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 											<div class="radio disabled">
 												<label><input type="radio" name="optradio1" checked="checked">Option 1</label>
 											</div>

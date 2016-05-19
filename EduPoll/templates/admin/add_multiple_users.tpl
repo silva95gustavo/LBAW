@@ -26,6 +26,7 @@
 						</div>
 						<div class="panel-body">
 							<form class="form-importfile">
+								<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 								<input type="file">
 								<br/><button type="button" class="btn btn-primary">Submit</button>
 							</form>
