@@ -91,9 +91,28 @@
 						</div>
 						
   						<div id="demo" class="collapse">
-  							Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-  							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  							{if $isOwner}
+  								<form class="form-remove-user">
+  									<input type="text" id="inputUserToRemove" class="form-control" placeholder="Inser user name or email of manager to add" required autofocus>
+  									<br/>
+  								</form>
+  							{/if}
+  							<ul class="list-group">
+  								{if $isOwner}  								
+  									{if sizeof($managers) == 0}
+  										<li class="list-group-item">There are no managers for this exam</li>
+  									{else}
+  										{for $manager=0 to sizeof($managers)-1}
+  											<a href="#" class="list-group-item">{$managers[$manager]['name']}</a>
+  										{/for}
+  									{/if}
+  								{else}
+  									<li class="list-group-item">{$owner['name']} (owner)</li>
+  									{for $manager=0 to sizeof($managers)-1}
+  										<li class="list-group-item">{$managers[$manager]['name']}</li>
+  									{/for}
+  								{/if}
+          					</ul>
   						</div>
 						<a href="#demo" class="btn btn-info show-managers" data-toggle="collapse">Show/hide managers</a>
 	

@@ -18,7 +18,14 @@ if ($exam)
 {
 	$exam['id'] = $examID;
 	$smarty->assign ( 'exam', $exam);
-	$smarty->assign ( 'isOwner', $exam['ownerid'] === $userInfo['id']);
+	$isOwner = $exam['ownerid'] === $userInfo['id'];
+	$smarty->assign ( 'isOwner', $isOwner);
+	if($isOwner) {
+		$smarty->assign('managers', getExamManagers($examID));
+	} else {
+		$smarty->assign('managers', getOtherExamManagers($examID, $userInfo['id']));
+		$smarty->assign('owner', getExamOwner($examID)[0]);
+	}
 }
 
 prepareDate($smarty);

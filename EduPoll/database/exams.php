@@ -41,6 +41,33 @@ function getOwnedAndManagedExams($userID) {
 	return $stmt->fetchAll();
 }
 
+function getExamOwner($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id, registereduser.name
+								FROM registereduser INNER JOIN exam ON exam.ownerid = registereduser.id
+								WHERE exam.id = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getExamManagers($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id, registereduser.name
+								FROM registereduser INNER JOIN managesexam ON managesexam.managerid = registereduser.id
+								WHERE managesexam.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getOtherExamManagers($examID, $userID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id, registereduser.name
+								FROM registereduser INNER JOIN managesexam ON managesexam.managerid = registereduser.id
+								WHERE managesexam.examid = ? AND registereduser.id != ?");
+	$stmt->execute(array($examID, $userID));
+	return $stmt->fetchAll();
+}
+
 function isExamManager($userID, $examID) {
 	global $conn;
 	$stmt = $conn->prepare("(SELECT managerid FROM managesexam WHERE manager = ? AND examid = ?");
