@@ -11,6 +11,8 @@
 
 <title>EduPoll</title>
 
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -34,7 +36,7 @@
 
 <script>
 	BASE_URL = '../../';
-	CSRF_TOKEN = {$CSRF_TOKEN};
+	CSRF_TOKEN = '{$CSRF_TOKEN}';
 </script>
 
 
