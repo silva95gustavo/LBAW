@@ -32,7 +32,10 @@
   <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
   -->
 
-<script>BASE_URL = '../../';</script>
+<script>
+	BASE_URL = '../../';
+	CSRF_TOKEN = {$CSRF_TOKEN};
+</script>
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
