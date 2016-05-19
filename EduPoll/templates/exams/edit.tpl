@@ -308,5 +308,6 @@
 		</div>
 	</div>
 	<!-- /container -->
+	<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
 	<script src="{$BASE_URL}javascript/exams/edit.js"></script>
 {include file='common/footer.tpl'}
