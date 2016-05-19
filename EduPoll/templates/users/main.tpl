@@ -28,7 +28,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<a href="../../pages/exams/statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
 									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
@@ -55,7 +55,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<a href="../../pages/exams/statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
 									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
@@ -82,7 +82,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<a href="../../pages/exams/statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
 									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
