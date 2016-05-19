@@ -30,7 +30,7 @@
 									</div>
 
 									<div class="col-md-2">
-										<br/><p class="list-group-item-text">cenas</p>
+										<br/><p class="list-group-item-text">{$Ongoing.description}</p>
 									</div>
 								</div>
 							</div>
@@ -55,7 +55,7 @@
 									</div>
 
 									<div class="col-md-2">
-										<br/><p class="list-group-item-text">cenas</p>
+										<br/><p class="list-group-item-text">{$Upcoming.description}</p>
 									</div>
 								</div>
 							</div>
@@ -80,7 +80,7 @@
 									</div>
 
 									<div class="col-md-2">
-										<br/><p class="list-group-item-text">cenas</p>
+										<br/><p class="list-group-item-text">{$Future.description}</p>
 									</div>
 								</div>
 							</div>
