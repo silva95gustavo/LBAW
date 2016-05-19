@@ -24,7 +24,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">{$exams[$examindex]['name']}</h4></a>
+									<a href="results.php?id={$exams[$examindex]['id']}"><h4 class="list-group-item-heading">{$exams[$examindex]['name']}</h4></a>
 									<datetime class="list-group-item-text">{$exams[$examindex]['starttime']} - {$exams[$examindex]['endtime']}</datetime>
 								</div>
 
