@@ -37,6 +37,10 @@ function sendEmail($email, $message) {
   mail($email, "Edupoll Signup", $message, implode("\r\n", $headers));
 }
 
+function validateCSRFToken($token) {
+	return $_SESSION['csrf_token'] == $token;
+}
+
 if (isLoggedIn())
 	$userInfo = getUserInfo($_SESSION['userID']);
 ?>
