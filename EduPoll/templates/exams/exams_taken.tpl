@@ -13,79 +13,30 @@
 						<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
 						<li class="active">Previous Exams</li>
 					</ol>
-
-					<div class="list-group">
+					
+					{if sizeof($exams) == 0}
+						<div class="alert alert-info" role="alert">
+        					There are no exams to be shown at the moment.
+      					</div>
+					{else}
+						<div class="list-group">
+						{for $examindex=0 to sizeof($exams) - 1}
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">COMP -
-											Avaliação Individual 2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
+									<a href="results.php?id={$exams[$examindex]['id']}"><h4 class="list-group-item-heading">{$exams[$examindex]['name']}</h4></a>
+									<datetime class="list-group-item-text">{$exams[$examindex]['starttime']} - {$exams[$examindex]['endtime']}</datetime>
 								</div>
 
 								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 18.0 / 20</p>
+									<br/><p class="list-group-item-text">Grade: {$exams[$examindex]['finalscore']} / {$exams[$examindex]['maxscore']}</p>
 								</div>
 							</div>
 						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">TCOM -
-											Avaliação 2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade not available</p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">IART -
-											Teste 1</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 16.8 / 20</p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">PPIN -
-											Inquérito de projeto</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 15.3 / 20</p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">LBAW -
-											Avaliação A2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 19.0 / 20</p>
-								</div>
-							</div>
-						</div>
+						{/for}
 					</div>
+					{/if}
+
 				</div>
 			</div>
 		</div>
