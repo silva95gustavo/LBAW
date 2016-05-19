@@ -14,9 +14,9 @@ $(document).ready(function() {
 		submit : 'OK',
 		cancel : 'Cancel',
 		submitdata : {
-			'id' : $(".inline-editable.exam-description").data("id")},
+			'id' : $(".inline-editable.exam-description").data("id"),
 			'csrf_token' : CSRF_TOKEN
-		}
+		},
 		callback: function(value,settings) {
 			var retval = nl2br(value);
 			$(this).html(retval);
