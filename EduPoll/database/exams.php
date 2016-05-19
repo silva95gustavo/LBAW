@@ -78,4 +78,13 @@ function getNumberOfExams(){
 	return $stmt->fetch()['total'];
 }
 
+function getUserPreviousExams($userID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT attempt.id, attempt.starttime, attempt.endtime, attempt.finalscore, attempt.examid, exam.name, exam.maxscore 
+								FROM attempt INNER JOIN exam ON attempt.examid = exam.id 
+								ORDER BY attempt.starttime ASC");
+	$stmt->execute(array($userID));
+	return $stmt->fetchAll();
+}
+
 ?>
