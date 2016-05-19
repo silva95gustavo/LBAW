@@ -15,7 +15,9 @@
 					</ol>
 					
 					{if (sizeof($exams) === 0)}
-						<p>You do not own or manage any exam. <a href="{$BASE_URL}pages/exams/create.php">Create one now.</a></p>
+						<div class="alert alert-info" role="alert">
+        					You do not own or manage any exam. <a href="{$BASE_URL}pages/exams/create.php">Create one now.</a>
+      					</div
 					{else}
 					<div class="list-group">
 					
