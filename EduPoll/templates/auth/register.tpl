@@ -4,6 +4,7 @@
   <h2>Register</h2>
 
   <form action="{$BASE_URL}actions/users/register.php" method="post" enctype="multipart/form-data">
+  	<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
     <label>Name:<br> 
       <input type="text" name="realname" value="{$FORM_VALUES.realname}"> 
       <span class="field_error">{$FIELD_ERRORS.username}</span>

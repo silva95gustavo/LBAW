@@ -2,7 +2,10 @@ $(document).ready(function() {
 	$(".inline-editable.exam-name").editable(BASE_URL + 'api/exams/edit_name.php', {
 		name : 'name',
 		tooltip   : 'Click to edit...',
-		submitdata : { 'id' : $(".inline-editable.exam-name").data("id")}
+		submitdata : {
+			'id' : $(".inline-editable.exam-name").data("id"),
+			'csrf_token' : CSRF_TOKEN
+		}
 	});
 	$(".inline-editable.exam-description").editable(BASE_URL + 'api/exams/edit_description.php', {
 		type : 'textarea',
@@ -10,7 +13,10 @@ $(document).ready(function() {
 		tooltip   : 'Click to edit...',
 		submit : 'OK',
 		cancel : 'Cancel',
-		submitdata : { 'id' : $(".inline-editable.exam-description").data("id")},
+		submitdata : {
+			'id' : $(".inline-editable.exam-description").data("id")},
+			'csrf_token' : CSRF_TOKEN
+		}
 		callback: function(value,settings) {
 			var retval = nl2br(value);
 			$(this).html(retval);
