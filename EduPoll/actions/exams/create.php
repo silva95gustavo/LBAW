@@ -24,6 +24,7 @@ if (! isset ( $_POST ['examName'] ) || ! isset ( $_POST ['examDescription'] ) ||
 if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
 	$_SESSION ['error_messages'] [] = 'CSRF token missing.';
 	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
+	die ();
 }
 
 if (strlen ( $_POST ['examName'] ) == 0) {
