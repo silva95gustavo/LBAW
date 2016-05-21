@@ -106,11 +106,5 @@
 
 
 	</div>
-<<<<<<< HEAD
-	<!-- /container -->
-
-{include file='common/footer.tpl'} 
-=======
 	<!-- /container -->
 {include file='common/footer.tpl'}
->>>>>>> origin/master
