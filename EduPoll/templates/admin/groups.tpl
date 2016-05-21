@@ -91,6 +91,7 @@
 							<h3 class="panel-title">Grupo "MIEIC-SDIS"</h3>
 						</div>
 						<form class="form-rename">
+							<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 							<label style="width: 80%;" for="inputName" class="sr-only">New group name</label> <input
 								type="text" id="inputName" class="form-control"
 								placeholder="New group name" required autofocus>
@@ -166,6 +167,7 @@
 							<h3 class="panel-title">Grupo "MIEIC-PPIN"</h3>
 						</div>
 						<form class="form-rename">
+							<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 							<label style="width: 80%;" for="inputName" class="sr-only">New member name or email</label> <input
 								type="text" id="inputName" class="form-control"
 								placeholder="New member's name or email" required autofocus>

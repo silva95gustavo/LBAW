@@ -13,79 +13,35 @@
 						<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
 						<li class="active">Previous Exams</li>
 					</ol>
-
-					<div class="list-group">
+					
+					{if sizeof($exams) == 0}
+						<div class="alert alert-info" role="alert">
+        					There are no exams to be shown at the moment.
+      					</div>
+					{else}
+						<div class="list-group">
+						{foreach $exams as $exam}
 						<div class="list-group-item">
 							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">COMP -
-											Avaliação Individual 2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
+								<div class="col-md-6">
+									<a href="welcome.php?id={$exam.id}"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 18.0 / 20</p>
+								<div class="col-md-6 text-right">
+									{assign "score" getBestScore($userID,$exam.id) nocache}
+									{if sizeof($score) != 0}
+									<br/><p class="list-group-item-text">Grade: {$score} / {$exam.maxscore}</p>
+									{else}
+									<br/><p class="list-group-item-text">Grade: Not Attempted / {$exam.maxscore}</p>
+									{/if}
 								</div>
 							</div>
 						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">TCOM -
-											Avaliação 2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade not available</p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">IART -
-											Teste 1</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 16.8 / 20</p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">PPIN -
-											Inquérito de projeto</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 15.3 / 20</p>
-								</div>
-							</div>
-						</div>
-						<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php"><h4 class="list-group-item-heading">LBAW -
-											Avaliação A2</h4></a>
-									<datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</div>
-
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: 19.0 / 20</p>
-								</div>
-							</div>
-						</div>
+						{/foreach}
 					</div>
+					{/if}
+
 				</div>
 			</div>
 		</div>

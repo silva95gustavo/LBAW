@@ -16,6 +16,7 @@
 				</ol>
 
 				<form class="form-register-ind-user" method="post" action="{$BASE_URL}actions/users/register.php">
+					<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 					<h2 class="form-signin-heading">Enter the new user's information below</h2>
 
 					<label for="inputName" class="sr-only">Full name</label>

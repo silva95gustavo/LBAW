@@ -17,57 +17,89 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">Ongoing exams</h3>
 						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">LBAW - Teste 1</h4> <datetime
-										class="list-group-item-text">22-01-2015 12:00-14:00</datetime>
-									<p class="list-group-item-text">This exam starts in less
-										than 10 minutes!</p>
-								</a>
+						{if (sizeof($Ongoingexams) === 0)}
+						<div class="alert alert-info" role="alert">
+        					You have no Ongoing Exams.
+      					</div>
+						{else}
+						<div class="list-group">
+					
+						{foreach $Ongoingexams as $exam }
+						<div class="list-group-item">
+							<div class="row">
+								<div class="col-md-10">
+									<a href="../../pages/exams/welcome.php?id={$exam.id}">
+										<h4 class="list-group-item-heading">{$exam.name}</h4>
+									</a>
+									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
+								</div>
+
+								<div class="col-md-2">
+									<br/><p class="list-group-item-text">{$exam.description}</p>
+								</div>
 							</div>
 						</div>
+						{/foreach}
 					</div>
+					{/if}
 					<div class="panel panel-warning">
 						<div class="panel-heading">
 							<h3 class="panel-title">Upcoming exams</h3>
 						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">IART - Teste 1</h4> <datetime
-										class="list-group-item-text">25-01-2015 12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">COMP - Avaliação
-										Individual 1</h4> <datetime class="list-group-item-text">27-01-2015
-									12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">SDIS - Prova 2</h4> <datetime
-										class="list-group-item-text">29-01-2015 12:00-14:00</datetime>
-								</a>
+						{if (sizeof($Upcomingexams) === 0)}
+						<div class="alert alert-info" role="alert">
+        					You have no Upcoming Exams.
+      					</div>
+						{else}
+						<div class="list-group">
+					
+						{foreach $Upcomingexams as $exam }
+						<div class="list-group-item">
+							<div class="row">
+								<div class="col-md-10">
+									<a href="../../pages/exams/welcome.php?id={$exam.id}">
+										<h4 class="list-group-item-heading">{$exam.name}</h4>
+									</a>
+									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
+								</div>
+
+								<div class="col-md-2">
+									<br/><p class="list-group-item-text">{$exam.description}</p>
+								</div>
 							</div>
 						</div>
+						{/foreach}
 					</div>
+					{/if}
 					<div class="last-element panel panel-info">
 						<div class="panel-heading">
 							<h3 class="panel-title">Future exams</h3>
 						</div>
-						<div class="panel-body">
-							<div class="list-group">
-								<a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">LBAW - Teste 2</h4> <datetime
-										class="list-group-item-text">05-02-2015 12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">COMP - Avaliação
-										Individual 2</h4> <datetime class="list-group-item-text">15-02-2015
-									12:00-14:00</datetime>
-								</a> <a href="{$BASE_URL}pages/exams/welcome.php" class="list-group-item">
-									<h4 class="list-group-item-heading">SDIS - Prova 3</h4> <datetime
-										class="list-group-item-text">23-02-2015 12:00-14:00</datetime>
-								</a>
+						{if (sizeof($Futureexams) === 0)}
+						<div class="alert alert-info" role="alert">
+        					You have no Future Exams.
+      					</div>
+						{else}
+						<div class="list-group">
+					
+						{foreach $Futureexams as $exam}
+						<div class="list-group-item">
+							<div class="row">
+								<div class="col-md-10">
+									<a href="../../pages/exams/welcome.php?id={$exam.id}">
+										<h4 class="list-group-item-heading">{$exam.name}</h4>
+									</a>
+									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
+								</div>
+
+								<div class="col-md-2">
+									<br/><p class="list-group-item-text">{$exam.description}</p>
+								</div>
 							</div>
 						</div>
-					</div>
+						{/foreach}
+					</div> 
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -75,5 +107,4 @@
 
 	</div>
 	<!-- /container -->
-
 {include file='common/footer.tpl'}
