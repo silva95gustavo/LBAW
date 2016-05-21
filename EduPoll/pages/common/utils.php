@@ -34,7 +34,7 @@ function sendEmail($email, $message) {
   $headers[] = "Subject: Edupoll Signup";
   $headers[] = "X-Mailer: PHP/".phpversion();
 
-  mail($email, "Edupoll Signup", $message, implode("\r\n", $headers));
+  mail($email, "", $message, implode("\r\n", $headers));
 }
 
 function validateCSRFToken($token) {
