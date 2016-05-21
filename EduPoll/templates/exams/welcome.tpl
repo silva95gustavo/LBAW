@@ -27,7 +27,29 @@
   						<div class="panel-body"><h5>{$exam.description}<h5></div>
 					</div>
 					{if $examStatus == 1}
-					<a href="../../pages/exams/statistics.php"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5"> - TODO Estatisticas</button><p></p></a>
+						{assign var="attempts" value=getAttempts($userID,$examID)}
+						{if sizeof($attempts) != 0}
+						{foreach $attempts as $attempt}
+							<div class="list-group-item">
+							<div class="row">
+								<div class="col-md-10">
+									<datetime class="list-group-item-text">{$attempt.starttime} - {$attempt.endtime}</datetime>
+									<br/>
+									<a href="../../pages/statistics.php">Review</a>
+								</div>
+								<div class="col-md-2 text-right">
+									<br/><p class="list-group-item-text">Grade: {$attempt.finalscore} / {$exam.maxscore}</p>
+								</div>
+							</div>
+						</div>
+						{/foreach}
+						{else}
+						<div id="examAvailableParent">
+							<div id="examAvailable" class="alert alert-info" >
+	  							No Attempts Available.
+							</div>
+						</div>
+					{/if}
 					{elseif $examStatus == 2}
 					<a href="take-exam.html"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">Take exam</button><p></p></a>
 					{else}

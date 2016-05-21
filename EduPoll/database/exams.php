@@ -80,10 +80,9 @@ function getNumberOfExams(){
 
 function getUserPreviousExams($userID) {
 	global $conn;
-	$stmt = $conn->prepare("SELECT attempt.id, attempt.starttime, attempt.endtime, attempt.finalscore, attempt.examid, exam.name, exam.maxscore 
-								FROM attempt INNER JOIN exam ON attempt.examid = exam.id 
-								WHERE attempt.userid = ? AND attempt.endtime IS NOT NULL
-								ORDER BY attempt.starttime ASC");
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+   								FROM exam 
+								WHERE has_access_exam(?,id) AND current_timestamp > endtime");
 	$stmt->execute(array($userID));
 	return $stmt->fetchAll();
 }
@@ -143,5 +142,24 @@ function examStatus($examID)
 	$stmt->bindParam(':examID', $examID, PDO::PARAM_INT);
 	$stmt->execute();
 	return $stmt->fetch()['status'];
+}
+
+function getBestScore($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT finalScore AS score FROM Attempt  
+		WHERE get_best_score(?,?) = Attempt.id");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetch()['score'];
+}
+function getAttempts($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id,startTime,endTime,finalScore 
+		FROM Attempt
+		WHERE userID = ? AND examID = ?
+		ORDER BY finalScore DESC");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetchAll();
 }
 ?> 
