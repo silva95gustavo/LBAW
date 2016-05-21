@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?
 require_once ('../../config/init.php');
 include_once ('../common/utils.php');
@@ -30,6 +29,7 @@ $exam = getExam($examID);
 $examStatus = examStatus($examID);
 
 prepareDate($smarty);
+$smarty->assign ('userID',$userID);
 $smarty->assign ('examStatus',$examStatus);
 $smarty->assign ('exam',$exam);
 $smarty->assign ('examID',$examID);
