@@ -139,7 +139,7 @@ function examStatus($examID)
             WHEN (exam.id = :examID AND (exam.starttime) < current_timestamp AND (exam.endtime IS NULL OR current_timestamp < exam.endtime)) THEN 2
             ELSE 0
        	END AS status
-		FROM exam) AS cenas WHERE id = :examID");
+		FROM exam) AS status WHERE id = :examID");
 	$stmt->bindParam(':examID', $examID, PDO::PARAM_INT);
 	$stmt->execute();
 	return $stmt->fetch()['status'];
