@@ -80,10 +80,9 @@ function getNumberOfExams(){
 
 function getUserPreviousExams($userID) {
 	global $conn;
-	$stmt = $conn->prepare("SELECT attempt.id, attempt.starttime, attempt.endtime, attempt.finalscore, attempt.examid, exam.name, exam.maxscore 
-								FROM attempt INNER JOIN exam ON attempt.examid = exam.id 
-								WHERE attempt.userid = ? AND attempt.endtime IS NOT NULL
-								ORDER BY attempt.starttime ASC");
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+   								FROM exam 
+								WHERE has_access_exam(?,id) AND current_timestamp > endtime");
 	$stmt->execute(array($userID));
 	return $stmt->fetchAll();
 }
@@ -95,7 +94,7 @@ function getOngoingExams($userID){
 								WHERE has_access_exam(?,id) AND (starttime - interval '1 hour') < current_timestamp AND (endtime IS NULL OR current_timestamp < endtime)
 								ORDER BY starttime ASC");
 	$stmt->execute(array($userID));
-	return $stmt->fetchAll();
+	return $stmt->fetchAll();	
 }	
 
 function getUpcomingExams($userID){
@@ -117,4 +116,50 @@ function getFutureExams($userID){
 	$stmt->execute(array($userID));
 	return $stmt->fetchAll();
 }
-?>
+
+function wasInvited($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT has_access_exam(?,?) AS value");
+	$stmt->execute(array($userID,$examID));
+	return $stmt->fetch()['value'];
+}
+
+//If 1 then the exam is over
+//If 2 then the exam is active
+//if 0 then the exam is not yet available
+function examStatus($examID)
+{
+	global $conn;
+	$stmt = $conn->prepare
+	("SELECT status AS status FROM 
+		(SELECT exam.id AS id, CASE 
+			WHEN (exam.id = :examID AND exam.endtime < current_timestamp) THEN 1
+            WHEN (exam.id = :examID AND (exam.starttime) < current_timestamp AND (exam.endtime IS NULL OR current_timestamp < exam.endtime)) THEN 2
+            ELSE 0
+       	END AS status
+		FROM exam) AS status WHERE id = :examID");
+	$stmt->bindParam(':examID', $examID, PDO::PARAM_INT);
+	$stmt->execute();
+	return $stmt->fetch()['status'];
+}
+
+function getBestScore($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT finalScore AS score FROM Attempt  
+		WHERE get_best_score(?,?) = Attempt.id");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetch()['score'];
+}
+function getAttempts($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id,startTime,endTime,finalScore 
+		FROM Attempt
+		WHERE userID = ? AND examID = ?
+		ORDER BY finalScore DESC");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetchAll();
+}
+?> 

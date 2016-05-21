@@ -28,7 +28,9 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="../../pages/exams/statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<a href="../../pages/exams/welcome.php?id={$exam.id}">
+										<h4 class="list-group-item-heading">{$exam.name}</h4>
+									</a>
 									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
@@ -55,7 +57,9 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="../../pages/exams/statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<a href="../../pages/exams/welcome.php?id={$exam.id}">
+										<h4 class="list-group-item-heading">{$exam.name}</h4>
+									</a>
 									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
@@ -78,11 +82,13 @@
 						{else}
 						<div class="list-group">
 					
-						{foreach $Futureexams as $exam }
+						{foreach $Futureexams as $exam}
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="../../pages/exams/statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<a href="../../pages/exams/welcome.php?id={$exam.id}">
+										<h4 class="list-group-item-heading">{$exam.name}</h4>
+									</a>
 									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
@@ -92,7 +98,7 @@
 							</div>
 						</div>
 						{/foreach}
-					</div>
+					</div> 
 					{/if}
 				</div>
 			</div>
