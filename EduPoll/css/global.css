@@ -88,3 +88,11 @@ div.jumbotron h2 {
 .well {
 	border-radius: 0;
 }
+
+#examAvailable {
+	display:inline-block;
+}
+
+#examAvailableParent{
+    text-align: center;
+}
