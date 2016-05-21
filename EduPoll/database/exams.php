@@ -116,6 +116,7 @@ function getFutureExams($userID){
 								ORDER BY starttime ASC");
 	$stmt->execute(array($userID));
 	return $stmt->fetchAll();
+<<<<<<< HEAD
 }
 
 function wasInvited($userID, $examID)
@@ -145,3 +146,7 @@ function examStatus($examID)
 	return $stmt->fetch()['status'];
 }
 ?> 
+=======
+}
+?>
+>>>>>>> origin/master
