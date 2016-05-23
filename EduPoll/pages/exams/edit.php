@@ -14,6 +14,21 @@ if (! isLoggedIn ()) {
 
 $examID = $_GET['id'];
 $exam = getExam($examID);
+
+if(examStatus($examID) === 1)
+{
+	$_SESSION ['error_messages'] [] = "The exam has ended, cannot be edited.";
+	header ( 'Location: ' . $BASE_URL . 'pages/exams/my_exams.php' );
+	die ();
+}
+
+if(!isManagerOrOwner($userInfo['id'],$examID))
+{
+	$_SESSION ['error_messages'] [] = "You do not have permission to edit this exam.";
+	header ( 'Location: ' . $BASE_URL . '/pages/exams/my_exams.php' );
+	die ();
+}
+
 if ($exam)
 {
 	$exam['id'] = $examID;

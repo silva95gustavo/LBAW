@@ -21,17 +21,23 @@
 					{else}
 					<div class="list-group">
 					
-						{foreach $exams as $exam }
+						{foreach $exams as $exam}
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-10">
-									<a href="statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
-									<datetime class="list-group-item-text">{$exam.startendtime}</datetime>
+									<a href="statistics.php?id={$exam.id}"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<datetime class="list-group-item-text">{$exam.starttime} - {($exam.endtime == NULL)?'End Time not defined':$exam.endtime}</datetime>
 								</div>
-
+								{if ($exam.endtime == NULL) || $currentTime < $exam.endtime}
 								<div class="col-md-2">
 									<br/><p class="list-group-item-text">{if isOwner($exam)}Owner{else}Manager{/if} <a href="edit.php?id={$exam.id}">(edit exam)</a></p>
 								</div>
+								{else}
+								<div class="col-md-2">
+									<br/><p class="list-group-item-text">Exam has Ended. </p>
+								</div>
+								{/if}
+
 							</div>
 						</div>
 						{/foreach}

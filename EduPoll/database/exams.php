@@ -32,18 +32,28 @@ function getExam($examID) {
 	return $stmt->fetch();
 }
 
+function isManagerOrOwner($userID, $examID){
+	global $conn;
+	$stmt = $conn->prepare("SELECT ownerID FROM Exam WHERE ownerID = ? AND id = ?");
+	$stmt->execute(array($userID, $examID));
+	if(count($stmt->fetchAll()) > 0 || isExamManager($userID, $examID))
+		return true;
+	else
+		return false;
+}
+
 function getOwnedAndManagedExams($userID) {
 	global $conn;
-	$stmt = $conn->prepare("(SELECT id, name, description, startTime, endTime, openToPublic, ownerID FROM Exam WHERE ownerID = ? OR id IN
+	$stmt = $conn->prepare("(SELECT id, name, description, starttime, endtime, openToPublic, ownerID FROM Exam WHERE ownerID = ? OR id IN
 		(SELECT examID FROM ManagesExam WHERE managerID = ?)
-		ORDER BY startTime DESC)");
+		ORDER BY starttime DESC)");
 	$stmt->execute(array($userID, $userID));
 	return $stmt->fetchAll();
 }
 
 function isExamManager($userID, $examID) {
 	global $conn;
-	$stmt = $conn->prepare("(SELECT managerid FROM managesexam WHERE manager = ? AND examid = ?");
+	$stmt = $conn->prepare("SELECT managerid FROM managesexam WHERE managerID = ? AND examID = ?");
 	$stmt->execute(array($userID, $examID));
 	if(count($stmt->fetchAll()) > 0)
 		return true;

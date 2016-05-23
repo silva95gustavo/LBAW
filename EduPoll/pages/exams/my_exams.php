@@ -18,29 +18,14 @@ if (! isLoggedIn ()) {
  
 $exams = getOwnedAndManagedExams($_SESSION['userID']);
 
-$datePattern = 'Y-m-d H:i:s';
-foreach ($exams as $key => $exam) {
-	$startTime = strtotime($exam['starttime']);
-	if (is_null($exam['endtime'])) {
-		$exams[$key]['startendtime'] = date($datePattern, $startTime) . " - Forever";
-		continue;
-	}
-	else
-		$endTime = strtotime($exam['endtime']);
-	
-	if (date('Y-m-d', $startTime) === date('Y-m-d', $endTime)) {
-		$exams[$key]['startendtime'] = date($datePattern, $startTime) . " - " . date('H:i:s', $endTime);
-	}
-	else
-		$exams[$key]['startendtime'] = date($datePattern, $startTime) . " - " . date($datePattern, $endTime);
-	
-	$exams[$key]['starttime'] = date($datePattern, strtotime($exam['starttime']));
-	$exams[$key]['endtime'] = date($datePattern, strtotime($exam['endtime']));
-}
+$now = new DateTime();
+$now->format('Y-m-d H:i:s');  
+$currentTime = date('Y-m-d H:i:s');
 
 prepareDate($smarty);
 
 $smarty->assign ( 'exams', $exams);
+$smarty->assign ( 'currentTime', $currentTime);
 $smarty->assign ( 'name', $_SESSION ['name'] );
 $smarty->display ( 'exams/my_exams.tpl' );
 ?>
