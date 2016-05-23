@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$(".inline-editable.exam-name").editable(BASE_URL + 'api/exams/edit_name.php', {
 		name : 'name',
+  		onblur: 'submit',
 		tooltip   : 'Click to edit...',
 		submitdata : {
 			'id' : $(".inline-editable.exam-name").data("id"),
@@ -10,9 +11,8 @@ $(document).ready(function() {
 	$(".inline-editable.exam-description").editable(BASE_URL + 'api/exams/edit_description.php', {
 		type : 'textarea',
 		name : 'description',
+  		onblur: 'submit',
 		tooltip   : 'Click to edit...',
-		submit : 'OK',
-		cancel : 'Cancel',
 		submitdata : {
 			'id' : $(".inline-editable.exam-description").data("id"),
 			'csrf_token' : CSRF_TOKEN
