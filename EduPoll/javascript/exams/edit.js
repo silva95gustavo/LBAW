@@ -55,7 +55,7 @@ $(document).ready(function() {
 			success: function () {
 				$('tr#' + userId).remove();
 				$('#confirmationModal').modal('hide');
-				//window.location.replace(BASE_URL + 'pages/exams/my_exams.php');
+				window.location.replace(BASE_URL + 'pages/exams/my_exams.php');
 			},
 			error: function () {
 				location.reload();
