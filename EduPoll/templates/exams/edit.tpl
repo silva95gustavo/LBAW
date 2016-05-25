@@ -79,6 +79,21 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModalRemoveManager" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to remove this manager?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_rem_manager" class="btn btn-success">Yes</button>
+									<button type="button" id="no_rem_manager" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModal" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -123,7 +138,7 @@
   										<li class="list-group-item">There are no managers for this exam</li>
   									{else}
   										{for $manager=0 to sizeof($managers)-1}
-  											<a href="#" class="list-group-item">{$managers[$manager]['name']}</a>
+  											<a href="#" class="list-group-item removable_manager" managerid={$managers[$manager]['id']}>{$managers[$manager]['name']}</a>
   										{/for}
   									{/if}
   								{else}

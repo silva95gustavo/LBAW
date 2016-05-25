@@ -127,4 +127,15 @@ function addManager($exam, $user) {
     else return -1;
 }
 
+function removeManager($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM managesexam
+            WHERE managerid = ? AND examid = ?");
+	if($stmt->execute(array($user, $exam)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
 ?>
