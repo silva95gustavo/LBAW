@@ -20,20 +20,25 @@
       					</div>
 					{else}
 						<div class="list-group">
-						{for $examindex=0 to sizeof($exams) - 1}
+						{foreach $exams as $exam}
 						<div class="list-group-item">
 							<div class="row">
-								<div class="col-md-10">
-									<a href="results.php?id={$exams[$examindex]['id']}"><h4 class="list-group-item-heading">{$exams[$examindex]['name']}</h4></a>
-									<datetime class="list-group-item-text">{$exams[$examindex]['starttime']} - {$exams[$examindex]['endtime']}</datetime>
+								<div class="col-md-6">
+									<a href="welcome.php?id={$exam.id}"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								</div>
 
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">Grade: {$exams[$examindex]['finalscore']} / {$exams[$examindex]['maxscore']}</p>
+								<div class="col-md-6 text-right">
+									{assign "score" getBestScore($userID,$exam.id) nocache}
+									{if sizeof($score) != 0}
+									<br/><p class="list-group-item-text">Grade: {$score} / {$exam.maxscore}</p>
+									{else}
+									<br/><p class="list-group-item-text">Grade: Not Attempted / {$exam.maxscore}</p>
+									{/if}
 								</div>
 							</div>
 						</div>
-						{/for}
+						{/foreach}
 					</div>
 					{/if}
 

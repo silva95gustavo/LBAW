@@ -93,3 +93,11 @@ div.jumbotron h2 {
 .show-managers {
 	margin: 2rem 0 2rem 1rem;
 }
+
+#examAvailable {
+	display:inline-block;
+}
+
+#examAvailableParent {
+    text-align: center;
+}
