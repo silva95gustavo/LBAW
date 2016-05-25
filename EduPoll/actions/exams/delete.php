@@ -10,7 +10,7 @@ if (! isLoggedIn ()) {
 }
 
 $exam = getExam($_POST['id']);
-if (! isset($exam)) {
+if (!$exam) {
 	$_SESSION ['error_messages'] [] = 'Error fetching exam to delete.';
 	header('Location: ' . $_SERVER['HTTP_REFERER']);
 	exit;
@@ -36,4 +36,3 @@ try {
 $_SESSION['success_messages'][] = 'Exam successfully deleted.';
 header("Location: " . $BASE_URL . "pages/exams/my_exams.php");
 ?>
-

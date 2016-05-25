@@ -138,4 +138,33 @@ function removeManager($exam, $user) {
     else return -1;
 }
 
+function getOngoingExams($userID){
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+   								FROM exam 
+								WHERE has_access_exam(?,id) AND (starttime - interval '1 hour') < current_timestamp AND (endtime IS NULL OR current_timestamp < endtime)
+								ORDER BY starttime ASC");
+	$stmt->execute(array($userID));
+	return $stmt->fetchAll();
+}	
+
+function getUpcomingExams($userID){
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+   								FROM exam 
+								WHERE has_access_exam(?,id) AND (starttime - interval '7 days') < current_timestamp AND current_timestamp < (starttime - interval '1 hour')
+								ORDER BY starttime ASC");
+	$stmt->execute(array($userID));
+	return $stmt->fetchAll();
+}
+
+function getFutureExams($userID){
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+   								FROM exam 
+								WHERE has_access_exam(?,id) AND (starttime >= (current_timestamp + interval '7 day'))
+								ORDER BY starttime ASC");
+	$stmt->execute(array($userID));
+	return $stmt->fetchAll();
+}
 ?>
