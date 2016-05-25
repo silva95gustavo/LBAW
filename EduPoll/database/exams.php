@@ -41,9 +41,36 @@ function getOwnedAndManagedExams($userID) {
 	return $stmt->fetchAll();
 }
 
+function getExamOwner($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id, registereduser.name
+								FROM registereduser INNER JOIN exam ON exam.ownerid = registereduser.id
+								WHERE exam.id = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getExamManagers($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id, registereduser.name
+								FROM registereduser INNER JOIN managesexam ON managesexam.managerid = registereduser.id
+								WHERE managesexam.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getOtherExamManagers($examID, $userID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id, registereduser.name
+								FROM registereduser INNER JOIN managesexam ON managesexam.managerid = registereduser.id
+								WHERE managesexam.examid = ? AND registereduser.id != ?");
+	$stmt->execute(array($examID, $userID));
+	return $stmt->fetchAll();
+}
+
 function isExamManager($userID, $examID) {
 	global $conn;
-	$stmt = $conn->prepare("(SELECT managerid FROM managesexam WHERE manager = ? AND examid = ?");
+	$stmt = $conn->prepare("SELECT managerid FROM managesexam WHERE managerid = ? AND examid = ?");
 	$stmt->execute(array($userID, $examID));
 	if(count($stmt->fetchAll()) > 0)
 		return true;
@@ -86,6 +113,29 @@ function getUserPreviousExams($userID) {
 								ORDER BY attempt.starttime ASC");
 	$stmt->execute(array($userID));
 	return $stmt->fetchAll();
+}
+
+function addManager($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO managesexam
+    		(managerid, examid)
+            VALUES (?, ?) RETURNING examid");
+	if($stmt->execute(array($user, $exam)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
+function removeManager($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM managesexam
+            WHERE managerid = ? AND examid = ?");
+	if($stmt->execute(array($user, $exam)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
 }
 
 function getOngoingExams($userID){
