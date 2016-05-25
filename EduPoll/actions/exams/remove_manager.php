@@ -20,7 +20,7 @@ $user = intval($_POST['user']);
 $exam = getExam($exam_id);
 
 if ($exam ['ownerid'] !== $userInfo ['id']) {
-	$_SESSION['error_messages'][] = 'Only the owner of an exam may add managers to it.';
+	$_SESSION['error_messages'][] = 'Only the owner of an exam may remove managers from it.';
 	http_response_code ( 401 );
 	exit;
 }
@@ -30,25 +30,25 @@ if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
 	exit;
 }
 
-if(getExamOwner($exam_id) === $user || isExamManager($user, $exam_id)) {
-	$_SESSION ['error_messages'] [] = 'That user already manages this exam.';
+if(! isExamManager($user, $exam_id)) {
+	$_SESSION ['error_messages'] [] = 'That user does not manage this exam.';
 	http_response_code (400);
 	exit;
 }
 
 try {
-	if(addManager($exam_id, $user) == -1) {
-		$_SESSION['error_messages'][] = 'Error adding manager to exam.';
+	if(removeManager($exam_id, $user) == -1) {
+		$_SESSION['error_messages'][] = 'Error removing manager from exam.';
 		http_response_code ( 400 );
 		exit;
 	}
 } catch (PDOException $e) {
-	$_SESSION['error_messages'][] = 'Error adding manager to exam: ' . $e->getMessage();
+	$_SESSION['error_messages'][] = 'Error removing manager from exam: ' . $e->getMessage();
 	http_response_code ( 400 );
 	exit;
 }
 
-$_SESSION['success_messages'][] = 'Manager successfully added.';
+$_SESSION['success_messages'][] = 'Manager successfully removed.';
 http_response_code ( 200 );
 echo 'hello';
 ?>

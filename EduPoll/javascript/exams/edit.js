@@ -1,4 +1,5 @@
 var exam_id;
+var removable_manager_id;
 
 $(document).ready(function() {
 	exam_id = $(".exam-id").attr("examid");
@@ -56,6 +57,26 @@ $(document).ready(function() {
 				$('tr#' + userId).remove();
 				$('#confirmationModal').modal('hide');
 				window.location.replace(BASE_URL + 'pages/exams/my_exams.php');
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('.removable_manager').click(function (e) {
+		removable_manager_id = $(this).attr('managerid');
+		$('#confirmationModalRemoveManager').modal('show');
+	})
+
+	$('#yes_rem_manager').click(function (e) {
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/remove_manager.php",
+			data: { user: removable_manager_id , exam: exam_id },
+			success: function (data) {
+				$('#confirmationModalRemoveManager').modal('hide');
+				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
 			},
 			error: function () {
 				location.reload();
