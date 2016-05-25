@@ -14,10 +14,11 @@ if (! isLoggedIn ()) {
 
  $userid = $_SESSION ['userID'];
  $exams = getUserPreviousExams($userid);
- 
+  
  prepareDate($smarty);
 
 $smarty->assign ( 'name', $_SESSION ['name'] );
+$smarty->assign ( 'userID',$userid);
 $smarty->assign ( 'exams', $exams );
 $smarty->display ( 'exams/exams_taken.tpl' );
 ?>
