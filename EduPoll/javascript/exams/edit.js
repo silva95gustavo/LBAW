@@ -1,11 +1,25 @@
+var exam_id;
+var removable_manager_id;
+
 $(document).ready(function() {
+	exam_id = $(".exam-id").attr("examid");
+	$("#inputUserToAdd").autocomplete({
+		source : BASE_URL + "api/exams/search_user_autocomplete.php",
+		minLength : 3,
+		select : function(event, ui) {
+			if (ui.item) {
+				this.value = ui.item.label;
+				$('#inputUserToAdd').data('id', ui.item.id);
+				$('#yes_manager').data('id', ui.item.id);
+				$('#confirmationModalAddManager').modal('show');
+			}
+		}
+	});
+	
 	$(".inline-editable.exam-name").editable(BASE_URL + 'api/exams/edit_name.php', {
 		name : 'name',
 		tooltip   : 'Click to edit...',
-		submitdata : {
-			'id' : $(".inline-editable.exam-name").data("id"),
-			'csrf_token' : CSRF_TOKEN
-		}
+		submitdata : { 'id' : $(".inline-editable.exam-name").data("id")}
 	});
 	$(".inline-editable.exam-description").editable(BASE_URL + 'api/exams/edit_description.php', {
 		type : 'textarea',
@@ -13,10 +27,7 @@ $(document).ready(function() {
 		tooltip   : 'Click to edit...',
 		submit : 'OK',
 		cancel : 'Cancel',
-		submitdata : {
-			'id' : $(".inline-editable.exam-description").data("id"),
-			'csrf_token' : CSRF_TOKEN
-		},
+		submitdata : { 'id' : $(".inline-editable.exam-description").data("id")},
 		callback: function(value,settings) {
 			var retval = nl2br(value);
 			$(this).html(retval);
@@ -46,6 +57,43 @@ $(document).ready(function() {
 				$('tr#' + userId).remove();
 				$('#confirmationModal').modal('hide');
 				window.location.replace(BASE_URL + 'pages/exams/my_exams.php');
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('.removable_manager').click(function (e) {
+		removable_manager_id = $(this).attr('managerid');
+		$('#confirmationModalRemoveManager').modal('show');
+	})
+
+	$('#yes_rem_manager').click(function (e) {
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/remove_manager.php",
+			data: { user: removable_manager_id , exam: exam_id },
+			success: function (data) {
+				$('#confirmationModalRemoveManager').modal('hide');
+				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('#yes_manager').click(function (e) {
+		userId = $(this).data('id');
+		console.log('check', exam_id, userId, $(this).data());
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/add_manager.php",
+			data: { user: userId , exam: exam_id },
+			success: function (data) {
+				$('#confirmationModalAddManager').modal('hide');
+				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
 			},
 			error: function () {
 				location.reload();

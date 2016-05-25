@@ -36,4 +36,3 @@ try {
 $_SESSION['success_messages'][] = 'Exam successfully deleted.';
 header("Location: " . $BASE_URL . "pages/exams/my_exams.php");
 ?>
-
