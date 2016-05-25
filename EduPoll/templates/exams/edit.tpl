@@ -1,6 +1,7 @@
 {include file='common/header.tpl'}
 {include file='common/menu.tpl'}
 
+	<div style="display: none;" class="exam-id" examid={$exam.id}></div>
 	<div class="container-fluid">
 		<div class="row">
 			{include file='common/sidebar.tpl'}
@@ -63,6 +64,21 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModalAddManager" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to add this user as manager?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_manager" class="btn btn-success">Yes</button>
+									<button type="button" id="no_manager" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModal" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -93,10 +109,13 @@
 						
   						<div id="demo" class="collapse">
   							{if $isOwner}
-  								<form class="form-remove-user">
-  									<input type="text" id="inputUserToRemove" class="form-control" placeholder="Inser user name or email of manager to add" required autofocus>
-  									<br/>
-  								</form>
+  								<form class="form-add-manager">
+									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+
+									<input type="text" id="inputUserToAdd" class="form-control" placeholder="User name or email"
+										required autofocus>
+								</form>
+								<br/>
   							{/if}
   							<ul class="list-group">
   								{if $isOwner}  								
