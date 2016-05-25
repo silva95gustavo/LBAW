@@ -70,7 +70,7 @@ function getOtherExamManagers($examID, $userID) {
 
 function isExamManager($userID, $examID) {
 	global $conn;
-	$stmt = $conn->prepare("(SELECT managerid FROM managesexam WHERE manager = ? AND examid = ?");
+	$stmt = $conn->prepare("SELECT managerid FROM managesexam WHERE managerid = ? AND examid = ?");
 	$stmt->execute(array($userID, $examID));
 	if(count($stmt->fetchAll()) > 0)
 		return true;
@@ -113,6 +113,18 @@ function getUserPreviousExams($userID) {
 								ORDER BY attempt.starttime ASC");
 	$stmt->execute(array($userID));
 	return $stmt->fetchAll();
+}
+
+function addManager($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO managesexam
+    		(managerid, examid)
+            VALUES (?, ?) RETURNING examid");
+	if($stmt->execute(array($user, $exam)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
 }
 
 ?>
