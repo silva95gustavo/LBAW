@@ -9,8 +9,13 @@ if (! isLoggedIn ()) {
 	exit ();
 }
 
+if (!isset($_POST['id'])) {
+	$_SESSION ['error_messages'] [] = 'Exam id undefined.';
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	exit;
+}
 $exam = getExam($_POST['id']);
-if (!$exam) {
+if(!$exam) {
 	$_SESSION ['error_messages'] [] = 'Error fetching exam to delete.';
 	header('Location: ' . $_SERVER['HTTP_REFERER']);
 	exit;
