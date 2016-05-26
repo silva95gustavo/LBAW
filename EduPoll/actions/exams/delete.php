@@ -9,12 +9,17 @@ if (! isLoggedIn ()) {
 	exit ();
 }
 
-if ($_POST['id']) {
-	$_SESSION ['error_messages'] [] = 'Error fetching exam to delete.';
+if (!isset($_POST['id'])) {
+	$_SESSION ['error_messages'] [] = 'Exam id undefined.';
 	header('Location: ' . $_SERVER['HTTP_REFERER']);
 	exit;
 }
 $exam = getExam($_POST['id']);
+if(!$exam) {
+	$_SESSION ['error_messages'] [] = 'Error fetching exam to delete.';
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	exit;
+}
 if ($exam ['ownerid'] !== $userInfo ['id']) {
 	$_SESSION ['error_messages'] [] = 'Only the owner of an exam may delete it.';
 	header('Location: ' . $_SERVER['HTTP_REFERER']);
