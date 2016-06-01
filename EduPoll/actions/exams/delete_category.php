@@ -15,15 +15,15 @@ if (! isset($_POST['category'])) {
 	exit;
 }
 
-$examID = getExamFromExamElement($_POST['category']);
+$exam = getExamFromExamElement($_POST['category']);
 
-if (!$examID) {
+if (!$exam) {
 	$_SESSION['error_messages'][] = 'Invalid category ID.';
 	http_response_code ( 400 );
 	exit;
 }
 
-if ($exam ['ownerid'] !== $userInfo ['id'] && !isExamManager($userInfo['id'], $examID)) {
+if ($exam ['ownerid'] !== $userInfo ['id'] && !isExamManager($userInfo['id'], $exam["id"])) {
 	$_SESSION['error_messages'][] = "You don't have permission to delete a category from this exam.";
 	http_response_code ( 403 );
 	exit;

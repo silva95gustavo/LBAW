@@ -109,6 +109,21 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModalDeleteCategory" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to delete this category? All questions inside it will be deleted as well.</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_delete_category" class="btn btn-success">Yes</button>
+									<button type="button" id="no_delete_category" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div class="exam" id="exam{$exam.id}">
 
 						<div class="jumbotron">
@@ -181,7 +196,9 @@
 										<div class="col-md-6 text-right">
 											<i class="fa fa-plus"></i>
 											<i class="fa fa-pencil"></i>
-											<i class="fa fa-trash-o"></i>
+											<span class="icon-clickable">
+												<i class="fa fa-trash-o" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#confirmationModalDeleteCategory"></i>
+											</span>
 										</div>
 									</div>
 								</div>
