@@ -212,4 +212,31 @@ function getAttempts($userID, $examID)
 	$stmt->execute(array($userID, $examID));
 	return $stmt->fetchAll();
 }
+function getExamCategories($examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT category.id, category.name, category.numselquestions
+   		FROM category INNER JOIN examelement ON (category.id = examelement.id)
+   		WHERE examelement.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+function getCategoryQuestions($categoryID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, category, statement, maxscore
+   		FROM question
+   		WHERE category = ?");
+	$stmt->execute(array($categoryID));
+	return $stmt->fetchAll();
+}
+function getQuestionAnswers($questionID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, text, score
+   		FROM answer
+   		WHERE questionid = :questionid");
+	$stmt->execute(array($questionID));
+	return $stmt->fetchAll();
+}
 ?> 

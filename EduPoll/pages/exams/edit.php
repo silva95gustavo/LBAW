@@ -42,6 +42,13 @@ if ($exam)
 		$smarty->assign('managers', getOtherExamManagers($examID, $userInfo['id']));
 		$smarty->assign('owner', getExamOwner($examID)[0]);
 	}
+	
+	$categories = getExamCategories($examID);
+	for ($i = 0; $i < sizeof($categories[$i]); $i++) {
+		$questions = getCategoryQuestions($categories[$i]["id"]);
+		$categories[$i]["questions"] = $questions;
+	}
+	$smarty->assign('categories', $categories);
 }
 
 prepareDate($smarty);
