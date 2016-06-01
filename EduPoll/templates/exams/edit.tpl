@@ -172,10 +172,11 @@
 							</div>
 						</div>
 	
+						{foreach $categories as $category}
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<div class="row">
-									<div class="col-md-6"><strong>Category A</strong></div>
+									<div class="col-md-6"><strong>{$category.name}</strong></div>
 									<div class="col-md-6 text-right">
 										<i class="fa fa-plus"></i>
 										<i class="fa fa-pencil"></i>
@@ -184,6 +185,7 @@
 								</div>
 							</div>
 							
+							{foreach $category.questions as $question}
 							<div class="panel-body">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
@@ -196,7 +198,7 @@
 										</div>
 									</div>
 									<div class="panel-body">
-										<p><strong>Question: </strong>First question. Select the correct option:</p>
+										<p><strong>Question: </strong>{$question.statement}</p>
 										<form>
 											<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 											<div class="radio disabled">
@@ -215,150 +217,28 @@
 									</div>
 								</div>
 							</div>
+							{/foreach}
 							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question A2</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>Second question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" disabled>Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" checked="checked">Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" disabled>Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" disabled>Option 4</label>
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
-						
-						
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-md-6"><strong>Category B</strong></div>
-									<div class="col-md-6 text-right">
-										<i class="fa fa-plus"></i>
-										<i class="fa fa-pencil"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question B1</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>First question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" checked="checked">Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" disabled>Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" disabled>Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" disabled>Option 4</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question B2</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>Second question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" disabled>Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" disabled>Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" checked="checked">Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" disabled>Option 4</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question B3</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>Third question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" disabled>Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" disabled>Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" checked="checked">Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" disabled>Option 4</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						{/foreach}
 						
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-info">Add New Category</button>
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-success">Save Changes</button>
 									</div>
-									<div class="col-md-4">
+									<div class="col-sm-3">
 										<button type="button" class="btn btn-danger">Cancel Changes</button>
 									</div>	
+									{if $isOwner}
+									<div class="col-sm-3">
+										<button type="submit" class="btn btn-danger" data-id="{$exam.id}" data-toggle="modal" data-target="#confirmationModal">Delete exam</button>
+									</div>
+									{/if}
 								</div>
 							</div>
 						</div>
