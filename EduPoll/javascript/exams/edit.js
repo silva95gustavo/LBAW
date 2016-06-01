@@ -104,4 +104,19 @@ $(document).ready(function() {
 			}
 		});
 	})
+	
+	$('#yes_delete_category').click(function (e) {
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/remove_manager.php",
+			data: { user: removable_manager_id , exam: exam_id, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalRemoveManager').modal('hide');
+				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
 });

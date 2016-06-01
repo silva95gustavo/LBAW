@@ -225,7 +225,7 @@ function getCategoryQuestions($categoryID)
 {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id, category, statement, maxscore
-   		FROM question
+   		FROM question INNER JOIN examelement ON (question.id = examelement.id)
    		WHERE category = :categoryid");
 	$stmt->execute(array($categoryID));
 	return $stmt->fetchAll();
@@ -248,5 +248,19 @@ function getQuestionAnswers($questionID)
    		WHERE questionid = :questionid");
 	$stmt->execute(array($questionID));
 	return $stmt->fetchAll();
+}
+function deleteCategory($categoryID)
+{
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM category
+		WHERE id = :categoryid");
+	return $stmt->execute(array($categoryID));
+}
+function getExamFromExamElement($examElementID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT examid FROM examelement WHERE examelement.id = ?");
+	$stmt->execute(array($examElementID));
+	return $stmt->fetch();
 }
 ?> 
