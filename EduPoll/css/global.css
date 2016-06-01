@@ -101,3 +101,9 @@ div.jumbotron h2 {
 #examAvailableParent {
     text-align: center;
 }
+.icon-clickable {
+	cursor: pointer
+}
+.icon-clickable:hover {
+	color: #AAA;
+}

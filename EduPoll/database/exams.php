@@ -259,7 +259,9 @@ function deleteCategory($categoryID)
 function getExamFromExamElement($examElementID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT examid FROM examelement WHERE examelement.id = ?");
+	$stmt = $conn->prepare("SELECT examid AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+			FROM examelement INNER JOIN exam ON exam.id = examelement.examid
+			WHERE examelement.id = ?");
 	$stmt->execute(array($examElementID));
 	return $stmt->fetch();
 }

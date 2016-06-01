@@ -46,13 +46,11 @@ $(document).ready(function() {
 
 	$('#confirmationModal').on('show.bs.modal', function (e) {
 		var data = $(e.relatedTarget).data();
-		console.log(data);
 		$('#yes').data('id', data.id);
 	})
 
 	$('#yes').click(function (e) {
 		userId = $(this).data('id');
-		console.log('check', $(this).data('id'), userId, $(this).data());
 		$.ajax({
 			type: 'POST',
 			url: "../../actions/exams/delete.php",
@@ -105,13 +103,19 @@ $(document).ready(function() {
 		});
 	})
 	
+	$('#confirmationModalDeleteCategory').on('show.bs.modal', function (e) {
+		var data = $(e.relatedTarget).data();
+		$('#yes_delete_category').data('categoryid', data.categoryid);
+	})
+	
 	$('#yes_delete_category').click(function (e) {
+		categoryId = $(this).data('categoryid');
 		$.ajax({
 			type: 'POST',
-			url: "../../actions/exams/remove_manager.php",
-			data: { user: removable_manager_id , exam: exam_id, csrf_token: CSRF_TOKEN },
+			url: "../../actions/exams/delete_category.php",
+			data: { category: categoryId, csrf_token: CSRF_TOKEN },
 			success: function (data) {
-				$('#confirmationModalRemoveManager').modal('hide');
+				$('#confirmationModalDeleteCategory').modal('hide');
 				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
 			},
 			error: function () {
