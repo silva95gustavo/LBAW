@@ -215,19 +215,29 @@ function getAttempts($userID, $examID)
 function getExamCategories($examID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT category.id, category.name, category.numselquestions
+	$stmt = $conn->prepare("SELECT category.id, category.name, category.numselquestions, orderindex
    		FROM category INNER JOIN examelement ON (category.id = examelement.id)
-   		WHERE examelement.examid = ?");
+   		WHERE examelement.examid = :examid");
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
 function getCategoryQuestions($categoryID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT id, category, statement, maxscore
+	$stmt = $conn->prepare("SELECT question.id, category, statement, maxscore
    		FROM question
-   		WHERE category = ?");
+   		WHERE category = :categoryid");
 	$stmt->execute(array($categoryID));
+	return $stmt->fetchAll();
+}
+function getIndependentQuestions($examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT question.id, question.category, question.statement, question.maxscore, orderindex
+   		FROM question INNER JOIN examelement ON (question.id = examelement.id)
+   		WHERE examelement.examid = :examid
+    	AND question.category IS NULL");
+	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
 function getQuestionAnswers($questionID)

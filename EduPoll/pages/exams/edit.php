@@ -3,6 +3,7 @@ require_once ('../../config/init.php');
 require_once ('../common/utils.php');
 require_once ('../../database/exams.php');
 include_once ('../common/sidebar.php');
+require_once ('../../pages/exams/utils.php');
 
 if (! isLoggedIn ()) {
 	header ( 'Location: ' . $BASE_URL . 'pages/auth/login.php' );
@@ -46,9 +47,22 @@ if ($exam)
 	$categories = getExamCategories($examID);
 	for ($i = 0; $i < sizeof($categories[$i]); $i++) {
 		$questions = getCategoryQuestions($categories[$i]["id"]);
+		$categories[$i]["type"] = "category";
 		$categories[$i]["questions"] = $questions;
+		for ($j = 0; $j < sizeof($questions); $j++) {
+			$answers = getQuestionAnswers($questions[$j]["id"]);
+			$categories[$i]["questions"][$j]["answers"] = $answers;
+		}
 	}
-	$smarty->assign('categories', $categories);
+	$independentQuestions = getIndependentQuestions($examID);
+	for ($i = 0; $i < sizeof($independentQuestions); $i++) {
+		$independentQuestions[$i]["type"] = "question";
+	}
+	
+	$examElements = array_merge($categories, $independentQuestions);
+	sortExamElements($examElements);
+	
+	$smarty->assign('examElements', $examElements);
 }
 
 prepareDate($smarty);

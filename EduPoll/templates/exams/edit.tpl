@@ -172,54 +172,28 @@
 							</div>
 						</div>
 	
-						{foreach $categories as $category}
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-md-6"><strong>{$category.name}</strong></div>
-									<div class="col-md-6 text-right">
-										<i class="fa fa-plus"></i>
-										<i class="fa fa-pencil"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</div>
-							</div>
-							
-							{foreach $category.questions as $question}
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question A1</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
+						{foreach $examElements as $examElement}
+							{if $examElement.type == 'category'}
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-md-6"><strong>{$examElement.name}</strong></div>
+										<div class="col-md-6 text-right">
+											<i class="fa fa-plus"></i>
+											<i class="fa fa-pencil"></i>
+											<i class="fa fa-trash-o"></i>
 										</div>
 									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>{$question.statement}</p>
-										<form>
-											<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" checked="checked">Option 1</label>
-											</div>
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" disabled>Option 2</label>
-											</div>
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" disabled>Option 3</label>
-											</div>
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" disabled>Option 4</label>
-											</div>
-										</form>
-									</div>
 								</div>
+								
+								{foreach $examElement.questions as $question}
+									{include file='exams/question.tpl'}
+								{/foreach}
+								
 							</div>
-							{/foreach}
-							
-						</div>
+							{else if $examElement.type == 'question'}
+								{include file='exams/question.tpl'}
+							{/if}
 						{/foreach}
 						
 						<div class="panel panel-default text-center">
