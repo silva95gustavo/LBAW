@@ -101,3 +101,7 @@ div.jumbotron h2 {
 #examAvailableParent {
     text-align: center;
 }
+
+a .list-group-item-heading{
+	display:inline-block
+}
