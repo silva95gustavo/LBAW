@@ -209,8 +209,12 @@
 									<div class="row">
 										<div class="col-md-6"><strong>{$examElement.name}</strong></div>
 										<div class="col-md-6 text-right">
-											<i class="fa fa-plus"></i>
-											<i class="fa fa-pencil"></i>
+											<span class="icon-clickable">
+												<i class="fa fa-plus"></i>
+											</span>
+											<span class="icon-clickable">
+												<i class="fa fa-pencil"></i>
+											</span>
 											<span class="icon-clickable">
 												<i class="fa fa-trash-o" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#confirmationModalDeleteCategory"></i>
 											</span>
