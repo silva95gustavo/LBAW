@@ -30,12 +30,18 @@ div.main div.container {
 .inline-editable {
 	display: inline-block;
 	padding: 0 0.5em;
+	width: 100%;
 }
 .inline-editable:hover {
 	display: inline-block;
 	position: relative;
 	outline: 2px dashed #CCC;
-	width: auto;
+}
+.inline-editable form {
+	color: black;
+}
+.inline-editable form input {
+	width: 100%;
 }
 .exam-name-container {
 	text-align: center;

@@ -19,7 +19,7 @@
 					<!-- Trigger the modal with a button -->
 
 					<!-- Modal -->
-					<div id="myModal" class="modal fade" role="dialog">
+					<div id="editQuestionModal" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 
 							<!-- Modal content-->
@@ -211,9 +211,6 @@
 										<div class="col-md-6 text-right">
 											<span class="icon-clickable">
 												<i class="fa fa-plus"></i>
-											</span>
-											<span class="icon-clickable">
-												<i class="fa fa-pencil"></i>
 											</span>
 											<span class="icon-clickable">
 												<i class="fa fa-trash-o" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#confirmationModalDeleteCategory"></i>
