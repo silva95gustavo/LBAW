@@ -123,4 +123,25 @@ $(document).ready(function() {
 			}
 		});
 	})
+	
+	$('#confirmationModalDeleteQuestion').on('show.bs.modal', function (e) {
+		var data = $(e.relatedTarget).data();
+		$('#yes_delete_question').data('questionid', data.questionid);
+	})
+	
+	$('#yes_delete_question').click(function (e) {
+		questionId = $(this).data('questionid');
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/delete_question.php",
+			data: { question: questionId, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalDeleteQuestion').modal('hide');
+				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
 });

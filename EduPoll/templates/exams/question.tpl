@@ -5,7 +5,9 @@
 				<div class="col-md-6">Question A1</div>
 				<div class="col-md-6 text-right">
 					<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-					<i class="fa fa-trash-o"></i>
+					<span class="icon-clickable">
+						<i class="fa fa-trash-o" data-questionid="{$examElement.id}" data-toggle="modal" data-target="#confirmationModalDeleteQuestion"></i>
+					</span>
 				</div>
 			</div>
 		</div>

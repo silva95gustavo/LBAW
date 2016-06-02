@@ -256,6 +256,13 @@ function deleteCategory($categoryID)
 		WHERE id = :categoryid");
 	return $stmt->execute(array($categoryID));
 }
+function deleteQuestion($questionID)
+{
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM question
+		WHERE id = :questionid");
+	return $stmt->execute(array($questionID));
+}
 function getExamFromExamElement($examElementID)
 {
 	global $conn;
