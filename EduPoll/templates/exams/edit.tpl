@@ -124,6 +124,21 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModalDeleteQuestion" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to delete this question?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_delete_question" class="btn btn-success">Yes</button>
+									<button type="button" id="no_delete_question" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div class="exam" id="exam{$exam.id}">
 
 						<div class="jumbotron">
@@ -209,6 +224,7 @@
 								
 							</div>
 							{else if $examElement.type == 'question'}
+								{assign question $examElement}
 								{include file='exams/question.tpl'}
 							{/if}
 						{/foreach}

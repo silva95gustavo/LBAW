@@ -57,6 +57,8 @@ if ($exam)
 	$independentQuestions = getIndependentQuestions($examID);
 	for ($i = 0; $i < sizeof($independentQuestions); $i++) {
 		$independentQuestions[$i]["type"] = "question";
+		$answers = getQuestionAnswers($independentQuestions[$i]["id"]);
+		$independentQuestions[$i]["answers"] = $answers;
 	}
 	
 	$examElements = array_merge($categories, $independentQuestions);

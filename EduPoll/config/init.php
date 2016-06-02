@@ -1,7 +1,8 @@
 <?php
 	  //session_set_cookie_params(3600, '/~lbaw1565/proto'); // FIXME
-	  session_set_cookie_params(3600, '/~up201304143/LBAW'); // FIXME
+	  //session_set_cookie_params(3600, '/~up201304143/LBAW'); // FIXME
 	  session_start();
+	  setcookie(session_name(),session_id(),time() + (365 * 24 * 60 * 60), '/~up201304143/LBAW');
 	  error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 	  
 	  //$BASE_DIR = '/opt/lbaw/lbaw1565/public_html/proto/';
