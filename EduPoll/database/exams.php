@@ -92,6 +92,13 @@ function editExamDescription($examID, $newDescription) {
 	return $stmt->fetchAll();
 }
 
+function editQuestionStatement($questionID, $newStatement) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE question SET statement = ? WHERE id = ? RETURNING statement");
+	$stmt->execute(array($newStatement, $questionID));
+	return $stmt->fetchAll();
+}
+
 function deleteExam($examID) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM exam WHERE id = ?");

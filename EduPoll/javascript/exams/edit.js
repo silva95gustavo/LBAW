@@ -43,6 +43,19 @@ $(document).ready(function() {
 			return retval;
 		}
 	});
+	
+	$(".inline-editable.question-statement").each(function() {
+		$(this).editable(BASE_URL + 'api/exams/edit_question_statement.php', {
+		name : 'statement',
+		tooltip   : 'Click to edit...',
+		submitdata : { 'id' : $(this).data("id"),
+						'csrf_token' : CSRF_TOKEN
+		}});
+	});
+	
+	$(".inline-editable.question-statement").click(function (e) {
+		console.log($(this).data("id"));
+	});
 
 	$('#confirmationModal').on('show.bs.modal', function (e) {
 		var data = $(e.relatedTarget).data();
