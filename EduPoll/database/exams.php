@@ -99,6 +99,13 @@ function editQuestionStatement($questionID, $newStatement) {
 	return $stmt->fetchAll();
 }
 
+function editAnswerText($answerID, $newText) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE answer SET text = ? WHERE id = ? RETURNING text");
+	$stmt->execute(array($newText, $answerID));
+	return $stmt->fetchAll();
+}
+
 function deleteExam($examID) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM exam WHERE id = ?");
@@ -277,6 +284,17 @@ function getExamFromExamElement($examElementID)
 			FROM examelement INNER JOIN exam ON exam.id = examelement.examid
 			WHERE examelement.id = ?");
 	$stmt->execute(array($examElementID));
+	return $stmt->fetch();
+}
+function getExamFromAnswer($answerID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT examid AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+			FROM answer
+			INNER JOIN examelement ON answer.questionid = examelement.id
+			INNER JOIN exam ON exam.id = examelement.examid
+			WHERE answer.id = ?");
+	$stmt->execute(array($answerID));
 	return $stmt->fetch();
 }
 ?> 

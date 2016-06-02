@@ -46,15 +46,22 @@ $(document).ready(function() {
 	
 	$(".inline-editable.question-statement").each(function() {
 		$(this).editable(BASE_URL + 'api/exams/edit_question_statement.php', {
-		name : 'statement',
-		tooltip   : 'Click to edit...',
-		submitdata : { 'id' : $(this).data("id"),
-						'csrf_token' : CSRF_TOKEN
-		}});
+			name : 'statement',
+			tooltip   : 'Click to edit...',
+			submitdata : { 'id' : $(this).data("id"),
+						   'csrf_token' : CSRF_TOKEN
+			}
+		});
 	});
 	
-	$(".inline-editable.question-statement").click(function (e) {
-		console.log($(this).data("id"));
+	$(".inline-editable.answer-text").each(function() {
+		$(this).editable(BASE_URL + 'api/exams/edit_answer_text.php', {
+			name : 'text',
+			tooltip   : 'Click to edit...',
+			submitdata : { 'id' : $(this).data("id"),
+						   'csrf_token' : CSRF_TOKEN
+			}
+		});
 	});
 
 	$('#confirmationModal').on('show.bs.modal', function (e) {

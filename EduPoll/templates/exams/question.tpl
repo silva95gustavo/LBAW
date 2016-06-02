@@ -18,7 +18,10 @@
 				
 				{foreach $question.answers as $answer}
 				<div class="radio disabled">
-					<label><input type="radio" name="optradio1" checked="checked">{$answer.text}</label>
+					<label>
+						<input type="radio" name="optradio1" checked="checked">
+						<div class="inline-editable answer-text" name="text" data-id="{$answer.id}">{$answer.text}</div>
+					</label>
 				</div>
 				{/foreach}
 				
