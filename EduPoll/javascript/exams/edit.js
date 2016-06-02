@@ -19,6 +19,7 @@ $(document).ready(function() {
 	$(".inline-editable.exam-name").editable(BASE_URL + 'api/exams/edit_name.php', {
 		name : 'name',
 		tooltip   : 'Click to edit...',
+		onblur : 'submit',
 		submitdata : { 'id' : $(".inline-editable.exam-name").data("id"),
 						'csrf_token' : CSRF_TOKEN
 			}
@@ -27,6 +28,7 @@ $(document).ready(function() {
 		type : 'textarea',
 		name : 'description',
 		tooltip   : 'Click to edit...',
+		onblur : 'submit',
 		submit : 'OK',
 		cancel : 'Cancel',
 		submitdata : { 'id' : $(".inline-editable.exam-description").data("id"),
@@ -48,6 +50,7 @@ $(document).ready(function() {
 		$(this).editable(BASE_URL + 'api/exams/edit_question_statement.php', {
 			name : 'statement',
 			tooltip   : 'Click to edit...',
+			onblur : 'submit',
 			submitdata : { 'id' : $(this).data("id"),
 						   'csrf_token' : CSRF_TOKEN
 			}
@@ -58,6 +61,7 @@ $(document).ready(function() {
 		$(this).editable(BASE_URL + 'api/exams/edit_answer_text.php', {
 			name : 'text',
 			tooltip   : 'Click to edit...',
+			onblur : 'submit',
 			submitdata : { 'id' : $(this).data("id"),
 						   'csrf_token' : CSRF_TOKEN
 			}
