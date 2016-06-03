@@ -35,7 +35,7 @@
 								<div class="col-md-10">
 									<datetime class="list-group-item-text">{$attempt.starttime} - {$attempt.endtime}</datetime>
 									<br/>
-									<a href="../../pages/statistics.php">Review</a>
+									<a href="../../pages/exams/exam_taken.php?attemptid={$attempt.id}">Review</a>
 								</div>
 								<div class="col-md-2 text-right">
 									<br/><p class="list-group-item-text">Grade: {$attempt.finalscore} / {$exam.maxscore}</p>
