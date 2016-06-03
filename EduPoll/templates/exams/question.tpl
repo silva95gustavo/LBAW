@@ -7,7 +7,7 @@
 				</div>
 				<div class="col-md-6 text-right">
 					<span class="icon-clickable">
-						<i class="fa fa-trash-o" data-questionid="{$examElement.id}" data-toggle="modal" data-target="#confirmationModalDeleteQuestion"></i>
+						<i class="fa fa-trash-o" data-questionid="{$question.id}" data-toggle="modal" data-target="#confirmationModalDeleteQuestion"></i>
 					</span>
 				</div>
 			</div>
