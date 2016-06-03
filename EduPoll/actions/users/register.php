@@ -56,4 +56,3 @@ $_SESSION ['success_messages'] [] = 'User was registered successfully';
 header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 
 ?>
->>>>>>> master
