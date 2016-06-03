@@ -25,7 +25,7 @@
 						<div class="list-group-item">
 							<div class="row">
 								<div class="col-md-12">
-									<a href="statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
+									<a href="statistics.php?examid={$exam.id}"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
 								</div>
 
 								<div class="col-md-12">
