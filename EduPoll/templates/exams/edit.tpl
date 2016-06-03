@@ -61,6 +61,27 @@
 						</div>
 					</div>
 					
+					<div id="modalCreateQuestion" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Create question</h4>
+								</div>
+								<div class="modal-body">
+									<form>
+										<label>Question statement: </label>
+										<input type="text" name="statement" class="form-control">
+									</form>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_create_question" class="btn btn-success">Create</button>
+									<button type="button" id="no_create_question" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModalDeleteCategory" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -162,7 +183,7 @@
 										<div class="col-md-6"><strong class="inline-editable category-name" data-id="{$examElement.id}">{$examElement.name|escape:'html'}</strong></div>
 										<div class="col-md-6 text-right">
 											<span class="icon-clickable">
-												<i class="fa fa-plus"></i>
+												<i class="fa fa-plus" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#modalCreateQuestion"></i>
 											</span>
 											<span class="icon-clickable">
 												<i class="fa fa-trash-o" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#confirmationModalDeleteCategory"></i>
