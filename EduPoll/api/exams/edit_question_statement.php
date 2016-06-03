@@ -24,7 +24,7 @@ if (!$exam) {
 	exit;
 }
 if ($exam ['ownerid'] !== $userInfo ['id']) {
-	if (!isExamManager($userInfo['id'], $_POST['id'])) {
+	if (!isExamManager($userInfo['id'], $exam['id'])) {
 		http_response_code(403);
 		echo 'Only the owner/manager of an exam may edit a question statement.';
 		exit;
