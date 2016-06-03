@@ -11,7 +11,7 @@ $(document).ready( function() {
 					if (ui.item) {
 						this.value = ui.item.label;
 						$('#inputGroupToManage').data('id', ui.item.id);
-						window.location.href = BASE_URL + "pages/admin/groups.php?page=" + ui.item.id	;
+						window.location.href = BASE_URL + "pages/admin/groups.php?groupID=" + ui.item.id	;
 					}
 				}			
 			});

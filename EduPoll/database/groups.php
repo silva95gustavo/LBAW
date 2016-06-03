@@ -24,4 +24,19 @@ function searchGroupFTS($data) {
     return $stmt->fetchAll();
   }
 
+  function getGroups(){
+  	global $conn;
+    $stmt = $conn->prepare("SELECT id,name FROM StudentGroup");
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+  function getGroupData($groupID){
+  	global $conn;
+    $stmt = $conn->prepare("SELECT id,name FROM StudentGroup WHERE id = ?");
+    $stmt->execute(array($groupID));
+    return $stmt->fetchAll();
+  }
+
+
 ?>
