@@ -60,9 +60,6 @@ function validateJSON($json_object)
 				registerUser($student["name"], $student["email"], $student["gender"], $password, 2 );
 			}
 			catch ( PDOException $e ) {
-				if (strpos ( $e->getMessage (), 'users_pkey' ) !== false) {
-					$StudentsError += 1;
-				} else
 				$StudentsError += 1;
 				continue;
 			}
@@ -108,9 +105,6 @@ function validateJSON($json_object)
 				registerUser($teacher["name"], $teacher["email"], $teacher["gender"], $password, 1 );
 			}
 			catch ( PDOException $e ) {
-				if (strpos ( $e->getMessage (), 'users_pkey' ) !== false) {
-					$TeacherError += 1;
-				} else
 				$TeacherError += 1;
 				continue;
 			}
@@ -162,6 +156,4 @@ else
 	header ( 'Location: '  . $_SERVER ['HTTP_REFERER']);
 	die ();
 }
-
-
 ?>
