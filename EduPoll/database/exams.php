@@ -170,6 +170,13 @@ function editAnswerText($answerID, $newText) {
 	return $stmt->fetch();
 }
 
+function editAnswerScore($answerID, $newScore) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE answer SET score = ? WHERE id = ? RETURNING score");
+	$stmt->execute(array($newScore, $answerID));
+	return $stmt->fetch();
+}
+
 function createAnswer($questionID, $text, $score = 0) {
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO answer

@@ -32,6 +32,9 @@ div.main div.container {
 	padding: 0 0.5em;
 	width: 100%;
 }
+.inline-editable.no-full-width {
+	width: auto;
+}
 .inline-editable:hover {
 	display: inline-block;
 	position: relative;
@@ -127,4 +130,16 @@ div.jumbotron h2 {
 
 a .list-group-item-heading{
 	display:inline-block
+}
+.answer-score.no-full-width {
+	width: 3em;
+}
+.answer-score.positive {
+	color: green;
+}
+.answer-score.neutral {
+	color: black;
+}
+.answer-score.negative {
+	color: red;
 }
