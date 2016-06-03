@@ -113,3 +113,14 @@ div.jumbotron h2 {
 .icon-clickable:hover {
 	color: #AAA;
 }
+
+/* ADD OPTION */
+.add-answer .fa-plus {
+	position:relative;
+	left: 1em;
+	width: 0;
+	color: #AAA;
+}
+.add-answer input {
+	padding-left: 2em;
+}
