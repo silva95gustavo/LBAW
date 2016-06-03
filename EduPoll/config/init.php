@@ -1,6 +1,6 @@
 <?php
 //session_set_cookie_params(3600, '/~lbaw1565/proto'); // FIXME
-session_set_cookie_params(3600, '/~up201305803/EduPoll'); // FIXME
+session_set_cookie_params(3600, '/~up201305803/EduPoll'); // FIXME 
 session_start();
 error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 

@@ -12,7 +12,8 @@ $(document).ready(
 					type : 'POST',
 					url : "../../actions/users/delete.php",
 					data : {
-						id : userId
+						id : userId,
+						csrf_token : CSRF_TOKEN
 					},
 					success : function() {
 						$('tr#' + userId).css('background-color','#FFF37F');

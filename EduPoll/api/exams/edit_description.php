@@ -11,6 +11,12 @@ if (! isLoggedIn ()) {
 	exit;
 }
 
+if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
+	$_SESSION ['error_messages'] [] = 'CSRF token missing.';
+	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
+	die ();
+}
+
 $exam = getExam($_POST['id']);
 if (!$exam) {
 	http_response_code(400);

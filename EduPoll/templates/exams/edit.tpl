@@ -1,6 +1,7 @@
 {include file='common/header.tpl'}
 {include file='common/menu.tpl'}
 
+	<div style="display: none;" class="exam-id" examid={$exam.id}></div>
 	<div class="container-fluid">
 		<div class="row">
 			{include file='common/sidebar.tpl'}
@@ -32,6 +33,7 @@
 									<label><strong>Question:</strong></label>
 									<input type="text" class="form-control">
 									<form>
+										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 										<div class="radio">
 											<label><input type="radio" name="optradio1">Option 1</label>
 										</div>
@@ -62,6 +64,36 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModalAddManager" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to add this user as manager?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_manager" class="btn btn-success">Yes</button>
+									<button type="button" id="no_manager" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalRemoveManager" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to remove this manager?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_rem_manager" class="btn btn-success">Yes</button>
+									<button type="button" id="no_rem_manager" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModal" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -85,10 +117,39 @@
 									<h2 class="inline-editable exam-name" name="name" data-id="{$exam.id}">{$exam.name|escape:'html'}</h2>
 								</div>
 								<div class="exam-description-container">
-									<h3 class="inline-editable exam-description" name="description" data-id="{$exam.id}">{$exam.description|escape:'html'|nl2br}</h2>
+									<h3 class="inline-editable exam-description" name="description" data-id="{$exam.id}">{$exam.description|escape:'html'|nl2br}</h3>
 								</div>
 							</div>
 						</div>
+						
+  						<div id="demo" class="collapse">
+  							{if $isOwner}
+  								<form class="form-add-manager">
+									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+
+									<input type="text" id="inputUserToAdd" class="form-control" placeholder="User name or email"
+										required autofocus>
+								</form>
+								<br/>
+  							{/if}
+  							<ul class="list-group">
+  								{if $isOwner}  								
+  									{if sizeof($managers) == 0}
+  										<li class="list-group-item">There are no managers for this exam</li>
+  									{else}
+  										{for $manager=0 to sizeof($managers)-1}
+  											<a href="#" class="list-group-item removable_manager" managerid={$managers[$manager]['id']}>{$managers[$manager]['name']}</a>
+  										{/for}
+  									{/if}
+  								{else}
+  									<li class="list-group-item">{$owner['name']} (owner)</li>
+  									{for $manager=0 to sizeof($managers)-1}
+  										<li class="list-group-item">{$managers[$manager]['name']}</li>
+  									{/for}
+  								{/if}
+          					</ul>
+  						</div>
+						<a href="#demo" class="btn btn-info show-managers" data-toggle="collapse">Show/hide managers</a>
 	
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
@@ -137,6 +198,7 @@
 									<div class="panel-body">
 										<p><strong>Question: </strong>First question. Select the correct option:</p>
 										<form>
+											<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 											<div class="radio disabled">
 												<label><input type="radio" name="optradio1" checked="checked">Option 1</label>
 											</div>
@@ -306,5 +368,6 @@
 		</div>
 	</div>
 	<!-- /container -->
+	<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
 	<script src="{$BASE_URL}javascript/exams/edit.js"></script>
 {include file='common/footer.tpl'}
