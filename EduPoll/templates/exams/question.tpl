@@ -16,15 +16,15 @@
 			<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 			
 			{foreach $question.answers as $answer}
-			<div class="radio disabled">
-				<label>
+			<div class="radio disabled answer">
+				<label class="answer">
 					<input type="radio" name="optradio1" checked="checked">
 					<div class="inline-editable answer-text" name="text" data-id="{$answer.id}">{$answer.text}</div>
 				</label>
 			</div>
 			{/foreach}
 			
-			<form class="add-answer">
+			<form class="add-answer" data-id={$answer.id}>
 				<i class="fa fa-plus"></i>
 				<input type="hidden" name="questionid" value="{$question.id}"/>
 				<input type="text" name="text" placeholder="Add answer"/>

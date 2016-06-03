@@ -170,12 +170,13 @@ $(document).ready(function() {
 	})
 	
 	$('form.add-answer').submit(function (e) {
-		var addAnswerInput = $(this);
+		var addAnswerForm = $(this);
 	    var $inputs = $(this).find(":input");
 	    var values = {};
 	    $inputs.each(function() {
 	        values[this.name] = $(this).val();
 	    });
+	    if (values["text"].length <= 0) return false;
 		$.ajax({
 			type: 'POST',
 			url: "../../api/exams/create_answer.php",
@@ -186,16 +187,16 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 				var html =
-				"<div class=\"radio disabled\">" +
-					"<label>" +
+				"<div class=\"radio disabled answer\">" +
+					"<label class=\"answer\">" +
 						"<input type=\"radio\" name=\"optradio1\" checked=\"checked\">" +
-						"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"{$answer.id}\">" + data + "</div>" +
+						"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"" + data + "\">" + values["text"] + "</div>" +
 					"</label>" +
 				"</div>";
-				addAnswerInput.before(html);
+				addAnswerForm.before(html);
 			},
-			error: function () {
-				//location.reload();
+			error: function (data) {
+				console.error("Error creating answer: " + data);
 			}
 		});
 		return false;

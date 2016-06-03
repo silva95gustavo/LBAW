@@ -34,12 +34,11 @@ if ($exam ['ownerid'] !== $userInfo ['id']) {
 
 try {
 	$reply = createAnswer($_POST['id'], $_POST['text']);
+	http_response_code(200);
+	echo json_encode($reply["id"]);
 } catch (PDOException $e) {
 	http_response_code(400);
 	echo 'Error adding answer: ' . $e->getMessage();
 	exit;
 }
-
-http_response_code(200);
-echo json_encode($_POST['text']);
 ?>
