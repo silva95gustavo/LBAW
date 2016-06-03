@@ -17,7 +17,15 @@
 			
 			{foreach $question.answers as $answer}
 			<div class="radio disabled answer">
-				<label class="answer">
+				{if $answer.score > 0}
+					{assign scoreType positive}
+				{else if $answer.score < 0}
+					{assign scoreType negative}
+				{else}
+					{assign scoreType neutral}
+				{/if}
+				<div class="inline-editable no-full-width answer-score {$scoreType}" type="number" name="score" data-id="{$answer.id}">{$answer.score}</div>
+				<label>
 					<input type="radio" name="optradio1" checked="checked">
 					<div class="inline-editable answer-text" name="text" data-id="{$answer.id}">{$answer.text|escape:'html'}</div>
 				</label>

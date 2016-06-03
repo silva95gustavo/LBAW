@@ -237,4 +237,33 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+	
+	$(".inline-editable.answer-score").each(function() {
+		$(this).editable(BASE_URL + 'api/exams/edit_answer_score.php', {
+			name : 'score',
+			tooltip   : 'Click to edit...',
+			onblur : 'submit',
+			submitdata : { 'id' : $(this).data("id"),
+						   'csrf_token' : CSRF_TOKEN
+			},
+			callback: function(value,settings) {
+				$(this).text(value);
+				$(this).trigger("change");
+			},
+			data: function(value,settings) {
+				return $('<div/>').html(value).text();
+			}
+		});
+	});
+	
+	$('.answer-score').change(function (e) {
+		var val = parseFloat($(this).text());
+		$(this).removeClass("positive neutral negative");
+		if (val > 0)
+			$(this).addClass("positive");
+		else if (val < 0)
+			$(this).addClass("negative");
+		else
+			$(this).addClass("neutral");
+	});
 });
