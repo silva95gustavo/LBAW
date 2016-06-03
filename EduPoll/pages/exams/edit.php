@@ -31,6 +31,7 @@ if(!isset($_GET['id'])) {
 }
 
 $exam = getExam($examID);
+$managers = [];
 if ($exam)
 {
 	$exam['id'] = $examID;
@@ -38,9 +39,9 @@ if ($exam)
 	$isOwner = $exam['ownerid'] === $userInfo['id'];
 	$smarty->assign ( 'isOwner', $isOwner);
 	if($isOwner) {
-		$smarty->assign('managers', getExamManagers($examID));
+		$managers = getExamManagers($examID);
 	} else {
-		$smarty->assign('managers', getOtherExamManagers($examID, $userInfo['id']));
+		$managers =getOtherExamManagers($examID, $userInfo['id']);
 		$smarty->assign('owner', getExamOwner($examID)[0]);
 	}
 	
@@ -66,6 +67,15 @@ if ($exam)
 	
 	$smarty->assign('examElements', $examElements);
 }
+
+$smarty->assign('managers', $managers);
+
+if(!in_array($userInfo['id'],$managers) && !$isOwner)
+	{
+	$_SESSION ['error_messages'] [] = "You don't have permission to edit this exam";
+	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
+	die ();
+	}
 
 prepareDate($smarty);
 

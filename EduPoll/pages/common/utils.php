@@ -41,6 +41,27 @@ function validateCSRFToken($token) {
 	return $_SESSION['csrf_token'] == $token;
 }
 
+function generatePassword(){
+	// password generation
+	$chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	$count = mb_strlen ( $chars );
+	for($i = 0, $password = ''; $i < $passwordLength; $i ++) {
+		$index = rand ( 0, $count - 1 );
+		$password .= mb_substr ( $chars, $index, 1 );
+	}
+	return $password;
+}
+
+function emailSender($name,$password,$email){
+	// The message
+	$message = "Edupoll Sign Up" . "\r\nHello, " . $name . "!" . "\r\nYou have been registered on Edupoll's platform." . "\r\nYour Password is: " . $password . "\r\nGood Luck with your exams!";
+	sendEmail ( $email, $message );
+}
+
+function registerUser($name, $email, $gender, $password, $type ){
+	createUser( $name, $email, $gender, $password, $type );
+}
+
 if (isLoggedIn())
 	$userInfo = getUserInfo($_SESSION['userID']);
 ?>
