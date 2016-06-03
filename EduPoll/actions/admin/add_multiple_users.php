@@ -75,10 +75,6 @@ function validateJSON($json_object)
 		$teacherN = -1;
 		foreach ($json_object['teachers'] as $teacher){
 			$teacherN += 1;
-			if(sizeof($teacher) > 3){
-				$_SESSION ['error_messages'] [] = "Too many parameters for Teacher " . $teacherN . ".";
-				continue;
-			}
 			if(!($teacher["name"])){
 				$_SESSION ['error_messages'] [] = "Name of Teacher " . $teacherN . " does not exist.";
 				continue;
@@ -119,6 +115,30 @@ function validateJSON($json_object)
 			$TeachersRegistered += 1;
 		}
 	$_SESSION ['success_messages'] [] = $TeachersRegistered . " Teachers registered.";
+	}
+	if($json_object['categories'])
+	{
+		foreach ($json_object['categories'] as $category) {
+			if($category['name'])
+			{
+				creategroup($category['name']);
+			}
+			else
+			{
+				$_SESSION ['error_messages'] [] = "Group without a name.";
+				continue;
+			}
+			foreach ($category['users'] as $user) {
+				if(!filter_var($user, FILTER_VALIDATE_EMAIL)){
+					addUserToGroup($category['name'],$user);
+				}
+				else
+				{
+					$_SESSION ['error_messages'] [] = "Exam not Valid.";
+					continue;
+				}
+			}
+		}
 	}
 }
 
