@@ -116,6 +116,15 @@ div.jumbotron h2 {
 .icon-clickable:hover {
 	color: #AAA;
 }
+.answer input[type="radio"][disabled] {
+	cursor: default;
+}
+.answer-text[disabled] {
+	cursor: default;
+}
+.answer [disabled] {
+	cursor: default;
+}
 
 /* QUESTIONS */
 .add-answer .fa-plus {

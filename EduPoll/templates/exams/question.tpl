@@ -16,7 +16,7 @@
 			<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 			
 			{foreach $question.answers as $answer}
-			<div class="radio disabled answer">
+			<div class="radio answer">
 				{if $answer.score > 0}
 					{assign scoreType positive}
 				{else if $answer.score < 0}
@@ -25,9 +25,9 @@
 					{assign scoreType neutral}
 				{/if}
 				<div class="inline-editable no-full-width answer-score {$scoreType}" type="number" name="score" data-id="{$answer.id}">{$answer.score}</div>
-				<label>
-					<input type="radio" name="optradio1" checked="checked">
-					<div class="inline-editable answer-text" name="text" data-id="{$answer.id}">{$answer.text|escape:'html'}</div>
+				<label{if $isEditing} disabled{/if}>
+					<input type="radio" name="optradio1"{if $isEditing} disabled{/if}>
+					<div class="inline-editable answer-text" name="text" data-id="{$answer.id}"{if $isEditing} disabled{/if}>{$answer.text|escape:'html'}</div>
 				</label>
 			</div>
 			{/foreach}
