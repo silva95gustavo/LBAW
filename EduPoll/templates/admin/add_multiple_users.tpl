@@ -25,9 +25,10 @@
 								information</h3>
 						</div>
 						<div class="panel-body">
-							<form class="form-importfile">
-								<input type="file">
-								<br/><button type="button" class="btn btn-primary">Submit</button>
+							<form class="form-importfile" action="../../actions/admin/add_multiple_users.php" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+								<input type="file" name="json_file" id="json_file">
+								<br/><button type="submit" name="json_file" class="btn btn-primary">Submit</button>
 							</form>
 						</div>
 					</div>

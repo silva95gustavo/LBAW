@@ -88,3 +88,20 @@ div.jumbotron h2 {
 .well {
 	border-radius: 0;
 }
+
+/* EDIT EXAM */
+.show-managers {
+	margin: 2rem 0 2rem 1rem;
+}
+
+#examAvailable {
+	display:inline-block;
+}
+
+#examAvailableParent {
+    text-align: center;
+}
+
+a .list-group-item-heading{
+	display:inline-block
+}

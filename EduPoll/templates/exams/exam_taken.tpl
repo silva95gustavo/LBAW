@@ -42,6 +42,7 @@
 									congue fermentum, mauris ante sollicitudin metus, vitae gravida
 									leo sem et nunc.</p>
 								<form>
+									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 									<div class="checkbox">
 										<label class="radio-inline"><input type="radio"
 											name="optradio" disabled>Option 1</label>
@@ -77,6 +78,7 @@
 									congue fermentum, mauris ante sollicitudin metus, vitae gravida
 									leo sem et nunc.</p>
 								<form>
+									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 									<div class="checkbox">
 										<label class="radio-inline"><input type="radio"
 											name="optradio" disabled>Option 1</label>
@@ -112,6 +114,7 @@
 									congue fermentum, mauris ante sollicitudin metus, vitae gravida
 									leo sem et nunc.</p>
 								<form>
+									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 									<div class="checkbox">
 										<label class="radio-inline"><input type="radio"
 											name="optradio" disabled>Option 1</label>
@@ -147,6 +150,7 @@
 									congue fermentum, mauris ante sollicitudin metus, vitae gravida
 									leo sem et nunc.</p>
 								<form>
+									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 									<div class="checkbox">
 										<label class="radio-inline"><input type="radio"
 											name="optradio" disabled>Option 1</label>
