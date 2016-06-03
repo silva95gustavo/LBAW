@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	$('input[type="checkbox"].examType').click(function() {
-		if ($(this).is(':checked')) {
+	$("[name='privacy']").on('switchChange.bootstrapSwitch', function (event, state) {
+		if (!state) { //true -> Public   false -> Private
 			$('.examTypeWarning').show(200);
 		} else {
 			$('.examTypeWarning').hide(200);
