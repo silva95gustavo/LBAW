@@ -32,6 +32,63 @@ function getExam($examID) {
 	return $stmt->fetch();
 }
 
+function getExamStats($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT COUNT(id) AS attempts, AVG(finalscore) AS averagegrade
+								FROM attempt
+								WHERE examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetch();
+}
+
+function getExamApprovals($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT *
+								FROM attempt
+								WHERE examid = ? AND finalscore >= 9.5");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getExamQuestions($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, statement
+								FROM question
+								WHERE (category IS NOT NULL AND category IN (SELECT id FROM examelement WHERE examid = ?))
+									OR (id IN (SELECT id FROM examelement WHERE examid = ?))");
+	$stmt->execute(array($examID, $examID));
+	return $stmt->fetchAll();
+}
+
+function getExamStudentGrades($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT attempt.id AS attemptid, registereduser.id AS userid, registereduser.name AS username, finalscore
+							FROM attempt INNER JOIN registereduser ON registereduser.id = attempt.userid
+							WHERE attempt.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getQuestion($questionID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT *
+								FROM question
+								WHERE id = ?");
+	$stmt->execute(array($questionID));
+	return $stmt->fetch();
+}
+
+function getQuestionAverageScore($questionID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT question.id AS questionid, question.statement AS statement, AVG(answer.score) AS score, COUNT(answer.id) AS answers
+								FROM questionattempt INNER JOIN question ON questionattempt.questionid = question.id
+									INNER JOIN answer ON answerid = answer.id
+								WHERE question.id = ?
+								GROUP BY question.id, question.statement");
+	$stmt->execute(array($questionID));
+	return $stmt->fetch();
+}
+
 function getOwnedAndManagedExams($userID) {
 	global $conn;
 	$stmt = $conn->prepare("(SELECT id, name, description, startTime, endTime, openToPublic, ownerID FROM Exam WHERE ownerID = ? OR id IN

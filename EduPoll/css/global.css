@@ -124,3 +124,7 @@ div.jumbotron h2 {
 .add-answer input {
 	padding-left: 2em;
 }
+
+a .list-group-item-heading{
+	display:inline-block
+}
