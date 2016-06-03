@@ -15,54 +15,6 @@
 						<li><a href="my_exams.php">My Exams</a></li>
 						<li class="active">Edit Exam</li>
 					</ol>
-
-					<!-- Trigger the modal with a button -->
-
-					<!-- Modal -->
-					<div id="editQuestionModal" class="modal fade" role="dialog">
-						<div class="modal-dialog">
-
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title"><strong>Create/Edit Question</strong></h4>
-								</div>
-								<div class="modal-body">
-									<p><strong>Category: </strong> Category A</p>
-									<label><strong>Question:</strong></label>
-									<input type="text" class="form-control">
-									<form>
-										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 1</label>
-										</div>
-										<input type="text" class="form-control">
-										
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 2</label>
-										</div>
-										<input type="text" class="form-control">
-										
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 3</label>
-										</div>
-										<input type="text" class="form-control">
-										
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 4</label>
-										</div>
-										<input type="text" class="form-control">
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div>
-
-						</div>
-					</div>
 					
 					<div id="confirmationModalAddManager" class="modal fade" role="dialog">
 						<div class="modal-dialog">
