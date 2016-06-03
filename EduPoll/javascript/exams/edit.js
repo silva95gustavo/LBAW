@@ -183,7 +183,7 @@ $(document).ready(function() {
 			data: { question: questionId, csrf_token: CSRF_TOKEN },
 			success: function (data) {
 				$('#confirmationModalDeleteQuestion').modal('hide');
-				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+				window.location.reload();
 			},
 			error: function () {
 				location.reload();
