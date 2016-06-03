@@ -1,6 +1,7 @@
 <?php
 require_once ('../../config/init.php');
 require_once ('../../database/users.php');
+require_once ('../../frameworks/PHPMailer/PHPMailerAutoload.php');
 
 $passwordLength = 8;
 
