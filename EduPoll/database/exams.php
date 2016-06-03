@@ -103,16 +103,16 @@ function editAnswerText($answerID, $newText) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE answer SET text = ? WHERE id = ? RETURNING text");
 	$stmt->execute(array($newText, $answerID));
-	return $stmt->fetchAll();
+	return $stmt->fetch();
 }
 
 function createAnswer($questionID, $text, $score = 0) {
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO answer
    		(questionid, text, score)
-   		VALUES (:questionid, :text, :score)");
+   		VALUES (:questionid, :text, :score) RETURNING id");
 	$stmt->execute(array($questionID, $text, $score));
-	return $stmt->fetchAll();
+	return $stmt->fetch();
 }
 
 function deleteExam($examID) {
