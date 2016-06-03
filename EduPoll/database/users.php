@@ -98,4 +98,11 @@
                                 WHERE id = ?");
     return $stmt->execute(array($newEmail, $userID));
   }
+  
+  function getUserByEmail($email) {
+  	global $conn;
+    $stmt = $conn->prepare("SELECT id, name, email, type FROM RegisteredUser WHERE email = ?");
+    $stmt->execute(array($email));
+    return $stmt->fetchAll();
+  }
 ?>
