@@ -25,7 +25,7 @@ function createExam($ownerID, $name, $description, $startTime, $endTime, $open, 
 
 function getExam($examID) {
 	global $conn;
-	$stmt = $conn->prepare("SELECT name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
    		FROM exam
    		WHERE id = ?");
 	$stmt->execute(array($examID));
@@ -103,6 +103,15 @@ function editAnswerText($answerID, $newText) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE answer SET text = ? WHERE id = ? RETURNING text");
 	$stmt->execute(array($newText, $answerID));
+	return $stmt->fetchAll();
+}
+
+function createAnswer($questionID, $text, $score = 0) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO answer
+   		(questionid, text, score)
+   		VALUES (:questionid, :text, :score)");
+	$stmt->execute(array($questionID, $text, $score));
 	return $stmt->fetchAll();
 }
 
@@ -280,7 +289,7 @@ function deleteQuestion($questionID)
 function getExamFromExamElement($examElementID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT examid AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+	$stmt = $conn->prepare("SELECT exam.id AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
 			FROM examelement INNER JOIN exam ON exam.id = examelement.examid
 			WHERE examelement.id = ?");
 	$stmt->execute(array($examElementID));
@@ -289,7 +298,7 @@ function getExamFromExamElement($examElementID)
 function getExamFromAnswer($answerID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT examid AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+	$stmt = $conn->prepare("SELECT exam.id AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
 			FROM answer
 			INNER JOIN examelement ON answer.questionid = examelement.id
 			INNER JOIN exam ON exam.id = examelement.examid

@@ -168,4 +168,36 @@ $(document).ready(function() {
 			}
 		});
 	})
+	
+	$('form.add-answer').submit(function (e) {
+		var addAnswerInput = $(this);
+	    var $inputs = $(this).find(":input");
+	    var values = {};
+	    $inputs.each(function() {
+	        values[this.name] = $(this).val();
+	    });
+		$.ajax({
+			type: 'POST',
+			url: "../../api/exams/create_answer.php",
+			data: {
+				id: values["questionid"],
+				text: values["text"],
+				csrf_token: CSRF_TOKEN
+			},
+			success: function (data) {
+				var html =
+				"<div class=\"radio disabled\">" +
+					"<label>" +
+						"<input type=\"radio\" name=\"optradio1\" checked=\"checked\">" +
+						"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"{$answer.id}\">" + data + "</div>" +
+					"</label>" +
+				"</div>";
+				addAnswerInput.before(html);
+			},
+			error: function () {
+				//location.reload();
+			}
+		});
+		return false;
+	});
 });
