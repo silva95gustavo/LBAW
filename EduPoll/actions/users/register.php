@@ -57,9 +57,10 @@ $message = "Edupoll Sign Up"
 . "\r\nYou have been registered on Edupoll's platform." 
 . "\r\nYour Password is: " . $password 
 . "\r\nGood Luck with your exams!";
-sendEmail($email, $message);
+$result = sendEmail($email, $message);
 
-$_SESSION['success_messages'][] = 'User was registered successfully';
+$_SESSION['success_messages'][] = 'User successfully registered';
 header("Location: " . $_SERVER['HTTP_REFERER']);
+//'User was registered successfully'
 
 ?>
