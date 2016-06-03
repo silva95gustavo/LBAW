@@ -8,10 +8,11 @@ function creategroup($groupName) {
 
 function addUserToGroup($groupName,$email){
 	global $conn;
-	$stmt = $conn->prepare("INSERT INTO StudentGroupAssoc(groupID,studentID) (SELECT groupID,studentID
-		FROM RegisteredUser,StudentGroup
-		WHERE (StudentGroup.id = groupID AND StudentGroup.name = ?) AND
-		(RegisteredUser.id = studentID AND RegisteredUser.email = ?)
+	$stmt = $conn->prepare("INSERT INTO StudentGroupAssoc(groupID,studentID) 
+		(SELECT StudentGroup.id,RegisteredUser.id
+		FROM RegisteredUser, StudentGroup
+		WHERE (StudentGroup.name = ?) AND
+		(RegisteredUser.email = ?)
 		)");
 	$stmt->execute(array($groupName,$email));
 }
