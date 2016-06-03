@@ -1,5 +1,4 @@
 var userId = null;
-
 $(document).ready(
 		function() {
 			$('#confirmationModal').on('show.bs.modal', function(e) {
@@ -17,8 +16,11 @@ $(document).ready(
 						csrf_token : CSRF_TOKEN
 					},
 					success : function() {
-						$('tr#' + userId).remove();
+						$('tr#' + userId).css('background-color','#FFF37F');
 						$('#confirmationModal').modal('hide');
+						$('tr#' + userId).hide(1000, function(){
+							$('tr#' + userId).remove();
+						});
 					},
 					error : function(xhr, status, error) {
 						console.log("Could not remove user: " + xhr.responseText);

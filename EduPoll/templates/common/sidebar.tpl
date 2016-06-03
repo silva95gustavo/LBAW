@@ -15,10 +15,7 @@
 			</ul>
 
 			<ul class="calendar-days">
-				{for $foo=0 to $firstDay-1}
-    				<li></li>
-				{/for}
-				{for $foo=1 to $monthDays}<li>{if $foo eq $day}<span class="calendar-day-active">{$foo}</span>{else}{$foo}{/if}</li>{/for}
+				{for $foo=0 to $firstDay-1}<li> </li>{/for}{for $foo=1 to $monthDays}<li>{if $foo eq $day}<span class="calendar-day-active">{$foo}</span>{else}{$foo}{/if}</li>{/for}
 			</ul>
 		</div>
 		

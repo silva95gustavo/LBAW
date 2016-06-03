@@ -27,7 +27,7 @@
 					<br/>
 
 					<div class="row">
-						<div class='col-md-2'>
+						<div class='col-md-3'>
 							<div class="form-group">
 								<div class='input-group date' id='startDate'>
 									<input type='text' class="form-control" placeholder="Exam Starts At" name='startDate'/>
@@ -37,7 +37,7 @@
 								</div>
 							</div>
 						</div>
-						<div class='col-md-2'>
+						<div class='col-md-3'>
 							<div class="form-group">
 								<div class='input-group date' id='endDate'>
 									<input type='text' class="form-control" placeholder="Exam Ends At" name="endDate"/>
@@ -56,7 +56,7 @@
 
 					{if !isStudent()}
 					<label><strong>Privacy:</strong></label>
-					<input type="checkbox" name="privacy" data-on-text="Public" data-off-text="Private" checked>
+					<input type="checkbox" class="examType" name="privacy" data-on-text="Public" data-off-text="Private" checked>
 
 					<div class="alert alert-warning examTypeWarning" role="alert">
 						<strong>Warning!</strong> Closed exams can only be seen by users you later invite to them.
