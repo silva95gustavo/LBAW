@@ -13,6 +13,20 @@
 						<li><a href="main.php">Home</a></li>
 						<li class="active">Manage Groups</li>
 					</ol>
+
+					<form class="form-manage-group">
+						<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+						<h2 class="form-signin-heading">Manage Groups</h2>
+
+						<label for="inputGroupToManage" class="sr-only">Full name</label>
+						<input type="text" id="inputGroupToManage" class="form-control" placeholder="Group Name"
+							required autofocus>
+						<br/>
+					</form>
+				<br/><br/>
+
+
+					<br><br><br><br><br>
 					
 					<h2>Group list:</h2>
 
@@ -250,3 +264,6 @@
 	</div>
 	<!-- /container -->
 {include file='common/footer.tpl'}
+<script src="{$BASE_URL}javascript/admin/manage_groups.js"></script>
+<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
