@@ -79,6 +79,7 @@ $smarty->assign('managers', $managers);
 
 prepareDate($smarty);
 
+$smarty->assign ( 'isEditing', true );
 $smarty->assign ( 'name', $userInfo['name'] );
 $smarty->display ( 'exams/edit.tpl' );
 ?>
