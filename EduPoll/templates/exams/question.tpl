@@ -3,7 +3,7 @@
 		<div class="panel-heading">
 			<div class="row">
 				<div class="col-md-6 question-statement-container">
-					<div class="inline-editable question-statement" name="statement" data-id="{$question.id}">{$question.statement}</div>
+					<div class="inline-editable question-statement" name="statement" data-id="{$question.id}">{$question.statement|escape:'html'}</div>
 				</div>
 				<div class="col-md-6 text-right">
 					<span class="icon-clickable">
@@ -19,7 +19,7 @@
 			<div class="radio disabled answer">
 				<label class="answer">
 					<input type="radio" name="optradio1" checked="checked">
-					<div class="inline-editable answer-text" name="text" data-id="{$answer.id}">{$answer.text}</div>
+					<div class="inline-editable answer-text" name="text" data-id="{$answer.id}">{$answer.text|escape:'html'}</div>
 				</label>
 			</div>
 			{/foreach}

@@ -67,6 +67,17 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	$(".inline-editable.category-name").each(function() {
+		$(this).editable(BASE_URL + 'api/exams/edit_category_name.php', {
+			name : 'name',
+			tooltip   : 'Click to edit...',
+			onblur : 'submit',
+			submitdata : { 'id' : $(this).data("id"),
+						   'csrf_token' : CSRF_TOKEN
+			}
+		});
+	});
 
 	$('#confirmationModal').on('show.bs.modal', function (e) {
 		var data = $(e.relatedTarget).data();
@@ -190,10 +201,11 @@ $(document).ready(function() {
 				"<div class=\"radio disabled answer\">" +
 					"<label class=\"answer\">" +
 						"<input type=\"radio\" name=\"optradio1\" checked=\"checked\">" +
-						"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"" + data + "\">" + values["text"] + "</div>" +
+						"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"" + data + "\">" + $("<div>").text(values["text"]).html() + "</div>" +
 					"</label>" +
 				"</div>";
 				addAnswerForm.before(html);
+				addAnswerForm.find(":input[name='text']").val("");
 			},
 			error: function (data) {
 				console.error("Error creating answer: " + data);

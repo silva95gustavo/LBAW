@@ -82,21 +82,28 @@ function editExamName($examID, $newName) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET name = ? WHERE id = ? RETURNING name");
 	$stmt->execute(array($newName, $examID));
-	return $stmt->fetchAll();
+	return $stmt->fetch();
 }
 
 function editExamDescription($examID, $newDescription) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET description = ? WHERE id = ? RETURNING description");
 	$stmt->execute(array($newDescription, $examID));
-	return $stmt->fetchAll();
+	return $stmt->fetch();
+}
+
+function editCategoryName($categoryID, $newName) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE category SET name = ? WHERE id = ? RETURNING name");
+	$stmt->execute(array($newName, $categoryID));
+	return $stmt->fetch();
 }
 
 function editQuestionStatement($questionID, $newStatement) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE question SET statement = ? WHERE id = ? RETURNING statement");
 	$stmt->execute(array($newStatement, $questionID));
-	return $stmt->fetchAll();
+	return $stmt->fetch();
 }
 
 function editAnswerText($answerID, $newText) {

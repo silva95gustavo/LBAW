@@ -120,13 +120,13 @@
   										<li class="list-group-item">There are no managers for this exam</li>
   									{else}
   										{for $manager=0 to sizeof($managers)-1}
-  											<a href="#" class="list-group-item removable_manager" managerid={$managers[$manager]['id']}>{$managers[$manager]['name']}</a>
+  											<a href="#" class="list-group-item removable_manager" managerid={$managers[$manager]['id']}>{$managers[$manager]['name']|escape:'html'}</a>
   										{/for}
   									{/if}
   								{else}
-  									<li class="list-group-item">{$owner['name']} (owner)</li>
+  									<li class="list-group-item">{$owner['name']|escape:'html'} (owner)</li>
   									{for $manager=0 to sizeof($managers)-1}
-  										<li class="list-group-item">{$managers[$manager]['name']}</li>
+  										<li class="list-group-item">{$managers[$manager]['name']|escape:'html'}</li>
   									{/for}
   								{/if}
           					</ul>
@@ -159,7 +159,7 @@
 							<div class="panel panel-info">
 								<div class="panel-heading">
 									<div class="row">
-										<div class="col-md-6"><strong>{$examElement.name}</strong></div>
+										<div class="col-md-6"><strong class="inline-editable category-name" data-id="{$examElement.id}">{$examElement.name|escape:'html'}</strong></div>
 										<div class="col-md-6 text-right">
 											<span class="icon-clickable">
 												<i class="fa fa-plus"></i>
