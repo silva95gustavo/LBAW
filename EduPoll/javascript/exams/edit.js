@@ -22,7 +22,13 @@ $(document).ready(function() {
 		onblur : 'submit',
 		submitdata : { 'id' : $(".inline-editable.exam-name").data("id"),
 						'csrf_token' : CSRF_TOKEN
-			}
+		},
+		callback: function(value,settings) {
+			$(this).text(value);
+		},
+		data: function(value,settings) {
+			return $('<div/>').html(value).text();
+		}
 	});
 	$(".inline-editable.exam-description").editable(BASE_URL + 'api/exams/edit_description.php', {
 		type : 'textarea',
@@ -53,6 +59,12 @@ $(document).ready(function() {
 			onblur : 'submit',
 			submitdata : { 'id' : $(this).data("id"),
 						   'csrf_token' : CSRF_TOKEN
+			},
+			callback: function(value,settings) {
+				$(this).text(value);
+			},
+			data: function(value,settings) {
+				return $('<div/>').html(value).text();
 			}
 		});
 	});
@@ -64,6 +76,12 @@ $(document).ready(function() {
 			onblur : 'submit',
 			submitdata : { 'id' : $(this).data("id"),
 						   'csrf_token' : CSRF_TOKEN
+			},
+			callback: function(value,settings) {
+				$(this).text(value);
+			},
+			data: function(value,settings) {
+				return $('<div/>').html(value).text();
 			}
 		});
 	});
@@ -75,6 +93,12 @@ $(document).ready(function() {
 			onblur : 'submit',
 			submitdata : { 'id' : $(this).data("id"),
 						   'csrf_token' : CSRF_TOKEN
+			},
+			callback: function(value,settings) {
+				$(this).text(value);
+			},
+			data: function(value,settings) {
+				return $('<div/>').html(value).text();
 			}
 		});
 	});
