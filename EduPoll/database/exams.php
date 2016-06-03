@@ -339,7 +339,7 @@ function getQuestionAnswers($questionID)
 	global $conn;
 	$stmt = $conn->prepare("SELECT id, text, score
    		FROM answer
-   		WHERE questionid = :questionid");
+   		WHERE questionid = :questionid ORDER BY id");
 	$stmt->execute(array($questionID));
 	return $stmt->fetchAll();
 }

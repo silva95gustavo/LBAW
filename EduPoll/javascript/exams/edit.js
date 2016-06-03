@@ -70,20 +70,7 @@ $(document).ready(function() {
 	});
 	
 	$(".inline-editable.answer-text").each(function() {
-		$(this).editable(BASE_URL + 'api/exams/edit_answer_text.php', {
-			name : 'text',
-			tooltip   : 'Click to edit...',
-			onblur : 'submit',
-			submitdata : { 'id' : $(this).data("id"),
-						   'csrf_token' : CSRF_TOKEN
-			},
-			callback: function(value,settings) {
-				$(this).text(value);
-			},
-			data: function(value,settings) {
-				return $('<div/>').html(value).text();
-			}
-		});
+		makeAnswerTextEditable($(this));
 	});
 	
 	$(".inline-editable.category-name").each(function() {
@@ -221,15 +208,24 @@ $(document).ready(function() {
 				csrf_token: CSRF_TOKEN
 			},
 			success: function (data) {
-				var html =
-				"<div class=\"radio disabled answer\">" +
+				var el =
+				$("<div class=\"radio disabled answer\">" +
+					"<div class=\"inline-editable no-full-width answer-score neutral\" type=\"number\" name=\"score\" data-id=\"" + data + "\">0</div> " +
 					"<label class=\"answer\">" +
 						"<input type=\"radio\" name=\"optradio1\" checked=\"checked\">" +
 						"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"" + data + "\">" + $("<div>").text(values["text"]).html() + "</div>" +
 					"</label>" +
-				"</div>";
-				addAnswerForm.before(html);
+				"</div>");
+				addAnswerForm.before(el);
 				addAnswerForm.find(":input[name='text']").val("");
+				makeAnswerTextEditable(el.find(".inline-editable.answer-text"));
+				var elScore = el.find(".inline-editable.answer-score");
+				makeAnswerScoreEditable(elScore);
+				console.log(elScore);
+				elScore.change(function() {
+					answerScoreOnChange(elScore);
+				});
+				elScore.trigger("change");
 			},
 			error: function (data) {
 				console.error("Error creating answer: " + data);
@@ -239,31 +235,56 @@ $(document).ready(function() {
 	});
 	
 	$(".inline-editable.answer-score").each(function() {
-		$(this).editable(BASE_URL + 'api/exams/edit_answer_score.php', {
-			name : 'score',
-			tooltip   : 'Click to edit...',
-			onblur : 'submit',
-			submitdata : { 'id' : $(this).data("id"),
-						   'csrf_token' : CSRF_TOKEN
-			},
-			callback: function(value,settings) {
-				$(this).text(value);
-				$(this).trigger("change");
-			},
-			data: function(value,settings) {
-				return $('<div/>').html(value).text();
-			}
-		});
+		makeAnswerScoreEditable($(this));
 	});
 	
 	$('.answer-score').change(function (e) {
-		var val = parseFloat($(this).text());
-		$(this).removeClass("positive neutral negative");
-		if (val > 0)
-			$(this).addClass("positive");
-		else if (val < 0)
-			$(this).addClass("negative");
-		else
-			$(this).addClass("neutral");
+		answerScoreOnChange($(this));
 	});
 });
+
+function makeAnswerTextEditable(jThis) {
+	jThis.editable(BASE_URL + 'api/exams/edit_answer_text.php', {
+		name : 'text',
+		tooltip   : 'Click to edit...',
+		onblur : 'submit',
+		submitdata : { 'id' : jThis.data("id"),
+					   'csrf_token' : CSRF_TOKEN
+		},
+		callback: function(value,settings) {
+			jThis.text(value);
+		},
+		data: function(value,settings) {
+			return $('<div/>').html(value).text();
+		}
+	});
+}
+
+function makeAnswerScoreEditable(jThis) {
+	jThis.editable(BASE_URL + 'api/exams/edit_answer_score.php', {
+		name : 'score',
+		tooltip   : 'Click to edit...',
+		onblur : 'submit',
+		submitdata : { 'id' : jThis.data("id"),
+					   'csrf_token' : CSRF_TOKEN
+		},
+		callback: function(value,settings) {
+			jThis.text(value);
+			jThis.trigger("change");
+		},
+		data: function(value,settings) {
+			return $('<div/>').html(value).text();
+		}
+	});
+}
+
+function answerScoreOnChange(jThis) {
+	var val = parseFloat(jThis.text());
+	jThis.removeClass("positive neutral negative");
+	if (val > 0)
+		jThis.addClass("positive");
+	else if (val < 0)
+		jThis.addClass("negative");
+	else
+		jThis.addClass("neutral");
+}
