@@ -4,7 +4,6 @@ include_once ('../../pages/common/utils.php');
 include_once ('../../database/exams.php');
 
 header('Content-Type: application/json');
-
 if (! isLoggedIn ()) {
 	http_response_code(401);
 	echo 'You are not logged in.';
@@ -23,15 +22,14 @@ if (!$exam) {
 	echo 'Error fetching exam to edit.';
 	exit;
 }
+
 if ($exam ['ownerid'] !== $userInfo ['id']) {
-	if (!isExamManager($userInfo['id'], $_POST['id'])) {
+	if (!isExamManager($userInfo['id'], $exam['id'])) {
 		http_response_code(403);
 		echo 'Only the owner/manager of an exam may edit an answer text.';
 		exit;
 	}
 }
-
-$reply;
 
 try {
 	$reply = editAnswerText($_POST['id'], $_POST['text']);
@@ -42,5 +40,5 @@ try {
 }
 
 http_response_code(200);
-echo $_POST['statement'];
+echo $_POST['text'];
 ?>

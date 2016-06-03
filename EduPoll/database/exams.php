@@ -370,4 +370,4 @@ function getExamFromAnswer($answerID)
 	$stmt->execute(array($answerID));
 	return $stmt->fetch();
 }
-?> 
+?>
