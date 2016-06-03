@@ -2,6 +2,8 @@
 require_once ('../../config/init.php');
 include_once ('../common/utils.php');
 include_once ('../common/sidebar.php');
+include_once ('../../database/groups.php');
+
 
 if (! isAdmin ()) {
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
