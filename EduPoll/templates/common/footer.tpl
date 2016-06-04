@@ -1,5 +1,3 @@
-  </body>
-
   <footer>
   	
   	<!-- JQuery -->
@@ -7,4 +5,6 @@
   	<script src="{$BASE_URL}javascript/main.js"></script>
 
   </footer>
+  
+  </body>
   </html>
