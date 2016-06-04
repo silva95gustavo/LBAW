@@ -164,18 +164,18 @@ $(document).ready(function() {
 
 	$('#yes_uninvite_group').click(function (e) {
 		console.log('check', exam_id, uninvite_group_id);
-		/*$.ajax({
+		$.ajax({
 			type: 'POST',
-			url: "../../actions/exams/add_manager.php",
-			data: { user: userId , exam: exam_id, csrf_token: CSRF_TOKEN },
+			url: "../../actions/exams/uninvite_group.php",
+			data: { group: uninvite_group_id , exam: exam_id, csrf_token: CSRF_TOKEN },
 			success: function (data) {
 				$('#confirmationModalUninviteGroup').modal('hide');
-				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+				location.reload();
 			},
 			error: function () {
 				location.reload();
 			}
-		});*/
+		});
 	})
 
 	$('#yes_manager').click(function (e) {
