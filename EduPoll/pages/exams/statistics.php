@@ -18,6 +18,7 @@ $userID = $_SESSION['userID'];
 if(getExamOwner($examID)[0]['id'] != $userID) {
 	$_SESSION ['error_messages'] [] = 'You do not own this exam.';
 	header ( "Location: " . $BASE_URL . 'pages/exams/my_exams.php' );
+	http_response_code(403);
 	die ();
 }
 
@@ -59,6 +60,14 @@ foreach($studentstats as $student) {
 	$gradedistribution[$grade]++;
 }
 
+$examOver = examStatus($examID); //1->over , 2->active, 0->
+
+
+$groupsAssigned = getAssignedGroups($examID);
+$studentsAssigned = getAssignedStudents($examID);
+$groupsNotAssigned = getNotAssignedGroups($examID);
+$studentsNotAssigned = getNotAssignedStudents($examID);
+
 prepareDate($smarty);
 
 $smarty->assign ( 'name', $_SESSION ['name'] );
@@ -67,5 +76,10 @@ $smarty->assign ( 'stats', $stats );
 $smarty->assign ( 'questionstats', $questionscores );
 $smarty->assign ( 'studentstats', $studentstats );
 $smarty->assign ( 'gradedistribution', $gradedistribution );
+$smarty->assign ( 'examOver', $examOver );
+$smarty->assign ( 'groupsAssigned', $groupsAssigned );
+$smarty->assign ( 'studentsAssigned', $studentsAssigned );
+$smarty->assign ( 'groupsNotAssigned', $groupsNotAssigned );
+$smarty->assign ( 'studentsNotAssigned', $studentsNotAssigned );
 $smarty->display ( 'exams/statistics.tpl' );
 ?>

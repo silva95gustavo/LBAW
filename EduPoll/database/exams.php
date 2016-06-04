@@ -259,6 +259,7 @@ function getBestScore($userID, $examID)
 	$stmt->execute(array($userID, $examID));
 	return $stmt->fetch()['score'];
 }
+
 function getAttempts($userID, $examID)
 {
 	global $conn;
@@ -268,5 +269,78 @@ function getAttempts($userID, $examID)
 		ORDER BY finalScore DESC");
 	$stmt->execute(array($userID, $examID));
 	return $stmt->fetchAll();
+}
+
+function getNotAssignedGroups($examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT *
+		FROM StudentGroup stu
+		WHERE (SELECT COUNT(*) FROM GroupExam
+			WHERE GroupExam.groupID = stu.id AND GroupExam.examID = ?) = 0");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getAssignedGroups($examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT StudentGroup.id, StudentGroup.name
+		FROM StudentGroup, GroupExam
+		WHERE GroupExam.groupID = StudentGroup.id AND GroupExam.examID = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getNotAssignedStudents($examID){
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, name, email, gender, type
+		FROM RegisteredUser
+		WHERE NOT(has_access_exam(id, ?))
+		ORDER BY name ASC");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getAssignedStudents($examID){
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, name, email, gender, type
+		FROM RegisteredUser
+		WHERE has_access_exam(id, ?)
+		ORDER BY name ASC");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function addUserToExam($userId, $examId) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO UserExam(userID, examID)
+		VALUES (?, ?) RETURNING userID");
+	if($stmt->execute(array($userId, $examId)))
+	{
+		return $stmt->fetch(PDO::FETCH_ASSOC)['userID'];
+	}
+	else return -1;
+}
+
+function removeUserFromExam($userId, $examId) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM UserExam
+		WHERE userID = ? AND examID = ?");
+	$stmt->execute(array($userId, $examId));
+}
+
+function addGroupToExam($groupId, $examId) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO GroupExam(groupID, examID)
+		VALUES (?, ?)");
+	$stmt->execute(array($groupId, $examId));
+}
+
+function removeGroupFromExam($groupId, $examId) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM GroupExam
+		WHERE groupID = ? AND examID = ?");
+	$stmt->execute(array($groupId, $examId));
 }
 ?> 
