@@ -18,6 +18,25 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#inputUserGroupToInvite").autocomplete({
+		source : BASE_URL + "api/exams/search_usergroup_autocomplete.php",
+		minLength : 2,
+		select : function(event, ui) {
+			if (ui.item) {
+				this.value = ui.item.label;
+				if(ui.item.type === "group") {
+					$('#inputUserGroupToInvite').data('id', ui.item.id);
+					$('#yes_invite_group').data('id', ui.item.id);
+					$('#confirmationModalInviteGroup').modal('show');
+				} else if (ui.item.type === "user") {
+					$('#inputUserGroupToInvite').data('id', ui.item.id);
+					$('#yes_invite_user').data('id', ui.item.id);
+					$('#confirmationModalInviteUser').modal('show');
+				}
+			}
+		}
+	});
+	
 	$(".inline-editable.exam-name").editable(BASE_URL + 'api/exams/edit_name.php', {
 		name : 'name',
 		tooltip   : 'Click to edit...',
@@ -188,6 +207,40 @@ $(document).ready(function() {
 			success: function (data) {
 				$('#confirmationModalAddManager').modal('hide');
 				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('#yes_invite_user').click(function (e) {
+		var userID = $(this).data('id');
+		console.log('check', exam_id, userID);
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/invite_user.php",
+			data: { user: userID , exam: exam_id, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalAddManager').modal('hide');
+				location.reload();
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('#yes_invite_group').click(function (e) {
+		var groupID = $(this).data('id');
+		console.log('check', exam_id, groupID);
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/invite_group.php",
+			data: { group: groupID , exam: exam_id, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalAddManager').modal('hide');
+				location.reload();
 			},
 			error: function () {
 				location.reload();
