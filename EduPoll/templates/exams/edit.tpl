@@ -69,14 +69,16 @@
 									<h4 class="modal-title">Create question</h4>
 								</div>
 								<div class="modal-body">
-									<form>
+									<form action="{$BASE_URL}actions/exams/create_question.php" method="post" id="createQuestion">
 										<label>Question statement: </label>
+										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+										<input type="hidden" name="examid" value="{$exam.id}" />
 										<input type="text" name="statement" class="form-control">
+										<div class="modal-body text-center">
+											<button type="submit" id="yes_create_question" class="btn btn-success" data-examid="{$exam.id}">Create</button>
+											<button type="button" id="no_create_question" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+										</div>
 									</form>
-								</div>
-								<div class="modal-body text-center">
-									<button type="button" id="yes_create_question" class="btn btn-success">Create</button>
-									<button type="button" id="no_create_question" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 								</div>
 							</div>
 						</div>
