@@ -185,8 +185,8 @@ $(document).ready(function() {
 				$('#confirmationModalDeleteQuestion').modal('hide');
 				window.location.reload();
 			},
-			error: function () {
-				location.reload();
+			error: function (xhr) {
+				console.error("Error deleting question: " + xhr.responseText);
 			}
 		});
 	})
