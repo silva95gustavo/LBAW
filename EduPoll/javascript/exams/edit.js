@@ -1,5 +1,7 @@
 var exam_id;
 var removable_manager_id;
+var uninvite_group_id;
+var uninvite_user_id;
 
 $(document).ready(function() {
 	exam_id = $(".exam-id").attr("examid");
@@ -12,6 +14,25 @@ $(document).ready(function() {
 				$('#inputUserToAdd').data('id', ui.item.id);
 				$('#yes_manager').data('id', ui.item.id);
 				$('#confirmationModalAddManager').modal('show');
+			}
+		}
+	});
+	
+	$("#inputUserGroupToInvite").autocomplete({
+		source : BASE_URL + "api/exams/search_usergroup_autocomplete.php",
+		minLength : 2,
+		select : function(event, ui) {
+			if (ui.item) {
+				this.value = ui.item.label;
+				if(ui.item.type === "group") {
+					$('#inputUserGroupToInvite').data('id', ui.item.id);
+					$('#yes_invite_group').data('id', ui.item.id);
+					$('#confirmationModalInviteGroup').modal('show');
+				} else if (ui.item.type === "user") {
+					$('#inputUserGroupToInvite').data('id', ui.item.id);
+					$('#yes_invite_user').data('id', ui.item.id);
+					$('#confirmationModalInviteUser').modal('show');
+				}
 			}
 		}
 	});
@@ -117,6 +138,18 @@ $(document).ready(function() {
 		$('#confirmationModalRemoveManager').modal('show');
 	})
 
+	$('.removable_group').click(function (e) {
+		uninvite_group_id = parseInt($(this).attr('groupid'));
+		console.log("Uninviting group " + uninvite_group_id);
+		$('#confirmationModalUninviteGroup').modal('show');
+	})
+
+	$('.removable_user').click(function (e) {
+		uninvite_user_id = parseInt($(this).attr('userid'));
+		console.log("Uninviting user " + uninvite_user_id);
+		$('#confirmationModalUninviteUser').modal('show');
+	})
+
 	$('#yes_rem_manager').click(function (e) {
 		$.ajax({
 			type: 'POST',
@@ -125,6 +158,38 @@ $(document).ready(function() {
 			success: function (data) {
 				$('#confirmationModalRemoveManager').modal('hide');
 				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('#yes_uninvite_user').click(function (e) {
+		console.log('check', exam_id, uninvite_user_id);
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/uninvite_user.php",
+			data: { user: uninvite_user_id , exam: exam_id, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalUninviteUser').modal('hide');
+				location.reload();
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('#yes_uninvite_group').click(function (e) {
+		console.log('check', exam_id, uninvite_group_id);
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/uninvite_group.php",
+			data: { group: uninvite_group_id , exam: exam_id, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalUninviteGroup').modal('hide');
+				location.reload();
 			},
 			error: function () {
 				location.reload();
@@ -142,6 +207,40 @@ $(document).ready(function() {
 			success: function (data) {
 				$('#confirmationModalAddManager').modal('hide');
 				window.location.replace(BASE_URL + 'pages/exams/edit.php?id=' + exam_id);
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('#yes_invite_user').click(function (e) {
+		var userID = $(this).data('id');
+		console.log('check', exam_id, userID);
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/invite_user.php",
+			data: { user: userID , exam: exam_id, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalAddManager').modal('hide');
+				location.reload();
+			},
+			error: function () {
+				location.reload();
+			}
+		});
+	})
+
+	$('#yes_invite_group').click(function (e) {
+		var groupID = $(this).data('id');
+		console.log('check', exam_id, groupID);
+		$.ajax({
+			type: 'POST',
+			url: "../../actions/exams/invite_group.php",
+			data: { group: groupID , exam: exam_id, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalAddManager').modal('hide');
+				location.reload();
 			},
 			error: function () {
 				location.reload();
