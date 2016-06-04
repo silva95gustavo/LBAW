@@ -4,11 +4,18 @@ include_once ('../common/utils.php');
 include_once ('../common/sidebar.php');
 include_once ('../../database/exams.php');
 
-function cleanData(&$str)
-{
+function cleanData(&$str) {
 	$str = preg_replace("/\t/", "\\t", $str);
 	$str = preg_replace("/\r?\n/", "\\n", $str);
     if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+}
+
+function isXLS($format) {
+	return strcmp($format, "XLS") == 0;
+}
+
+function isJSON($format) {
+	return strcmp($format, "JSON") == 0;
 }
 
  if (! isLoggedIn ()) {
@@ -25,15 +32,36 @@ $userID = $_SESSION['userID'];
 if(getExamOwner($examID)[0]['id'] != $userID) {
 	$_SESSION ['error_messages'] [] = 'You do not own this exam.';
 	header ( "Location: " . $BASE_URL . 'pages/exams/my_exams.php' );
-	http_response_code(403);
+	die ();
+}
+
+$format = $_GET['format'];
+
+if(!isset($format)) {
+	$_SESSION ['error_messages'] [] = 'No format was specified (XLS/JSON).';
+	header ( "Location: " . $_SERVER['HTTP_REFERER'] );
+	die ();
+}
+
+if(!isXLS($format) && !isJSON($format)) {
+	$_SESSION ['error_messages'] [] = 'Invalid format specified. Must be XLS or JSON.';
+	header ( "Location: " . $_SERVER['HTTP_REFERER'] );
 	die ();
 }
 	//header("Content-Type: text/plain");
   	///*
-  	$filename = "exam_" . $examID . ".xls";
-	header("Content-Disposition: attachment; filename=\"$filename\"");
-  	header("Content-Type: application/vnd.ms-excel");
+  	if(isXLS($format)) {
+  		$filename = "exam_" . $examID . ".xls";
+		header("Content-Disposition: attachment; filename=\"$filename\"");
+  		header("Content-Type: application/vnd.ms-excel");
+  	} else {
+	  	$filename = "exam_" . $examID . ".json";
+		header("Content-Disposition: attachment; filename=\"$filename\"");
+  		header("Content-Type: application/json");
+  	}
   	//*/
+  	
+$jsondata = [];
 
 $exam = getExam($examID);
 $stats = getExamStats($examID);
@@ -81,7 +109,6 @@ $line_break = "\r\n";
 $paragraph = $line_break . $line_break;
 $tab = "\t";
 
-echo "Grade distribution" . $paragraph;
 $gradedistexport = [];
 for($g = 0; $g <= 20; $g++) {
 	$temp = [];
@@ -90,24 +117,34 @@ for($g = 0; $g <= 20; $g++) {
 	array_push($gradedistexport, $temp);
 }
 
-echo $tab . implode("\t", array_keys($gradedistexport[0])) . "\r\n";
-foreach($gradedistexport as $row) {
-	array_walk($row, __NAMESPACE__ . '\cleanData');
-	echo $tab . implode("\t", array_values($row)) . "\r\n";
+if(isXLS($format)) {
+	echo "Grade distribution" . $paragraph;
+	echo $tab . implode("\t", array_keys($gradedistexport[0])) . "\r\n";
+	foreach($gradedistexport as $row) {
+		array_walk($row, __NAMESPACE__ . '\cleanData');
+		echo $tab . implode("\t", array_values($row)) . "\r\n";
+	}
+} else {
+	$jsondata['gradeDistribution'] = $gradedistexport;
 }
 
-echo $paragraph . "Question statistics" . $paragraph;
+if(isXLS($format)) {
+	echo $paragraph . "Question statistics" . $paragraph;
 
-//$questionscores
-$questionstatexport = [];
-echo $tab . implode("\t", array_keys($questionscores[0])) . "\r\n";
-foreach($questionscores as $row) {
-	array_walk($row, __NAMESPACE__ . '\cleanData');
-	echo $tab . implode("\t", array_values($row)) . "\r\n";
+	echo $tab . implode("\t", array_keys($questionscores[0])) . "\r\n";
+	foreach($questionscores as $row) {
+		array_walk($row, __NAMESPACE__ . '\cleanData');
+		echo $tab . implode("\t", array_values($row)) . "\r\n";
+	}
+} else {
+	$jsondata['questionStatistics'] = $questionscores;
 }
 
+$jsondata['attemptScores'] = [];
 if(sizeof($studentstats > 0)) {
-	echo $paragraph . "Attempt scores" . $paragraph;
+	if(isXLS($format)) {
+		echo $paragraph . "Attempt scores" . $paragraph;
+	}
 
 	$scoresexport = [];
 	foreach($studentstats as $student) {
@@ -118,20 +155,34 @@ if(sizeof($studentstats > 0)) {
 		array_push($scoresexport, $temp);
 	}
 	
-	echo $tab . implode("\t", array_keys($scoresexport[0])) . "\r\n";
-	foreach($scoresexport as $row) {
-		array_walk($row, __NAMESPACE__ . '\cleanData');
-		echo $tab . implode("\t", array_values($row)) . "\r\n";
+	if(isXLS($format)) {
+		echo $tab . implode("\t", array_keys($scoresexport[0])) . "\r\n";
+		foreach($scoresexport as $row) {
+			array_walk($row, __NAMESPACE__ . '\cleanData');
+			echo $tab . implode("\t", array_values($row)) . "\r\n";
+		}
+	} else {
+		$jsondata['attemptScores'] = $scoresexport;
 	}
 }
 
-echo $paragraph . "Approvals" . $paragraph;
-$approvals = array(
-	array("Approved" => $stats['approved'], "Disapproved" => (sizeof($studentstats) - $stats['approved']))
-);
+if(isXLS($format)) {
+	echo $paragraph . "Approvals" . $paragraph;
+	$approvals = array(
+		array("Approved" => $stats['approved'], "Disapproved" => (sizeof($studentstats) - $stats['approved']))
+	);
 
-echo $tab . implode("\t", array_keys($approvals[0])) . "\r\n";
-	echo $tab . implode("\t", array_values($approvals[0])) . "\r\n";
+	echo $tab . implode("\t", array_keys($approvals[0])) . "\r\n";
+		echo $tab . implode("\t", array_values($approvals[0])) . "\r\n";
+} else {
+	$jsondata['approvals'] = array(
+		array("approved" => $stats['approved'], "disapproved" => (sizeof($studentstats) - $stats['approved']))
+	);
+}
+
+if(isJSON($format)) {
+	echo json_encode($jsondata);
+}
 
 
 ?>

@@ -138,6 +138,7 @@
 								<div class="col-md-2">
 									<form action="{$BASE_URL}pages/exams/export_statistics.php" method="get">
 										<input type="hidden" name="examid" value="{$exam.id}"/>
+										<input type="hidden" name="format" value="XLS"/>
     									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export XLS" />
 									</form>
 								</div>
@@ -148,7 +149,22 @@
 									the functionalities provided Excel. Some examples are averages, charts and standard deviations.
 								</div>
 							</div>
-
+								<br/><br/>
+							<div class="row">
+								<div class="col-md-2">
+									<form action="{$BASE_URL}pages/exams/export_statistics.php" method="get">
+										<input type="hidden" name="examid" value="{$exam.id}"/>
+										<input type="hidden" name="format" value="JSON"/>
+    									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export JSON" />
+									</form>
+								</div>
+								<div class="col-md-10">
+									Export the exam results to a ".json" file, so that you can consult them using JSON parsing tools.
+									<br/>
+									This format is useful if you want data to be parsed by other tools rather than Excel, for example for
+									computation with data analysis software or similar applications.
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
