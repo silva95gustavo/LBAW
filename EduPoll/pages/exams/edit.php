@@ -70,12 +70,12 @@ if ($exam)
 
 $smarty->assign('managers', $managers);
 
-/*if(!in_array($userInfo['id'],$managers) && !$isOwner)
+if(!in_array($userInfo['id'],$managers) && !$isOwner)
 	{
 	$_SESSION ['error_messages'] [] = "You don't have permission to edit this exam";
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
 	die ();
-	}*/
+	}
 
 prepareDate($smarty);
 
