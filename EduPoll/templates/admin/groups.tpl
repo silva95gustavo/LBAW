@@ -27,6 +27,15 @@
 
 				{if $listing}
 
+				<form action="{$BASE_URL}actions/admin/create_group.php" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+					<h3 class="form-signin-heading">Create Group</h3>
+
+					<label for="create_group" class="sr-only">Full name</label>
+					<input type="text" name="groupname" id="groupname" class="form-control" placeholder="Group Name"
+					required autofocus> 
+					<br/>
+				</form>
 
 				<table class="table table-striped">
 					<thead>
@@ -40,7 +49,7 @@
 						{foreach $groups as $group}
 						<tr id="{$group.id}">
 							<td><a href="?groupID={$group.id}">{$group.name}</a></td>
-							<td>{$group.numberofstudents}</td>
+							<td>{$nstudents[$group['id']]}</td>
 							<td><a data-groupid="{$group.id}" href="#" data-toggle="modal" data-target="#confirmationModalGroup">Remove</a></td>
 						</tr>
 					</tr>
@@ -53,93 +62,103 @@
 			{/for}
 
 			{else}
-
-			<h2 class="text-center">{$groups[0].groupname}</h2>
 			<br/>
 			<div class="container-fluid">
 				<div class="row">
-					<form class="form-add-user col-md-6" id="addform" >
-						<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-						<h2 class="form-signin-heading">Add Student To Group</h2>
-
-						<label for="userToAddToGroup" class="sr-only">Full name</label>
-						<input type="text" id="userToAddToGroup" class="form-control" placeholder="User name or email"
-						required autofocus/>
-						<input type="hidden" name="groupID" id="groupID" value="{$groupid}"/>
-					</form>
-
-					<form class="form-remove-user col-md-6" id="removeform">
-						<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-						<h2 class="form-signin-heading">Remove Student From Group</h2>
-
-						<label for="userToRemoveFromGroup" class="sr-only">Full name</label>
-						<input type="text" id="userToRemoveFromGroup" class="form-control" placeholder="User name or email"
-						required autofocus/>
-						<input type="hidden" name="groupID" id="groupID" value="{$groupid}"/>
-					</form>
-				</div>
-			</div/>
-			<br/>
-
-			<h2>List of Students in Group </h2>
-			<br/>
-
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{foreach $groups as $group}
-					<tr id="{$group.studentid}">
-						<td>{$group.studentid}</td>
-						<td>{$group.studentname}</td>
-						<td>{$group.studentemail}</td>
-						<td><a data-userid="{$group.studentid}"data-groupid="{$groupid}" data-bool="1" href="#" data-toggle="modal" 
-							data-target="#confirmationModal">Remove from Group</a></td>
-						</tr>
-						{/foreach}
-
-						{/if}
-
-						<div id="confirmationModal" class="modal fade" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header text-center">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Are you sure?</h4>
-									</div>
-									<div class="modal-body text-center">
-										<button type="button" id="yes" class="btn btn-success">Yes</button>
-										<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
-									</div>
-								</div>
-							</div>
+					<div class="col-md-12 text-center">
+						<h2>{$groupname}</h2>
+						<a data-groupid="{$groupid}" href="#" data-toggle="modal" data-target="#confirmationModalGroup">
+							<h5 class="text-center">(Delete)</h5> </a>
 						</div>
+						<form class="form-add-user col-md-6" id="addform" >
+							<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+							<h2 class="form-signin-heading">Add Student To Group</h2>
 
-						<div id="confirmationModalGroup" class="modal fade" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header text-center">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Are you sure?</h4>
-									</div>
-									<div class="modal-body text-center">
-										<button type="button" id="yesGroup" class="btn btn-success">Yes</button>
-										<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
-									</div>
-								</div>
-							</div>
-						</div>
+							<label for="userToAddToGroup" class="sr-only">Full name</label>
+							<input type="text" id="userToAddToGroup" class="form-control" placeholder="User name or email"
+							required autofocus/>
+							<input type="hidden" name="groupID" id="groupID" value="{$groupid}"/>
+						</form>
 
+						<form class="form-remove-user col-md-6" id="removeform">
+							<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+							<h2 class="form-signin-heading">Remove Student From Group</h2>
 
+							<label for="userToRemoveFromGroup" class="sr-only">Full name</label>
+							<input type="text" id="userToRemoveFromGroup" class="form-control" placeholder="User name or email"
+							required autofocus/>
+							<input type="hidden" name="groupID" id="groupID" value="{$groupid}"/>
+						</form>
 					</div>
-					<!-- /container -->
-					{include file='common/footer.tpl'}
-					<script src="{$BASE_URL}javascript/admin/manage_groups.js"></script>
-					<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
-					<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+				</div/>
+				<br/>
+
+				{if sizeof($students) === 0}
+				<div class="alert alert-info" role="alert">
+					There are Students in Group.
+				</div>
+				{else}
+
+				<h2>List of Students in Group </h2>
+				<br/>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach $students as $student}
+						<tr id="{$student.studentid}">
+							<td>{$student.studentid}</td>
+							<td>{$student.studentname}</td>
+							<td>{$student.studentemail}</td>
+							<td><a data-userid="{$student.studentid}" data-groupid="{$groupid}" data-bool="1" href="#" 
+								data-toggle="modal"	data-target="#confirmationModal">Remove from Group</a></td>
+							</tr>
+							{/foreach}
+
+							{/if}
+							{/if}
+
+							<div id="confirmationModal" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header text-center">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Are you sure?</h4>
+										</div>
+										<div class="modal-body text-center">
+											<button type="button" id="yes" class="btn btn-success">Yes</button>
+											<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="confirmationModalGroup" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header text-center">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Are you sure?</h4>
+										</div>
+										<div class="modal-body text-center">
+											<button type="button" id="yesGroup" class="btn btn-success">Yes</button>
+											<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<!-- /container -->
+						{include file='common/footer.tpl'}
+						<script src="{$BASE_URL}javascript/admin/manage_groups.js"></script>
+						<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
+						<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
