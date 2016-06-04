@@ -15,32 +15,36 @@ $perPage = 10;
 
 if($listing)
 {
-	if(!isset($_GET['page']))
+	$numberOfGroups = getNumberOfGroups();
+	$numberOfPages = ceil($numberOfGroups / $perPage);
+	if(!isset($_GET['page']) || $_GET['page'] <= 0 || $_GET['page'] > $numberOfPages)
 		$groups = getGroups(0,$perPage);
 	else $groups = getGroups(($_GET['page'] - 1)*$perPage,$perPage);
-
-	$smarty->assign ('groupid', $_GET['groupID']);
-
+	foreach ($groups as $group) {
+		$nstudents[$group['id']] = getStudentsByGroup($group['id']);
+	}
+	$smarty->assign ('nstudents', $nstudents);
+	$smarty->assign ('groups', $groups);
 }
 else{
-	$groups = getGroupData($_GET['groupID']);
-	if(sizeof($groups) === 0)
+	$groupname = getName($_GET['groupID']);
+	if(!$groupname)
 	{
 		$_SESSION ['error_messages'] [] = "Group does not exist.";
 		header ( 'Location: ' . $BASE_URL . 'pages/admin/groups.php' );
 		die();
 	}
-	$smarty->assign ('groupid', $_GET['groupID']);
+	$smarty->assign ('groupname', $groupname);
+	$students = getGroupStudents($_GET['groupID']);
+	$smarty->assign ('students', $students);
 }
 
-$numberOfGroups = getNumberOfGroups();
-$numberOfPages = ceil($numberOfGroups / $perPage);
 
 
 
 prepareDate($smarty);
 
-$smarty->assign ('groups', $groups);
+$smarty->assign ('groupid', $_GET['groupID']);
 $smarty->assign ( 'listing', $listing );
 $smarty->assign ( 'numberOfPages', $numberOfPages );
 $smarty->assign ( 'name', $_SESSION ['name'] );

@@ -20,12 +20,18 @@ $(document).ready( function() {
 	});
 	$('#confirmationModal').on('show.bs.modal', function(e) {
 		var data;
-		if($(this).data('bool'))
-			data = $(e.relatedTarget).data() || $('#userToRemoveFromGroup').data();
+		if($(this).data('bool')){
+			data = $('#userToRemoveFromGroup').data();
+		}
+		else if($(e.relatedTarget).data('bool')) {
+			data = $(e.relatedTarget).data();
+		}
 		else data = $('#userToAddToGroup').data();
+
 		$('#yes').data('userid', data.userid);
 		$('#yes').data('groupid', data.groupid);
 		$('#yes').data('bool', data.bool);
+
 	});
 
 	$('#confirmationModalGroup').on('show.bs.modal', function(e) {
@@ -48,8 +54,8 @@ $(document).ready( function() {
 				console.log(groupid);
 				$('tr#' + groupid).hide(1000, function(){
 					$('tr#' + groupid).remove();
-				})
-				console.log(result);
+				});
+				window.location.href = BASE_URL + "pages/admin/groups.php";
 			},
 			error : function(xhr, status, error) {
 				console.log("Could not remove group: " + xhr.responseText);
@@ -75,9 +81,12 @@ $(document).ready( function() {
 					$('#confirmationModal').modal('hide');
 					$('tr#' + userid).hide(1000, function(){
 						$('tr#' + userid).remove();
-					})
+					});
+					console.log("wut1/" + userid);
 				}
 				else{
+					console.log("wut2/" + userid);
+
 					location.reload();
 				};
 			},

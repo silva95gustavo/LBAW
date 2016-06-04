@@ -35,19 +35,30 @@ function searchGroupFTS($data, $groupID) {
 
 function getGroups($start,$perPage){
   global $conn;
-  $stmt = $conn->prepare("SELECT StudentGroup.*,COUNT(StudentGroupAssoc.*) AS numberofstudents FROM StudentGroup,StudentGroupAssoc 
-    WHERE StudentGroup.id = StudentGroupAssoc.groupID GROUP BY StudentGroup.id
-    LIMIT ? OFFSET ?");
+  $stmt = $conn->prepare("SELECT StudentGroup.id, StudentGroup.name FROM StudentGroup LIMIT ? OFFSET ?");
   $stmt->execute(array($perPage,$start));
   return $stmt->fetchAll();
 }
+function getStudentsByGroup($groupID){
+  global $conn;
+  $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM StudentGroupAssoc WHERE StudentGroupAssoc.groupID = ?");
+  $stmt->execute(array($groupID));
+  return $stmt->fetch()['total'];
+}
 
-function getGroupData($groupID){
+function getName($groupID){
  global $conn;
- $stmt = $conn->prepare("SELECT StudentGroup.name AS groupname,RegisteredUser.id AS studentid,RegisteredUser.name AS studentname, RegisteredUser.email AS studentemail
-  FROM StudentGroup INNER JOIN StudentGroupAssoc ON StudentGroup.id = StudentGroupAssoc.groupID
-  INNER JOIN RegisteredUser ON StudentGroupAssoc.studentID = RegisteredUser.id
-  WHERE StudentGroup.id = ?");
+ $stmt = $conn->prepare("SELECT name AS groupname FROM StudentGroup WHERE id = ?");
+ $stmt->execute(array($groupID));
+ return $stmt->fetch()['groupname'];
+}
+
+function getGroupStudents($groupID)
+{
+  global $conn;
+  $stmt = $conn->prepare("SELECT RegisteredUser.id AS studentid,RegisteredUser.name AS studentname, RegisteredUser.email AS studentemail
+  FROM StudentGroupAssoc,RegisteredUser WHERE StudentGroupAssoc.groupID = ?
+   AND StudentGroupAssoc.studentID = RegisteredUser.id");
  $stmt->execute(array($groupID));
  return $stmt->fetchAll();
 }
