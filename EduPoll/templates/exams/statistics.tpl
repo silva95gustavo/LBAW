@@ -27,7 +27,6 @@
 					{/if}
 				</div>
 				
-				{if $examOver === 2}
 				{if $stats['attempts'] === 0}
 				<div class="alert alert-warning" role="alert">
 					<strong>Warning!</strong> No attempts have been made for this exam.
@@ -38,6 +37,7 @@
 					<div id="grade{$k}">{$i}</div>
 					{/foreach}
 				</div>
+				{/if}
 
 
 				<div class="row text-center">
@@ -151,153 +151,11 @@
 						</div>
 					</div>
 				</div>
-				{/if}
-				{elseif $examOver === 0}
-				<div class="container">
-					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" class="tab" data-id="groups-assigned-tab" href="#groups-assigned">Groups Assigned</a></li>
-						<li><a data-toggle="tab" class="tab" data-id="users-assigned-tab" href="#users-assigned">Individual Users Assigned</a></li>
-						<li><a data-toggle="tab" class="tab" data-id="assign-group-tab" href="#assign-group">Assign New Group</a></li>
-						<li><a data-toggle="tab" class="tab" data-id="assign-user-tab" href="#assign-user">Assign New User</a></li>
-					</ul>
-
-					<div class="tab-content">
-						<div id="groups-assigned" class="tab-pane fade in active">
-							<table class="table table-striped" id="groups-assigned-table">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Name</th>
-										<th>Remove</th>
-									</tr>
-								</thead>
-								<tbody>
-									{foreach $groupsAssigned as $group}
-									<tr id="removegroup{$group.id}">
-										<td>{$group.id}</td>
-										<td>{$group.name}</td>
-										<td><button type="button" class="btn btn-danger idSubmition" data-id="{$group.id}" data-toggle="modal" data-target="#confirmationModal">Remove</td>
-									</tr>
-									{/foreach}
-								</tbody>
-							</table>
-						</div>
-						<div id="users-assigned" class="tab-pane fade">
-							<div class="tab-pane fade in active">
-								<form class="form-remove-user">
-									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-									<h2 class="form-signin-heading">Remove user</h2>
-
-									<label for="inputUserToRemove" class="sr-only">Full name</label>
-									<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email"
-									required autofocus>
-									<br/>
-								</form>
-								<table class="table table-striped" id="users-assigned-table">
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Add</th>
-										</tr>
-									</thead>
-									<tbody>
-										{foreach $studentsAssigned as $student}
-										<tr id="removestudent{$student.id}">
-											<td>{$student.id}</td>
-											<td>{$student.name}</td>
-											<td>{$student.email}</td>
-											<td><button type="button" class="btn btn-danger idSubmition" data-id="{$student.id}" data-toggle="modal" data-target="#confirmationModal">Remove</td>
-										</tr>
-										{/foreach}
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div id="assign-group" class="tab-pane fade">
-							<div class="tab-pane fade in active">
-								<table class="table table-striped" id="assign-group-table">
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>Name</th>
-											<th>Add</th>
-										</tr>
-									</thead>
-									<tbody>
-										{foreach $groupsNotAssigned as $group}
-										<tr id="addgroup{$group.id}">
-											<td>{$group.id}</td>
-											<td>{$group.name}</td>
-											<td><button type="button" class="btn btn-success idSubmition"  data-id="{$group.id}"data-toggle="modal" data-target="#confirmationModal">Add</td>
-										</tr>
-										{/foreach}
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div id="assign-user" class="tab-pane fade">
-							<div class="tab-pane fade in active">
-								<form class="form-add-user">
-									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-									<h2 class="form-signin-heading">Add user</h2>
-
-									<label for="inputUserToAdd" class="sr-only">Full name</label>
-									<input type="text" id="inputUserToAdd" class="form-control" placeholder="User name or email"
-									required autofocus>
-									<br/>
-								</form>
-								<table class="table table-striped" id="assign-user-table">
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Add</th>
-										</tr>
-									</thead>
-									<tbody>
-										{foreach $studentsNotAssigned as $student}
-										<tr id="addstudent{$student.id}">
-											<td>{$student.id}</td>
-											<td>{$student.name}</td>
-											<td>{$student.email}</td>
-											<td><button type="button" class="btn btn-success idSubmition" data-id="{$student.id}" data-toggle="modal" data-target="#confirmationModal">Add</td>
-										</tr>
-										{/foreach}
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="confirmationModal" class="modal fade" role="dialog">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header text-center">
-								<button type="button" class="close"  data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Are you sure to apply this change?</h4>
-							</div>
-							<div class="modal-body text-center">
-								<button data-id="{$exam.id}" type="button" id="yes" class="btn btn-success">Yes</button>
-								<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				{/if}
 			</div>
 		</div>
 	</div>z
 </div>
 
-{if $examOver === 1 }
 <script src="{$BASE_URL}frameworks/Chart.js"></script>
-<script src="{$BASE_URL}javascript/exams/exam-statistics-after.js"></script>
-{else}
-<script src="{$BASE_URL}javascript/exams/exam-statistics-previous.js"></script><script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
-{/if}
+<script src="{$BASE_URL}javascript/exams/exam-statistics.js"></script>
 {include file='common/footer.tpl'}
