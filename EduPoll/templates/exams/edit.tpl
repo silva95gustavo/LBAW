@@ -16,6 +16,36 @@
 						<li class="active">Edit Exam</li>
 					</ol>
 					
+					<div id="confirmationModalInviteUser" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to invite this user?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_invite_user" class="btn btn-success">Yes</button>
+									<button type="button" id="no_invite_user" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalInviteGroup" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to invite this group?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_invite_group" class="btn btn-success">Yes</button>
+									<button type="button" id="no_invite_group" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModalAddManager" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -182,7 +212,7 @@
 						
   						<div id="demo" class="collapse">
   							{if $isOwner}
-  								<form class="form-add-manager">
+  								<form action="#" class="form-add-manager">
 									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 
 									<input type="text" id="inputUserToAdd" class="form-control" placeholder="User name or email"
@@ -210,7 +240,7 @@
 						<a href="#demo" class="btn btn-info show-managers" data-toggle="collapse">Show/hide managers</a>
 						
   						<div id="invitees" class="collapse">
-  							<form class="form-add-manager">
+  							<form action="#" class="form-add-manager">
 								<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 								<input type="text" id="inputUserGroupToInvite" class="form-control" placeholder="User name/email or Group name"
 									required autofocus>

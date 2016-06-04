@@ -245,6 +245,52 @@ function removeManager($exam, $user) {
     else return -1;
 }
 
+function examIsUserInvited($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT userid
+							FROM userexam
+							WHERE examid = ? AND userid = ?");
+	if($stmt->execute(array($exam, $user)))
+    {
+    	return $stmt->fetch()['userid'] == $user;
+    }
+    else return false;
+}
+
+function examIsGroupInvited($exam, $group) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT groupid
+							FROM groupexam
+							WHERE examid = ? AND groupid = ?");
+	if($stmt->execute(array($exam, $group)))
+    {
+    	return $stmt->fetch()['groupid'] == $group;
+    }
+    else return false;
+}
+
+function examInviteUser($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO userexam (examid, userid)
+            				VALUES (?, ?) RETURNING examid");
+	if($stmt->execute(array($exam, $user)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
+function examInviteGroup($exam, $group) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO groupexam (examid, groupid)
+            				VALUES (?, ?) RETURNING examid");
+	if($stmt->execute(array($exam, $group)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
 function examUninviteUser($exam, $user) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM userexam

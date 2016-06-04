@@ -16,4 +16,11 @@ function addUserToGroup($groupName,$email){
 		)");
 	$stmt->execute(array($groupName,$email));
 }
+
+function searchGroupFTS($data) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT id, name FROM studentgroup WHERE to_tsvector('english', name) @@ plainto_tsquery('english', ?)");
+    $stmt->execute(array($data));
+	return $stmt->fetchAll();
+}
 ?>
