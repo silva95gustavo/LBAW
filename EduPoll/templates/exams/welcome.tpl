@@ -18,7 +18,7 @@
 					<div class="first-element jumbotron">
 						<h1 class="text-center">{$exam.name}</h1>
 						<div>
-							<p><strong>Starts:</strong> {$exam.starttime} <p> <strong>Ends:</strong> {$exam.endtime}</p>
+							<p><strong>Start:</strong> {$exam.starttime} <p> <strong>End:</strong> {$exam.endtime}</p>
 						</div>
 					</div>
 
