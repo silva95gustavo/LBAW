@@ -199,7 +199,11 @@ function createAnswer($questionID, $text, $score = 0) {
 	$stmt->execute(array($questionID, $text, $score));
 	return $stmt->fetch();
 }
-
+function deleteAnswer($answerID) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM answer WHERE id = :answerid");
+	return $stmt->execute(array($answerID));
+}
 function deleteExam($examID) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM exam WHERE id = ?");

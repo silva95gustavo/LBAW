@@ -24,7 +24,8 @@
 				{else}
 					{assign scoreType neutral}
 				{/if}
-				<div class="inline-editable no-full-width answer-score {$scoreType}" type="number" name="score" data-id="{$answer.id}">{$answer.score}</div>
+				<span class="icon-clickable delete-answer" data-answerid="{$answer.id}"><i class="fa fa-trash-o"></i></span><!--
+			 --><div class="inline-editable no-full-width answer-score {$scoreType}" type="number" name="score" data-id="{$answer.id}">{$answer.score}</div>
 				<label{if $isEditing} disabled{/if}>
 					<input type="radio" name="optradio1"{if $isEditing} disabled{/if}>
 					<div class="inline-editable answer-text" name="text" data-id="{$answer.id}"{if $isEditing} disabled{/if}>{$answer.text|escape:'html'}</div>
