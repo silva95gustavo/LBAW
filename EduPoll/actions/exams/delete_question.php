@@ -5,7 +5,7 @@ require_once ('../../database/exams.php');
 
 if (! isLoggedIn ()) {
 	$_SESSION ['error_messages'] [] = 'You are not logged in.';
-	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
+	header ( "Location: $BASE_URL" );
 	exit;
 }
 
