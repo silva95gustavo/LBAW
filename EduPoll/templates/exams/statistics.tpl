@@ -27,7 +27,6 @@
 					{/if}
 				</div>
 				
-				{if $examOver === 2}
 				{if $stats['attempts'] === 0}
 				<div class="alert alert-warning" role="alert">
 					<strong>Warning!</strong> No attempts have been made for this exam.
@@ -152,7 +151,6 @@
 					</div>
 				</div>
 				{/if}
-				{elseif $examOver === 0}
 				<div class="container">
 					<ul class="nav nav-tabs">
 						<li class="active"><a data-toggle="tab" class="tab" data-id="groups-assigned-tab" href="#groups-assigned">Groups Assigned</a></li>
@@ -287,7 +285,6 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 			</div>
 		</div>
 	</div>
