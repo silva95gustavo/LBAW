@@ -30,12 +30,21 @@ div.main div.container {
 .inline-editable {
 	display: inline-block;
 	padding: 0 0.5em;
+	width: 100%;
+}
+.inline-editable.no-full-width {
+	width: auto;
 }
 .inline-editable:hover {
 	display: inline-block;
 	position: relative;
 	outline: 2px dashed #CCC;
-	width: auto;
+}
+.inline-editable form {
+	color: black;
+}
+.inline-editable form input {
+	width: 100%;
 }
 .exam-name-container {
 	text-align: center;
@@ -101,6 +110,32 @@ div.jumbotron h2 {
 #examAvailableParent {
     text-align: center;
 }
+.icon-clickable {
+	cursor: pointer
+}
+.icon-clickable:hover {
+	color: #AAA;
+}
+.answer input[type="radio"][disabled] {
+	cursor: default;
+}
+.answer-text[disabled] {
+	cursor: default;
+}
+.answer [disabled] {
+	cursor: default;
+}
+
+/* QUESTIONS */
+.add-answer .fa-plus {
+	position:relative;
+	left: 1em;
+	width: 0;
+	color: #AAA;
+}
+.add-answer input {
+	padding-left: 2em;
+}
 
 a .list-group-item-heading{
 	display:inline-block
@@ -108,4 +143,16 @@ a .list-group-item-heading{
 
 #addform,#removeform{
 	padding-left:0px;
+
+.answer-score.no-full-width {
+	width: 3em;
+}
+.answer-score.positive {
+	color: green;
+}
+.answer-score.neutral {
+	color: black;
+}
+.answer-score.negative {
+	color: red;
 }
