@@ -191,29 +191,12 @@ $(document).ready(function() {
 		});
 	})
 	
-	$('#aamodalCreateQuestion').on('show.bs.modal', function (e) {
-		var data = $(e.relatedTarget).data();
-		$('#yes_create_question').data('questionid', data.questionid);
-	})
-	
-	$('#aayes_create_question').click(function (e) {
-		var categoryId = $(this).data('categoryid');
-		var d = { examid: $(this).data('examid'), csrf_token: CSRF_TOKEN };
-		console.log(d);
-		if (typeof categoryId !== 'undefined')
-			d.category = categoryId;
-		$.ajax({
-			type: 'POST',
-			url: "../../actions/exams/create_question.php",
-			data: d,
-			success: function (data) {
-				$('#modalCreateQuestion').modal('hide');
-				window.location.reload();
-			},
-			error: function (xhr, status, error) {
-				console.error("Error creating question: " + xhr.responseText);
-			}
-		});
+	$('#modalCreateQuestion').on('show.bs.modal', function (e) {
+		var categoryID = $(e.relatedTarget).data("categoryid");
+		console.log(categoryID);
+		$(this).find('form input[name="categoryid"]').remove();
+		if (categoryID)
+			$(this).find('form').append('<input type="hidden" name="categoryid" value="' + categoryID + '" />');
 	})
 	
 	$('form.add-answer').submit(function (e) {
