@@ -249,6 +249,75 @@ function removeManager($exam, $user) {
     else return -1;
 }
 
+
+function examIsUserInvited($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT userid
+							FROM userexam
+							WHERE examid = ? AND userid = ?");
+	if($stmt->execute(array($exam, $user)))
+    {
+    	return $stmt->fetch()['userid'] == $user;
+    }
+    else return false;
+}
+
+function examIsGroupInvited($exam, $group) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT groupid
+							FROM groupexam
+							WHERE examid = ? AND groupid = ?");
+	if($stmt->execute(array($exam, $group)))
+    {
+    	return $stmt->fetch()['groupid'] == $group;
+    }
+    else return false;
+}
+
+function examInviteUser($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO userexam (examid, userid)
+            				VALUES (?, ?) RETURNING examid");
+	if($stmt->execute(array($exam, $user)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
+function examInviteGroup($exam, $group) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO groupexam (examid, groupid)
+            				VALUES (?, ?) RETURNING examid");
+	if($stmt->execute(array($exam, $group)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
+function examUninviteUser($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM userexam
+            WHERE userid = ? AND examid = ?");
+	if($stmt->execute(array($user, $exam)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
+function examUninviteGroup($exam, $group) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM groupexam
+            WHERE groupid = ? AND examid = ?");
+	if($stmt->execute(array($group, $exam)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
 function getOngoingExams($userID){
 	global $conn;
 	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
@@ -423,7 +492,6 @@ function getNotAssignedGroups($examID)
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
-
 function getAssignedGroups($examID)
 {
 	global $conn;
@@ -433,7 +501,6 @@ function getAssignedGroups($examID)
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
-
 function getNotAssignedStudents($examID){
 	global $conn;
 	$stmt = $conn->prepare("SELECT id, name, email, gender, type
@@ -443,7 +510,6 @@ function getNotAssignedStudents($examID){
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
-
 function getAssignedStudents($examID){
 	global $conn;
 	$stmt = $conn->prepare("SELECT id, name, email, gender, type
@@ -453,7 +519,6 @@ function getAssignedStudents($examID){
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
-
 function addUserToExam($userId, $examId) {
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO UserExam(userID, examID)
@@ -464,25 +529,39 @@ function addUserToExam($userId, $examId) {
 	}
 	else return -1;
 }
-
 function removeUserFromExam($userId, $examId) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM UserExam
 		WHERE userID = ? AND examID = ?");
 	$stmt->execute(array($userId, $examId));
 }
-
 function addGroupToExam($groupId, $examId) {
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO GroupExam(groupID, examID)
 		VALUES (?, ?)");
 	$stmt->execute(array($groupId, $examId));
 }
-
 function removeGroupFromExam($groupId, $examId) {
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM GroupExam
 		WHERE groupID = ? AND examID = ?");
 	$stmt->execute(array($groupId, $examId));
+}
+function getExamInvitedGroups($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT studentgroup.id AS id, studentgroup.name AS name
+								FROM studentgroup INNER JOIN groupexam ON studentgroup.id = groupexam.groupid
+								WHERE groupexam.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getExamInvitedUsers($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id AS id, registereduser.name AS name, registereduser.email AS email
+								FROM registereduser INNER JOIN userexam ON registereduser.id = userexam.userid
+								WHERE userexam.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
 }
 ?>
