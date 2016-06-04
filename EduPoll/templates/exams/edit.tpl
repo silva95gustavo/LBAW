@@ -16,6 +16,36 @@
 						<li class="active">Edit Exam</li>
 					</ol>
 					
+					<div id="confirmationModalInviteUser" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to invite this user?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_invite_user" class="btn btn-success">Yes</button>
+									<button type="button" id="no_invite_user" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalInviteGroup" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to invite this group?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_invite_group" class="btn btn-success">Yes</button>
+									<button type="button" id="no_invite_group" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModalAddManager" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -41,6 +71,36 @@
 								<div class="modal-body text-center">
 									<button type="button" id="yes_rem_manager" class="btn btn-success">Yes</button>
 									<button type="button" id="no_rem_manager" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalUninviteGroup" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to uninvite this group?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_uninvite_group" class="btn btn-success">Yes</button>
+									<button type="button" id="no_uninvite_group" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalUninviteUser" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to uninvite this user?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_uninvite_user" class="btn btn-success">Yes</button>
+									<button type="button" id="no_uninvite_user" class="btn btn-danger" data-dismiss="modal">No</button>
 								</div>
 							</div>
 						</div>
@@ -152,7 +212,7 @@
 						
   						<div id="demo" class="collapse">
   							{if $isOwner}
-  								<form class="form-add-manager">
+  								<form action="#" class="form-add-manager">
 									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 
 									<input type="text" id="inputUserToAdd" class="form-control" placeholder="User name or email"
@@ -178,6 +238,28 @@
           					</ul>
   						</div>
 						<a href="#demo" class="btn btn-info show-managers" data-toggle="collapse">Show/hide managers</a>
+						
+  						<div id="invitees" class="collapse">
+  							<form action="#" class="form-add-manager">
+								<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+								<input type="text" id="inputUserGroupToInvite" class="form-control" placeholder="User name/email or Group name"
+									required autofocus>
+							</form>
+							<br/>
+  							<ul class="list-group">
+  								{if sizeof($invitedusers) == 0 && sizeof($invitedgroups) == 0}
+  									<li class="list-group-item">There are no invitees for this exam</li>
+  								{else}
+  									{foreach from=$invitedgroups item=group}
+  										<a href="#" class="list-group-item removable_group" groupid={$group.id}><strong>Group:</strong> {$group.name|escape:'html'}</a>
+  									{/foreach}
+  									{foreach from=$invitedusers item=user}
+  										<a href="#" class="list-group-item removable_user" userid={$user.id}><strong>User:</strong> {$user.name|escape:'html'} ({$user.email|escape:'html'})</a>
+  									{/foreach}
+  								{/if}
+          					</ul>
+  						</div>
+						<a href="#invitees" class="btn btn-info show-invitees" data-toggle="collapse">Show/hide invited users and groups</a>
 	
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
