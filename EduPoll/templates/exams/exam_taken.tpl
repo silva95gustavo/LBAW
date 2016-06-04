@@ -71,7 +71,7 @@
 						</div>
 					{/foreach}					
 					
-					<a href="{$BASE_URL}pages/exams/welcome.php?id={$attempt.examid}"><button type="button" class="btn btn-primary">Return to results page</button><p></p></a>	
+					<button type="button" class="btn btn-primary"><a href="{$BASE_URL}pages/exams/welcome.php?id={$attempt.examid}">Return to results page</a></button><p></p>	
 					
 				</div>
 			</div>

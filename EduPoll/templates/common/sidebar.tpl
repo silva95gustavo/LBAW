@@ -19,7 +19,7 @@
 			</ul>
 		</div>
 		
-  	</br></br><ul class="nav nav-sidebar" text-align="right">
+  	<br/><br/><ul class="nav nav-sidebar">
     	<li><a href="{$BASE_URL}pages/users/edit_profile.php">{$name|escape:'html'}</a></li>
   	</ul>
   
