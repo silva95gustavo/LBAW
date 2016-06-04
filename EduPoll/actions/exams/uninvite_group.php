@@ -9,14 +9,14 @@ if (! isLoggedIn ()) {
 	exit;
 }
 
-if (! isset($_POST['exam']) || ! isset($_POST['user'])) {
+if (! isset($_POST['exam']) || ! isset($_POST['group'])) {
 	$_SESSION['error_messages'][] = 'Error fetching exam to edit.';
 	http_response_code ( 400 );
 	exit;
 }
 
 $exam_id = intval($_POST['exam']);
-$user = intval($_POST['user']);
+$group = intval($_POST['group']);
 $exam = getExam($exam_id);
 
 if(!isset($exam)) {
@@ -38,18 +38,18 @@ if ($exam ['ownerid'] !== $userInfo ['id'] && !isExamManager($userInfo['id'], $e
 }
 
 try {
-	if(examUninviteUser($exam_id, $user) == -1) {
-		$_SESSION['error_messages'][] = 'Error uninviting user from exam.';
+	if(examUninviteGroup($exam_id, $group) == -1) {
+		$_SESSION['error_messages'][] = 'Error uninviting group from exam.';
 		http_response_code ( 400 );
 		exit;
 	}
 } catch (PDOException $e) {
-	$_SESSION['error_messages'][] = 'Error uninviting user from exam: ' . $e->getMessage();
+	$_SESSION['error_messages'][] = 'Error uninviting group from exam: ' . $e->getMessage();
 	http_response_code ( 400 );
 	exit;
 }
 
-$_SESSION['success_messages'][] = 'User successfully uninvited.';
+$_SESSION['success_messages'][] = 'Group successfully uninvited.';
 http_response_code ( 200 );
 ?>
 
