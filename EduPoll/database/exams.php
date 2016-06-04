@@ -184,6 +184,13 @@ function createQuestion($examID, $categoryID, $statement) {
 	return $stmt->fetch();
 }
 
+function createCategory($examID, $name) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT create_category(:examID, :name)");
+	$stmt->execute(array($examID, $name));
+	return $stmt->fetch();
+}
+
 function createAnswer($questionID, $text, $score = 0) {
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO answer

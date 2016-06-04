@@ -61,6 +61,29 @@
 						</div>
 					</div>
 					
+					<div id="modalCreateCategory" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Create category</h4>
+								</div>
+								<div class="modal-body">
+									<form action="{$BASE_URL}actions/exams/create_category.php" method="post" id="createCategory">
+										<label>Category name: </label>
+										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+										<input type="hidden" name="examid" value="{$exam.id}" />
+										<input type="text" name="name" class="form-control">
+										<div class="modal-body text-center">
+											<button type="submit" id="yes_create_category" class="btn btn-success" data-examid="{$exam.id}">Create</button>
+											<button type="button" id="no_create_category" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="modalCreateQuestion" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -160,7 +183,7 @@
 							<div class="panel-heading">
 								<div class="row">
 									<div class="col-sm-3">
-										<button type="button" class="btn btn-info">Add New Category</button>
+										<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalCreateCategory">Add New Category</button>
 									</div>
 									<div class="col-sm-3">
 										<button type="button" class="btn btn-success">Save Changes</button>
@@ -205,26 +228,6 @@
 							{/if}
 						{/foreach}
 						
-						<div class="panel panel-default text-center">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-sm-3">
-										<button type="button" class="btn btn-info">Add New Category</button>
-									</div>
-									<div class="col-sm-3">
-										<button type="button" class="btn btn-success">Save Changes</button>
-									</div>
-									<div class="col-sm-3">
-										<button type="button" class="btn btn-danger">Cancel Changes</button>
-									</div>	
-									{if $isOwner}
-									<div class="col-sm-3">
-										<button type="submit" class="btn btn-danger" data-id="{$exam.id}" data-toggle="modal" data-target="#confirmationModal">Delete exam</button>
-									</div>
-									{/if}
-								</div>
-							</div>
-						</div>
 					</div>					
 				</div>
 			</div>
