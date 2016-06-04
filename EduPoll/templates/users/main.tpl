@@ -34,7 +34,8 @@
 									</div>
 
 									<div class="col-md-3">
-										<datetime class="list-group-item-text pull-right">Start :{$exam.starttime}</datetime></p>
+										<datetime class="list-group-item-text pull-right">Start :{$exam.starttime}</datetime>
+										<br>
 										<datetime class="list-group-item-text pull-right">End   :{$exam.endtime}</datetime>
 									</div>
 								</div>
@@ -65,7 +66,8 @@
 									</div>
 
 									<div class="col-md-3">
-										<datetime class="list-group-item-text pull-right">Start :{$exam.starttime}</datetime></p>
+										<datetime class="list-group-item-text pull-right">Start :{$exam.starttime}</datetime>
+										<br>
 										<datetime class="list-group-item-text pull-right">End   :{$exam.endtime}</datetime>
 									</div>
 								</div>
@@ -96,7 +98,8 @@
 									</div>
 
 									<div class="col-md-3">
-										<datetime class="list-group-item-text pull-right">Start :{$exam.starttime}</datetime></p>
+										<datetime class="list-group-item-text pull-right">Start :{$exam.starttime}</datetime>
+										<br>
 										<datetime class="list-group-item-text pull-right">End   :{$exam.endtime}</datetime>
 									</div>
 								</div>

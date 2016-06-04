@@ -16,8 +16,8 @@ $(document).ready(
 						csrf_token : CSRF_TOKEN
 					},
 					success : function() {
-						$('tr#' + userId).css('background-color','#FFF37F');
 						$('#confirmationModal').modal('hide');
+						$('tr#' + userId).css('background-color','#FFF37F');
 						$('tr#' + userId).hide(1000, function(){
 							$('tr#' + userId).remove();
 						});

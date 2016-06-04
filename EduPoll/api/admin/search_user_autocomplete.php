@@ -5,7 +5,7 @@ require_once ('../../database/users.php');
 
 header('Content-Type: application/json');
 
-if (! isAdmin ()) {
+if ( isStudent ()) {
 	http_response_code(403);
 	echo 'You do not have permission to do this.';
 	exit ();
