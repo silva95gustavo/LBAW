@@ -316,13 +316,16 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 				var el =
-				$("<div class=\"radio disabled answer\">" +
-					"<div class=\"inline-editable no-full-width answer-score neutral\" type=\"number\" name=\"score\" data-id=\"" + data + "\">0</div> " +
-					"<label class=\"answer\">" +
-						"<input type=\"radio\" name=\"optradio1\" checked=\"checked\">" +
-						"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"" + data + "\">" + $("<div>").text(values["text"]).html() + "</div>" +
-					"</label>" +
-				"</div>");
+				$(	"<div class=\"radio answer\">" +
+						"<span class=\"icon-clickable delete-answer\" data-answerid=\"" + data + "\">" +
+						"<i class=\"fa fa-trash-o\"></i>" +
+						"</span>" +
+						"<div class=\"inline-editable no-full-width answer-score neutral\" type=\"number\" name=\"score\" data-id=\"" + data + "\">0</div> " +
+						"<label class=\"answer\">" +
+							"<input type=\"radio\" name=\"optradio1\" disabled>" +
+							"<div class=\"inline-editable answer-text\" name=\"text\" data-id=\"" + data + "\" disabled>" + $("<div>").text(values["text"]).html() + "</div>" +
+						"</label>" +
+					"</div>");
 				addAnswerForm.before(el);
 				addAnswerForm.find(":input[name='text']").val("");
 				makeAnswerTextEditable(el.find(".inline-editable.answer-text"));
@@ -331,6 +334,9 @@ $(document).ready(function() {
 				console.log(elScore);
 				elScore.change(function() {
 					answerScoreOnChange(elScore);
+				});
+				el.find(".delete-answer").click(function() {
+					answerDeleteOnClick($(this));
 				});
 				elScore.trigger("change");
 			},
@@ -348,7 +354,26 @@ $(document).ready(function() {
 	$('.answer-score').change(function (e) {
 		answerScoreOnChange($(this));
 	});
+	
+	$('.delete-answer').click(function (e) {
+		return answerDeleteOnClick($(this));
+	})
 });
+
+function answerDeleteOnClick(jThis) {
+	var answerID = jThis.data("answerid");
+	$.ajax({
+		type: 'POST',
+		url: "../../api/exams/delete_answer.php",
+		data: { answer: answerID, csrf_token: CSRF_TOKEN },
+		success: function (data) {
+			jThis.parent().remove();
+		},
+		error: function (xhr) {
+			console.error("Error deleting answer: " + xhr.responseText);
+		}
+	});
+}
 
 function makeAnswerTextEditable(jThis) {
 	jThis.editable(BASE_URL + 'api/exams/edit_answer_text.php', {
