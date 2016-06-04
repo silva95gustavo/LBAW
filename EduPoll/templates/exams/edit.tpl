@@ -46,6 +46,36 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModalUninviteGroup" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to uninvite this group?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_uninvite_group" class="btn btn-success">Yes</button>
+									<button type="button" id="no_uninvite_group" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalUninviteUser" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to uninvite this user?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_uninvite_user" class="btn btn-success">Yes</button>
+									<button type="button" id="no_uninvite_user" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModal" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -194,7 +224,7 @@
   										<a href="#" class="list-group-item removable_group" groupid={$group.id}><strong>Group:</strong> {$group.name|escape:'html'}</a>
   									{/foreach}
   									{foreach from=$invitedusers item=user}
-  										<a href="#" class="list-group-item removable_user" userrid={$user.id}><strong>User:</strong> {$user.name|escape:'html'} ({$user.email|escape:'html'})</a>
+  										<a href="#" class="list-group-item removable_user" userid={$user.id}><strong>User:</strong> {$user.name|escape:'html'} ({$user.email|escape:'html'})</a>
   									{/foreach}
   								{/if}
           					</ul>

@@ -245,6 +245,17 @@ function removeManager($exam, $user) {
     else return -1;
 }
 
+function examUninviteUser($exam, $user) {
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM userexam
+            WHERE userid = ? AND examid = ?");
+	if($stmt->execute(array($user, $exam)))
+    {
+    	return $stmt->fetch(PDO::FETCH_ASSOC)['examid'];
+    }
+    else return -1;
+}
+
 function getOngoingExams($userID){
 	global $conn;
 	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
