@@ -177,6 +177,13 @@ function editAnswerScore($answerID, $newScore) {
 	return $stmt->fetch();
 }
 
+function createQuestion($examID, $categoryID, $statement) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT create_question(:examID, :categoryID, :statement)");
+	$stmt->execute(array($examID, $categoryID, $statement));
+	return $stmt->fetch();
+}
+
 function createAnswer($questionID, $text, $score = 0) {
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO answer
