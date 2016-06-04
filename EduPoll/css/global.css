@@ -140,6 +140,10 @@ div.jumbotron h2 {
 a .list-group-item-heading{
 	display:inline-block
 }
+
+#addform,#removeform{
+	padding-left:0px;
+
 .answer-score.no-full-width {
 	width: 3em;
 }
