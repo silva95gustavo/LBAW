@@ -28,12 +28,12 @@ if(getExamOwner($examID)[0]['id'] != $userID) {
 	http_response_code(403);
 	die ();
 }
-header("Content-Type: text/plain");
-  // filename for download
-  /*$filename = "exam_" . $examID . ".xls";
-
-  header("Content-Disposition: attachment; filename=\"$filename\"");
-  header("Content-Type: application/vnd.ms-excel");*/
+	//header("Content-Type: text/plain");
+  	///*
+  	$filename = "exam_" . $examID . ".xls";
+	header("Content-Disposition: attachment; filename=\"$filename\"");
+  	header("Content-Type: application/vnd.ms-excel");
+  	//*/
 
 $exam = getExam($examID);
 $stats = getExamStats($examID);
@@ -45,15 +45,15 @@ foreach($questions as $question) {
 	$questionstats = getQuestionAverageScore($question['id']);
 	$questiondata = [];
 	if(!$questionstats) {
-		$questiondata['id'] = $question['id'];
-		$questiondata['statement'] = $question['statement'];
-		$questiondata['score'] = "-";
-		$questiondata['answers'] = 0;
+		$questiondata['Question ID'] = $question['id'];
+		$questiondata['Statement'] = $question['statement'];
+		$questiondata['Ammount of Answers'] = 0;
+		$questiondata['Average Score'] = "-";
 	} else {
-		$questiondata['id'] = $question['id'];
-		$questiondata['statement'] = $questionstats['statement'];
-		$questiondata['score'] = $questionstats['score'];
-		$questiondata['answers'] = $questionstats['answers'];
+		$questiondata['Question ID'] = $question['id'];
+		$questiondata['Statement'] = $questionstats['statement'];
+		$questiondata['Ammount of Answers'] = $questionstats['answers'];
+		$questiondata['Average Score'] = str_replace('.', ',', "" . $questionstats['score']);
 	}
 	array_push($questionscores, $questiondata);
 }
@@ -76,11 +76,6 @@ foreach($studentstats as $student) {
 $examOver = examStatus($examID); //1->over , 2->active, 0->
 
 
-$groupsAssigned = getAssignedGroups($examID);
-$studentsAssigned = getAssignedStudents($examID);
-$groupsNotAssigned = getNotAssignedGroups($examID);
-$studentsNotAssigned = getNotAssignedStudents($examID);
-
 
 $line_break = "\r\n";
 $paragraph = $line_break . $line_break;
@@ -101,7 +96,42 @@ foreach($gradedistexport as $row) {
 	echo $tab . implode("\t", array_values($row)) . "\r\n";
 }
 
-echo $paragraph . "";
+echo $paragraph . "Question statistics" . $paragraph;
+
+//$questionscores
+$questionstatexport = [];
+echo $tab . implode("\t", array_keys($questionscores[0])) . "\r\n";
+foreach($questionscores as $row) {
+	array_walk($row, __NAMESPACE__ . '\cleanData');
+	echo $tab . implode("\t", array_values($row)) . "\r\n";
+}
+
+if(sizeof($studentstats > 0)) {
+	echo $paragraph . "Attempt scores" . $paragraph;
+
+	$scoresexport = [];
+	foreach($studentstats as $student) {
+		$temp = [];
+		$temp['Attempt ID'] = $student['attemptid'];
+		$temp['Student Name'] = $student['username'];
+		$temp['Grade'] = str_replace('.', ',', "" . $student['finalscore']);
+		array_push($scoresexport, $temp);
+	}
+	
+	echo $tab . implode("\t", array_keys($scoresexport[0])) . "\r\n";
+	foreach($scoresexport as $row) {
+		array_walk($row, __NAMESPACE__ . '\cleanData');
+		echo $tab . implode("\t", array_values($row)) . "\r\n";
+	}
+}
+
+echo $paragraph . "Approvals" . $paragraph;
+$approvals = array(
+	array("Approved" => $stats['approved'], "Disapproved" => (sizeof($studentstats) - $stats['approved']))
+);
+
+echo $tab . implode("\t", array_keys($approvals[0])) . "\r\n";
+	echo $tab . implode("\t", array_values($approvals[0])) . "\r\n";
 
 
 ?>
