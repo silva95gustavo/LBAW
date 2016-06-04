@@ -23,22 +23,24 @@ if (!$exam) {
 	echo 'Error fetching exam to edit.';
 	exit;
 }
-
 if ($exam ['ownerid'] !== $userInfo ['id']) {
-	if (!isExamManager($userInfo['id'], $exam["id"])) {
+	if (!isExamManager($userInfo['id'], $exam['id'])) {
 		http_response_code(403);
-		echo 'Only the owner/manager of an exam may add a question answer.';
+		echo 'Only the owner/manager of an exam may edit a question statement.';
 		exit;
 	}
 }
 
+$reply;
+
 try {
-	$reply = createAnswer($_POST['id'], $_POST['text']);
-	http_response_code(200);
-	echo json_encode($reply["id"]);
+	$reply = editQuestionStatement($_POST['id'], $_POST['statement']);
 } catch (PDOException $e) {
 	http_response_code(400);
-	echo 'Error adding answer: ' . $e->getMessage();
+	echo 'Error editing question statement: ' . $e->getMessage();
 	exit;
 }
+
+http_response_code(200);
+echo $_POST['statement'];
 ?>
