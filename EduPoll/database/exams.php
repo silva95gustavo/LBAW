@@ -139,14 +139,65 @@ function editExamName($examID, $newName) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET name = ? WHERE id = ? RETURNING name");
 	$stmt->execute(array($newName, $examID));
-	return $stmt->fetchAll();
+	return $stmt->fetch();
 }
 
 function editExamDescription($examID, $newDescription) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET description = ? WHERE id = ? RETURNING description");
 	$stmt->execute(array($newDescription, $examID));
-	return $stmt->fetchAll();
+	return $stmt->fetch();
+}
+
+function editCategoryName($categoryID, $newName) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE category SET name = ? WHERE id = ? RETURNING name");
+	$stmt->execute(array($newName, $categoryID));
+	return $stmt->fetch();
+}
+
+function editQuestionStatement($questionID, $newStatement) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE question SET statement = ? WHERE id = ? RETURNING statement");
+	$stmt->execute(array($newStatement, $questionID));
+	return $stmt->fetch();
+}
+
+function editAnswerText($answerID, $newText) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE answer SET text = ? WHERE id = ? RETURNING text");
+	$stmt->execute(array($newText, $answerID));
+	return $stmt->fetch();
+}
+
+function editAnswerScore($answerID, $newScore) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE answer SET score = ? WHERE id = ? RETURNING score");
+	$stmt->execute(array($newScore, $answerID));
+	return $stmt->fetch();
+}
+
+function createQuestion($examID, $categoryID, $statement) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT create_question(:examID, :categoryID, :statement)");
+	$stmt->execute(array($examID, $categoryID, $statement));
+	return $stmt->fetch();
+}
+
+function createCategory($examID, $name) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT create_category(:examID, :name)");
+	$stmt->execute(array($examID, $name));
+	return $stmt->fetch();
+}
+
+function createAnswer($questionID, $text, $score = 0) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO answer
+   		(questionid, text, score)
+   		VALUES (:questionid, :text, :score) RETURNING id");
+	$stmt->execute(array($questionID, $text, $score));
+	return $stmt->fetch();
 }
 
 function deleteExam($examID) {
@@ -270,6 +321,79 @@ function getAttempts($userID, $examID)
 	return $stmt->fetchAll();
 }
 
+
+
+function getExamCategories($examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT category.id, category.name, category.numselquestions, orderindex
+   		FROM category INNER JOIN examelement ON (category.id = examelement.id)
+   		WHERE examelement.examid = :examid");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+function getCategoryQuestions($categoryID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT question.id, category, statement, maxscore
+   		FROM question INNER JOIN examelement ON (question.id = examelement.id)
+   		WHERE category = :categoryid");
+	$stmt->execute(array($categoryID));
+	return $stmt->fetchAll();
+}
+function getIndependentQuestions($examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT question.id, question.category, question.statement, question.maxscore, orderindex
+   		FROM question INNER JOIN examelement ON (question.id = examelement.id)
+   		WHERE examelement.examid = :examid
+    	AND question.category IS NULL");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+function getQuestionAnswers($questionID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, text, score
+   		FROM answer
+   		WHERE questionid = :questionid ORDER BY id");
+	$stmt->execute(array($questionID));
+	return $stmt->fetchAll();
+}
+function deleteCategory($categoryID)
+{
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM category
+		WHERE id = :categoryid");
+	return $stmt->execute(array($categoryID));
+}
+function deleteQuestion($questionID)
+{
+	global $conn;
+	$stmt = $conn->prepare("DELETE FROM question
+		WHERE id = :questionid");
+	return $stmt->execute(array($questionID));
+}
+function getExamFromExamElement($examElementID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT exam.id AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+			FROM examelement INNER JOIN exam ON exam.id = examelement.examid
+			WHERE examelement.id = ?");
+	$stmt->execute(array($examElementID));
+	return $stmt->fetch();
+}
+function getExamFromAnswer($answerID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT exam.id AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore 
+			FROM answer
+			INNER JOIN examelement ON answer.questionid = examelement.id
+			INNER JOIN exam ON exam.id = examelement.examid
+			WHERE answer.id = ?");
+	$stmt->execute(array($answerID));
+	return $stmt->fetch();
+}
 function getAttempt($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT * 
@@ -278,7 +402,6 @@ function getAttempt($attemptID) {
 	$stmt->execute(array($attemptID));
 	return $stmt->fetchAll()[0];
 }
-
 function getAttemptQuestions($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, questionattempt.answerid AS answerid, questionattempt.questionorder AS order, question.statement AS statement, question.maxscore AS maxscore
@@ -288,14 +411,3 @@ function getAttemptQuestions($attemptID) {
 	$stmt->execute(array($attemptID));
 	return $stmt->fetchAll();
 }
-
-function getQuestionAnswers($questionID) {
-	global $conn;
-	$stmt = $conn->prepare("SELECT *
-								FROM answer
-								WHERE questionid = ?");
-	$stmt->execute(array($questionID));
-	return $stmt->fetchAll();
-}
-
-?> 
