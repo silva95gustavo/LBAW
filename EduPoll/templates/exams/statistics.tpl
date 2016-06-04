@@ -153,7 +153,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>z
 </div>
 
 <script src="{$BASE_URL}frameworks/Chart.js"></script>

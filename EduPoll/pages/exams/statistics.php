@@ -62,7 +62,6 @@ foreach($studentstats as $student) {
 
 $examOver = examStatus($examID); //1->over , 2->active, 0->
 
-
 $groupsAssigned = getAssignedGroups($examID);
 $studentsAssigned = getAssignedStudents($examID);
 $groupsNotAssigned = getNotAssignedGroups($examID);
