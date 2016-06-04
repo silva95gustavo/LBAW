@@ -320,6 +320,9 @@ function getAttempts($userID, $examID)
 	$stmt->execute(array($userID, $examID));
 	return $stmt->fetchAll();
 }
+
+
+
 function getExamCategories($examID)
 {
 	global $conn;
@@ -391,4 +394,20 @@ function getExamFromAnswer($answerID)
 	$stmt->execute(array($answerID));
 	return $stmt->fetch();
 }
-?>
+function getAttempt($attemptID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT * 
+		FROM Attempt
+		WHERE id = ?");
+	$stmt->execute(array($attemptID));
+	return $stmt->fetchAll()[0];
+}
+function getAttemptQuestions($attemptID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT question.id AS questionid, questionattempt.answerid AS answerid, questionattempt.questionorder AS order, question.statement AS statement, question.maxscore AS maxscore
+								FROM questionattempt INNER JOIN question ON questionattempt.questionid = question.id
+								WHERE attemptid = ?
+								ORDER BY questionorder ASC");
+	$stmt->execute(array($attemptID));
+	return $stmt->fetchAll();
+}
