@@ -411,3 +411,21 @@ function getAttemptQuestions($attemptID) {
 	$stmt->execute(array($attemptID));
 	return $stmt->fetchAll();
 }
+
+function getExamInvitedGroups($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT studentgroup.id AS id, studentgroup.name AS name
+								FROM studentgroup INNER JOIN groupexam ON studentgroup.id = groupexam.groupid
+								WHERE groupexam.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function getExamInvitedUsers($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT registereduser.id AS id, registereduser.name AS name, registereduser.email AS email
+								FROM registereduser INNER JOIN userexam ON registereduser.id = userexam.userid
+								WHERE userexam.examid = ?");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
