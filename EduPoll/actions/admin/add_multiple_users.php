@@ -2,6 +2,7 @@
 require_once ('../../config/init.php');
 require_once ('../../pages/common/utils.php');
 require_once ('../../database/exams.php');
+require_once ('../../database/groups.php');
 
 if (! isAdmin ()) {
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
@@ -16,109 +17,127 @@ if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
 
 function validateJSON($json_object)
 {
-	$UsersRegistered = 0;
+	$StudentsRegistered = 0;
+	$StudentsError = 0;
 	if($json_object['students'])
 	{
 		$studentN = -1;
 		foreach ($json_object['students'] as $student) {
 			$studentN += 1;
 			if(sizeof($student) > 3){
-				$_SESSION ['error_messages'] [] = "Too many parameters for Student " . $studentN . ".";
+				$StudentsError += 1;
 				continue;
 			}
 			if(!($student["name"])){
-				$_SESSION ['error_messages'] [] = "Name of Student " . $studentN . " does not exist.";
+				$StudentsError += 1;
 				continue;
 			}
 			else if(!is_string($student["name"]))
 			{
-				$_SESSION ['error_messages'] [] = "Name of Student " . $studentN . " not a string.";
+				$StudentsError += 1;
 				continue;
 			}
 			if(!($student["email"])){
-				$_SESSION ['error_messages'] [] = "Email of Student " . $studentN . " does not exist.";
+				$StudentsError += 1;
 				continue;
 			}
 			else if(!filter_var($student["email"], FILTER_VALIDATE_EMAIL))
 			{
-				$_SESSION ['error_messages'] [] = "Email of Student " . $studentN . " is invalid.";
+				$StudentsError += 1;
 				continue;
 			}
 			if(!isset($student["gender"])){
-				$_SESSION ['error_messages'] [] = "Gender of Student " . $studentN . " does not exist.";
+				$StudentsError += 1;
 				continue;
 			}
 			else if(!is_numeric($student["gender"])){
-				$_SESSION ['error_messages'] [] = "Gender of Student " . $studentN . " not a number.";
+				$StudentsError += 1;
 				continue;
 			}
 
 			$password = generatePassword();
 			try{
-				registerUser($student["name"], $student["email"], $student["gender"], $password, 0 );
+				registerUser($student["name"], $student["email"], $student["gender"], $password, 2 );
 			}
 			catch ( PDOException $e ) {
-				if (strpos ( $e->getMessage (), 'users_pkey' ) !== false) {
-					$_SESSION ['error_messages'] [] = 'Duplicate username of Student ' . $studentN . ".";
-				} else
-				$_SESSION ['error_messages'] [] = 'Error on user registration of Student ' . $studentN . ".". $e->getMessage ();
+				$StudentsError += 1;
 				continue;
 			}
 			emailSender($student["name"],$password,$student["email"]);
-			$UsersRegistered += 1;
+			$StudentsRegistered += 1;
 		}
-	$_SESSION ['success_messages'] [] = $UsersRegistered . " Students registered.";
+		$_SESSION ['success_messages'] [] = $StudentsRegistered . " Students registered. " . $StudentsError . " Students failed to be registered.";
 	}
 	if($json_object['teachers'])
 	{
 		$TeachersRegistered = 0;
+		$TeacherError = 0;
 		$teacherN = -1;
 		foreach ($json_object['teachers'] as $teacher){
 			$teacherN += 1;
-			if(sizeof($teacher) > 3){
-				$_SESSION ['error_messages'] [] = "Too many parameters for Teacher " . $teacherN . ".";
-				continue;
-			}
 			if(!($teacher["name"])){
-				$_SESSION ['error_messages'] [] = "Name of Teacher " . $teacherN . " does not exist.";
+				$TeacherError += 1;
 				continue;
 			}
 			else if(!is_string($teacher["name"]))
 			{
-				$_SESSION ['error_messages'] [] = "Name of Teacher " . $teacherN . " not a string.";
+				$TeacherError += 1;
 				continue;
 			}
 			if(!($teacher["email"])){
-				$_SESSION ['error_messages'] [] = "Email of Teacher " . $teacherN . " does not exist.";
+				$TeacherError += 1;
 				continue;
 			}
 			else if(!filter_var($teacher["email"], FILTER_VALIDATE_EMAIL))
 			{
-				$_SESSION ['error_messages'] [] = "Email of Teacher " . $teacherN . " is invalid.";
+				$TeacherError += 1;
 				continue;
 			}
 			if(!isset($teacher["gender"])){
-				$_SESSION ['error_messages'] [] = "Gender of Teacher " . $teacherN . " does not exist.";
+				$TeacherError += 1;
 				continue;
 			}
 			else if(!is_numeric($teacher["gender"])){
-				$_SESSION ['error_messages'] [] = "Gender of Student " . $teacherN . " not a number.";
+				$TeacherError += 1;
 				continue;
 			}$password = generatePassword();
 			try{
 				registerUser($teacher["name"], $teacher["email"], $teacher["gender"], $password, 1 );
 			}
 			catch ( PDOException $e ) {
-				if (strpos ( $e->getMessage (), 'users_pkey' ) !== false) {
-					$_SESSION ['error_messages'] [] = 'Duplicate username of Teacher ' . $teacherN . ".";
-				} else
-				$_SESSION ['error_messages'] [] = 'Error on user registration of Teacher ' . $teacherN . ".";
+				$TeacherError += 1;
 				continue;
 			}
 			emailSender($student["name"],$password,$student["email"]);
 			$TeachersRegistered += 1;
 		}
-	$_SESSION ['success_messages'] [] = $TeachersRegistered . " Teachers registered.";
+		$_SESSION ['success_messages'] [] = $TeachersRegistered . " Teachers registered. " . $TeacherError . " Teachers failed to be registered.";
+	}
+	if($json_object['categories'])
+	{
+		foreach ($json_object['categories'] as $category) {
+			if($category['name'])
+			{
+				try{
+					creategroup($category['name']);
+				}
+				catch (PDOException $e ) {
+					if(strpos ( $e->getMessage (), 'duplicate key value violates unique constraint "studentgroup_name_key"' ) !== false){
+						continue;
+					}
+				}
+			}
+			foreach ($category['users'] as $user) {
+				if(filter_var($user, FILTER_VALIDATE_EMAIL)){
+					try{
+						addUserToGroup($category['name'],$user);
+					}
+					catch ( PDOException $e ){
+						continue;		
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -137,6 +156,4 @@ else
 	header ( 'Location: '  . $_SERVER ['HTTP_REFERER']);
 	die ();
 }
-
-
 ?>

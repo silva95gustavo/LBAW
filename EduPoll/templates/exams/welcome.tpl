@@ -18,7 +18,7 @@
 					<div class="first-element jumbotron">
 						<h1 class="text-center">{$exam.name}</h1>
 						<div>
-							<p><strong>Starts:</strong> {$exam.starttime} <p> <strong>Ends:</strong> {$exam.endtime}</p>
+							<p><strong>Start:</strong> {$exam.starttime} <p> <strong>End:</strong> {$exam.endtime}</p>
 						</div>
 					</div>
 
@@ -35,7 +35,7 @@
 								<div class="col-md-10">
 									<datetime class="list-group-item-text">{$attempt.starttime} - {$attempt.endtime}</datetime>
 									<br/>
-									<a href="../../pages/statistics.php">Review</a>
+									<a href="../../pages/exams/exam_taken.php?attemptid={$attempt.id}">Review</a>
 								</div>
 								<div class="col-md-2 text-right">
 									<br/><p class="list-group-item-text">Grade: {$attempt.finalscore} / {$exam.maxscore}</p>

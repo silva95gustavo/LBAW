@@ -15,52 +15,34 @@
 						<li><a href="my_exams.php">My Exams</a></li>
 						<li class="active">Edit Exam</li>
 					</ol>
-
-					<!-- Trigger the modal with a button -->
-
-					<!-- Modal -->
-					<div id="myModal" class="modal fade" role="dialog">
+					
+					<div id="confirmationModalInviteUser" class="modal fade" role="dialog">
 						<div class="modal-dialog">
-
-							<!-- Modal content-->
 							<div class="modal-content">
-								<div class="modal-header">
+								<div class="modal-header text-center">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title"><strong>Create/Edit Question</strong></h4>
+									<h4 class="modal-title">Are you sure to invite this user?</h4>
 								</div>
-								<div class="modal-body">
-									<p><strong>Category: </strong> Category A</p>
-									<label><strong>Question:</strong></label>
-									<input type="text" class="form-control">
-									<form>
-										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 1</label>
-										</div>
-										<input type="text" class="form-control">
-										
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 2</label>
-										</div>
-										<input type="text" class="form-control">
-										
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 3</label>
-										</div>
-										<input type="text" class="form-control">
-										
-										<div class="radio">
-											<label><input type="radio" name="optradio1">Option 4</label>
-										</div>
-										<input type="text" class="form-control">
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_invite_user" class="btn btn-success">Yes</button>
+									<button type="button" id="no_invite_user" class="btn btn-danger" data-dismiss="modal">No</button>
 								</div>
 							</div>
-
+						</div>
+					</div>
+					
+					<div id="confirmationModalInviteGroup" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure to invite this group?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_invite_group" class="btn btn-success">Yes</button>
+									<button type="button" id="no_invite_group" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
 						</div>
 					</div>
 					
@@ -94,6 +76,36 @@
 						</div>
 					</div>
 					
+					<div id="confirmationModalUninviteGroup" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to uninvite this group?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_uninvite_group" class="btn btn-success">Yes</button>
+									<button type="button" id="no_uninvite_group" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalUninviteUser" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to uninvite this user?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_uninvite_user" class="btn btn-success">Yes</button>
+									<button type="button" id="no_uninvite_user" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div id="confirmationModal" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -104,6 +116,82 @@
 								<div class="modal-body text-center">
 									<button type="button" id="yes" class="btn btn-success">Yes</button>
 									<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="modalCreateCategory" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Create category</h4>
+								</div>
+								<div class="modal-body">
+									<form action="{$BASE_URL}actions/exams/create_category.php" method="post" id="createCategory">
+										<label>Category name: </label>
+										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+										<input type="hidden" name="examid" value="{$exam.id}" />
+										<input type="text" name="name" class="form-control">
+										<div class="modal-body text-center">
+											<button type="submit" id="yes_create_category" class="btn btn-success" data-examid="{$exam.id}">Create</button>
+											<button type="button" id="no_create_category" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="modalCreateQuestion" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Create question</h4>
+								</div>
+								<div class="modal-body">
+									<form action="{$BASE_URL}actions/exams/create_question.php" method="post" id="createQuestion">
+										<label>Question statement: </label>
+										<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+										<input type="hidden" name="examid" value="{$exam.id}" />
+										<input type="text" name="statement" class="form-control">
+										<div class="modal-body text-center">
+											<button type="submit" id="yes_create_question" class="btn btn-success" data-examid="{$exam.id}">Create</button>
+											<button type="button" id="no_create_question" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalDeleteCategory" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to delete this category? All questions inside it will be deleted as well.</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_delete_category" class="btn btn-success">Yes</button>
+									<button type="button" id="no_delete_category" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="confirmationModalDeleteQuestion" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to delete this question?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_delete_question" class="btn btn-success">Yes</button>
+									<button type="button" id="no_delete_question" class="btn btn-danger" data-dismiss="modal">No</button>
 								</div>
 							</div>
 						</div>
@@ -124,7 +212,7 @@
 						
   						<div id="demo" class="collapse">
   							{if $isOwner}
-  								<form class="form-add-manager">
+  								<form action="#" class="form-add-manager">
 									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 
 									<input type="text" id="inputUserToAdd" class="form-control" placeholder="User name or email"
@@ -138,24 +226,46 @@
   										<li class="list-group-item">There are no managers for this exam</li>
   									{else}
   										{for $manager=0 to sizeof($managers)-1}
-  											<a href="#" class="list-group-item removable_manager" managerid={$managers[$manager]['id']}>{$managers[$manager]['name']}</a>
+  											<a href="#" class="list-group-item removable_manager" managerid={$managers[$manager]['id']}>{$managers[$manager]['name']|escape:'html'}</a>
   										{/for}
   									{/if}
   								{else}
-  									<li class="list-group-item">{$owner['name']} (owner)</li>
+  									<li class="list-group-item">{$owner['name']|escape:'html'} (owner)</li>
   									{for $manager=0 to sizeof($managers)-1}
-  										<li class="list-group-item">{$managers[$manager]['name']}</li>
+  										<li class="list-group-item">{$managers[$manager]['name']|escape:'html'}</li>
   									{/for}
   								{/if}
           					</ul>
   						</div>
 						<a href="#demo" class="btn btn-info show-managers" data-toggle="collapse">Show/hide managers</a>
+						
+  						<div id="invitees" class="collapse">
+  							<form action="#" class="form-add-manager">
+								<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+								<input type="text" id="inputUserGroupToInvite" class="form-control" placeholder="User name/email or Group name"
+									required autofocus>
+							</form>
+							<br/>
+  							<ul class="list-group">
+  								{if sizeof($invitedusers) == 0 && sizeof($invitedgroups) == 0}
+  									<li class="list-group-item">There are no invitees for this exam</li>
+  								{else}
+  									{foreach from=$invitedgroups item=group}
+  										<a href="#" class="list-group-item removable_group" groupid={$group.id}><strong>Group:</strong> {$group.name|escape:'html'}</a>
+  									{/foreach}
+  									{foreach from=$invitedusers item=user}
+  										<a href="#" class="list-group-item removable_user" userid={$user.id}><strong>User:</strong> {$user.name|escape:'html'} ({$user.email|escape:'html'})</a>
+  									{/foreach}
+  								{/if}
+          					</ul>
+  						</div>
+						<a href="#invitees" class="btn btn-info show-invitees" data-toggle="collapse">Show/hide invited users and groups</a>
 	
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
 								<div class="row">
 									<div class="col-sm-3">
-										<button type="button" class="btn btn-info">Add New Category</button>
+										<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalCreateCategory">Add New Category</button>
 									</div>
 									<div class="col-sm-3">
 										<button type="button" class="btn btn-success">Save Changes</button>
@@ -172,196 +282,34 @@
 							</div>
 						</div>
 	
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-md-6"><strong>Category A</strong></div>
-									<div class="col-md-6 text-right">
-										<i class="fa fa-plus"></i>
-										<i class="fa fa-pencil"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question A1</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>First question. Select the correct option:</p>
-										<form>
-											<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" checked="checked">Option 1</label>
-											</div>
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" disabled>Option 2</label>
-											</div>
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" disabled>Option 3</label>
-											</div>
-											<div class="radio disabled">
-												<label><input type="radio" name="optradio1" disabled>Option 4</label>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question A2</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>Second question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" disabled>Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" checked="checked">Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" disabled>Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio2" disabled>Option 4</label>
+						{foreach $examElements as $examElement}
+							{if $examElement.type == 'category'}
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-md-6"><strong class="inline-editable category-name" data-id="{$examElement.id}">{$examElement.name|escape:'html'}</strong></div>
+										<div class="col-md-6 text-right">
+											<span class="icon-clickable">
+												<i class="fa fa-plus" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#modalCreateQuestion"></i>
+											</span>
+											<span class="icon-clickable">
+												<i class="fa fa-trash-o" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#confirmationModalDeleteCategory"></i>
+											</span>
 										</div>
 									</div>
 								</div>
+								
+								{foreach $examElement.questions as $question}
+									{include file='exams/question.tpl'}
+								{/foreach}
+								
 							</div>
-						</div>
+							{else if $examElement.type == 'question'}
+								{assign question $examElement}
+								{include file='exams/question.tpl'}
+							{/if}
+						{/foreach}
 						
-						
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-md-6"><strong>Category B</strong></div>
-									<div class="col-md-6 text-right">
-										<i class="fa fa-plus"></i>
-										<i class="fa fa-pencil"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question B1</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>First question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" checked="checked">Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" disabled>Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" disabled>Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio3" disabled>Option 4</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question B2</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>Second question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" disabled>Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" disabled>Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" checked="checked">Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio4" disabled>Option 4</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-6">Question B3</div>
-											<div class="col-md-6 text-right">
-												<i class="fa fa-pencil" data-toggle="modal" data-target="#myModal"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-										<p><strong>Question: </strong>Third question. Select the correct option:</p>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" disabled>Option 1</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" disabled>Option 2</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" checked="checked">Option 3</label>
-										</div>
-										<div class="radio disabled">
-											<label><input type="radio" name="optradio5" disabled>Option 4</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="panel panel-default text-center">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-md-4">
-										<button type="button" class="btn btn-info">Add New Category</button>
-									</div>
-									<div class="col-md-4">
-										<button type="button" class="btn btn-success">Save Changes</button>
-									</div>
-									<div class="col-md-4">
-										<button type="button" class="btn btn-danger">Cancel Changes</button>
-									</div>	
-								</div>
-							</div>
-						</div>
 					</div>					
 				</div>
 			</div>
