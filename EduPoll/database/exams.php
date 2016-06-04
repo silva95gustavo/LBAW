@@ -376,7 +376,7 @@ function getExamFromExamElement($examElementID)
 function getExamFromAnswer($answerID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT exam.id AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+	$stmt = $conn->prepare("SELECT exam.id AS id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore 
 			FROM answer
 			INNER JOIN examelement ON answer.questionid = examelement.id
 			INNER JOIN exam ON exam.id = examelement.examid

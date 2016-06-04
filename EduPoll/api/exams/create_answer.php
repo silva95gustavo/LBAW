@@ -17,7 +17,7 @@ if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
 	die ();
 }
 
-$exam = getExamFromAnswer($_POST['id']);
+$exam = getExamFromExamElement($_POST['id']);
 if (!$exam) {
 	http_response_code(400);
 	echo 'Error fetching exam to edit.';
