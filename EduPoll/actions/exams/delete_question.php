@@ -5,13 +5,13 @@ require_once ('../../database/exams.php');
 
 if (! isLoggedIn ()) {
 	$_SESSION ['error_messages'] [] = 'You are not logged in.';
-	header ( "Location: $BASE_URL" );
+	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 	exit;
 }
 
 if (! isset($_POST['question'])) {
 	$_SESSION['error_messages'][] = 'Question ID missing in the request.';
-	http_response_code ( 400 );
+	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 	exit;
 }
 
@@ -19,31 +19,31 @@ $exam = getExamFromExamElement($_POST['question']);
 
 if (!$exam) {
 	$_SESSION['error_messages'][] = 'Invalid question ID.';
-	http_response_code ( 400 );
+	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 	exit;
 }
 
 if ($exam ['ownerid'] !== $userInfo ['id'] && !isExamManager($userInfo['id'], $exam["id"])) {
 	$_SESSION['error_messages'][] = "You don't have permission to delete a question from this exam.";
-	http_response_code ( 403 );
+	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 	exit;
 }
 
 if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
 	$_SESSION['error_messages'][] = 'CSRF token missing.';
-	http_response_code ( 403 );
+	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 	exit;
 }
 
 try {
-	if(!deleteQuestion($questionid)) {
+	if(!deleteQuestion($_POST['question'])) {
 		$_SESSION['error_messages'][] = 'Error deleting question from exam.';
-		http_response_code ( 400 );
+		header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 		exit;
 	}
 } catch (PDOException $e) {
 	$_SESSION['error_messages'][] = 'Error deleting question from exam: ' . $e->getMessage();
-	http_response_code ( 400 );
+	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 	exit;
 }
 
