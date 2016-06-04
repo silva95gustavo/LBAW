@@ -31,6 +31,7 @@ $(document).ready(
 			$("#inputUserToRemove").autocomplete({
 				source : BASE_URL + "api/admin/search_user_autocomplete.php",
 				minLength : 3,
+				autoFocus: true,
 				select : function(event, ui) {
 					if (ui.item) {
 						this.value = ui.item.label;
