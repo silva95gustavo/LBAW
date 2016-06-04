@@ -76,10 +76,15 @@ $smarty->assign('managers', $managers);
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
 	die ();
 	}*/
+	
+$invitedgroups = getExamInvitedGroups($examID);
+$invitedusers = getExamInvitedUsers($examID);
 
 prepareDate($smarty);
 
 $smarty->assign ( 'isEditing', true );
 $smarty->assign ( 'name', $userInfo['name'] );
+$smarty->assign ( 'invitedgroups', $invitedgroups );
+$smarty->assign ( 'invitedusers', $invitedusers );
 $smarty->display ( 'exams/edit.tpl' );
 ?>

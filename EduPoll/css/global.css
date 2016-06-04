@@ -99,7 +99,7 @@ div.jumbotron h2 {
 }
 
 /* EDIT EXAM */
-.show-managers {
+.show-managers, .show-invitees {
 	margin: 2rem 0 2rem 1rem;
 }
 

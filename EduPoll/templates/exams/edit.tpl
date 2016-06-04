@@ -178,6 +178,28 @@
           					</ul>
   						</div>
 						<a href="#demo" class="btn btn-info show-managers" data-toggle="collapse">Show/hide managers</a>
+						
+  						<div id="invitees" class="collapse">
+  							<form class="form-add-manager">
+								<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+								<input type="text" id="inputUserGroupToInvite" class="form-control" placeholder="User name/email or Group name"
+									required autofocus>
+							</form>
+							<br/>
+  							<ul class="list-group">
+  								{if sizeof($invitedusers) == 0 && sizeof($invitedgroups) == 0}
+  									<li class="list-group-item">There are no invitees for this exam</li>
+  								{else}
+  									{foreach from=$invitedgroups item=group}
+  										<a href="#" class="list-group-item removable_group" groupid={$group.id}><strong>Group:</strong> {$group.name|escape:'html'}</a>
+  									{/foreach}
+  									{foreach from=$invitedusers item=user}
+  										<a href="#" class="list-group-item removable_user" userrid={$user.id}><strong>User:</strong> {$user.name|escape:'html'} ({$user.email|escape:'html'})</a>
+  									{/foreach}
+  								{/if}
+          					</ul>
+  						</div>
+						<a href="#invitees" class="btn btn-info show-invitees" data-toggle="collapse">Show/hide invited users and groups</a>
 	
 						<div class="panel panel-default text-center">
 							<div class="panel-heading">
