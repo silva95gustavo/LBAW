@@ -560,6 +560,13 @@ function editAttemptAnswer($attemptID, $questionID, $answerID) {
 	return $stmt->fetch();
 }
 
+function submitAttempt($attemptID) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE attempt SET endtime = CURRENT_TIMESTAMP WHERE id = ? RETURNING id");
+	$stmt->execute(array($attemptID));
+	return $stmt->fetch();
+}
+
 function getAttemptQuestions($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, questionattempt.answerid AS answerid, questionattempt.questionorder AS order, question.statement AS statement, question.maxscore AS maxscore
