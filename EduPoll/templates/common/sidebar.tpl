@@ -20,7 +20,11 @@
 		</div>
 		
   	<br/><br/><ul class="nav nav-sidebar">
+  		{if $invited}
+  		<li><a href="#">Guest</a></li>
+  		{else}
     	<li><a href="{$BASE_URL}pages/users/edit_profile.php">{$name|escape:'html'}</a></li>
+  		{/if}
   	</ul>
   
 	</div>

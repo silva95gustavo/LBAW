@@ -26,7 +26,19 @@
 					<p><strong>End: </strong>Until the owner closes the exam</p>
 					{/if}
 				</div>
-				
+	
+				{if $exam.opentopublic && $examOver != 1}
+				<div class="container-fluid">
+					<input type="hidden" id="csrf_token" value="{$CSRF_TOKEN}" />
+					<button class="btn btn-lg btn-info col-md-2" id="generateLink" data-id="{$exam.id}">Generate Guest Link</button>
+					<input type="text" class="input-lg col-md-8" id="generatedLink" disabled>
+					<span class="input-group-btn">
+                  		<button class="btn btn-lg btn-default" id="copy" type="button" style="box-shadow: 0 3px 0 0 #888888; border-radius: 20px;">Copy</button>
+               		</span>
+				</div>
+				<br>
+				{/if}	
+
 				{if $stats['attempts'] === 0}
 				<div class="alert alert-warning" role="alert">
 					<strong>Warning!</strong> No attempts have been made for this exam.
