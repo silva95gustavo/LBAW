@@ -91,6 +91,15 @@ function getQuestion($questionID) {
 	return $stmt->fetch();
 }
 
+function getCategory($categoryID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT *
+								FROM category
+								WHERE id = ?");
+	$stmt->execute(array($categoryID));
+	return $stmt->fetch();
+}
+
 function getQuestionAverageScore($questionID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, question.statement AS statement, AVG(answer.score) AS score, COUNT(answer.id) AS answers
@@ -407,13 +416,55 @@ function getBestScore($userID, $examID)
 function getAttempts($userID, $examID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT id,startTime,endTime,finalScore 
-		FROM Attempt
-		WHERE userID = ? AND examID = ?
-		ORDER BY finalScore DESC");
+	$stmt = $conn->prepare("SELECT id, starttime, endtime, finalscore 
+		FROM attempt
+		WHERE userid = ? AND examid = ?");
 	$stmt->execute(array($userID, $examID));
 	return $stmt->fetchAll();
 }
+
+function getExamlElements($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, orderindex
+		FROM examelement
+		WHERE examid = ?
+		ORDER BY orderindex ASC");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function addQuestionToAttempt($attemptid, $questionid, $orderindex) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO questionattempt (attemptid, questionid, questionorder)
+		VALUES (?, ?, ?) RETURNING attemptid");
+	if($stmt->execute(array($attemptid, $questionid, $orderindex)))
+	{
+		return $stmt->fetch(PDO::FETCH_ASSOC)['attemptid'];
+	}
+	else return -1;
+}
+
+function getPreviousAttempts($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, starttime, endtime, finalscore 
+		FROM attempt
+		WHERE userid = ? AND examid = ? AND endtime IS NOT NULL
+		ORDER BY finalscore DESC");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetchAll();
+}
+
+function getOngoingAttempt($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id
+		FROM attempt
+		WHERE userid = ? AND examid = ? AND endtime IS NULL");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetchAll();
+}
+
 function getExamCategories($examID)
 {
 	global $conn;
@@ -485,6 +536,18 @@ function getExamFromAnswer($answerID)
 	$stmt->execute(array($answerID));
 	return $stmt->fetch();
 }
+
+function createAttempt($userID, $examID) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO attempt (starttime, userid, examid)
+		VALUES (CURRENT_TIMESTAMP, ?, ?) RETURNING id");
+	if($stmt->execute(array($userID, $examID)))
+	{
+		return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+	}
+	else return -1;
+}
+
 function getAttempt($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT * 
@@ -493,6 +556,30 @@ function getAttempt($attemptID) {
 	$stmt->execute(array($attemptID));
 	return $stmt->fetchAll()[0];
 }
+
+function getAnswer($answerID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT * 
+		FROM answer
+		WHERE id = ?");
+	$stmt->execute(array($answerID));
+	return $stmt->fetchAll()[0];
+}
+
+function editAttemptAnswer($attemptID, $questionID, $answerID) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE questionattempt SET answerid = ? WHERE questionid = ? AND attemptid = ? RETURNING answerid");
+	$stmt->execute(array($answerID, $questionID, $attemptID));
+	return $stmt->fetch();
+}
+
+function submitAttempt($attemptID) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE attempt SET endtime = CURRENT_TIMESTAMP WHERE id = ? RETURNING id");
+	$stmt->execute(array($attemptID));
+	return $stmt->fetch();
+}
+
 function getAttemptQuestions($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, questionattempt.answerid AS answerid, questionattempt.questionorder AS order, question.statement AS statement, question.maxscore AS maxscore

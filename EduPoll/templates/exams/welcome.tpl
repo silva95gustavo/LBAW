@@ -24,6 +24,7 @@
 							{else}
 							<p><strong>End: </strong>Until the owner closes the exam</p>
 							{/if}
+							<p><strong>Attempts:</strong> {$exam.maxtries}</p>
 						</div>
 					</div>
 
@@ -56,9 +57,22 @@
 								</div>
 							</div>
 							{/if}
+						</div>
 						{/if}
 					{elseif $examStatus == 2}
-					<a href="take-exam.html"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">Take exam</button><p></p></a>
+						{if $ongoingattempt === -1 && sizeof($userattempts) < $exam.maxtries}
+							<a href="{$BASE_URL}pages/exams/take.php?exam={$exam.id}">
+								<button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">
+									Take exam
+								</button><p></p>
+							</a>
+						{elseif $ongoingattempt !== -1}
+							<a href="{$BASE_URL}pages/exams/take.php?exam={$exam.id}&attempt={$ongoingattempt}">
+								<button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">
+									Continue attempt
+								</button><p></p>
+							</a>
+						{/if}
 					{else}
 					<div id="examAvailableParent">
 						<div id="examAvailable" class="alert alert-info" >
@@ -67,6 +81,32 @@
 					</div>
 					{/if}
 					
+					{if $examStatus !== 0 && sizeof($userattempts) > 0}
+						<br/>
+						<div class="page-header">
+        					<h1>Previous attempts</h1>
+      					</div>
+      					<table class="table table-striped">
+            				<thead>
+ 				            	<tr>
+                					<th>Attempt ID</th>
+                					<th>Start</th>
+                					<th>End</th>
+                					<th>Score</th>
+              					</tr>
+            				</thead>
+            				<tbody>
+            					{foreach from=$userattempts item=attempt}
+              						<tr>
+                						<td>{$attempt.id} <a href="{$BASE_URL}pages/exams/exam_taken.php?attemptid={$attempt.id}">(Review)</a></td>
+                						<td>{$attempt.starttime}</td>
+                						<td>{$attempt.endtime}</td>
+                						<td>{$attempt.finalscore}</td>
+              						</tr>
+            					{/foreach}
+            				</tbody>
+          				</table>
+					{/if}
 				</div>
 			</div>
 		</div>
