@@ -10,6 +10,16 @@ if (! isAdmin ()) {
 
 $perPage = 15;
 
+try{
+$users = getUsers($start, $perPage);
+}
+catch(PDOException $e)
+{
+	$_SESSION ['error_messages'] [] = "Invalid Page.";
+	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
+	die ();
+}
+
 $numberOfUsers = getNumberOfUsers();
 $numberOfPages = ceil( $numberOfUsers / $perPage );
 
