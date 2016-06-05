@@ -12,14 +12,24 @@ if (!isset($_GET['id']))
 	die ();
 }
 
-$examID = intval($_GET['id']);
+$examID = (int)$_GET['id'];
 
 $invited = false;
+
+$exam = null;
+try {
+	$exam = getExam($examID);
+} catch ( PDOException $e ) {
+	$_SESSION ['error_messages'] [] = "Failed to retrieve exam info.";
+	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
+	die ();
+}
+
 if (isset($_GET['inv']))
 {
 	$hash = $_GET['inv'];
 	$data = $exam['id'] . $exam['name'] . $exam['description'] . $exam['starttime'] . $exam['ownerid'];
-	if(password_verify($data,$hash) && $exam["opentopublic"])
+	if(password_verify($data,$hash))
 		$invited = true;
 }
 
