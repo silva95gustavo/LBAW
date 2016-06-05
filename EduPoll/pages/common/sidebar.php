@@ -1,5 +1,5 @@
 <?php
-function prepareDate($smarty,$currentDay = null) {
+function prepareDate($smarty,$currentDay = null,$currentMonth = null,$currentYear = null) {
     date_default_timezone_get();
   	$day = date('d', time());
   	$month = date('m', time());
@@ -10,6 +10,8 @@ function prepareDate($smarty,$currentDay = null) {
   	$month_name = date('M');
 
     $smarty->assign('currentDay', $currentDay);
+    $smarty->assign('currentMonth', $currentMonth);
+    $smarty->assign('currentYear', $currentYear);
   
   	$smarty->assign('day', $day);
     $smarty->assign('month', $month);
