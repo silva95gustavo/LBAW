@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div class="panel-body question">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<div class="row">

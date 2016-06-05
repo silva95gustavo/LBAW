@@ -281,11 +281,17 @@
 	
 						{foreach $examElements as $examElement}
 							{if $examElement.type == 'category'}
-							<div class="panel panel-info">
+							<div class="panel panel-info category">
 								<div class="panel-heading">
 									<div class="row">
 										<div class="col-md-6"><strong class="inline-editable category-name" data-id="{$examElement.id}">{$examElement.name|escape:'html'}</strong></div>
 										<div class="col-md-6 text-right">
+											<form class="num-sel-questions-wrapper" method="post" action="{$BASE_URL}api/exams/edit_category_num_sel_questions.php">
+												<label>Number of questions to select:</label>
+												<input class="num-sel-questions" type="number" name="numselquestions" value="{$examElement.numselquestions}" min="0" data-categoryid="{$examElement.id}"/>
+												<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
+												<input type="hidden" name="category" value="{$examElement.id}" />
+											</form>
 											<span class="icon-clickable">
 												<i class="fa fa-plus" data-categoryid="{$examElement.id}" data-toggle="modal" data-target="#modalCreateQuestion"></i>
 											</span>
