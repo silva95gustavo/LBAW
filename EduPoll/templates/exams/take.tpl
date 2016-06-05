@@ -47,7 +47,7 @@
 												{$score = $answer.score}
 											{/if}
 											
-											disabled>{$answer.text}</label>
+											enabled>{$answer.text}</label>
 										<br/>
 									{/foreach}
 									</div>

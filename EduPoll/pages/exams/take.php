@@ -3,6 +3,7 @@ require_once ('../../config/init.php');
 include_once ('../common/utils.php');
 include_once ('../common/sidebar.php');
 require_once ('../../database/exams.php');
+require_once ('utils.php');
 
 function getQuestionsAndAnswers($attemptid) {
 	$questions = getAttemptQuestions($attemptid);
@@ -16,11 +17,6 @@ function getQuestionsAndAnswers($attemptid) {
 	}
 
 	return $questions;
-}
-
-function generateQuestions($examid, $attemptid) {
-	echo $attemptid;
-	die;
 }
 
 if (! isLoggedIn ()) {
@@ -66,6 +62,13 @@ if(isset($attemptID))	// CONTINUE ATTEMPT
 }
 else					// START NEW ATTEMPT IF POSSIBLE
 {
+	// CHECK IF THERE IS AN ONGOING ATTEMPT AND REDIRECT IF THERE IS ONE
+	$test_ongoing = getOngoingAttempt($userID, $examID);
+	if(sizeof($test_ongoing) == 1) {
+		header('Location: ' . $BASE_URL . 'pages/exams/take.php?exam=' . $examID . '&attempt=' . $test_ongoing[0]['id']);
+	  	die();
+	}
+	
 	$userattempts = getPreviousAttempts($userID, $examID);
 	if(sizeof($userattempts) >= $exam['maxtries']) {
 		$_SESSION ['error_messages'] [] = "Attempt limit has been reached.";
@@ -73,9 +76,14 @@ else					// START NEW ATTEMPT IF POSSIBLE
 	  	die();
 	}
 
-	$newAttemptID = createAttempt($userID, $exam['id']);
-
-	generateQuestions($exam, $newAttemptID);
+	try {
+		$newAttemptID = createAttempt($userID, $exam['id']);
+		generateQuestions($exam['id'], $newAttemptID);
+	} catch (Exception $e) {
+		$_SESSION ['error_messages'] [] = "Unable to create attempt.";
+  		header('Location: ' . $_SERVER['HTTP_REFERER']);
+  		die();
+	}
 
 	header('Location: ' . $BASE_URL . 'pages/exams/take.php?exam=' . $examID . '&attempt=' . $newAttemptID);
 	die();
