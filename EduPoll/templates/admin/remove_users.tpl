@@ -64,7 +64,43 @@
 						</div>
 					</div>
 				</div>
+				<div class="text-center">
+					{if $numberOfPages < 8}
+						
+						{for $i=1 to $currentPage-1}
+							<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+						{/for}
+						<a class="btn btn-primary active" href="remove_users.php?page={$currentPage}">{$currentPage}</a>
+						{for $i=currentPage+1 to $numberOfPages}
+							<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+						{/for}
+					
+					{else}
 
+						{if $currentPage > 4}
+							<a class="btn btn-primary" href="remove_users.php?page=1">First</a>
+							{for $i=$currentPage - 3 to $currentPage-1}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+						{else}
+							{for $i=1 to $currentPage-1}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+						{/if}
+						<a class="btn btn-primary active" href="remove_users.php?page={$currentPage}">{$currentPage}</a>
+						{if $currentPage + 3 < $numberOfPages}
+							{for $i=$currentPage + 1 to $currentPage + 3}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+							<a class="btn btn-primary" href="remove_users.php?page={$numberOfPages}">Last</a>
+						{else}
+							{for $i=$currentPage + 1 to $numberOfPages}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+						{/if}
+
+					{/if}
+				</div>
 			</div>
 		</div>
 	</div>

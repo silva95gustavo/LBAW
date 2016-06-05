@@ -48,13 +48,14 @@ function getName($groupID){
 	$stmt->execute(array($groupID));
 	return $stmt->fetch()['groupname'];
 }
-function getGroupStudents($groupID)
+function getGroupStudents($groupID, $start, $perPage)
 {
 	global $conn;
 	$stmt = $conn->prepare("SELECT RegisteredUser.id AS studentid,RegisteredUser.name AS studentname, RegisteredUser.email AS studentemail
-  FROM StudentGroupAssoc,RegisteredUser WHERE StudentGroupAssoc.groupID = ?
-   AND StudentGroupAssoc.studentID = RegisteredUser.id");
-	$stmt->execute(array($groupID));
+  	FROM StudentGroupAssoc,RegisteredUser WHERE StudentGroupAssoc.groupID = ?
+  	AND StudentGroupAssoc.studentID = RegisteredUser.id
+	LIMIT ? OFFSET ?");
+	$stmt->execute(array($groupID, $perPage, $start));
 	return $stmt->fetchAll();
 }
 function getNumberOfGroups(){
