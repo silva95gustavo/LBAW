@@ -30,7 +30,7 @@ $('button#generateLink').on('click', function(){
 		url: '../../api/exams/generate_guest_link.php',
 		data: { examID: examID, csrf_token: csrf_token },
 		success: function(data) {
-			var urlPath = "https://gnomo.fe.up.pt/~lbaw1565/LBAW/final/pages/exams/welcome.php?id="+examID+"&inv=";
+			var urlPath = "https://gnomo.fe.up.pt/~lbaw1565/final/pages/exams/welcome.php?id="+examID+"&inv=";
 			var json = JSON.stringify(data);
 			var response = JSON.parse(json);
 			$('input#generatedLink').val('');
