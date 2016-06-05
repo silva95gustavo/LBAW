@@ -9,7 +9,9 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				{if isAdmin()}
+				{if $invited}
+				<a class="navbar-brand" href="#">EduPoll</a>
+				{elseif isAdmin()}
 				<a class="navbar-brand" href="{$BASE_URL}pages/admin/main.php">EduPoll</a>
 				{elseif isAcademic()}
 				<a class="navbar-brand" href="{$BASE_URL}pages/users/main.php">EduPoll</a>
@@ -17,7 +19,8 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-				{if isAdmin()}
+				{if $invited}
+				{elseif isAdmin()}
 					<li><a href="{$BASE_URL}pages/admin/add_users.php">Add users</a></li>
 					<li><a href="{$BASE_URL}pages/admin/remove_users.php">Remove users</a></li>
 					<li><a href="{$BASE_URL}pages/admin/groups.php">Manage groups</a></li>
