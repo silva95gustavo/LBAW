@@ -125,6 +125,15 @@ div.jumbotron h2 {
 .answer [disabled] {
 	cursor: default;
 }
+.num-sel-questions-wrapper {
+	display: inline-block;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+input.num-sel-questions {
+	width: 3em;
+	padding-left: 0.1rem;
+}
 
 /* QUESTIONS */
 .add-answer .fa-plus {

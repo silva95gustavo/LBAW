@@ -115,7 +115,7 @@ $(document).ready( function() {
 				$('#userToRemoveFromGroup').data('userid', ui.item.id);
 				$('#userToRemoveFromGroup').data('groupid', ui.item.groupid);
 				$('#userToRemoveFromGroup').data('bool', 1);
-				$('#confirmationModal').data('bool',1);
+				$('#confirmationModal').data('bool', 1);
 				$('#confirmationModal').modal('show');
 			}
 		}
@@ -134,7 +134,7 @@ $(document).ready( function() {
 				$('#userToAddToGroup').data('userid', ui.item.id);
 				$('#userToAddToGroup').data('groupid', ui.item.groupid);
 				$('#userToAddToGroup').data('bool', 0);
-				$('#confirmationModal').data('bool',0);
+				$('#confirmationModal').data('bool', 0);
 				$('#confirmationModal').modal('show');
 			}
 		}

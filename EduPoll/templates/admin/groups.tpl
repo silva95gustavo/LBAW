@@ -50,16 +50,50 @@
 						<tr id="{$group.id}">
 							<td><a href="?groupID={$group.id}">{$group.name}</a></td>
 							<td>{$nstudents[$group['id']]}</td>
-							<td><a data-groupid="{$group.id}" href="#" data-toggle="modal" data-target="#confirmationModalGroup">Remove</a></td>
+							<td><a class="btn btn-danger" data-groupid="{$group.id}" href="#" data-toggle="modal" data-target="#confirmationModalGroup">Remove</a></td>
 						</tr>
 					</tr>
 					{/foreach}
 				</tbody>
 			</table>
 
-			{for $i=1 to $numberOfPages}
-			<a href="groups.php?page={$i}">{$i}</a> 
-			{/for}
+			<div class="text-center">
+					{if $numberOfPages < 8}
+
+						{for $i=1 to $currentPage-1}
+						<a class="btn btn-primary" href="groups.php?page={$i}">{$i}</a>
+						{/for}
+						<a class="btn btn-primary active" href="groups.php?page={$currentPage}">{$currentPage}</a>
+						{for $i=$currentPage+1 to $numberOfPages}
+						<a class="btn btn-primary" href="groups.php?page={$i}">{$i}</a>
+						{/for}
+					
+					{else}
+
+						{if $currentPage > 4}
+						<a class="btn btn-primary" href="groups.php?page=1">First</a>
+						{for $i=$currentPage - 3 to $currentPage-1}
+						<a class="btn btn-primary" href="groups.php?page={$i}">{$i}</a>
+						{/for}
+						{else}
+						{for $i=1 to $currentPage-1}
+						<a class="btn btn-primary" href="groups.php?page={$i}">{$i}</a>
+						{/for}
+						{/if}
+						<a class="btn btn-primary active" href="groups.php?page={$currentPage}">{$currentPage}</a>
+						{if $currentPage + 3 < $numberOfPages}
+						{for $i=$currentPage + 1 to $currentPage + 3}
+						<a class="btn btn-primary" href="groups.php?page={$i}">{$i}</a>
+						{/for}
+						<a class="btn btn-primary" href="groups.php?page={$numberOfPages}">Last</a>
+						{else}
+						{for $i=$currentPage + 1 to $numberOfPages}
+						<a class="btn btn-primary" href="groups.php?page={$i}">{$i}</a>
+						{/for}
+						{/if}
+
+					{/if}
+				</div>
 
 			{else}
 			<br/>
@@ -95,7 +129,7 @@
 
 				{if sizeof($students) === 0}
 				<div class="alert alert-info" role="alert">
-					There are Students in Group.
+					There are no Students in Group.
 				</div>
 				{else}
 
@@ -115,50 +149,92 @@
 						{foreach $students as $student}
 						<tr id="{$student.studentid}">
 							<td>{$student.studentid}</td>
-							<td>{$student.studentname}</td>
+							<td>{$student.studentname}</td> 
 							<td>{$student.studentemail}</td>
-							<td><a data-userid="{$student.studentid}" data-groupid="{$groupid}" data-bool="1" href="#" 
-								data-toggle="modal"	data-target="#confirmationModal">Remove from Group</a></td>
-							</tr>
-							{/foreach}
+							<td><a class="btn btn-danger" data-userid="{$student.studentid}" data-groupid="{$groupid}" data-bool="1"
+								data-toggle="modal"	data-target="#confirmationModal">Remove</a>
+							</td>
+						</tr>
+						{/foreach}
 
-							{/if}
-							{/if}
+						{/if}
+					</tbody>
+				</table>
+				<div class="text-center">
+					{if $numberOfPages < 8}
 
-							<div id="confirmationModal" class="modal fade" role="dialog">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header text-center">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Are you sure?</h4>
-										</div>
-										<div class="modal-body text-center">
-											<button type="button" id="yes" class="btn btn-success">Yes</button>
-											<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
-										</div>
-									</div>
-								</div>
+						{for $i=1 to $currentPage-1}
+						<a class="btn btn-primary" href="groups.php?page={$i}&groupID={$groupid}">{$i}</a>
+						{/for}
+						<a class="btn btn-primary active" href="groups.php?page={$currentPage}&groupID={$groupid}">{$currentPage}</a>
+						{for $i=$currentPage+1 to $numberOfPages}
+						<a class="btn btn-primary" href="groups.php?page={$i}&groupID={$groupid}">{$i}</a>
+						{/for}
+					
+					{else}
+
+						{if $currentPage > 4}
+						<a class="btn btn-primary" href="groups.php?page=1&groupID={$groupid}">First</a>
+						{for $i=$currentPage - 3 to $currentPage-1}
+						<a class="btn btn-primary" href="groups.php?page={$i}&groupID={$groupid}">{$i}</a>
+						{/for}
+						{else}
+						{for $i=1 to $currentPage-1}
+						<a class="btn btn-primary" href="groups.php?page={$i}&groupID={$groupid}">{$i}</a>
+						{/for}
+						{/if}
+						<a class="btn btn-primary active" href="groups.php?page={$currentPage}&groupID={$groupid}">{$currentPage}</a>
+						{if $currentPage + 3 < $numberOfPages}
+						{for $i=$currentPage + 1 to $currentPage + 3}
+						<a class="btn btn-primary" href="groups.php?page={$i}&groupID={$groupid}">{$i}</a>
+						{/for}
+						<a class="btn btn-primary" href="groups.php?page={$numberOfPages}&groupID={$groupid}">Last</a>
+						{else}
+						{for $i=$currentPage + 1 to $numberOfPages}
+						<a class="btn btn-primary" href="groups.php?page={$i}&groupID={$groupid}">{$i}</a>
+						{/for}
+						{/if}
+
+					{/if}
+				{/if}
+				</div>
+				<div id="confirmationModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header text-center">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Are you sure?</h4>
 							</div>
-
-							<div id="confirmationModalGroup" class="modal fade" role="dialog">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header text-center">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Are you sure?</h4>
-										</div>
-										<div class="modal-body text-center">
-											<button type="button" id="yesGroup" class="btn btn-success">Yes</button>
-											<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
-										</div>
-									</div>
-								</div>
+							<div class="modal-body text-center">
+								<button type="button" id="yes" class="btn btn-success">Yes</button>
+								<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
 							</div>
-
-
 						</div>
-						<!-- /container -->
-						{include file='common/footer.tpl'}
-						<script src="{$BASE_URL}javascript/admin/manage_groups.js"></script>
-						<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
-						<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+					</div>
+				</div>
+
+				<div id="confirmationModalGroup" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header text-center">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Are you sure?</h4>
+							</div>
+							<div class="modal-body text-center">
+								<button type="button" id="yesGroup" class="btn btn-success">Yes</button>
+								<button type="button" id="no" class="btn btn-danger" data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- /container -->
+{include file='common/footer.tpl'}
+<script src="{$BASE_URL}javascript/admin/manage_groups.js"></script>
+<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
