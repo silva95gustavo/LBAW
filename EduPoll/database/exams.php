@@ -571,4 +571,5 @@ function getExamInvitedUsers($examID) {
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
+
 ?>

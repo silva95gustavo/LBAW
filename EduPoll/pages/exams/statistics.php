@@ -28,6 +28,7 @@ $approvals = getExamApprovals($examID);
 $questions = getExamQuestions($examID);
 $questionscores = [];
 
+
 foreach($questions as $question) {
 	$questionstats = getQuestionAverageScore($question['id']);
 	$questiondata = [];
