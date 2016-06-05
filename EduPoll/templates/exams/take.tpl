@@ -14,6 +14,21 @@
 						<li><a href="{$BASE_URL}pages/exams/welcome.php?id={$exam.id}">Exam</a></li>
 						<li class="active">Take Exam</li>
 					</ol>
+					
+					<div id="confirmationModalSubmit" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to submit this attempt?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_submit" class="btn btn-success">Yes</button>
+									<button type="button" id="no_submit" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
 					<!-- Main jumbotron for a primary marketing message or call to action -->
 					<div class="first-element jumbotron">
