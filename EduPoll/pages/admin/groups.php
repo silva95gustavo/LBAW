@@ -27,7 +27,13 @@ if($listing)
 	$smarty->assign ('groups', $groups);
 }
 else{
+	try{
 	$groupname = getName($_GET['groupID']);
+}catch ( PDOException $e ) {
+		$_SESSION ['error_messages'] [] = "Invalid Group ID.";
+		header ( 'Location: ' . $BASE_URL . 'pages/admin/groups.php' );
+		die();
+	}
 	if(!$groupname)
 	{
 		$_SESSION ['error_messages'] [] = "Group does not exist.";
