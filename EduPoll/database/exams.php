@@ -156,6 +156,13 @@ function editCategoryName($categoryID, $newName) {
 	return $stmt->fetch();
 }
 
+function editCategoryNumSelQuestions($categoryID, $newNumSelQuestions) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE category SET numselquestions = ? WHERE id = ? RETURNING numselquestions");
+	$stmt->execute(array($newNumSelQuestions, $categoryID));
+	return $stmt->fetch();
+}
+
 function editQuestionStatement($questionID, $newStatement) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE question SET statement = ? WHERE id = ? RETURNING statement");
