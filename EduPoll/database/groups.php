@@ -30,4 +30,25 @@ function searchGroupFTS($data) {
     $stmt->execute(array($data));
 	return $stmt->fetchAll();
 }
+
+function getGroups($start, $perPage) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT * FROM StudentGroup LIMIT ? OFFSET ?");
+	$stmt->execute(array($perPage, $start));
+	return $stmt->fetchAll();
+}
+
+function getStudentsByGroup($groupId) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT * FROM RegisteredUser INNER JOIN StudentGroupAssoc ON StudentGroupAssoc.studentID = RegisteredUser.id AND StudentGroupAssoc.groupID = ?");
+	$stmt->execute(array($groupId));
+	return $stmt->fetchAll();
+}
+
+function getName($groupId) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT name FROM StudentGroup WHERE StudentGroup.id = ?");
+	$stmt->execute(array($groupId));
+	return $stmt->fetch()['name'];
+}
 ?>

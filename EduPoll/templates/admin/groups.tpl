@@ -66,13 +66,13 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<h2>{$groupname}</h2>
+						<h2><strong>{$groupname}</strong></h2>
 						<a data-groupid="{$groupid}" href="#" data-toggle="modal" data-target="#confirmationModalGroup">
 							<h5 class="text-center">(Delete)</h5> </a>
 						</div>
 						<form class="form-add-user col-md-6" id="addform" >
 							<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-							<h2 class="form-signin-heading">Add Student To Group</h2>
+							<h3 class="form-signin-heading">Add Student To Group</h3>
 
 							<label for="userToAddToGroup" class="sr-only">Full name</label>
 							<input type="text" id="userToAddToGroup" class="form-control" placeholder="User name or email"
@@ -82,7 +82,7 @@
 
 						<form class="form-remove-user col-md-6" id="removeform">
 							<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-							<h2 class="form-signin-heading">Remove Student From Group</h2>
+							<h3 class="form-signin-heading">Remove Student From Group</h3>
 
 							<label for="userToRemoveFromGroup" class="sr-only">Full name</label>
 							<input type="text" id="userToRemoveFromGroup" class="form-control" placeholder="User name or email"
@@ -99,7 +99,7 @@
 				</div>
 				{else}
 
-				<h2>List of Students in Group </h2>
+				<h3>List of Students in Group </h3>
 				<br/>
 
 				<table class="table table-striped">
@@ -108,17 +108,17 @@
 							<th>ID</th>
 							<th>Name</th>
 							<th>Email</th>
-							<th>Actions</th>
+							<th>Remove</th>
 						</tr>
 					</thead>
 					<tbody>
 						{foreach $students as $student}
-						<tr id="{$student.studentid}">
-							<td>{$student.studentid}</td>
-							<td>{$student.studentname}</td>
-							<td>{$student.studentemail}</td>
-							<td><a data-userid="{$student.studentid}" data-groupid="{$groupid}" data-bool="1" href="#" 
-								data-toggle="modal"	data-target="#confirmationModal">Remove from Group</a></td>
+						<tr id="{$student.id}">
+							<td>{$student.id}</td>
+							<td>{$student.name}</td>
+							<td>{$student.email}</td>
+							<td><a class="btn btn-danger" data-userid="{$student.id}" data-groupid="{$groupid}" data-bool="1" href="#" 
+								data-toggle="modal"	data-target="#confirmationModal">Remove</a></td>
 							</tr>
 							{/foreach}
 
@@ -154,11 +154,8 @@
 									</div>
 								</div>
 							</div>
-
-
-						</div>
-						<!-- /container -->
-						{include file='common/footer.tpl'}
-						<script src="{$BASE_URL}javascript/admin/manage_groups.js"></script>
-						<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
-						<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+	<!-- /container -->
+	{include file='common/footer.tpl'}
+	<script src="{$BASE_URL}javascript/admin/manage_groups.js"></script>
+	<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>

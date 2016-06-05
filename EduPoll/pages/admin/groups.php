@@ -5,25 +5,21 @@ include_once ('../common/sidebar.php');
 include_once ('../../database/groups.php');
 
 if (! isAdmin ()) {
-	header ( 'Location: ' . $BASE_URL . 'pages/admin/main.php' );
+	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
 	die ();
 }
 
 $listing = !isset($_GET['groupID']);
 
-$perPage = 10;
+$perPage = 15;
 
 if($listing)
 {
 	$numberOfGroups = getNumberOfGroups();
 	$numberOfPages = ceil($numberOfGroups / $perPage);
-	if(!isset($_GET['page']) || $_GET['page'] <= 0 || $_GET['page'] > $numberOfPages)
+	if(!isset($_GET['page']) || $_GET['page'] < 1 || $_GET['page'] > $numberOfPages)
 		$groups = getGroups(0,$perPage);
 	else $groups = getGroups(($_GET['page'] - 1)*$perPage,$perPage);
-	foreach ($groups as $group) {
-		$nstudents[$group['id']] = getStudentsByGroup($group['id']);
-	}
-	$smarty->assign ('nstudents', $nstudents);
 	$smarty->assign ('groups', $groups);
 }
 else{
@@ -35,7 +31,7 @@ else{
 		die();
 	}
 	$smarty->assign ('groupname', $groupname);
-	$students = getGroupStudents($_GET['groupID']);
+	$students = getStudentsByGroup($_GET['groupID']);
 	$smarty->assign ('students', $students);
 }
 
