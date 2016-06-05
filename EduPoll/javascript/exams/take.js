@@ -1,8 +1,11 @@
 var attempt_id;
+var exam_id;
 
 $(document).ready(function() {
 	$(".checkbox_input").click(checkbox_click);
+	$(".submit-attempt").click(submit);
 	attempt_id = parseInt($("#attempt_id_elem").text());
+	exam_id = parseInt($("#exam_id_elem").text());
 });
 
 function checkbox_click(event) {
@@ -18,8 +21,21 @@ function checkbox_click(event) {
 			console.log(data);
 		},
 		error: function (data) {
-			console.log(data);
-			//location.reload();
+			location.reload();
+		}
+	});
+}
+
+function submit(event) {
+	$.ajax({
+		type: 'POST',
+		url: "../../actions/exams/attempt_closed_submit.php",
+		data: { attempt: attempt_id, csrf_token: CSRF_TOKEN },
+		success: function (data) {
+			window.location.replace(BASE_URL + 'pages/exams/welcome.php?id=' + exam_id);
+		},
+		error: function (data) {
+			location.reload();
 		}
 	});
 }

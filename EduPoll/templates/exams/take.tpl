@@ -22,8 +22,9 @@
 					</div>
 					
 					<div id="attempt_id_elem" style="display: none;">{$attempt.id}</div>
+					<div id="exam_id_elem" style="display: none;">{$exam.id}</div>
 					
-					<a href="exam-welcome.html"></a><button type="button" class="btn btn-primary">Submit exam</button><p></p></a>
+					<button type="button" class="btn btn-primary submit-attempt">Submit exam</button><p></p>
 
 					{foreach from=$questions item=question}
 						{$score = 0}
@@ -59,7 +60,7 @@
 								<div class="row">
 									<div class="col-md-10"></div>
 									<div class="col-md-2">
-										Score: {(float)$score} / {(float)$maxscore}
+										Max Score: {(float)$maxscore}
 									</div>
 								</div>
 							</div>
@@ -68,7 +69,7 @@
 					
 					<h4>Total exam max score: {$exam.maxscore}</h4>
 					
-					<button type="button" class="btn btn-primary">Submit exam</button><p></p>
+					<button type="button" class="btn btn-primary submit-attempt">Submit exam</button><p></p>
 					
 				</div>
 			</div>
