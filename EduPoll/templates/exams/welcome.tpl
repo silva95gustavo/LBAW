@@ -51,7 +51,7 @@
 						</div>
 					{/if}
 					{elseif $examStatus == 2}
-					<a href="take-exam.html"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">Take exam</button><p></p></a>
+					<a href="{$BASE_URL}pages/exams/take.php"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">Take exam</button><p></p></a>
 					{else}
 					<div id="examAvailableParent">
 						<div id="examAvailable" class="alert alert-info" >
