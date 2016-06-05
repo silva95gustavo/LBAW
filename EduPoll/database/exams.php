@@ -544,6 +544,22 @@ function getAttempt($attemptID) {
 	return $stmt->fetchAll()[0];
 }
 
+function getAnswer($answerID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT * 
+		FROM answer
+		WHERE id = ?");
+	$stmt->execute(array($answerID));
+	return $stmt->fetchAll()[0];
+}
+
+function editAttemptAnswer($attemptID, $questionID, $answerID) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE questionattempt SET answerid = ? WHERE questionid = ? AND attemptid = ? RETURNING answerid");
+	$stmt->execute(array($answerID, $questionID, $attemptID));
+	return $stmt->fetch();
+}
+
 function getAttemptQuestions($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, questionattempt.answerid AS answerid, questionattempt.questionorder AS order, question.statement AS statement, question.maxscore AS maxscore

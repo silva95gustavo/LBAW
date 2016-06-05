@@ -21,6 +21,8 @@
 						<p>{$attempt.starttime} - {if isset($attempt.endtime)}{$attempt.endtime}{else}Ongoing{/if}</p>
 					</div>
 					
+					<div id="attempt_id_elem" style="display: none;">{$attempt.id}</div>
+					
 					<a href="exam-welcome.html"></a><button type="button" class="btn btn-primary">Submit exam</button><p></p></a>
 
 					{foreach from=$questions item=question}
@@ -40,7 +42,8 @@
 										{/if}
 									
 										<label class="radio-inline"><input type="radio"
-											name="optradio" 
+											name="optradio" class="checkbox_input"
+											id="answer_{$answer.id}"
 											
 											{if $answer.id == $question.answerid}
 												checked="checked"
@@ -70,13 +73,9 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
-
-
 	</div>
 	<!-- /container -->
+	
+<script src="{$BASE_URL}javascript/exams/take.js"></script>
 
 {include file='common/footer.tpl'}
