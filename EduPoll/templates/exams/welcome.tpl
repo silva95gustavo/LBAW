@@ -18,7 +18,9 @@
 					<div class="first-element jumbotron">
 						<h1 class="text-center">{$exam.name}</h1>
 						<div>
-							<p><strong>Start:</strong> {$exam.starttime} <p> <strong>End:</strong> {$exam.endtime}</p>
+							<p><strong>Start:</strong> {$exam.starttime}</p>
+							<p><strong>End:</strong> {$exam.endtime}</p>
+							<p><strong>Attempts:</strong> {$exam.maxtries}</p>
 						</div>
 					</div>
 
@@ -49,9 +51,9 @@
 	  							No Attempts Available.
 							</div>
 						</div>
-					{/if}
+					//{/if}
 					{elseif $examStatus == 2}
-					<a href="{$BASE_URL}pages/exams/take.php"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">Take exam</button><p></p></a>
+						<a href="{$BASE_URL}pages/exams/take.php"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">Take exam</button><p></p></a>
 					{else}
 					<div id="examAvailableParent">
 						<div id="examAvailable" class="alert alert-info" >
@@ -60,6 +62,32 @@
 					</div>
 					{/if}
 					
+					{if $examStatus !== 0 && sizeof($userattempts) > 0}
+						<br/>
+						<div class="page-header">
+        					<h1>Previous attempts</h1>
+      					</div>
+      					<table class="table table-striped">
+            				<thead>
+ 				            	<tr>
+                					<th>Attempt ID</th>
+                					<th>Start</th>
+                					<th>End</th>
+                					<th>Score</th>
+              					</tr>
+            				</thead>
+            				<tbody>
+            					{foreach from=$userattempts item=attempt}
+              						<tr>
+                						<td>{$attempt.id} <a href="{$BASE_URL}pages/exams/exam_taken.php?attemptid={$attempt.id}">(Review)</a></td>
+                						<td>{$attempt.starttime}</td>
+                						<td>{$attempt.endtime}</td>
+                						<td>{$attempt.finalscore}</td>
+              						</tr>
+            					{/foreach}
+            				</tbody>
+          				</table>
+					{/if}
 				</div>
 			</div>
 		</div>
