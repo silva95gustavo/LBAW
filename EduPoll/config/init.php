@@ -1,8 +1,8 @@
 <?php
+ 	  session_start();
 	  session_set_cookie_params(3600, '/~lbaw1565/final'); // FIXME
 	  //session_set_cookie_params(3600, '/~up201304143/LBAW'); // FIXME
 	  //session_set_cookie_params(3600, '/~up201305803/EduPoll'); // FIXME
- 	  session_start();
 	  error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 	  
 	  $BASE_DIR = '/opt/lbaw/lbaw1565/public_html/final/';
