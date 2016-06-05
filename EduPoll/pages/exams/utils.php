@@ -21,27 +21,27 @@ function selectAndRemoveQuestion(&$questions) {
 
 function generateQuestions($examid, $attemptid) {
 	$elements = getExamlElements($examid);
-	$current_index = 0;	
-	
+	$current_index = 0;
+
 	foreach($elements as $element) {
 		$question = getQuestion($element['id']);
 		if($question && $question['category'] == NULL) {
 			// PROCESS INDEPENDANT QUESTION
 			addQuestionToAttempt($attemptid, $question['id'], $current_index++);
-			continue;	
+			continue;
 		}
-		
+
 		$category = getCategory($element['id']);
 		if($category) {
 			// PROCESS CATEGORY
 			$categoryQuestions = getCategoryQuestions($element['id']);
 			$numQuestions = $category['numselquestions'];
-			
+
 			for($i = 0; $i < $numQuestions; ++$i) {
 				$q = selectAndRemoveQuestion($categoryQuestions);
 				addQuestionToAttempt($attemptid, $q['id'], $current_index++);
 			}
-			continue;	
+			continue;
 		}
 	}
 }
