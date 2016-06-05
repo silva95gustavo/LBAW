@@ -29,8 +29,14 @@ if(!isset($_GET['id'])) {
   		die();
 	}
 }
-
-$exam = getExam($examID);
+try{
+	$exam = getExam($examID);
+}
+catch ( PDOException $e ) {
+	$_SESSION ['error_messages'] [] = "Invalid Exam ID.";
+	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
+	die ();
+	}
 $managers = [];
 if ($exam)
 {

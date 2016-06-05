@@ -12,7 +12,15 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $perPage = 20;
 $start = ($page - 1) * $perPage;
 
+try{
 $users = getUsers($start, $perPage);
+}
+catch(PDOException $e)
+{
+	$_SESSION ['error_messages'] [] = "Invalid Page.";
+	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
+	die ();
+}
 $numberOfUsers = getNumberOfUsers();
 $numberOfPages = ceil($numberOfUsers / $perPage);
 
