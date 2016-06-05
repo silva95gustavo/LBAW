@@ -27,12 +27,12 @@ if (! isLoggedIn ()) {
 	$smarty->assign ( 'exams', $exams);
  }
  catch(PDOException $e){
-	$_SESSION ['error_messages'] [] = "Invalid Day/Month/Year.".$e->getMessage();
+	$_SESSION ['error_messages'] [] = "Invalid Day/Month/Year.";
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
 	die ();
  }
  
- prepareDate($smarty,$day);
+ prepareDate($smarty,$day,$month,$year);
 
 $smarty->assign ( 'name', $_SESSION ['name'] );
 $smarty->display ( 'exams/exam_date.tpl' );

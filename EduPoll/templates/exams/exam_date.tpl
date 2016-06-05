@@ -11,7 +11,7 @@
 
 				<ol class="breadcrumb">
 					<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
-					<li class="active">Exam List at {$currentDay}/{$month}/{$year}</li>
+					<li class="active">Exam List at {$currentDay}/{$currentMonth}/{$currentYear}</li>
 				</ol>
 
 				{if sizeof($exams) == 0}

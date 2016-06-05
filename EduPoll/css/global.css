@@ -165,3 +165,7 @@ a .list-group-item-heading{
 .answer-score.negative {
 	color: red;
 }
+
+.json-printing{
+	padding-left:2em;
+}

@@ -15,15 +15,7 @@
 		</ul>
 
 		<ul class="calendar-days">
-			{for $foo=0 to $firstDay-1}<li> </li>{/for}{for $foo=1 to $monthDays}<li>
-			<a href="../../pages/exams/exam_date.php?day={$foo}&month={$month}&year={$year}">
-				{if $currentDay != null && $foo eq $currentDay}<span class="calendar-day-current">{$foo}</span>
-				{elseif $foo eq $day}<span class="calendar-day-active">{$foo}</span>
-				{else}{$foo}
-				{/if}
-			</a>
-		</li>
-		{/for}
+			{for $foo=0 to $firstDay-1}<li> </li>{/for}{for $foo=1 to $monthDays}<li><a href="../../pages/exams/exam_date.php?day={$foo}&month={$month}&year={$year}">{if $currentDay != null && $foo eq $currentDay}<span class="calendar-day-current">{$foo}</span>{elseif $foo eq $day}<span class="calendar-day-active">{$foo}</span>{else}{$foo}{/if}</a></li>{/for}
 	</ul>
 </div>
 
