@@ -18,6 +18,11 @@ function getQuestionsAndAnswers($attemptid) {
 	return $questions;
 }
 
+function generateQuestions($examid, $attemptid) {
+	echo $attemptid;
+	die;
+}
+
 if (! isLoggedIn ()) {
 	header ( 'Location: ' . $BASE_URL . 'pages/auth/login.php' );
 	die ();
@@ -70,7 +75,7 @@ else					// START NEW ATTEMPT IF POSSIBLE
 
 	$newAttemptID = createAttempt($userID, $exam['id']);
 
-	//generateQuestions($exam, $newAttemptID);
+	generateQuestions($exam, $newAttemptID);
 
 	header('Location: ' . $BASE_URL . 'pages/exams/take.php?exam=' . $examID . '&attempt=' . $newAttemptID);
 	die();

@@ -11,7 +11,7 @@
 
 					<ol class="breadcrumb">
 						<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
-						<li><a href="exam-welcome.html">Exam</a></li>
+						<li><a href="{$BASE_URL}pages/exams/welcome.php?id={$exam.id}">Exam</a></li>
 						<li class="active">Take Exam</li>
 					</ol>
 
