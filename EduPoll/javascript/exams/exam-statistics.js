@@ -7,6 +7,8 @@ var submitted_no;
 var approved_no;
 var grade_dist = [];
 
+var dir_base;
+
 var examID = null;
 $(document).ready(function(){
 	submitted_no = parseInt($("#exam_submitted_no").text());
@@ -15,11 +17,12 @@ $(document).ready(function(){
 	for(var i = 0; i <= 20; ++i) {
 		grade_dist[i] = parseInt($("#grade_distribution #grade" + i).text());
 	}
-	console.log(grade_dist);
 	
 	circular = $("#AScanvas").get(0).getContext("2d");
 	bar = $("#GDcanvas").get(0).getContext("2d");
 	asChart();
+	
+	dir_base = window.location.protocol + "//" + window.location.host + $("#base_url_start").text();
 });
 
 $('button#generateLink').on('click', function(){
@@ -30,7 +33,7 @@ $('button#generateLink').on('click', function(){
 		url: '../../api/exams/generate_guest_link.php',
 		data: { examID: examID, csrf_token: csrf_token },
 		success: function(data) {
-			var urlPath = "https://gnomo.fe.up.pt/~lbaw1565/final/pages/exams/welcome.php?id="+examID+"&inv=";
+			var urlPath = dir_base + "pages/exams/welcome.php?id="+examID+"&inv=";
 			var json = JSON.stringify(data);
 			var response = JSON.parse(json);
 			$('input#generatedLink').val('');
