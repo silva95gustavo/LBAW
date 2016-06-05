@@ -282,7 +282,6 @@ $(document).ready(function() {
 			data: { question: questionId, csrf_token: CSRF_TOKEN },
 			success: function (data) {
 				$('#confirmationModalDeleteQuestion').modal('hide');
-				window.location.reload();
 			},
 			error: function (xhr) {
 				console.error("Error deleting question: " + xhr.responseText);
