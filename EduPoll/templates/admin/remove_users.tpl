@@ -41,14 +41,11 @@
 							<td>{$user.id}</td>
 							<td>{$user.name}</td>
 							<td>{$user.email}</td>
-							<td><a data-id="{$user.id}" href="#" data-toggle="modal" data-target="#confirmationModal">Remove</a></td>
+							<td><a class="btn btn-danger" data-id="{$user.id}" href="#" data-toggle="modal" data-target="#confirmationModal">Remove</a></td>
 						</tr>
 						{/foreach}
 					</tbody>
 				</table>
-
-				{for $i=1 to $numberOfPages}
-				<a href="remove_users.php?page={$i}">{$i}</a> {/for}
 
 				<div id="confirmationModal" class="modal fade" role="dialog">
 					<div class="modal-dialog">
