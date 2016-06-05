@@ -10,6 +10,7 @@ if (! isLoggedIn ()) {
 }
 
 if (! isset($_POST['question'])) {
+	
 	$_SESSION['error_messages'][] = 'Question ID missing in the request.';
 	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
 	exit;
