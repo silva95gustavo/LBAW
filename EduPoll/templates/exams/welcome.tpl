@@ -53,7 +53,19 @@
 						</div>
 					//{/if}
 					{elseif $examStatus == 2}
-						<a href="{$BASE_URL}pages/exams/take.php"><button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">Take exam</button><p></p></a>
+						{if $ongoingattempt === -1 && sizeof($userattempts) < $exam.maxtries}
+							<a href="{$BASE_URL}pages/exams/take.php">
+								<button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">
+									Take exam
+								</button><p></p>
+							</a>
+						{elseif $ongoingattempt !== -1}
+							<a href="{$BASE_URL}pages/exams/take.php?attempt={$ongoingattempt}">
+								<button type="button" class="btn btn-lg btn-primary col-md-2 col-md-offset-5">
+									Continue attempt
+								</button><p></p>
+							</a>
+						{/if}
 					{else}
 					<div id="examAvailableParent">
 						<div id="examAvailable" class="alert alert-info" >

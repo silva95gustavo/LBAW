@@ -405,6 +405,16 @@ function getPreviousAttempts($userID, $examID)
 	return $stmt->fetchAll();
 }
 
+function getOngoingAttempt($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id
+		FROM attempt
+		WHERE userid = ? AND examid = ? AND endtime IS NULL");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetchAll();
+}
+
 function getExamCategories($examID)
 {
 	global $conn;
