@@ -1,8 +1,8 @@
 <?php
+	  session_set_cookie_params(3600, '/~lbaw1565/final'); // FIXME
+	  //session_set_cookie_params(3600, '/~up201304143/LBAW'); // FIXME
+	  //session_set_cookie_params(3600, '/~up201305803/EduPoll'); // FIXME
  	  session_start();
-	  setcookie(session_name(),session_id(),time() + (365 * 24 * 60 * 60), '/~lbaw1565/final');
-	  //setcookie(session_name(),session_id(),time() + (365 * 24 * 60 * 60), '/~up201304143/LBAW');
-	  //setcookie(session_name(),session_id(),time() + (365 * 24 * 60 * 60), '/~up201305803/EduPoll');
 	  error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 	  
 	  $BASE_DIR = '/opt/lbaw/lbaw1565/public_html/final/';
