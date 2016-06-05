@@ -3,10 +3,6 @@
 	  //setcookie(session_name(),session_id(),time() + (365 * 24 * 60 * 60), '/~lbaw1565/final');
 	  setcookie(session_name(),session_id(),time() + (365 * 24 * 60 * 60), '/~up201304143/LBAW');
 	  error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
-	   
-	  ini_set('display_errors', 1);
-	  ini_set('display_startup_errors', 1);
-	  error_reporting(E_ALL);
 	  
 	  //$BASE_DIR = '/opt/lbaw/lbaw1565/public_html/final/';
 	  $BASE_DIR = '/usr/users2/mieic2013/up201304143/public_html/LBAW/';

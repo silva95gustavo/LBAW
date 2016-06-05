@@ -415,7 +415,7 @@ function getCategoryQuestions($categoryID)
 function getIndependentQuestions($examID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT question.id, question.category, question.statement, question.maxscore, orderindex
+	$stmt = $conn->prepare("SELECT question.id, question.statement, question.maxscore, orderindex
    		FROM question INNER JOIN examelement ON (question.id = examelement.id)
    		WHERE examelement.examid = :examid
     	AND question.category IS NULL");
