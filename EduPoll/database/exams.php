@@ -78,6 +78,15 @@ function getQuestion($questionID) {
 	return $stmt->fetch();
 }
 
+function getCategory($categoryID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT *
+								FROM category
+								WHERE id = ?");
+	$stmt->execute(array($categoryID));
+	return $stmt->fetch();
+}
+
 function getQuestionAverageScore($questionID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, question.statement AS statement, AVG(answer.score) AS score, COUNT(answer.id) AS answers
@@ -399,6 +408,27 @@ function getAttempts($userID, $examID)
 		WHERE userid = ? AND examid = ?");
 	$stmt->execute(array($userID, $examID));
 	return $stmt->fetchAll();
+}
+
+function getExamlElements($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, orderindex
+		FROM examelement
+		WHERE examid = ?
+		ORDER BY orderindex ASC");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function addQuestionToAttempt($attemptid, $questionid, $orderindex) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO questionattempt (attemptid, questionid, questionorder)
+		VALUES (?, ?, ?) RETURNING attemptid");
+	if($stmt->execute(array($attemptid, $questionid, $orderindex)))
+	{
+		return $stmt->fetch(PDO::FETCH_ASSOC)['attemptid'];
+	}
+	else return -1;
 }
 
 function getPreviousAttempts($userID, $examID)
