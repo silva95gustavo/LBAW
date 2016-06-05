@@ -46,7 +46,7 @@ if ($exam)
 	}
 	
 	$categories = getExamCategories($examID);
-	for ($i = 0; $i < sizeof($categories[$i]); $i++) {
+	for ($i = 0; $i < sizeof($categories); $i++) {
 		$questions = getCategoryQuestions($categories[$i]["id"]);
 		$categories[$i]["type"] = "category";
 		$categories[$i]["questions"] = $questions;
@@ -61,7 +61,6 @@ if ($exam)
 		$answers = getQuestionAnswers($independentQuestions[$i]["id"]);
 		$independentQuestions[$i]["answers"] = $answers;
 	}
-	
 	$examElements = array_merge($categories, $independentQuestions);
 	sortExamElements($examElements);
 	
