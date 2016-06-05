@@ -659,3 +659,4 @@ function getExamInvitedUsers($examID) {
 	return $stmt->fetchAll();
 }
 ?>
+
