@@ -4,7 +4,6 @@ require_once ('../../pages/common/utils.php');
 require_once ('../../database/groups.php');
 
 
-
 if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
 	$_SESSION ['error_messages'] [] = 'CSRF token missing.';
 	http_response_code ( 400 );
