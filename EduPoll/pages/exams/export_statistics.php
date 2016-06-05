@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?
 require_once ('../../config/init.php');
 include_once ('../common/utils.php');
@@ -372,7 +371,4 @@ if(isXLS($format)) {
 if(isJSON($format)) {
 	echo json_encode($jsondata);
 }
-
-
->>>>>>> origin/master
 ?>
