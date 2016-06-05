@@ -358,6 +358,34 @@ $(document).ready(function() {
 	$('.delete-answer').click(function (e) {
 		return answerDeleteOnClick($(this));
 	})
+	
+	$('.num-sel-questions').change(function(e) {
+		var max = $(this).parents(".category").find(".question").length;
+		var categoryId = $(this).data("categoryid");
+		var n = $(this).val();
+		if (n > max) {
+			n = max;
+			$(this).val(n);
+			return false;
+		} else if (n < 0) {
+			n = 0;
+			$(this).val(n);
+			return false;
+		}
+		$.ajax({
+			type: 'POST',
+			url: "../../api/exams/edit_category_num_sel_questions.php",
+			data: { category: categoryId, numselquestions: n, csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				$('#confirmationModalDeleteQuestion').modal('hide');
+				window.location.reload();
+			},
+			error: function (xhr) {
+				console.error("Error deleting question: " + xhr.responseText);
+			}
+		});
+		return true;
+	})
 });
 
 function answerDeleteOnClick(jThis) {
