@@ -40,15 +40,15 @@
 				{/if}	
 
 				{if $stats['attempts'] === 0}
-				<div class="alert alert-warning" role="alert">
-					<strong>Warning!</strong> No attempts have been made for this exam.
-				</div>
+					<div class="alert alert-warning" role="alert">
+						<strong>Warning!</strong> No attempts have been made for this exam.
+					</div>
 				{else}
-				<div id="grade_distribution" style="display: none;">
-					{foreach from=$gradedistribution key=k item=i}
-					<div id="grade{$k}">{$i}</div>
-					{/foreach}
-				</div>
+					<div id="grade_distribution" style="display: none;">
+						{foreach from=$gradedistribution key=k item=i}
+							<div id="grade{$k}">{$i}</div>
+						{/foreach}
+					</div>
 				{/if}
 
 

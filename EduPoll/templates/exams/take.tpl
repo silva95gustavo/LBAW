@@ -11,182 +11,87 @@
 
 					<ol class="breadcrumb">
 						<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
-						<li><a href="exam-welcome.html">Exam</a></li>
+						<li><a href="{$BASE_URL}pages/exams/welcome.php?id={$exam.id}">Exam</a></li>
 						<li class="active">Take Exam</li>
 					</ol>
+					
+					<div id="confirmationModalSubmit" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header text-center">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Are you sure you want to submit this attempt?</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button type="button" id="yes_submit" class="btn btn-success">Yes</button>
+									<button type="button" id="no_submit" class="btn btn-danger" data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
 					<!-- Main jumbotron for a primary marketing message or call to action -->
 					<div class="first-element jumbotron">
-						<h2>COMP - Teste 1</h2>
-						<p>25/02/2016 10:00-13:00</p>
+						<h2>{$exam.name}</h2>
+						<p>{$attempt.starttime} - {if isset($attempt.endtime)}{$attempt.endtime}{else}Ongoing{/if}</p>
 					</div>
 					
-					<a href="exam-welcome.html"></a><button type="button" class="btn btn-primary">Submit exam</button><p></p></a>
+					<div id="attempt_id_elem" style="display: none;">{$attempt.id}</div>
+					<div id="exam_id_elem" style="display: none;">{$exam.id}</div>
+					
+					<button type="button" class="btn btn-primary submit-attempt">Submit exam</button><p></p>
 
-					<div class="first-element panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Question 1</h3>
-						</div>
-						<div class="panel-body">
-								<p class="list-group-item-text">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit. Cras at massa vel quam tincidunt
-									tempus a eu ipsum. Pellentesque lobortis, turpis sit amet
-									congue fermentum, mauris ante sollicitudin metus, vitae gravida
-									leo sem et nunc.</p>
+					{foreach from=$questions item=question}
+						{$score = 0}
+						{$maxscore = 0}
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">{$question.statement}</h3>
+							</div>
+							<div class="panel-body">
 								<form>
 									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 									<div class="checkbox">
+									{foreach from=$question.answers item=answer}
+										{if $answer.score > $maxscore}
+											{$maxscore = $answer.score}
+										{/if}
+									
 										<label class="radio-inline"><input type="radio"
-											name="optradio" >Option 1</label>
+											name="optradio" class="checkbox_input"
+											id="answer_{$answer.id}"
 											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio"  >Option 2</label>
+											{if $answer.id == $question.answerid}
+												checked="checked"
+												{$score = $answer.score}
+											{/if}
 											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 3</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 4</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >I don't want to answer</label>
+											enabled>{$answer.text}</label>
+										<br/>
+									{/foreach}
 									</div>
 								</form>
 								
 								<div class="row">
 									<div class="col-md-10"></div>
 									<div class="col-md-2">
-										Max Score: 3
+										Max Score: {(float)$maxscore}
 									</div>
 								</div>
+							</div>
 						</div>
-					</div>
+					{/foreach}
 					
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Question 2</h3>
-						</div>
-						<div class="panel-body">
-								<p class="list-group-item-text">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit. Cras at massa vel quam tincidunt
-									tempus a eu ipsum. Pellentesque lobortis, turpis sit amet
-									congue fermentum, mauris ante sollicitudin metus, vitae gravida
-									leo sem et nunc.</p>
-								<form>
-									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-									<div class="checkbox">
-										<label class="radio-inline"><input type="radio"
-											name="optradio" >Option 1</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio">Option 2</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 3</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio"  >Option 4</label>
-									</div>
-								</form>
-								
-								<div class="row">
-									<div class="col-md-10"></div>
-									<div class="col-md-2">
-										Max Score: 2
-									</div>
-								</div>
-						</div>
-					</div>
+					<h4>Total exam max score: {$exam.maxscore}</h4>
 					
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Question 3</h3>
-						</div>
-						<div class="panel-body">
-								<p class="list-group-item-text">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit. Cras at massa vel quam tincidunt
-									tempus a eu ipsum. Pellentesque lobortis, turpis sit amet
-									congue fermentum, mauris ante sollicitudin metus, vitae gravida
-									leo sem et nunc.</p>
-								<form>
-									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-									<div class="checkbox">
-										<label class="radio-inline"><input type="radio"
-											name="optradio" >Option 1</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 2</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 3</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio"  >Option 4</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >I don't want to answer</label>
-									</div>
-								</form>
-								
-								<div class="row">
-									<div class="col-md-10"></div>
-									<div class="col-md-2">
-										Max Score: 2
-									</div>
-								</div>
-						</div>
-					</div>
-					
-					<div class="last-element panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Question 4</h3>
-						</div>
-						<div class="panel-body">
-								<p class="list-group-item-text">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit. Cras at massa vel quam tincidunt
-									tempus a eu ipsum. Pellentesque lobortis, turpis sit amet
-									congue fermentum, mauris ante sollicitudin metus, vitae gravida
-									leo sem et nunc.</p>
-								<form>
-									<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-									<div class="checkbox">
-										<label class="radio-inline"><input type="radio"
-											name="optradio" >Option 1</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 2</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 3</label>
-											
-											<br/><label class="radio-inline"><input type="radio"
-											name="optradio" >Option 4</label>
-									</div>
-								</form>
-								
-								<div class="row">
-									<div class="col-md-10"></div>
-									<div class="col-md-2">
-										Max Score: 2
-									</div>
-								</div>
-						</div>
-					</div>
-					
-					<h4>Total exam max score: 9</h4>
-					
-					<button type="button" class="btn btn-primary">Submit exam</button><p></p>
+					<button type="button" class="btn btn-primary submit-attempt">Submit exam</button><p></p>
 					
 				</div>
 			</div>
 		</div>
-
-
-
-
-
-
 	</div>
 	<!-- /container -->
+	
+<script src="{$BASE_URL}javascript/exams/take.js"></script>
 
 {include file='common/footer.tpl'}
