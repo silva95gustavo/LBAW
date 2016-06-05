@@ -9,12 +9,12 @@ function getQuestionsAndAnswers($attemptid) {
 
 	for($q = 0; $q < sizeof($questions); ++$q) {
 		$questions[$q]['answers'] = [];
-	
+
 		$answers = getQuestionAnswers($questions[$q]['questionid']);
 		if(isset($answers))
 			$questions[$q]['answers'] = $answers;
 	}
-	
+
 	return $questions;
 }
 
@@ -52,10 +52,12 @@ if(isset($attemptID))	// CONTINUE ATTEMPT
 	  	header('Location: ' . $_SERVER['HTTP_REFERER']);
 	  	die();
 	}
-	
+
 	$questions = getQuestionsAndAnswers($attemptID);
-	
+	$attempt = getAttempt($attemptID);
+
 	$smarty->assign ( 'questions', $questions );
+	$smarty->assign ( 'attempt', $attempt );
 }
 else					// START NEW ATTEMPT IF POSSIBLE
 {
@@ -65,16 +67,18 @@ else					// START NEW ATTEMPT IF POSSIBLE
 	  	header('Location: ' . $_SERVER['HTTP_REFERER']);
 	  	die();
 	}
-	
+
 	$newAttemptID = createAttempt($userID, $exam['id']);
-	
+
 	//generateQuestions($exam, $newAttemptID);
-	
-	$questions = getQuestionsAndAnswers($newAttemptID);
+
+	header('Location: ' . $BASE_URL . 'pages/exams/take.php?exam=' . $examID . '&attempt=' . $newAttemptID);
+	die();
 }
- 
+
 prepareDate($smarty);
 
+$smarty->assign ( 'exam', $exam );
 $smarty->assign ( 'name', $_SESSION ['name'] );
 $smarty->display ( 'exams/take.tpl' );
 ?>
