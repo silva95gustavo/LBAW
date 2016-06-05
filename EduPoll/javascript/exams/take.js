@@ -6,6 +6,10 @@ $(document).ready(function() {
 	$(".submit-attempt").click(submit);
 	attempt_id = parseInt($("#attempt_id_elem").text());
 	exam_id = parseInt($("#exam_id_elem").text());
+	
+	$('#yes_submit').click(function (e) {
+		actualSubmit();
+	})
 });
 
 function checkbox_click(event) {
@@ -27,6 +31,10 @@ function checkbox_click(event) {
 }
 
 function submit(event) {
+	$('#confirmationModalSubmit').modal('show');
+}
+
+function actualSubmit() {
 	$.ajax({
 		type: 'POST',
 		url: "../../actions/exams/attempt_closed_submit.php",
