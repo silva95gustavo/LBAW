@@ -13,7 +13,7 @@ if (! isLoggedIn ()) {
 	die();
 }
 
-$examID = $_GET['id'];
+$examID = intval($_GET['id']);
 $userID = $_SESSION['userID'];
 try{
 	if(!wasInvited($userID, $examID))
@@ -31,12 +31,20 @@ try{
 $exam = getExam($examID);
 
 $examStatus = examStatus($examID);
+$userattempts = [];
+
+if($exam["opentopublic"]) {
+	// TODO
+} else {
+	$userattempts = getPreviousAttempts($userID, $examID);
+}
 
 prepareDate($smarty);
 $smarty->assign ('userID',$userID);
 $smarty->assign ('examStatus',$examStatus);
 $smarty->assign ('exam',$exam);
 $smarty->assign ('examID',$examID);
+$smarty->assign ('userattempts',$userattempts);
 $smarty->assign ( 'name', $_SESSION ['name'] );
 $smarty->display ( 'exams/welcome.tpl' );
 ?>

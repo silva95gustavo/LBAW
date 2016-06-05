@@ -387,13 +387,24 @@ function getBestScore($userID, $examID)
 function getAttempts($userID, $examID)
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT id,startTime,endTime,finalScore 
-		FROM Attempt
-		WHERE userID = ? AND examID = ?
-		ORDER BY finalScore DESC");
+	$stmt = $conn->prepare("SELECT id, starttime, endtime, finalscore 
+		FROM attempt
+		WHERE userid = ? AND examid = ?");
 	$stmt->execute(array($userID, $examID));
 	return $stmt->fetchAll();
 }
+
+function getPreviousAttempts($userID, $examID)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, starttime, endtime, finalscore 
+		FROM attempt
+		WHERE userid = ? AND examid = ? AND endtime IS NOT NULL
+		ORDER BY finalscore DESC");
+	$stmt->execute(array($userID, $examID));
+	return $stmt->fetchAll();
+}
+
 function getExamCategories($examID)
 {
 	global $conn;
