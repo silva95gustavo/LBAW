@@ -12,6 +12,7 @@
 	  $BASE_URL = '/~lbaw1565/final/';
 	  //$BASE_URL = '/~up201304143/LBAW/';
 	  //$BASE_URL = '/~up201305803/EduPoll/';
+	  
 	  $conn = new PDO('pgsql:host=dbm;dbname=lbaw1565', 'lbaw1565', 'BN80V7U5');
 	  $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 	  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
