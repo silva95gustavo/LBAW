@@ -486,6 +486,18 @@ function getExamFromAnswer($answerID)
 	$stmt->execute(array($answerID));
 	return $stmt->fetch();
 }
+
+function createAttempt($userID, $examID) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO attempt (starttime, userid, examid)
+		VALUES (CURRENT_TIMESTAMP, ?, ?) RETURNING id");
+	if($stmt->execute(array($userID, $examID)))
+	{
+		return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+	}
+	else return -1;
+}
+
 function getAttempt($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT * 
@@ -494,6 +506,7 @@ function getAttempt($attemptID) {
 	$stmt->execute(array($attemptID));
 	return $stmt->fetchAll()[0];
 }
+
 function getAttemptQuestions($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, questionattempt.answerid AS answerid, questionattempt.questionorder AS order, question.statement AS statement, question.maxscore AS maxscore
