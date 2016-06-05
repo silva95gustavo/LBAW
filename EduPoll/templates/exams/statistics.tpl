@@ -136,16 +136,34 @@
 						<h3>Export Statistics</h3>
 						<div class="jumbotron">
 							<div class="row">
-								<div class="col-md-4"><button class="btn-primary btn-lg">Export PDF</button></div>
-								<div class="col-md-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ornare aliquet. Maecenas interdum lacus enim, vel ultrices est pulvinar vel. Sed vitae interdum nibh. Curabitur et justo ullamcorper, ullamcorper leo vel, imperdiet dolor. Proin egestas nisl in porttitor convallis. Proin maximus tempor elit, in semper eros mollis in. Donec lobortis magna ut massa feugiat, eu porta nulla sollicitudin. Donec lobortis iaculis felis at tempus. Quisque ac lectus libero. Nulla diam turpis, mollis vitae dapibus et, facilisis vitae erat. In pellentesque, sapien ac sagittis consectetur, erat ante egestas purus, id scelerisque mauris nibh eget tortor. Nunc pretium mauris eros, quis consequat ipsum convallis a. In sodales congue felis, eget elementum mauris finibus euismod. Nunc vitae fermentum lacus. Morbi tempor neque non tortor rutrum malesuada. Integer bibendum risus elementum nulla viverra, vitae imperdiet urna pharetra.</div>
+								<div class="col-md-2">
+									<form action="{$BASE_URL}pages/exams/export_statistics.php" method="get">
+										<input type="hidden" name="examid" value="{$exam.id}"/>
+										<input type="hidden" name="format" value="XLS"/>
+    									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export XLS" />
+									</form>
+								</div>
+								<div class="col-md-10">
+									Export the exam results to a ".XLS" file, so that you can consult them using Microsoft Office Excel.
+									<br/>
+									This allows you to easily perform calculations and custom statistics for your exams, by using
+									the functionalities provided Excel. Some examples are averages, charts and standard deviations.
+								</div>
 							</div>
-
-						</div>
-						<div class="jumbotron">
+								<br/><br/>
 							<div class="row">
-								<div class="row">
-									<div class="col-md-4"><button class="btn-primary btn-lg">Export CLS</button></div>
-									<div class="col-md-8">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse ac mi ex. Suspendisse elit risus, dictum sit amet turpis quis, imperdiet venenatis risus. Etiam quis velit augue. In cursus luctus eros, id blandit lacus aliquet sit amet. Fusce ut sapien eget lectus feugiat aliquet vel in ligula. Nulla maximus sed arcu vitae tristique.</div>
+								<div class="col-md-2">
+									<form action="{$BASE_URL}pages/exams/export_statistics.php" method="get">
+										<input type="hidden" name="examid" value="{$exam.id}"/>
+										<input type="hidden" name="format" value="JSON"/>
+    									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export JSON" />
+									</form>
+								</div>
+								<div class="col-md-10">
+									Export the exam results to a ".json" file, so that you can consult them using JSON parsing tools.
+									<br/>
+									This format is useful if you want data to be parsed by other tools rather than Excel, for example for
+									computation with data analysis software or similar applications.
 								</div>
 							</div>
 						</div>
