@@ -32,11 +32,16 @@ $exam = getExam($examID);
 
 $examStatus = examStatus($examID);
 $userattempts = [];
+$ongoingattempt = -1;
 
 if($exam["opentopublic"]) {
 	// TODO
 } else {
 	$userattempts = getPreviousAttempts($userID, $examID);
+	$temp = getOngoingAttempt($userID, $examID);
+	if(sizeof($temp) === 1) {
+		$ongoingattempt = $temp[0]['id'];
+	}
 }
 
 prepareDate($smarty);
@@ -45,6 +50,7 @@ $smarty->assign ('examStatus',$examStatus);
 $smarty->assign ('exam',$exam);
 $smarty->assign ('examID',$examID);
 $smarty->assign ('userattempts',$userattempts);
+$smarty->assign ('ongoingattempt',$ongoingattempt);
 $smarty->assign ( 'name', $_SESSION ['name'] );
 $smarty->display ( 'exams/welcome.tpl' );
 ?>
