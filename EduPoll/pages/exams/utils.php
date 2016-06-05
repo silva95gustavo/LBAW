@@ -7,9 +7,8 @@ function examElementsCompare($e1, $e2) {
 	return ($e1["orderindex"] < $e2["orderindex"]) ? -1 : 1;
 }
 
-function sortExamElements($examElements) {
-	usort($examElements, "examElementsCompare");
-	return $examElements;
+function sortExamElements(&$examElements) {
+	return usort($examElements, "examElementsCompare");
 }
 
 ?>
