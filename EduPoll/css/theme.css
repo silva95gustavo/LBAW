@@ -126,6 +126,12 @@ body {
     color: white !important
 }
 
+.calendar-days li .calendar-day-current {
+    padding: 5px;
+    background: #000099;
+    color: white !important
+}
+
 label[for="inputMaxTries"] {
 	margin-right: 1em;
 }

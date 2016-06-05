@@ -32,6 +32,19 @@ function getExam($examID) {
 	return $stmt->fetch();
 }
 
+function getExamByDate($day,$month,$year,$userid){
+	$firsttimestamp = '20'.$year.'-'.$month.'-'.$day.' 23:59:59';
+	$secondtimestamp = '20'.$year.'-'.$month.'-'.$day.' 00:00:00';
+	global $conn;
+	$stmt = $conn->prepare("SELECT *,0 AS type FROM exam WHERE ? >= starttime AND ? <= endtime AND 	has_access_exam(?,id)
+		UNION
+	 	SELECT *,1 AS type FROM exam WHERE ? >= starttime AND ? <= endtime AND ? = ownerid 
+	 	UNION
+	 	SELECT *,2 AS type FROM exam WHERE ? >= starttime AND ? <= endtime AND ? IN (SELECT managerID FROM ManagesExam WHERE Exam.id = ManagesExam.examID)");
+	$stmt->execute(array($firsttimestamp,$secondtimestamp,$userid,$firsttimestamp,$secondtimestamp,$userid,$firsttimestamp,$secondtimestamp,$userid));
+	return $stmt->fetchAll();
+}
+
 function getExamStats($examID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT COUNT(id) AS attempts, AVG(finalscore) AS averagegrade
@@ -571,5 +584,4 @@ function getExamInvitedUsers($examID) {
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
 }
-
 ?>

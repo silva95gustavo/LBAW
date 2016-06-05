@@ -8,10 +8,10 @@ if (! isLoggedIn ()) {
 	header ( 'Location: ' . $BASE_URL . 'pages/auth/login.php' );
 	die ();
 } else if (isAdmin()) {
-  	header('Location: ' . $BASE_URL . 'pages/admin/main.php');
-  	die();
- }
- 
+	header('Location: ' . $BASE_URL . 'pages/admin/main.php');
+	die();
+}
+
 $examID = $_GET ['examid'];
 $userID = $_SESSION['userID'];
 
@@ -21,11 +21,17 @@ if(getExamOwner($examID)[0]['id'] != $userID) {
 	http_response_code(403);
 	die ();
 }
-
-$exam = getExam($examID);
-$stats = getExamStats($examID);
-$approvals = getExamApprovals($examID);
-$questions = getExamQuestions($examID);
+try{
+	$exam = getExam($examID);
+	$stats = getExamStats($examID);
+	$approvals = getExamApprovals($examID);
+	$questions = getExamQuestions($examID);
+}
+catch ( PDOException $e ) {
+	$_SESSION ['error_messages'] [] = 'Invalid Exam ID';
+	header ( "Location: " . $BASE_URL . 'pages/exams/my_exams.php' );
+	die();
+}
 $questionscores = [];
 
 

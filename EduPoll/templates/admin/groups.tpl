@@ -16,7 +16,7 @@
 
 				<form class="form-manage-group">
 					<input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
-					<h3 class="form-signin-heading">Manage Groups</h3>
+					<h3 class="form-signin-heading">Search Groups</h3>
 
 					<label for="inputGroupToManage" class="sr-only">Full name</label>
 					<input type="text" id="inputGroupToManage" class="form-control" placeholder="Group Name"

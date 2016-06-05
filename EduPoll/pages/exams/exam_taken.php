@@ -19,8 +19,14 @@ if(!isset($attemptid)) {
   	die();
 }
 
-$attempt = getAttempt($attemptid);
-
+try{
+	$attempt = getAttempt($attemptid);	
+}
+catch ( PDOException $e ) {
+	$_SESSION ['error_messages'] [] = 'Invalid Attempt ID';
+  	header('Location: ' . $BASE_URL . 'pages/exams/exams_taken.php');
+  	die();
+	}
 if(!isset($attempt)) {
 	$_SESSION ['error_messages'] [] = 'Unable to retrieve attempt.';
   	header('Location: ' . $BASE_URL . 'pages/exams/exams_taken.php');
