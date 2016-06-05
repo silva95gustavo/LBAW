@@ -18,7 +18,7 @@
 
 					<!-- Main jumbotron for a primary marketing message or call to action -->
 					<div class="first-element jumbotron">
-						<h2>LBAW - Teste 3</h2>
+						<h2>{$exam.name}</h2>
 						<p>{$attempt.starttime} - {$attempt.endtime}</p>
 					</div>
 					
