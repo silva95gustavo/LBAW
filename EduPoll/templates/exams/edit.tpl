@@ -265,14 +265,11 @@
 							<div class="panel-heading">
 								<div class="row">
 									<div class="col-sm-3">
-										<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalCreateCategory">Add New Category</button>
+										<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalCreateCategory">Add New Category</button>
 									</div>
 									<div class="col-sm-3">
-										<button type="button" class="btn btn-success">Save Changes</button>
+										<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalCreateQuestion">Add New Question</button>
 									</div>
-									<div class="col-sm-3">
-										<button type="button" class="btn btn-danger">Cancel Changes</button>
-									</div>	
 									{if $isOwner}
 									<div class="col-sm-3">
 										<button type="submit" class="btn btn-danger" data-id="{$exam.id}" data-toggle="modal" data-target="#confirmationModal">Delete exam</button>
