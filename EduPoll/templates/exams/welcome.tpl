@@ -18,8 +18,12 @@
 					<div class="first-element jumbotron">
 						<h1 class="text-center">{$exam.name}</h1>
 						<div>
-							<p><strong>Start:</strong> {$exam.starttime}</p>
-							<p><strong>End:</strong> {$exam.endtime}</p>
+							<p><strong>Start:</strong> {$exam.starttime} 
+							{if isset($exam['endtime'])}
+							<p><strong>End: </strong>{$exam['endtime']}</p>
+							{else}
+							<p><strong>End: </strong>Until the owner closes the exam</p>
+							{/if}
 							<p><strong>Attempts:</strong> {$exam.maxtries}</p>
 						</div>
 					</div>
@@ -29,29 +33,32 @@
   						<div class="panel-body"><h5>{$exam.description}<h5></div>
 					</div>
 					{if $examStatus == 1}
-						{assign var="attempts" value=getAttempts($userID,$examID)}
-						{if sizeof($attempts) != 0}
-						{foreach $attempts as $attempt}
-							<div class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<datetime class="list-group-item-text">{$attempt.starttime} - {$attempt.endtime}</datetime>
-									<br/>
-									<a href="../../pages/exams/exam_taken.php?attemptid={$attempt.id}">Review</a>
-								</div>
-								<div class="col-md-2 text-right">
-									<br/><p class="list-group-item-text">Grade: {$attempt.finalscore} / {$exam.maxscore}</p>
+						{if !$exam.opentopublic}
+							{assign var="attempts" value=getAttempts($userID,$examID)}
+							{if sizeof($attempts) != 0}
+							{foreach $attempts as $attempt}
+								<div class="list-group-item">
+								<div class="row">
+									<div class="col-md-10">
+										<datetime class="list-group-item-text">{$attempt.starttime} - {$attempt.endtime}</datetime>
+										<br/>
+										<a href="../../pages/exams/exam_taken.php?attemptid={$attempt.id}">Review</a>
+									</div>
+									<div class="col-md-2 text-right">
+										<br/><p class="list-group-item-text">Grade: {$attempt.finalscore} / {$exam.maxscore}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						{/foreach}
-						{else}
-						<div id="examAvailableParent">
-							<div id="examAvailable" class="alert alert-info" >
-	  							No Attempts Available.
+							{/foreach}
+							{else}
+							<div id="examAvailableParent">
+								<div id="examAvailable" class="alert alert-info" >
+		  							No Attempts Available.
+								</div>
 							</div>
+							{/if}
 						</div>
-					//{/if}
+						{/if}
 					{elseif $examStatus == 2}
 						{if $ongoingattempt === -1 && sizeof($userattempts) < $exam.maxtries}
 							<a href="{$BASE_URL}pages/exams/take.php?exam={$exam.id}">
