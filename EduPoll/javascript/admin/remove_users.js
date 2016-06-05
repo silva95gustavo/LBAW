@@ -17,7 +17,7 @@ $(document).ready(
 					},
 					success : function() {
 						$('#confirmationModal').modal('hide');
-						$('tr#' + userId).css('background-color','#FFF37F');
+						$('tr#' + userId).css('background-color','#FF9C9C');
 						$('tr#' + userId).hide(1000, function(){
 							$('tr#' + userId).remove();
 						});

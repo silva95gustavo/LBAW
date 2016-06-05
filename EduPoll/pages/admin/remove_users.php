@@ -8,18 +8,30 @@ if (! isAdmin ()) {
 	die ();
 }
 
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$perPage = 20;
-$start = ($page - 1) * $perPage;
+$perPage = 15;
 
-$users = getUsers($start, $perPage);
 $numberOfUsers = getNumberOfUsers();
-$numberOfPages = ceil($numberOfUsers / $perPage);
+$numberOfPages = ceil( $numberOfUsers / $perPage );
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1)
+	$page = 1;
+else if ($page > $numberOfPages)
+	$page = $numberOfPages;
+
+
+
+$start = ($page - 1) * $perPage;
+$users = getUsers($start, $perPage);
 
 prepareDate($smarty);
 
 $smarty->assign ( 'users', $users );
 $smarty->assign ( 'numberOfPages', $numberOfPages );
+$smarty->assign ( 'currentPage', $page );
 $smarty->assign ( 'name', $_SESSION ['name'] );
 $smarty->display ( 'admin/remove_users.tpl' );
+
+$myArray = array('no' => 10, 'label' => 'Peanuts');
+$smarty->assign('foo',$myArray);
 ?>

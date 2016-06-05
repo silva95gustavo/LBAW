@@ -6,6 +6,13 @@ function creategroup($groupName) {
 	$stmt->execute(array($groupName));
 }
 
+function getNumberOfGroups() {
+	global $conn;
+	$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM StudentGroup");
+	$stmt->execute();
+	return $stmt->fetch()['total'];
+}
+
 function addUserToGroup($groupName,$email){
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO StudentGroupAssoc(groupID,studentID) 
@@ -16,6 +23,7 @@ function addUserToGroup($groupName,$email){
       )");
 	$stmt->execute(array($groupName,$email));
 }
+
 function searchGroupFTS($data) {
     global $conn;
     $stmt = $conn->prepare("SELECT id, name FROM studentgroup WHERE to_tsvector('english', name) @@ plainto_tsquery('english', ?)");
