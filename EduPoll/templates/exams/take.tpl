@@ -74,8 +74,7 @@
 												checked="checked"
 												{$score = $answer.score}
 											{/if}
-											
-											enabled>{$answer.text}</label>
+										>{$answer.text}</label>
 										<br/>
 									{/foreach}
 									</div>
