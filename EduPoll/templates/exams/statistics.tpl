@@ -28,31 +28,35 @@
 					<p><strong>End: </strong>Until the owner closes the exam</p>
 					{/if}
 				</div>
-	
+
 				{if $exam.opentopublic && $examOver != 1}
 				<div class="container-fluid">
-					<input type="hidden" id="csrf_token" value="{$CSRF_TOKEN}" />
-					<button class="btn btn-lg btn-info col-md-2" id="generateLink" data-id="{$exam.id}">Generate Guest Link</button>
-					<input type="text" class="input-lg col-md-8" id="generatedLink" disabled>
-					<span class="input-group-btn">
-                  		<button class="btn btn-lg btn-default" id="copy" type="button" style="box-shadow: 0 3px 0 0 #888888; border-radius: 20px;">Copy</button>
-               		</span>
-               		<label><strong>Share grade with Exam Takers:</strong></label>
-					<input id="share" class="shareButton" type="checkbox" name="share" data-id="{$exam.id}" data-on-text="Share" data-off-text="Private" checked>
+					<div class="col-md-12">
+						<input type="hidden" id="csrf_token" value="{$CSRF_TOKEN}" />
+						<button class="btn btn-lg btn-info col-md-2" id="generateLink" data-id="{$exam.id}">Generate Guest Link</button>
+						<input type="text" class="input-lg col-md-8" id="generatedLink" disabled>
+						<span class="input-group-btn">
+							<button class="btn btn-lg btn-default" id="copy" type="button" style="box-shadow: 0 3px 0 0 #888888; border-radius: 20px;">Copy</button>
+						</span>
+					</div>
 				</div>
 				<br>
-				{/if}	
-
+				{/if}
+				<div class="">
+					<label><strong>Share Grades:</strong></label>
+					<input id="share" class="shareButton" type="checkbox" name="share" data-id="{$exam.id}" data-on-text="Share" data-off-text="Private" {if $exam.publicgrades}checked{/if}>
+				</div>
+				<br>
 				{if $stats['attempts'] === 0}
-					<div class="alert alert-warning" role="alert">
-						<strong>Warning!</strong> No attempts have been made for this exam.
-					</div>
+				<div class="alert alert-warning" role="alert">
+					<strong>Warning!</strong> No attempts have been made for this exam.
+				</div>
 				{else}
-					<div id="grade_distribution" style="display: none;">
-						{foreach from=$gradedistribution key=k item=i}
-							<div id="grade{$k}">{$i}</div>
-						{/foreach}
-					</div>
+				<div id="grade_distribution" style="display: none;">
+					{foreach from=$gradedistribution key=k item=i}
+					<div id="grade{$k}">{$i}</div>
+					{/foreach}
+				</div>
 				{/if}
 
 
@@ -156,7 +160,7 @@
 									<form action="{$BASE_URL}pages/exams/export_statistics.php" method="get">
 										<input type="hidden" name="examid" value="{$exam.id}"/>
 										<input type="hidden" name="format" value="XLS"/>
-    									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export XLS" />
+										<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export XLS" />
 									</form>
 								</div>
 								<div class="col-md-10">
@@ -166,13 +170,13 @@
 									the functionalities provided Excel. Some examples are averages, charts and standard deviations.
 								</div>
 							</div>
-								<br/><br/>
+							<br/><br/>
 							<div class="row">
 								<div class="col-md-2">
 									<form action="{$BASE_URL}pages/exams/export_statistics.php" method="get">
 										<input type="hidden" name="examid" value="{$exam.id}"/>
 										<input type="hidden" name="format" value="JSON"/>
-    									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export JSON" />
+										<input class="btn btn-lg btn-primary btn-block" type="submit" value="Export JSON" />
 									</form>
 								</div>
 								<div class="col-md-10">
