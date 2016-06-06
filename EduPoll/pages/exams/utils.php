@@ -45,4 +45,43 @@ function generateQuestions($examid, $attemptid) {
 	}
 }
 
+function generateQuestionsAnonymous($examid) {
+	$questions = [];
+	
+	$elements = getExamlElements($examid);
+
+	foreach($elements as $element) {
+		$question = getQuestion($element['id']);
+		if($question && $question['category'] == NULL) {
+			$question['answers'] = [];
+			$answers = getQuestionAnswers($question['id']);
+			if(isset($answers))
+				$question['answers'] = $answers;
+			
+			array_push($questions, $question);
+			continue;
+		}
+
+		$category = getCategory($element['id']);
+		if($category) {
+			$categoryQuestions = getCategoryQuestions($element['id']);
+			$numQuestions = $category['numselquestions'];
+
+			for($i = 0; $i < $numQuestions; ++$i) {
+				$q = selectAndRemoveQuestion($categoryQuestions);
+				
+				$q['answers'] = [];
+				$answers = getQuestionAnswers($q['id']);
+				if(isset($answers))
+					$q['answers'] = $answers;
+					
+				array_push($questions, $q);
+			}
+			continue;
+		}
+	}
+	
+	return $questions;
+}
+
 ?>
