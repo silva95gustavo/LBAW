@@ -1,24 +1,24 @@
 <?php
  	  session_start();
-	  session_set_cookie_params(3600, '/~lbaw1565/final'); // FIXME
+	  //session_set_cookie_params(3600, '/~lbaw1565/final'); // FIXME
 	  //session_set_cookie_params(3600, '/~up201304143/LBAW'); // FIXME
-	  //session_set_cookie_params(3600, '/~up201305803/EduPoll'); // FIXME
+	  session_set_cookie_params(3600, '/~up201305803/EduPoll'); // FIXME
 	  error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 	  
-	  $BASE_DIR = '/opt/lbaw/lbaw1565/public_html/final/';
+	  //$BASE_DIR = '/opt/lbaw/lbaw1565/public_html/final/';
 	  //$BASE_DIR = '/usr/users2/mieic2013/up201304143/public_html/LBAW/';
-	  //$BASE_DIR = '/usr/users2/mieic2013/up201305803/public_html/EduPoll/';
+	  $BASE_DIR = '/usr/users2/mieic2013/up201305803/public_html/EduPoll/';
 	 
-	  $BASE_URL = '/~lbaw1565/final/';
+	  //$BASE_URL = '/~lbaw1565/final/';
 	  //$BASE_URL = '/~up201304143/LBAW/';
-	  //$BASE_URL = '/~up201305803/EduPoll/';
+	  $BASE_URL = '/~up201305803/EduPoll/';
 	  
 	  $conn = new PDO('pgsql:host=dbm;dbname=lbaw1565', 'lbaw1565', 'BN80V7U5');
 	  $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 	  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	  //$conn->exec('SET SCHEMA \'Guilherme\'');
+	  $conn->exec('SET SCHEMA \'Guilherme\'');
 	  //$conn->exec('SET SCHEMA \'Gustavo\'');
-	  $conn->exec('SET SCHEMA \'public\'');
+	  //$conn->exec('SET SCHEMA \'public\'');
 	  
 	  include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
 	  include_once($BASE_DIR . 'lib/phpPasswordHashingLib/passwordLib.php');
