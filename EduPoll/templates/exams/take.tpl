@@ -33,18 +33,23 @@
 					<!-- Main jumbotron for a primary marketing message or call to action -->
 					<div class="first-element jumbotron">
 						<h2>{$exam.name}</h2>
-						<p>{$attempt.starttime} - {if isset($attempt.endtime)}{$attempt.endtime}{else}Ongoing{/if}</p>
+						{if $exam.opentopublic}
+							<p>{$exam.starttime} - {$exam.endtime}</p>
+						{else}
+							<p>{$attempt.starttime} - {if isset($attempt.endtime)}{$attempt.endtime}{else}Ongoing{/if}</p>
+						{/if}
 					</div>
 					
 					<div id="attempt_id_elem" style="display: none;">{$attempt.id}</div>
 					<div id="exam_id_elem" style="display: none;">{$exam.id}</div>
+					<div id="exam_open_elem" style="display: none;">{if $exam.opentopublic}0{else}1{/if}</div>
 					
 					<button type="button" class="btn btn-primary submit-attempt">Submit exam</button><p></p>
 
 					{foreach from=$questions item=question}
 						{$score = 0}
 						{$maxscore = 0}
-						<div class="panel panel-primary">
+						<div class="panel panel-primary exam-question">
 							<div class="panel-heading">
 								<h3 class="panel-title">{$question.statement}</h3>
 							</div>
@@ -59,7 +64,11 @@
 									
 										<label class="radio-inline"><input type="radio"
 											name="optradio" class="checkbox_input"
-											id="answer_{$answer.id}"
+											{if $exam.opentopublic}
+												id="{$question.id}_{$answer.id}"
+											{else}
+												id="answer_{$answer.id}"
+											{/if}
 											
 											{if $answer.id == $question.answerid}
 												checked="checked"

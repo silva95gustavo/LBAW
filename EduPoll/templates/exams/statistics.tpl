@@ -8,6 +8,8 @@
 			<div class="theme-showcase" role="main">
 				
 				{include file='common/result_messages.tpl'}
+				
+				<div style="display: none;" id="base_url_start">{$BASE_URL}</div>
 
 				<ol class="breadcrumb">
 					<li><a href="{$BASE_URL}pages/users/main.php">Home</a></li>
