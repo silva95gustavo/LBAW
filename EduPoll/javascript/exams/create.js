@@ -29,3 +29,34 @@ $(document).ready(function() {
 
 	$("[name='privacy']").bootstrapSwitch();
 });
+
+
+$('input#inputExam').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('textarea#inputDescription').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#inputMaxTries').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#starttime').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#endtime').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
