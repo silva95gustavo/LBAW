@@ -580,6 +580,48 @@ function submitAttempt($attemptID) {
 	return $stmt->fetch();
 }
 
+function submitAnonymousAttempt($exam, $starttime, $qa_pairs) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO attempt (starttime, endtime, examid)
+		VALUES (?, CURRENT_TIMESTAMP, ?) RETURNING id");
+	$id = -1;
+	if($stmt->execute(array($starttime, $exam)))
+	{
+		$id = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+	}
+	
+	if($id < 0)
+		return $id;
+	
+	foreach($qa_pairs as $pair) {
+		$stmt = $conn->prepare("INSERT INTO questionattempt (attemptid, questionid, answerid)
+			VALUES (?, ?, ?)");
+		$stmt->execute(array((int)$id, (int)$pair[0], (int)$pair[1]));
+		$stmt->fetchAll();
+	}
+}
+
+function submitOpenAttempt($exam, $starttime, $qa_pairs, $user) {
+	global $conn;
+	$stmt = $conn->prepare("INSERT INTO attempt (userid, starttime, endtime, examid)
+		VALUES (?, ?, CURRENT_TIMESTAMP, ?) RETURNING id");
+	$id = -1;
+	if($stmt->execute(array($user, $starttime, $exam)))
+	{
+		$id = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+	}
+	
+	if($id < 0)
+		return $id;
+	
+	foreach($qa_pairs as $pair) {
+		$stmt = $conn->prepare("INSERT INTO questionattempt (attemptid, questionid, answerid)
+			VALUES (?, ?, ?)");
+		$stmt->execute(array((int)$id, (int)$pair[0], (int)$pair[1]));
+		$stmt->fetchAll();
+	}
+}
+
 function getAttemptQuestions($attemptID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT question.id AS questionid, questionattempt.answerid AS answerid, questionattempt.questionorder AS order, question.statement AS statement, question.maxscore AS maxscore
