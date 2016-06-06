@@ -25,7 +25,7 @@ function createExam($ownerID, $name, $description, $startTime, $endTime, $open, 
 
 function getExam($examID) {
 	global $conn;
-	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, publicgrades, maxtries, maxscore
    		FROM exam
    		WHERE id = ?");
 	$stmt->execute(array($examID));
@@ -743,7 +743,7 @@ function changeShareSetting($examID,$booleanShare)
 {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET publicgrades = ? WHERE id = ?");
-	$stmt->execute(array($booleanShare,$examID));
+	$stmt->execute(array($booleanShare ,$examID));
 	return $stmt->fetchAll();
 }
 ?>
