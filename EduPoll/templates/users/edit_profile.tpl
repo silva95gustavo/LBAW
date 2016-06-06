@@ -71,7 +71,9 @@
 						<div class="row">
 							<div class="col-md-6">
 								<label for="inputConfirmNewEmail" class="sr-only">New email</label>
-								<input type="email" name="inputConfirmNewEmail" id="inputConfirmNewEmail" class="form-control" placeholder="Verify the new email" required>
+								<input type="email" name="inputConfirmNewEmail" id="inputConfirmNewEmail" class="form-control" placeholder="Confirm New Email" 
+								data-toggle="tooltip" title="Verify the new email" 
+								required>
 							</div>
 						</div>
 						<br/>
