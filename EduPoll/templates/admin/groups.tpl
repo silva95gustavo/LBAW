@@ -20,6 +20,7 @@
 
 					<label for="inputGroupToManage" class="sr-only">Full name</label>
 					<input type="text" id="inputGroupToManage" class="form-control" placeholder="Group Name"
+					data-toggle="tooltip" title="Insert the name of a group to consult its information"
 					required autofocus>
 					<input type="hidden" name="groupID" id="groupID" value="{$groupid}">
 					<br/>

@@ -19,6 +19,7 @@
 
 					<label for="inputUserToRemove" class="sr-only">Full name</label>
 					<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email"
+					data-toggle="tooltip" title="Insert the name or email of the user to be removed"
 						required autofocus>
 					<br/>
 				</form>
