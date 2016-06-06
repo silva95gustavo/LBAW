@@ -179,10 +179,16 @@ function editCategoryName($categoryID, $newName) {
 }
 
 function editCategoryNumSelQuestions($categoryID, $newNumSelQuestions) {
+	$exam = getExamFromExamElement($questionID);
+	
 	global $conn;
 	$stmt = $conn->prepare("UPDATE category SET numselquestions = ? WHERE id = ? RETURNING numselquestions");
 	$stmt->execute(array($newNumSelQuestions, $categoryID));
-	return $stmt->fetch();
+	$ret = $stmt->fetch();
+	
+	updateExamScore($exam['id']);
+	
+	return $ret;
 }
 
 function editQuestionStatement($questionID, $newStatement) {
@@ -200,17 +206,27 @@ function editAnswerText($answerID, $newText) {
 }
 
 function editAnswerScore($answerID, $newScore) {
+	$exam = getExamFromAnswer($answerID);
+	
 	global $conn;
 	$stmt = $conn->prepare("UPDATE answer SET score = ? WHERE id = ? RETURNING score");
 	$stmt->execute(array($newScore, $answerID));
-	return $stmt->fetch();
+	$ret = $stmt->fetch();
+	
+	updateExamScore($exam['id']);
+	
+	return $ret;
 }
 
 function createQuestion($examID, $categoryID, $statement) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT create_question(:examID, :categoryID, :statement)");
 	$stmt->execute(array($examID, $categoryID, $statement));
-	return $stmt->fetch();
+	$ret = $stmt->fetch();
+	
+	updateExamScore($examID);
+	
+	return $ret;
 }
 
 function createCategory($examID, $name) {
@@ -221,17 +237,30 @@ function createCategory($examID, $name) {
 }
 
 function createAnswer($questionID, $text, $score = 0) {
+	$exam = getExamFromExamElement($questionID);
+	
 	global $conn;
 	$stmt = $conn->prepare("INSERT INTO answer
    		(questionid, text, score)
    		VALUES (:questionid, :text, :score) RETURNING id");
 	$stmt->execute(array($questionID, $text, $score));
-	return $stmt->fetch();
+	$ret = $stmt->fetch();
+	
+	updateExamScore($exam['id']);
+	
+	return $ret;
 }
 function deleteAnswer($answerID) {
+	
+	$exam = getExamFromAnswer($answerID);
+	
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM answer WHERE id = :answerid");
-	return $stmt->execute(array($answerID));
+	$ret = $stmt->execute(array($answerID));
+	
+	updateExamScore($exam['id']);
+	
+	return $ret;
 }
 function deleteExam($examID) {
 	global $conn;
@@ -518,17 +547,31 @@ function getQuestionAnswers($questionID)
 }
 function deleteCategory($categoryID)
 {
+	$exam = getExamFromExamElement($questionID);
+	
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM category
 		WHERE id = :categoryid");
-	return $stmt->execute(array($categoryID));
+	
+	$ret = $stmt->execute(array($categoryID));
+	
+	updateExamScore($exam['id']);
+	
+	return $ret;
 }
 function deleteQuestion($questionID)
 {
+	$exam = getExamFromExamElement($questionID);
+	
 	global $conn;
 	$stmt = $conn->prepare("DELETE FROM question
 		WHERE id = :questionid");
-	return $stmt->execute(array($questionID));
+		
+	$ret = $stmt->execute(array($questionID));
+	
+	updateExamScore($exam['id']);
+	
+	return $ret;
 }
 function getExamFromExamElement($examElementID)
 {
@@ -726,5 +769,39 @@ function getExamInvitedUsers($examID) {
 								WHERE userexam.examid = ?");
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
+}
+
+function setExamScore($examID, $score) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE exam SET maxscore = ? WHERE id = ? RETURNING id");
+	$stmt->execute(array($score, $examID));
+	return $stmt->fetch();
+}
+
+function updateExamScore($examid) {
+	$score = 0;
+	
+	$elements = getExamElements($examid);
+	
+	foreach($elements as $element) {
+		$question = getQuestion($element['id']);
+		if($question && $question['category'] == NULL) {
+			$score += $question['maxscore'];
+			continue;
+		}
+
+		$category = getCategory($element['id']);
+		if($category) {
+			$categoryQuestions = getCategoryQuestions($element['id']);
+			$numQuestions = $category['numselquestions'];
+
+			for($i = 0; $i < $numQuestions; ++$i) {
+				$score += $categoryQuestions[$i]['maxscore'];
+			}
+			continue;
+		}
+	}
+	
+	return setExamScore($examid, $score);
 }
 ?>
