@@ -34,6 +34,7 @@
 
 					<label for="create_group" class="sr-only">Full name</label>
 					<input type="text" name="groupname" id="groupname" class="form-control" placeholder="Group Name"
+					data-toggle="tooltip" title="Create a new group by typing a name for it"
 					required autofocus> 
 					<br/>
 				</form>
@@ -49,14 +50,14 @@
 					<tbody>
 						{foreach $groups as $group}
 						<tr id="{$group.id}">
-							<td><a href="?groupID={$group.id}">{$group.name}</a></td>
+							<td>
+							<a href="?groupID={$group.id}">{$group.name}</a></td>
 							<td>{$nstudents[$group['id']]}</td>
 							<td><a class="btn btn-danger" data-groupid="{$group.id}" href="#" data-toggle="modal" data-target="#confirmationModalGroup">Remove</a></td>
 						</tr>
-					</tr>
-					{/foreach}
-				</tbody>
-			</table>
+						{/foreach}
+					</tbody>
+				</table>
 
 			<div class="text-center">
 					{if $numberOfPages < 8}
@@ -111,6 +112,7 @@
 
 							<label for="userToAddToGroup" class="sr-only">Full name</label>
 							<input type="text" id="userToAddToGroup" class="form-control" placeholder="User name or email"
+							data-toggle="tooltip" title="Add a new student to this group by typing his/her name"
 							required autofocus/>
 							<input type="hidden" name="groupID" id="groupID" value="{$groupid}"/>
 						</form>
@@ -121,6 +123,7 @@
 
 							<label for="userToRemoveFromGroup" class="sr-only">Full name</label>
 							<input type="text" id="userToRemoveFromGroup" class="form-control" placeholder="User name or email"
+							data-toggle="tooltip" title="Remove a student from this group by typing his/her name"
 							required autofocus/>
 							<input type="hidden" name="groupID" id="groupID" value="{$groupid}"/>
 						</form>
