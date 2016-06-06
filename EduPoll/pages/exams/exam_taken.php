@@ -42,6 +42,13 @@ if($userID !== $attempt['userid']) {
 
 $exam = getExam($attempt['examid']);
 
+if(!$exam['publicgrades'])
+{
+	$_SESSION ['error_messages'] [] = 'Grades are not available yet.';
+  	header('Location: ' . $BASE_URL . 'pages/exams/exams_taken.php');
+  	die();
+}
+
 $questions = getAttemptQuestions($attemptid);
 
 for($q = 0; $q < sizeof($questions); ++$q) {
