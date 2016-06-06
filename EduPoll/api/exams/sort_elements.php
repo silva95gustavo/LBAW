@@ -77,6 +77,7 @@ try {
 		echo json_encode('Error reordering exam elements.');
 		exit;
 	}
+	updateExamScore($exam["id"]);
 } catch (PDOException $e) {
 	http_response_code(400);
 	echo json_encode('Error reordering exam elements: ' . $e->getMessage());
