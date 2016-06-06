@@ -144,3 +144,21 @@ $('input#inputGroupToManage').tooltip({ /*or use any other selector, class, ID*/
     trigger: 'hover',
     delay: { "show": 500, "hide": 100 }
 });
+
+$('input#groupname').tooltip({ /*or use any other selector, class, ID*/
+    placement: "left",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#userToAddToGroup').tooltip({ /*or use any other selector, class, ID*/
+    placement: "left",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#userToRemoveFromGroup').tooltip({ /*or use any other selector, class, ID*/
+    placement: "left",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
