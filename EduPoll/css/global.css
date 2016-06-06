@@ -99,6 +99,12 @@ div.jumbotron h2 {
 }
 
 /* EDIT EXAM */
+.exam-elements {
+	padding-bottom: 10rem; /* easier for sorting */
+}
+.exam-element-heading {
+	cursor: move;
+}
 .show-managers, .show-invitees {
 	margin: 2rem 0 2rem 1rem;
 }
@@ -136,6 +142,9 @@ input.num-sel-questions {
 }
 
 /* QUESTIONS */
+.exam-elements .panel-body.question {
+	padding: 0;
+}
 .add-answer .fa-plus {
 	position:relative;
 	left: 1em;

@@ -423,7 +423,7 @@ function getAttempts($userID, $examID)
 	return $stmt->fetchAll();
 }
 
-function getExamlElements($examID) {
+function getExamElements($examID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT id, orderindex
 		FROM examelement
@@ -431,6 +431,20 @@ function getExamlElements($examID) {
 		ORDER BY orderindex ASC");
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
+}
+
+function resortExamElements($order) {
+	global $conn;
+	$conn->beginTransaction();
+	$orderArrayString = pg_escape_string("ARRAY[" . implode(",", $order) . "]");
+	$stmt = $conn->prepare("SELECT resort_exam_elements(" . $orderArrayString . ");");
+	$result = $stmt->execute();
+	echo $orderString;
+	if ($result)
+		$conn->commit();
+	else
+		$conn->rollback();
+	return $result;
 }
 
 function addQuestionToAttempt($attemptid, $questionid, $orderindex) {

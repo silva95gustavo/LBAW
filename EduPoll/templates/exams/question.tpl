@@ -1,6 +1,6 @@
-<div class="panel-body question">
+<div id="exam-element-{$examElement.id}" class="panel-body question exam-element">
 	<div class="panel panel-primary">
-		<div class="panel-heading">
+		<div class="panel-heading exam-element-heading">
 			<div class="row">
 				<div class="col-md-6 question-statement-container">
 					<div class="inline-editable question-statement" name="statement" data-id="{$question.id}">{$question.statement|escape:'html'}</div>
