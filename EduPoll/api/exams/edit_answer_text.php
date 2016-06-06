@@ -11,8 +11,8 @@ if (! isLoggedIn ()) {
 }
 
 if (! validateCSRFToken ( $_POST ['csrf_token'] )) {
-	$_SESSION ['error_messages'] [] = 'CSRF token missing.';
-	header ( "Location: " . $_SERVER ['HTTP_REFERER'] );
+	http_response_code(400);
+	echo 'Invalid CSRF token.';
 	die ();
 }
 
