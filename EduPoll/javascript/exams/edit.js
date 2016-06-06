@@ -384,7 +384,27 @@ $(document).ready(function() {
 			}
 		});
 		return true;
-	})
+	});
+	
+	$('.exam-elements').sortable({
+		axis: 'y',
+		
+		update: function (event, ui) {
+	        var data = $(this).sortable('serialize');
+	        data += "&csrf_token=" + encodeURIComponent(CSRF_TOKEN) + "&examid=" + $(".exam").attr("id").slice("exam".length);
+	
+	        $.ajax({
+	            data: data,
+	            type: 'POST',
+	            url: BASE_URL + "api/exams/sort_elements.php",
+	            success: function (data) {
+				},
+				error: function (xhr) {
+					console.error("Error changing order: " + xhr.responseText);
+				}
+	        });
+	    }
+	});
 });
 
 function answerDeleteOnClick(jThis) {
