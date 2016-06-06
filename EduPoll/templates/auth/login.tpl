@@ -17,18 +17,5 @@
 			</form>
 		</div>
 	</div>
-
+	<script src="{$BASE_URL}javascript/auth/login.js"></script>
 {include file='common/footer.tpl'}
-<script>
-	$('input#inputEmail').tooltip({ /*or use any other selector, class, ID*/
-    placement: "left",
-    trigger: 'hover',
-    delay: { "show": 500, "hide": 100 }
-});
-
-	$('input#inputPassword').tooltip({ /*or use any other selector, class, ID*/
-    placement: "left",
-    trigger: 'hover',
-    delay: { "show": 500, "hide": 100 }
-});
-</script>
