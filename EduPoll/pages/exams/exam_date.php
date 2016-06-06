@@ -34,6 +34,7 @@ if (! isLoggedIn ()) {
  
  prepareDate($smarty,$day,$month,$year);
 
+$smarty->assign ( 'userID', $_SESSION ['userID'] );
 $smarty->assign ( 'name', $_SESSION ['name'] );
 $smarty->display ( 'exams/exam_date.tpl' );
 ?>

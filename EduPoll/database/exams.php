@@ -157,6 +157,17 @@ function isExamManager($userID, $examID) {
 		return false;
 }
 
+function isExamManagerOrOwner($userID, $examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT managerid FROM managesexam WHERE managerid = ? AND examid = ?
+		UNION SELECT ownerid FROM exam WHERE id = ? AND ownerid = ?");
+	$stmt->execute(array($userID, $examID,$examID,$userID));
+	if(count($stmt->fetchAll()) > 0)
+		return true;
+	else
+		return false;
+}
+
 function editExamName($examID, $newName) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET name = ? WHERE id = ? RETURNING name");
@@ -725,6 +736,14 @@ function getExamInvitedUsers($examID) {
 								FROM registereduser INNER JOIN userexam ON registereduser.id = userexam.userid
 								WHERE userexam.examid = ?");
 	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
+function changeShareSetting($examID,$booleanShare)
+{
+	global $conn;
+	$stmt = $conn->prepare("UPDATE exam SET publicgrades = ? WHERE id = ?");
+	$stmt->execute(array($booleanShare,$examID));
 	return $stmt->fetchAll();
 }
 ?>
