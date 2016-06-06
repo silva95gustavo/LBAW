@@ -10,7 +10,12 @@ var grade_dist = [];
 var dir_base;
 
 var examID = null;
+
+
 $(document).ready(function(){
+
+	
+
 	submitted_no = parseInt($("#exam_submitted_no").text());
 	approved_no = parseInt($("#exam_approved_no").text());
 	
@@ -45,6 +50,42 @@ $('button#generateLink').on('click', function(){
 		}
 	})
 });
+
+$('.shareButton').bootstrapSwitch('state', true);
+
+$('.shareButton').on('switchChange.bootstrapSwitch', 
+	function (event, state)
+	{
+		var examid = $(this).data("id");
+		if(state){
+		$.ajax({
+			type: 'POST',
+			url: "../../api/exams/share.php",
+			data: { examid:examid, share: state , csrf_token: CSRF_TOKEN },
+			success: function () {
+				console.log("Exam has shared grades.")
+			},
+			error: function () {
+				console.log("Could not change setting.")
+			}
+		});
+		}
+		else{
+			$.ajax({
+			type: 'POST',
+			url: "../../api/exams/share.php",
+			data: { examid:examid, share: state , csrf_token: CSRF_TOKEN },
+			success: function () {
+				console.log("Exam has private grades.")
+			},
+			error: function () {
+				console.log("Could not change setting.")
+			}
+		});
+		}
+	}
+	);
+
 
 function animateColorButtonCopy(color) {
 	$('button#copy').css("background-color", color);

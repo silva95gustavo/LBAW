@@ -37,6 +37,8 @@
 					<span class="input-group-btn">
                   		<button class="btn btn-lg btn-default" id="copy" type="button" style="box-shadow: 0 3px 0 0 #888888; border-radius: 20px;">Copy</button>
                		</span>
+               		<label><strong>Share grade with Exam Takers:</strong></label>
+					<input id="share" class="shareButton" type="checkbox" name="share" data-id="{$exam.id}" data-on-text="Share" data-off-text="Private" checked>
 				</div>
 				<br>
 				{/if}	
@@ -185,9 +187,13 @@
 				</div>
 			</div>
 		</div>
-	</div>z
+	</div>
 </div>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}frameworks/bootstrap-switch.min.js"></script>	
+<script type="text/javascript" src="{$BASE_URL}frameworks/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}frameworks/en-gb.js"></script>
 <script src="{$BASE_URL}frameworks/Chart.js"></script>
 <script src="{$BASE_URL}javascript/exams/exam-statistics.js"></script>
 {include file='common/footer.tpl'}
