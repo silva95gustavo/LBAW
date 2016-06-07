@@ -4,6 +4,32 @@ var uninvite_group_id;
 var uninvite_user_id;
 
 $(document).ready(function() {
+
+	$('#startDate').datetimepicker({
+		format: "YYYY-MM-DD HH:mm:00",
+		useCurrent: false
+	});
+	$('#endDate').datetimepicker({
+		format: "YYYY-MM-DD HH:mm:00",
+		useCurrent: false
+	});
+
+	if($('input#endtime').data("id") == "")
+ 		$('input#endtime').attr("placeholder", "Exam Ends At");
+ 	else
+ 		$('input#endtime').attr("placeholder", $('input#endtime').data("id"));
+ 	
+	$('#startDate').data("DateTimePicker").minDate(new Date());
+	$('#endDate').data("DateTimePicker").minDate(new Date());
+	$("#startDate").on("dp.change", function (e) {
+		$('#endDate').data("DateTimePicker").minDate(e.date);
+		if($('#startDate').find("input").val() == "")
+			$('#endDate').find("input").val("");
+	});
+	$("#endDate").on("dp.change", function (e) {
+		$('#startDate').data("DateTimePicker").maxDate(e.date);
+	});
+
 	exam_id = $(".exam-id").attr("examid");
 	$("#inputUserToAdd").autocomplete({
 		source : BASE_URL + "api/exams/search_user_autocomplete.php",
@@ -404,6 +430,29 @@ $(document).ready(function() {
 				}
 	        });
 	    }
+	});
+
+	$('button#submitDates').on('click', function(){
+		var startTime = $("#starttime").val();
+		var endTime = $("#endtime").val();
+		var examID = $(this).data("id");
+		$.ajax({
+			type: 'POST',
+			url: "../../api/exams/edit_dates.php",
+			data: {
+				csrf_token: CSRF_TOKEN,
+				startTime : startTime,
+				endTime : endTime,
+				examID : examID
+			},
+			success: function(data) {
+				console.log("sucesso");
+				window.location.reload();
+			},
+			error: function (xhr) {
+				window.location.reload();
+			}
+		});
 	});
 });
 
