@@ -477,7 +477,7 @@ function getExamElementsWithoutParent($examID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT id, orderindex
 		FROM examelement
-		WHERE examid = ? AND category IS NULL
+		WHERE examid = ? AND orderindex IS NOT NULL
 		ORDER BY orderindex ASC");
 	$stmt->execute(array($examID));
 	return $stmt->fetchAll();
