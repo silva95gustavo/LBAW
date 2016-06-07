@@ -48,4 +48,4 @@
     <![endif]-->
 </head>
 
-<body role="document">
+<body>

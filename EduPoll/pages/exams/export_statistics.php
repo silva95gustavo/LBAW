@@ -183,5 +183,4 @@ if(isXLS($format)) {
 if(isJSON($format)) {
 	echo json_encode($jsondata);
 }
->>>>>>> refs/remotes/origin/Pedro
 ?>
