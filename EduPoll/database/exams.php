@@ -824,6 +824,5 @@ function updateExamScore($examid) {
 	}
 	
 	return setExamScore($examid, $score);
->>>>>>> origin/master
 }
 ?>
