@@ -87,9 +87,4 @@ function removeGroup($groupID)
 	$stmt->execute(array($groupID));
 	return $stmt->fetchAll();
 }
-
-function changeShareSetting($examID,$booleanShare)
-{
-	
-}
 ?>

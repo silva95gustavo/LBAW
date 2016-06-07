@@ -19,7 +19,7 @@ function selectAndRemoveQuestion(&$questions) {
 }
 
 function generateQuestions($examid, $attemptid) {
-	$elements = getExamlElements($examid);
+	$elements = getExamElements($examid);
 	$current_index = 0;
 
 	foreach($elements as $element) {
@@ -48,7 +48,7 @@ function generateQuestions($examid, $attemptid) {
 function generateQuestionsAnonymous($examid) {
 	$questions = [];
 	
-	$elements = getExamlElements($examid);
+	$elements = getExamElements($examid);
 
 	foreach($elements as $element) {
 		$question = getQuestion($element['id']);

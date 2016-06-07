@@ -112,7 +112,11 @@
 						<td>{$attempt.id} <a href="{$BASE_URL}pages/exams/exam_taken.php?attemptid={$attempt.id}">(Review)</a></td>
 						<td>{$attempt.starttime}</td>
 						<td>{$attempt.endtime}</td>
-						<td>{$attempt.finalscore}</td>
+						{if $exam.publicgrades}
+							<td>{$attempt.finalscore}</td>
+						{else}
+							<td>-</td>
+						{/if}
 					</tr>
 					{/foreach}
 				</tbody>

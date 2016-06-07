@@ -80,8 +80,9 @@ else					// START NEW ATTEMPT IF POSSIBLE
 		$newAttemptID = createAttempt($userID, $exam['id']);
 		generateQuestions($exam['id'], $newAttemptID);
 	} catch (Exception $e) {
+		var_dump($e);
 		$_SESSION ['error_messages'] [] = "Unable to create attempt.";
-  		header('Location: ' . $_SERVER['HTTP_REFERER']);
+  		//header('Location: ' . $_SERVER['HTTP_REFERER']);
   		die();
 	}
 
