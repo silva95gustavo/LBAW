@@ -46,6 +46,11 @@ if(!$invited)
 		die();
 	}
 
+	if(isExamManagerOrOwner($userID, $examID)){
+		header('Location: ' . $BASE_URL . 'pages/exams/edit.php?id='.$examID);
+		die();
+	}
+
 	try{
 		if(!wasInvited($userID, $examID))
 		{
