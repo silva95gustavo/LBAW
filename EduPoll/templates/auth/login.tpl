@@ -5,20 +5,17 @@
 		<div class="col-md-4 col-md-offset-4">
 			<form class="form-signin" action="{$BASE_URL}actions/auth/login.php" method="post">
 				<h2 class="form-signin-heading">EduPoll</h2>
-				<label for="inputEmail" class="sr-only">Email address</label> <input
-					   type="email" id="inputEmail" name="email" class="form-control"
-					   placeholder="Email address" required autofocus> 
+				<label for="inputEmail" class="sr-only">Email address</label> 
+				<input type="email" id="inputEmail" name="email" class="form-control"
+					   placeholder="Email address" 
+					   data-toggle="tooltip" title="Required email"
+					   required autofocus> 
 					<label for="inputPassword" class="sr-only">Password</label> 
-						<input type="password" id="inputPassword" name="password" class="form-control"
-							   placeholder="Password" required>
-					<div class="checkbox">
-						<label> 
-							<input type="checkbox" value="remember-me">Remember me
-						</label>
-					</div>
+						<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"
+						data-toggle="tooltip" title="Required password" required>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 			</form>
 		</div>
 	</div>
-
+	<script src="{$BASE_URL}javascript/auth/login.js"></script>
 {include file='common/footer.tpl'}

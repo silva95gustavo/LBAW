@@ -24,13 +24,13 @@
 						{foreach $exams as $exam }
 						<div class="list-group-item">
 							<div class="row">
-								<div class="col-md-10">
-									<a href="statistics.php"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
-									<datetime class="list-group-item-text">{$exam.startendtime}</datetime>
+								<div class="col-md-12">
+									<a href="statistics.php?examid={$exam.id}"><h4 class="list-group-item-heading">{$exam.name}</h4></a>
 								</div>
 
-								<div class="col-md-2">
-									<br/><p class="list-group-item-text">{if isOwner($exam)}Owner{else}Manager{/if} <a href="edit.php?id={$exam.id}">(edit exam)</a></p>
+								<div class="col-md-12">
+									<datetime class="list-group-item-text">{$exam.startendtime}</datetime>
+									<p class="list-group-item-text pull-right">{if isOwner($exam)}Owner{else}Manager{/if} <a href="edit.php?id={$exam.id}">(edit exam)</a></p>
 								</div>
 							</div>
 						</div>

@@ -50,6 +50,5 @@ try {
 
 $_SESSION['success_messages'][] = 'Manager successfully removed.';
 http_response_code ( 200 );
-echo 'hello';
 ?>
 

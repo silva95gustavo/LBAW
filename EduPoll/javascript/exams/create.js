@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	$('input[type="checkbox"].examType').click(function() {
-		if ($(this).is(':checked')) {
+	$("[name='privacy']").on('switchChange.bootstrapSwitch', function (event, state) {
+		if (!state) { //true -> Public   false -> Private
 			$('.examTypeWarning').show(200);
 		} else {
 			$('.examTypeWarning').hide(200);
@@ -28,4 +28,35 @@ $(document).ready(function() {
 	});
 
 	$("[name='privacy']").bootstrapSwitch();
+});
+
+
+$('input#inputExam').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('textarea#inputDescription').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#inputMaxTries').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#starttime').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#endtime').tooltip({ /*or use any other selector, class, ID*/
+    placement: "top",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
 });

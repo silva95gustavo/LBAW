@@ -19,6 +19,7 @@
 
 					<label for="inputUserToRemove" class="sr-only">Full name</label>
 					<input type="text" id="inputUserToRemove" class="form-control" placeholder="User name or email"
+					data-toggle="tooltip" title="Insert the name or email of the user to be removed"
 						required autofocus>
 					<br/>
 				</form>
@@ -41,14 +42,11 @@
 							<td>{$user.id}</td>
 							<td>{$user.name}</td>
 							<td>{$user.email}</td>
-							<td><a data-id="{$user.id}" href="#" data-toggle="modal" data-target="#confirmationModal">Remove</a></td>
+							<td><a class="btn btn-danger" data-id="{$user.id}" href="#" data-toggle="modal" data-target="#confirmationModal">Remove</a></td>
 						</tr>
 						{/foreach}
 					</tbody>
 				</table>
-
-				{for $i=1 to $numberOfPages}
-				<a href="remove_users.php?page={$i}">{$i}</a> {/for}
 
 				<div id="confirmationModal" class="modal fade" role="dialog">
 					<div class="modal-dialog">
@@ -64,7 +62,43 @@
 						</div>
 					</div>
 				</div>
+				<div class="text-center">
+					{if $numberOfPages < 8}
+						
+						{for $i=1 to $currentPage-1}
+							<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+						{/for}
+						<a class="btn btn-primary active" href="remove_users.php?page={$currentPage}">{$currentPage}</a>
+						{for $i=currentPage+1 to $numberOfPages}
+							<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+						{/for}
+					
+					{else}
 
+						{if $currentPage > 4}
+							<a class="btn btn-primary" href="remove_users.php?page=1">First</a>
+							{for $i=$currentPage - 3 to $currentPage-1}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+						{else}
+							{for $i=1 to $currentPage-1}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+						{/if}
+						<a class="btn btn-primary active" href="remove_users.php?page={$currentPage}">{$currentPage}</a>
+						{if $currentPage + 3 < $numberOfPages}
+							{for $i=$currentPage + 1 to $currentPage + 3}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+							<a class="btn btn-primary" href="remove_users.php?page={$numberOfPages}">Last</a>
+						{else}
+							{for $i=$currentPage + 1 to $numberOfPages}
+								<a class="btn btn-primary" href="remove_users.php?page={$i}">{$i}</a>
+							{/for}
+						{/if}
+
+					{/if}
+				</div>
 			</div>
 		</div>
 	</div>
