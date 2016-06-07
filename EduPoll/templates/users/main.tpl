@@ -36,7 +36,9 @@
 									<div class="col-md-3">
 										<datetime class="list-group-item-text pull-right">Start :{$exam.starttime}</datetime>
 										<br>
-										<datetime class="list-group-item-text pull-right">End   :{$exam.endtime}</datetime>
+										{if $exam.endtime != null}
+											<datetime class="list-group-item-text pull-right">End   :{$exam.endtime}</datetime>
+										{/if}
 									</div>
 								</div>
 							</div>
