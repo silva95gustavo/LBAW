@@ -25,7 +25,7 @@ function createExam($ownerID, $name, $description, $startTime, $endTime, $open, 
 
 function getExam($examID) {
 	global $conn;
-	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, maxtries, maxscore
+	$stmt = $conn->prepare("SELECT id, name, description, ownerid, starttime, endtime, opentopublic, publicgrades, maxtries, maxscore
    		FROM exam
    		WHERE id = ?");
 	$stmt->execute(array($examID));
@@ -151,6 +151,17 @@ function isExamManager($userID, $examID) {
 	global $conn;
 	$stmt = $conn->prepare("SELECT managerid FROM managesexam WHERE managerid = ? AND examid = ?");
 	$stmt->execute(array($userID, $examID));
+	if(count($stmt->fetchAll()) > 0)
+		return true;
+	else
+		return false;
+}
+
+function isExamManagerOrOwner($userID, $examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT managerid FROM managesexam WHERE managerid = ? AND examid = ?
+		UNION SELECT ownerid FROM exam WHERE id = ? AND ownerid = ?");
+	$stmt->execute(array($userID, $examID,$examID,$userID));
 	if(count($stmt->fetchAll()) > 0)
 		return true;
 	else
@@ -771,6 +782,16 @@ function getExamInvitedUsers($examID) {
 	return $stmt->fetchAll();
 }
 
+function changeShareSetting($examID,$booleanShare)
+{
+	global $conn;
+	$stmt = $conn->prepare("UPDATE exam SET publicgrades = ? WHERE id = ?");
+	$stmt->execute(array($booleanShare ,$examID));
+	return $stmt->fetchAll();
+
+}
+
+
 function setExamScore($examID, $score) {
 	global $conn;
 	$stmt = $conn->prepare("UPDATE exam SET maxscore = ? WHERE id = ? RETURNING id");
@@ -803,5 +824,6 @@ function updateExamScore($examid) {
 	}
 	
 	return setExamScore($examid, $score);
+>>>>>>> origin/master
 }
 ?>

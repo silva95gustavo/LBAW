@@ -31,11 +31,11 @@
 							<div class="col-md-12 ">
 								<datetime class="list-group-item-text">{$exam.starttime} - {$exam.endtime}</datetime>
 								{assign "score" getBestScore($userID,$exam.id) nocache}
-								{if sizeof($score) != 0}
-								<p class="list-group-item-text pull-right">Grade: {$score} / {$exam.maxscore}</p>
-								{else}
-								<p class="list-group-item-text pull-right">Grade: Not Attempted / {$exam.maxscore}</p>
-								{/if}
+									{if sizeof($score) != 0}
+									<p class="list-group-item-text pull-right">Grade: {$score} / {$exam.maxscore}</p>
+									{else}
+									<p class="list-group-item-text pull-right">Grade: Not Attempted / {$exam.maxscore}</p>
+									{/if}
 							</div>
 							{else}
 							<div class="col-md-12">
