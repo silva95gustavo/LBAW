@@ -36,7 +36,8 @@ catch ( PDOException $e ) {
 	$_SESSION ['error_messages'] [] = "Invalid Exam ID.";
 	header ( 'Location: ' . $BASE_URL . 'pages/users/main.php' );
 	die ();
-	}
+}
+
 $managers = [];
 if ($exam)
 {
@@ -73,7 +74,7 @@ if ($exam)
 	$smarty->assign('examElements', $examElements);
 }
 
-$smarty->assign('managers', $managers);
+$hasStarted = examHasStarted($examID); //0 -> começou, 1-> startTime ainda pode ser editado
 
 if(!in_array($userInfo['id'],$managers) && !$isOwner)
 	{
@@ -86,7 +87,8 @@ $invitedgroups = getExamInvitedGroups($examID);
 $invitedusers = getExamInvitedUsers($examID);
 
 prepareDate($smarty);
-
+$smarty->assign ( 'hasStarted', $hasStarted);
+$smarty->assign('managers', $managers);
 $smarty->assign ( 'isEditing', true );
 $smarty->assign ( 'name', $userInfo['name'] );
 $smarty->assign ( 'invitedgroups', $invitedgroups );

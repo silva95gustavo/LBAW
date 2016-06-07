@@ -208,6 +208,38 @@
 									<h3 class="inline-editable exam-description" name="description" data-id="{$exam.id}">{$exam.description|escape:'html'|nl2br}</h3>
 								</div>
 							</div>
+						
+						</div>
+
+						<div>
+							<div class="row">
+								<div class='col-md-3'>
+									{if $hasStarted == 0}<p><strong>Start:</strong> {$exam.starttime}</p>{/if}
+									<div class="form-group" {if $hasStarted == 0}hidden{/if}>
+										<label class="col-xs-3 control-label"><strong>Start:</strong></label>
+										<div class='input-group date' id='startDate'>
+											<input type='text' id="starttime" class="form-control" placeholder="{$exam.starttime}" name='startDate'
+											data-toggle="tooltip" title="Define a starting date and hour for the exam"/>
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class='col-md-3'>
+									<div class="form-group">
+										<label class="col-xs-3 control-label"><strong>End:</strong></label>
+										<div class='input-group date' id='endDate'>
+											<input type='text' data-id="{$exam.endtime}" id="endtime" class="form-control" placeholder="Exam Ends At" name="endDate"
+											data-toggle="tooltip" title="Define a ending date and hour for the exam (Optional)"/>
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<button id="submitDates" data-id="{$exam.id}" class="btn btn-success" style="border-radius: 25px">SAVE DATES</button>
+							</div>			
 						</div>
 						
   						<div id="demo" class="collapse">
@@ -321,6 +353,9 @@
 		</div>
 	</div>
 	<!-- /container -->
-	<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
-	<script src="{$BASE_URL}javascript/exams/edit.js"></script>
+<script src="{$BASE_URL}javascript/jquery.jeditable.js"></script>
+<script src="{$BASE_URL}javascript/exams/edit.js"></script>
 {include file='common/footer.tpl'}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}frameworks/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}frameworks/en-gb.js"></script>

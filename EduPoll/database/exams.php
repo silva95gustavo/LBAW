@@ -835,4 +835,25 @@ function updateExamScore($examid) {
 	
 	return setExamScore($examid, $score);
 }
+
+function examHasStarted($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM Exam WHERE Exam.id = ? AND Exam.startTime > CURRENT_TIMESTAMP");
+	$stmt->execute(array($examID));
+	return $stmt->fetch()['total'];
+}
+
+function setStartDate($examID, $date) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE exam SET startTime = ? WHERE id = ? RETURNING id");
+	$stmt->execute(array($date, $examID));
+	return $stmt->fetch();
+}
+
+function setEndDate($examID, $date) {
+	global $conn;
+	$stmt = $conn->prepare("UPDATE exam SET endTime = ? WHERE id = ? RETURNING id");
+	$stmt->execute(array($date, $examID));
+	return $stmt->fetch();
+}
 ?>
