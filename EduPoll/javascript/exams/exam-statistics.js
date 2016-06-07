@@ -10,7 +10,12 @@ var grade_dist = [];
 var dir_base;
 
 var examID = null;
+
+
 $(document).ready(function(){
+
+	
+
 	submitted_no = parseInt($("#exam_submitted_no").text());
 	approved_no = parseInt($("#exam_approved_no").text());
 	
@@ -46,6 +51,31 @@ $('button#generateLink').on('click', function(){
 	})
 });
 
+$('.shareButton').bootstrapSwitch();
+
+$('.shareButton').on('switchChange.bootstrapSwitch', 
+	function (event, state)
+	{
+		var examid = $(this).data("id");
+		var state = state;
+		$.ajax({
+			type: 'POST',
+			url: "../../api/exams/share.php",
+			data: { examid : examid, state: state , csrf_token: CSRF_TOKEN },
+			success: function (data) {
+				if(state)
+					console.log("Exam has shared grades.");
+				else
+					console.log("Exam has private grades.");
+			},
+			error: function (data) {
+				console.log("Could not change settings.");
+			}
+		});
+	}
+	);
+
+
 function animateColorButtonCopy(color) {
 	$('button#copy').css("background-color", color);
 	$('button#copy').animate({
@@ -65,10 +95,10 @@ $('button#copy').on('click', function(){
 
 function copyToClipboard(elem) {
 	  // create hidden text element, if it doesn't already exist
-    var targetId = "_hiddenCopyText_";
-    var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
-    var origSelectionStart, origSelectionEnd;
-    if (isInput) {
+	  var targetId = "_hiddenCopyText_";
+	  var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+	  var origSelectionStart, origSelectionEnd;
+	  if (isInput) {
         // can just use the original source element for the selection and copy
         target = elem;
         origSelectionStart = elem.selectionStart;
@@ -77,12 +107,12 @@ function copyToClipboard(elem) {
         // must use a temporary form element for the selection and copy
         target = document.getElementById(targetId);
         if (!target) {
-            var target = document.createElement("textarea");
-            target.style.position = "absolute";
-            target.style.left = "-9999px";
-            target.style.top = "0";
-            target.id = targetId;
-            document.body.appendChild(target);
+        	var target = document.createElement("textarea");
+        	target.style.position = "absolute";
+        	target.style.left = "-9999px";
+        	target.style.top = "0";
+        	target.id = targetId;
+        	document.body.appendChild(target);
         }
         target.textContent = elem.textContent;
     }
@@ -94,13 +124,13 @@ function copyToClipboard(elem) {
     // copy the selection
     var succeed;
     try {
-    	  succeed = document.execCommand("copy");
+    	succeed = document.execCommand("copy");
     } catch(e) {
-        succeed = false;
+    	succeed = false;
     }
     // restore original focus
     if (currentFocus && typeof currentFocus.focus === "function") {
-        currentFocus.focus();
+    	currentFocus.focus();
     }
     
     if (isInput) {
@@ -130,18 +160,18 @@ $("#GDtab").on("click", function(){
 function asChart(){
 
 	data = [
-	        {
-	        	value: approved_no,
-	        	color: "#85e085",
-	        	highlight: "#00e64d",
-	        	label: "Approved"
-	        },
-	        {
-	        	value: submitted_no - approved_no,
-	        	color: "#ff4d4d",
-	        	highlight: "#ff1a1a",
-	        	label: "Disapproved"
-	        }
+	{
+		value: approved_no,
+		color: "#85e085",
+		highlight: "#00e64d",
+		label: "Approved"
+	},
+	{
+		value: submitted_no - approved_no,
+		color: "#ff4d4d",
+		highlight: "#ff1a1a",
+		label: "Disapproved"
+	}
 	];
 	
 	chart = new Chart(circular).Pie(data);
@@ -153,14 +183,14 @@ function gdChart(){
 	data = {
 		labels: ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],
 		datasets: [
-			{
-				label: "Grades Distribution",
-				fillColor: "#66b3ff",
-	            strokeColor: "#0080ff",
-	            highlightFill: "#66b3ff",
-	            highlightStroke: "#0059b3",
-	            data: grade_dist
-			}
+		{
+			label: "Grades Distribution",
+			fillColor: "#66b3ff",
+			strokeColor: "#0080ff",
+			highlightFill: "#66b3ff",
+			highlightStroke: "#0059b3",
+			data: grade_dist
+		}
 		]
 	};
 	
