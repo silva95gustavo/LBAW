@@ -57,6 +57,10 @@ function emailSender($name,$password,$email){
 	$message = "Edupoll Sign Up" . "\r\nHello, " . $name . "!" . "\r\nYou have been registered on Edupoll's platform." . "\r\nYour Password is: " . $password . "\r\nGood Luck with your exams!";
 	sendEmail ( $email, $message );
 }
+function resetPasswordEmailSender($name,$password,$email){
+	$message = "Edupoll Sign Up" . "\r\nHello, " . $name . "!" . "\r\nThis is your new password for the Edupoll platform:" . "\r\n" . $password . "\r\nGood Luck with your exams!";
+	sendEmail ( $email, $message );
+}
 
 function registerUser($name, $email, $gender, $password, $type ){
 	createUser( $name, $email, $gender, $password, $type );
