@@ -20,15 +20,21 @@
 					<h2 class="form-signin-heading">Enter the new user's information below</h2>
 
 					<label for="inputName" class="sr-only">Full name</label>
-					<input type="text" name="userName" id="inputName" class="form-control" placeholder="Full name" required autofocus>
+					<input type="text" name="userName" id="inputName" class="form-control" placeholder="Full name" 
+					data-toggle="tooltip" title="Insert the name of the user to be registered"
+					required autofocus>
 					<br/>
 
 					<label for="inputEmail" class="sr-only">Email</label>
-					<input type="email" name="userEmail" id="inputEmail" class="form-control" placeholder="Email" required>
+					<input type="email" name="userEmail" id="inputEmail" class="form-control" placeholder="Email" 
+					data-toggle="tooltip" title="Insert the email of the user to be registered"
+					required>
 					<br/>
 
 					<label for="confirmUserEmail" class="sr-only">Confirm Email</label>
-					<input type="email" name="confirmUserEmail" id="confirmUserEmail" class="form-control" placeholder="Confirm Email" required>
+					<input type="email" name="confirmUserEmail" id="confirmUserEmail" class="form-control" placeholder="Confirm Email" 
+					data-toggle="tooltip" title="Verify the email of the user to be registered"
+					required>
 					<br/>
 
 					<label><strong>Gender:</strong></label>

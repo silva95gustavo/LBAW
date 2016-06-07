@@ -2,7 +2,6 @@
 
 $(document).ready( function() {
 
-
 	$("#inputGroupToManage").autocomplete({
 		'search':function(event,ui){
 			var newUrl= BASE_URL + "api/admin/search_group_autocomplete.php?groupID=" + $("#groupID").val();
@@ -55,7 +54,6 @@ $(document).ready( function() {
 				$('tr#' + groupid).hide(1000, function(){
 					$('tr#' + groupid).remove();
 				});
-				window.location.href = BASE_URL + "pages/admin/groups.php";
 			},
 			error : function(xhr, status, error) {
 				console.log("Could not remove group: " + xhr.responseText);
@@ -139,4 +137,28 @@ $(document).ready( function() {
 			}
 		}
 	});
+});
+
+$('input#inputGroupToManage').tooltip({ /*or use any other selector, class, ID*/
+    placement: "left",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#groupname').tooltip({ /*or use any other selector, class, ID*/
+    placement: "left",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#userToAddToGroup').tooltip({ /*or use any other selector, class, ID*/
+    placement: "left",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
+});
+
+$('input#userToRemoveFromGroup').tooltip({ /*or use any other selector, class, ID*/
+    placement: "left",
+    trigger: 'hover',
+    delay: { "show": 500, "hide": 100 }
 });

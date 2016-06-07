@@ -47,6 +47,8 @@ else{
 	}
 	$numberOfStudents = getStudentsByGroup($_GET['groupID']);
 	$numberOfPages = ceil($numberOfStudents / $perPage);
+	if ($numberOfPages == 0)
+		$numberOfPages = 1;
 	$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 	if($currentPage < 1)
 		$currentPage = 1;

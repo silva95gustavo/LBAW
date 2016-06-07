@@ -19,18 +19,23 @@
 					<h2 class="form-signin-heading">Enter the new exam's information below</h2>
 
 					<label for="inputExam" class="sr-only">Exam name</label>
-					<input type="text" name="examName" id="inputExam" class="form-control" placeholder="Exam name" required autofocus>
+					<input type="text" name="examName" id="inputExam" class="form-control" placeholder="Exam name" 
+					data-toggle="tooltip" title="Insert the name for the new exam"
+					required autofocus>
 					<br/>
 
 					<label for="inputDescription" class="sr-only">Exam description</label>
-					<textarea id="inputDescription" name="examDescription" class="form-control" placeholder="Exam description" rows="10" required></textarea>
+					<textarea id="inputDescription" name="examDescription" class="form-control" placeholder="Exam description" rows="10" 
+					data-toggle="tooltip" title="Write an explicit description for the new exam"
+					required></textarea>
 					<br/>
 
 					<div class="row">
 						<div class='col-md-3'>
 							<div class="form-group">
 								<div class='input-group date' id='startDate'>
-									<input type='text' class="form-control" placeholder="Exam Starts At" name='startDate'/>
+									<input type='text' id="starttime" class="form-control" placeholder="Exam Starts At" name='startDate'
+									data-toggle="tooltip" title="Define a starting date and hour for the exam"/>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -40,7 +45,8 @@
 						<div class='col-md-3'>
 							<div class="form-group">
 								<div class='input-group date' id='endDate'>
-									<input type='text' class="form-control" placeholder="Exam Ends At" name="endDate"/>
+									<input type='text' id="endtime" class="form-control" placeholder="Exam Ends At" name="endDate"
+									data-toggle="tooltip" title="Define a ending date and hour for the exam (Optional)"/>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -51,7 +57,8 @@
 
 					<br/>
 					<label for="inputMaxTries">Maximum number of tries</label>
-					<input type="number" name="examMaxTries" id="inputMaxTries" class="form-control" min="0" required value="1">
+					<input type="number" name="examMaxTries" id="inputMaxTries" class="form-control" min="0" required value="1"
+					data-toggle="tooltip" title="Choose the number of maximum tries for this exam">
 					<br/> <br/>
 
 					{if !isStudent()}
