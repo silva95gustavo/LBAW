@@ -473,6 +473,16 @@ function getExamElements($examID) {
 	return $stmt->fetchAll();
 }
 
+function getExamElementsWithoutParent($examID) {
+	global $conn;
+	$stmt = $conn->prepare("SELECT id, orderindex
+		FROM examelement
+		WHERE examid = ? AND category IS NULL
+		ORDER BY orderindex ASC");
+	$stmt->execute(array($examID));
+	return $stmt->fetchAll();
+}
+
 function resortExamElements($order) {
 	global $conn;
 	$conn->beginTransaction();

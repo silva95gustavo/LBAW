@@ -38,7 +38,7 @@ if (!isset($_POST["exam-element"])) {
 	exit;
 }
 
-$examElements = getExamElements($exam["id"]);
+$examElements = getExamElementsWithoutParent($exam["id"]);
 $orderInput = $_POST["exam-element"];
 if (sizeof($orderInput) != sizeof($examElements)) {
 	http_response_code(400);
